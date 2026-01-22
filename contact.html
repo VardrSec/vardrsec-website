@@ -4,14 +4,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contact | VardrSec</title>
-  <meta name="description" content="Contact VardrSec for cybersecurity consulting, assessments, and advisory services." />
+  <meta name="description" content="Contact VardrSec for cybersecurity consulting. Send a message with your environment and goals to receive scope options and next steps." />
   <link rel="stylesheet" href="css/styles.css" />
 </head>
+
 <body>
+  <!-- Top Nav -->
   <header class="topbar">
     <div class="container">
       <nav class="nav">
-        <a class="brand" href="index.html">
+        <a class="brand" href="index.html" aria-label="VardrSec Home">
           <div class="brand-mark" aria-hidden="true"><span>VS</span></div>
           <div class="brand-name">
             <strong>VardrSec</strong>
@@ -19,8 +21,7 @@
           </div>
         </a>
 
-        <div class="nav-links">
-          <a href="index.html">Home</a>
+        <div class="nav-links" aria-label="Primary">
           <a href="about.html">About</a>
           <a href="mission.html">Mission</a>
           <a href="services.html">Services</a>
@@ -29,11 +30,16 @@
           <a class="active" href="contact.html">Contact</a>
         </div>
 
-        <button class="menu-btn" id="menuBtn" aria-label="Open menu">☰</button>
+        <div class="nav-cta">
+          <a class="btn primary" href="contact.html">Get in touch</a>
+        </div>
+
+        <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mobilePanel">
+          ☰
+        </button>
       </nav>
 
-      <div class="mobile-panel" id="mobilePanel">
-        <a href="index.html">Home</a>
+      <div class="mobile-panel" id="mobilePanel" aria-label="Mobile navigation">
         <a href="about.html">About</a>
         <a href="mission.html">Mission</a>
         <a href="services.html">Services</a>
@@ -44,118 +50,124 @@
     </div>
   </header>
 
+  <!-- Main -->
   <main>
     <section class="section compact">
       <div class="container">
-        <div class="section-title">
-          <h2>Contact</h2>
-          <p>Send an inquiry. I will reply with scoping options, timeline, and next steps.</p>
+        <!-- Contact header (tight spacing) -->
+        <div class="section-title" style="margin-bottom: 14px;">
+          <div>
+            <h2 style="margin-bottom: 6px;">Contact</h2>
+            <p style="margin-bottom: 18px;">
+              Describe what you need secured or any additional questions. I’ll respond with scope options and next steps.
+            </p>
+          </div>
         </div>
 
-        <div class="grid-2">
-          <!-- Contact form card -->
-          <div class="card">
-            <h3>Send a message</h3>
-            <p class="meta">
-              Include what you need tested (web app, API, cloud), goals, and any deadlines.
-            </p>
+        <!-- Form Card -->
+        <div class="card">
+          <h3 style="margin-top: 0; margin-bottom: 8px;">Send a message</h3>
+          <p class="meta" style="margin-top: 0; margin-bottom: 14px;">
+            Please include a brief description of your environment (web app, API, cloud provider) and what you’re looking to achieve.
+          </p>
 
-            <!--
-              ACTION PLACEHOLDER:
-              Replace action="#" when you wire it up:
-              - Formspree endpoint
-              - Netlify Forms
-              - Your backend endpoint
-            -->
-            <form class="form" action="#" method="POST">
-              <div class="field">
-                <label for="email">Email</label>
-                <input id="email" name="email" type="email" placeholder="you@company.com" required />
-              </div>
-
-              <div class="field">
-                <label for="subject">Subject (optional)</label>
-                <input id="subject" name="subject" type="text" placeholder="e.g., API Security Assessment" />
-              </div>
-
-              <div class="field">
-                <label for="message">Message</label>
-                <textarea id="message" name="message" placeholder="Describe your environment, scope, and what success looks like." required></textarea>
-              </div>
-
-              <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-top:6px;">
-                <button class="btn primary" type="submit">Send message</button>
-                <span style="font-size:12px; color: rgba(231,237,247,.70);">
-                  Typical response: 1–2 business days
-                </span>
-              </div>
-            </form>
-
-            <div class="note" style="margin-top:14px;">
-              Work requires explicit written authorization and defined scope. No unauthorized testing.
+          <!--
+            NOTE:
+            This form is front-end only. To make "Send" actually deliver messages, you’ll need a backend or a form service.
+            Options: Formspree, Netlify Forms, Cloudflare Pages Functions, etc.
+          -->
+          <form class="form" action="#" method="post" onsubmit="return false;">
+            <div class="field">
+              <label for="email">Email address</label>
+              <input id="email" name="email" type="email" placeholder="you@company.com" autocomplete="email" required />
             </div>
+
+            <div class="field">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" placeholder="What are you trying to secure? Timeline? Any specific concerns?" required></textarea>
+            </div>
+
+            <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+              <button class="btn primary" type="submit">Send message</button>
+              <span class="badge warn">Authorization required</span>
+              <span class="badge">Response: 1–2 business days</span>
+            </div>
+
+            <div class="note" style="margin-top: 10px;">
+              <strong>Important:</strong> I do not perform unauthorized testing. Any security work requires explicit written authorization and a defined scope.
+            </div>
+          </form>
+        </div>
+
+        <!-- Optional: quick contact info -->
+        <div class="grid-2" style="margin-top: 16px;">
+          <div class="card">
+            <h3>What to include</h3>
+            <p>
+              Target type (web app/API/cloud), authentication model, and what “done” looks like (assessment, remediation help, retest).
+            </p>
+            <div class="meta">The more context you provide, the faster I can scope accurately.</div>
           </div>
 
-          <!-- What happens next card -->
           <div class="card">
-            <h3>What happens next</h3>
-            <p class="meta">A standard consulting intake flow:</p>
-
-            <div class="grid-3" style="margin-top:12px;">
-              <div class="card" style="padding:14px;">
-                <h3 style="font-size:14px;">1. Review</h3>
-                <p>Confirm goals, environment, and constraints.</p>
-              </div>
-              <div class="card" style="padding:14px;">
-                <h3 style="font-size:14px;">2. Scope</h3>
-                <p>Define target systems, rules of engagement, deliverables.</p>
-              </div>
-              <div class="card" style="padding:14px;">
-                <h3 style="font-size:14px;">3. Execute</h3>
-                <p>Testing + reporting + remediation guidance.</p>
-              </div>
-            </div>
-
-            <div class="note" style="margin-top:14px; border-left-color: rgba(124,240,215,.7);">
-              If you have a preferred NDA or MSA, mention it in your message.
-            </div>
+            <h3>Typical engagements</h3>
+            <p>
+              Security assessment, API testing, cloud hardening guidance, threat modeling, and secure SDLC improvements.
+            </p>
+            <div class="meta">If you’re unsure which service fits, describe the problem and I’ll propose options.</div>
           </div>
         </div>
       </div>
     </section>
   </main>
 
+  <!-- Footer -->
   <footer class="footer">
-    <div class="container footer-grid">
-      <div>
-        <h4>VardrSec</h4>
-        <p>Security consulting focused on practical risk reduction and clean deliverables.</p>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h4>VardrSec</h4>
+          <p>Offensive Security Research &amp; Tooling. Practical, scoped security work focused on measurable risk reduction.</p>
+          <small>© <span id="year"></span> VardrSec. All rights reserved.</small>
+        </div>
+
+        <div class="links">
+          <h4>Company</h4>
+          <a href="about.html">About</a>
+          <a href="mission.html">Mission &amp; Vision</a>
+          <a href="services.html">Services</a>
+          <a href="plans.html">Plans</a>
+        </div>
+
+        <div class="links">
+          <h4>Legal</h4>
+          <a href="privacy.html">Privacy</a>
+          <a href="terms.html">Terms</a>
+          <a href="contact.html">Contact</a>
+        </div>
       </div>
-      <div class="links">
-        <h4>Company</h4>
-        <a href="about.html">About</a>
-        <a href="services.html">Services</a>
-        <a href="plans.html">Plans</a>
-      </div>
-      <div class="links">
-        <h4>Legal</h4>
-        <a href="privacy.html">Privacy</a>
-        <a href="terms.html">Terms</a>
-        <a href="contact.html">Contact</a>
+
+      <div class="copyright">
+        <small>Security work requires written authorization and defined scope.</small>
+        <small><a href="resources.html">Resources</a></small>
       </div>
     </div>
-
-    <div class="container copyright">
-      <small>&copy; <span id="year"></span> VardrSec. All rights reserved.</small>
-      <small>Security work by authorization only.</small>
-    </div>
-
-    <script>
-      document.getElementById("year").textContent = new Date().getFullYear();
-      const btn = document.getElementById("menuBtn");
-      const panel = document.getElementById("mobilePanel");
-      if (btn && panel) btn.addEventListener("click", () => panel.classList.toggle("open"));
-    </script>
   </footer>
+
+  <script>
+    // Mobile menu
+    const menuBtn = document.getElementById('menuBtn');
+    const mobilePanel = document.getElementById('mobilePanel');
+
+    if (menuBtn && mobilePanel) {
+      menuBtn.addEventListener('click', () => {
+        const open = mobilePanel.classList.toggle('open');
+        menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+    }
+
+    // Footer year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
