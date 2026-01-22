@@ -15,11 +15,12 @@
           <div class="brand-mark" aria-hidden="true"><span>VS</span></div>
           <div class="brand-name">
             <strong>VardrSec</strong>
-            <span>Offensive Security Research &amp; Tooling</span>
+            <small>Offensive Security Research &amp; Tooling</small>
           </div>
         </a>
 
         <div class="nav-links">
+          <a href="index.html">Home</a>
           <a href="about.html">About</a>
           <a href="mission.html">Mission</a>
           <a href="services.html">Services</a>
@@ -27,91 +28,97 @@
           <a href="resources.html">Resources</a>
           <a class="active" href="contact.html">Contact</a>
         </div>
+
+        <button class="menu-btn" id="menuBtn" aria-label="Open menu">☰</button>
       </nav>
+
+      <div class="mobile-panel" id="mobilePanel">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="mission.html">Mission</a>
+        <a href="services.html">Services</a>
+        <a href="plans.html">Plans</a>
+        <a href="resources.html">Resources</a>
+        <a class="active" href="contact.html">Contact</a>
+      </div>
     </div>
   </header>
 
   <main>
-    <section class="hero hero--compact">
+    <section class="section compact">
       <div class="container">
-        <h1>Contact</h1>
-        <p class="lead">
-          Describe what you need secured. I’ll respond with scope options and next steps.
-        </p>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="container contact-container">
-        <div class="contact-box">
-          <h2>Send a message</h2>
-          <p class="muted">
-            Please include a brief description of your environment (web app, API, cloud provider)
-            and what you’re looking to achieve.
-          </p>
-
-          <!-- 
-            ACTION PLACEHOLDER
-            Replace action="#" with:
-            - Formspree: https://formspree.io/f/XXXXXX
-            - Netlify: add data-netlify="true" and method="POST"
-            - Backend endpoint when ready
-          -->
-          <form action="#" method="POST" class="contact-form">
-            <div class="form-group">
-              <label for="email">Email address</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                placeholder="you@company.com"
-                required
-              />
-            </div>
-
-            <div class="form-group">
-              <label for="message">Message</label>
-              <textarea
-                id="message"
-                name="message"
-                rows="6"
-                placeholder="What are you trying to secure? Timeline? Any specific concerns?"
-                required
-              ></textarea>
-            </div>
-
-            <div class="form-actions">
-              <button type="submit" class="btn btn-primary">
-                Send message
-              </button>
-            </div>
-          </form>
-
-          <div class="contact-note">
-            <p>
-              <strong>Important:</strong> I do not perform unauthorized testing.
-              Any security work requires explicit written authorization and defined scope.
-            </p>
-          </div>
+        <div class="section-title">
+          <h2>Contact</h2>
+          <p>Send an inquiry. I will reply with scoping options, timeline, and next steps.</p>
         </div>
-      </div>
-    </section>
 
-    <section class="section section--alt">
-      <div class="container">
-        <h2>What happens next</h2>
-        <div class="grid grid-3">
+        <div class="grid-2">
+          <!-- Contact form card -->
           <div class="card">
-            <h3>1. Review</h3>
-            <p>I review your message and environment details.</p>
+            <h3>Send a message</h3>
+            <p class="meta">
+              Include what you need tested (web app, API, cloud), goals, and any deadlines.
+            </p>
+
+            <!--
+              ACTION PLACEHOLDER:
+              Replace action="#" when you wire it up:
+              - Formspree endpoint
+              - Netlify Forms
+              - Your backend endpoint
+            -->
+            <form class="form" action="#" method="POST">
+              <div class="field">
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" placeholder="you@company.com" required />
+              </div>
+
+              <div class="field">
+                <label for="subject">Subject (optional)</label>
+                <input id="subject" name="subject" type="text" placeholder="e.g., API Security Assessment" />
+              </div>
+
+              <div class="field">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" placeholder="Describe your environment, scope, and what success looks like." required></textarea>
+              </div>
+
+              <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-top:6px;">
+                <button class="btn primary" type="submit">Send message</button>
+                <span style="font-size:12px; color: rgba(231,237,247,.70);">
+                  Typical response: 1–2 business days
+                </span>
+              </div>
+            </form>
+
+            <div class="note" style="margin-top:14px;">
+              Work requires explicit written authorization and defined scope. No unauthorized testing.
+            </div>
           </div>
+
+          <!-- What happens next card -->
           <div class="card">
-            <h3>2. Scope</h3>
-            <p>You receive scope options and engagement approach.</p>
-          </div>
-          <div class="card">
-            <h3>3. Execute</h3>
-            <p>Work begins after authorization and agreement.</p>
+            <h3>What happens next</h3>
+            <p class="meta">A standard consulting intake flow:</p>
+
+            <div class="grid-3" style="margin-top:12px;">
+              <div class="card" style="padding:14px;">
+                <h3 style="font-size:14px;">1. Review</h3>
+                <p>Confirm goals, environment, and constraints.</p>
+              </div>
+              <div class="card" style="padding:14px;">
+                <h3 style="font-size:14px;">2. Scope</h3>
+                <p>Define target systems, rules of engagement, deliverables.</p>
+              </div>
+              <div class="card" style="padding:14px;">
+                <h3 style="font-size:14px;">3. Execute</h3>
+                <p>Testing + reporting + remediation guidance.</p>
+              </div>
+            </div>
+
+            <div class="note" style="margin-top:14px; border-left-color: rgba(124,240,215,.7);">
+              If you have a preferred NDA or MSA, mention it in your message.
+            </div>
           </div>
         </div>
       </div>
@@ -121,20 +128,33 @@
   <footer class="footer">
     <div class="container footer-grid">
       <div>
-        <strong>VardrSec</strong>
-        <p class="muted">Offensive Security Research &amp; Tooling</p>
+        <h4>VardrSec</h4>
+        <p>Security consulting focused on practical risk reduction and clean deliverables.</p>
       </div>
-      <div class="footer-links">
+      <div class="links">
+        <h4>Company</h4>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="plans.html">Plans</a>
+      </div>
+      <div class="links">
+        <h4>Legal</h4>
         <a href="privacy.html">Privacy</a>
         <a href="terms.html">Terms</a>
-        <a href="resources.html">Resources</a>
+        <a href="contact.html">Contact</a>
       </div>
     </div>
-    <div class="container">
-      <p class="tiny muted">&copy; <span id="year"></span> VardrSec. All rights reserved.</p>
+
+    <div class="container copyright">
+      <small>&copy; <span id="year"></span> VardrSec. All rights reserved.</small>
+      <small>Security work by authorization only.</small>
     </div>
+
     <script>
       document.getElementById("year").textContent = new Date().getFullYear();
+      const btn = document.getElementById("menuBtn");
+      const panel = document.getElementById("mobilePanel");
+      if (btn && panel) btn.addEventListener("click", () => panel.classList.toggle("open"));
     </script>
   </footer>
 </body>
