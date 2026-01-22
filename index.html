@@ -2,11 +2,248 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>VardrSec</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VardrSec | Cybersecurity Consulting</title>
+  <meta name="description" content="VardrSec provides offensive security, assessments, and pragmatic hardening for small and mid-sized organizations." />
+  <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
-  <h1>VardrSec</h1>
-  <p>Site is live.</p>
+  <header class="topbar">
+    <div class="container">
+      <nav class="nav">
+        <a class="brand" href="index.html">
+          <div class="brand-mark" aria-hidden="true"><span>VS</span></div>
+          <div class="brand-name">
+            <strong>VardrSec</strong>
+            <small>Offensive Security Research & Consulting</small>
+          </div>
+        </a>
+
+        <div class="nav-links">
+          <a class="active" href="index.html">Home</a>
+          <a href="services.html">Services</a>
+          <a href="plans.html">Plans</a>
+          <a href="case-studies.html">Case Studies</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+        </div>
+
+        <div class="nav-cta">
+          <a class="btn" href="resources.html">Resources</a>
+          <a class="btn primary" href="contact.html">Request a consult</a>
+        </div>
+
+        <button id="menuBtn" class="menu-btn" aria-label="Open menu" aria-expanded="false">Menu</button>
+      </nav>
+
+      <div id="mobilePanel" class="mobile-panel">
+        <a class="active" href="index.html">Home</a>
+        <a href="services.html">Services</a>
+        <a href="plans.html">Plans</a>
+        <a href="case-studies.html">Case Studies</a>
+        <a href="about.html">About</a>
+        <a href="mission.html">Mission & Vision</a>
+        <a href="resources.html">Resources</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero-grid">
+          <div class="hero-card">
+            <div class="hero-banner">
+              <img src="assets/orgbanner.png" alt="VardrSec banner logo" />
+            </div>
+            <div class="hero-body">
+              <div class="kicker"><span class="dot"></span> Practical security for real systems</div>
+              <h1>Cybersecurity consulting built for outcomes.</h1>
+              <p class="lead">
+                VardrSec helps organizations reduce risk with targeted assessments, actionable remediation,
+                and security engineering that survives production realities.
+              </p>
+
+              <div class="hero-actions">
+                <a class="btn primary" href="contact.html">Book an assessment</a>
+                <a class="btn" href="services.html">View services</a>
+                <a class="btn" href="plans.html">Plans & retainers</a>
+              </div>
+
+              <div class="pills">
+                <span class="pill">Web & API Security</span>
+                <span class="pill">Cloud Security (Azure/AWS)</span>
+                <span class="pill">Security Reviews</span>
+                <span class="pill">Detection & Hardening</span>
+              </div>
+            </div>
+          </div>
+
+          <aside class="side-card">
+            <h3>Engagement model</h3>
+            <p>Fast kickoff, clear scope, measurable deliverables, and a written report you can use with leadership and engineers.</p>
+
+            <div class="kpi">
+              <div class="box">
+                <strong>72h</strong>
+                <small>Typical kickoff window</small>
+              </div>
+              <div class="box">
+                <strong>Actionable</strong>
+                <small>Fix-focused findings</small>
+              </div>
+              <div class="box">
+                <strong>Clear</strong>
+                <small>Risk + impact mapping</small>
+              </div>
+              <div class="box">
+                <strong>Pragmatic</strong>
+                <small>Engineering-first</small>
+              </div>
+            </div>
+
+            <div class="note">
+              <strong>Security-first policy:</strong>
+              VardrSec performs testing only with explicit authorization and written scope.
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="section compact">
+      <div class="container">
+        <div class="section-title">
+          <h2>What we do</h2>
+          <p>Core offerings designed for small and mid-sized teams that need high-signal security work without enterprise overhead.</p>
+        </div>
+
+        <div class="grid-3">
+          <div class="card">
+            <h3>Web & API Security Assessments</h3>
+            <p>Modern testing focused on authZ, IDOR/BOLA, session/JWT risks, and real business logic abuse.</p>
+            <div class="meta">Deliverables: prioritized findings, proof-of-risk, fix guidance.</div>
+          </div>
+
+          <div class="card">
+            <h3>Cloud Security & Hardening</h3>
+            <p>Attack surface review, identity posture, logging, and practical guardrails for production environments.</p>
+            <div class="meta">Deliverables: control gaps, secure baselines, roadmap.</div>
+          </div>
+
+          <div class="card">
+            <h3>Secure Engineering Support</h3>
+            <p>Threat modeling, design reviews, and remediation support that integrates with your delivery process.</p>
+            <div class="meta">Deliverables: architecture notes, secure patterns, verification.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-title">
+          <h2>Typical engagement flow</h2>
+          <p>Structured execution so you get value quickly, without ambiguity.</p>
+        </div>
+
+        <table class="table" aria-label="Engagement flow table">
+          <thead>
+            <tr>
+              <th>Phase</th>
+              <th>What happens</th>
+              <th>Output</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="badge ok">1. Scope</span></td>
+              <td>Confirm target systems, rules of engagement, and success criteria.</td>
+              <td>Written scope + schedule</td>
+            </tr>
+            <tr>
+              <td><span class="badge warn">2. Assess</span></td>
+              <td>Testing and review with emphasis on exploitable risk and business impact.</td>
+              <td>Findings + evidence</td>
+            </tr>
+            <tr>
+              <td><span class="badge ok">3. Report</span></td>
+              <td>Clear remediation steps, severity rationale, and validation approach.</td>
+              <td>Report + executive summary</td>
+            </tr>
+            <tr>
+              <td><span class="badge ok">4. Fix & Verify</span></td>
+              <td>Optional remediation support and re-test of critical items.</td>
+              <td>Verification notes</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section compact">
+      <div class="container">
+        <div class="section-title">
+          <h2>Ready to start?</h2>
+          <p>Use a short intake form so we can reply with scope and pricing options.</p>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <h3>Request a consultation</h3>
+            <p>Tell us what you’re protecting and what you need validated.</p>
+            <div class="meta" style="margin-top:12px">
+              <a class="btn primary" href="contact.html">Contact VardrSec</a>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Prefer a plan?</h3>
+            <p>Monthly retainers for continuous security testing, reviews, and advisory.</p>
+            <div class="meta" style="margin-top:12px">
+              <a class="btn" href="plans.html">View plans</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h4>VardrSec</h4>
+          <p>Offensive security research, assessments, and consulting. Focused on practical outcomes and engineering-aligned security.</p>
+          <div class="meta" style="margin-top:10px;">
+            <span class="badge">Authorized testing only</span>
+          </div>
+        </div>
+        <div class="links">
+          <h4>Company</h4>
+          <a href="about.html">About</a>
+          <a href="mission.html">Mission & Vision</a>
+          <a href="case-studies.html">Case Studies</a>
+          <a href="resources.html">Resources</a>
+        </div>
+        <div class="links">
+          <h4>Legal</h4>
+          <a href="privacy.html">Privacy</a>
+          <a href="terms.html">Terms</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+
+      <div class="copyright">
+        <small>© <span id="year"></span> VardrSec. All rights reserved.</small>
+        <small>Built on Cloudflare Pages.</small>
+      </div>
+    </div>
+
+    <script src="js/site.js"></script>
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+  </footer>
 </body>
 </html>
