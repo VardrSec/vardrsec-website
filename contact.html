@@ -127,18 +127,14 @@
       <div class="footer-grid">
         <div>
           <h4>VardrSec</h4>
-          <p>Offensive Security Research &amp; Tooling. Practical, scoped security work focused on measurable risk reduction.</p>
-          <small>© <span id="year"></span> VardrSec. All rights reserved.</small>
+          <p>Offensive security research, assessments, and consulting. Focused on practical outcomes and engineering-aligned security.</p>
         </div>
-
         <div class="links">
           <h4>Company</h4>
-          <a href="about.html">About</a>
-          <a href="mission.html">Mission &amp; Vision</a>
-          <a href="services.html">Services</a>
-          <a href="plans.html">Plans</a>
+          <a href="mission.html">Mission & Vision</a>
+          <a href="case-studies.html">Case Studies</a>
+          <a href="resources.html">Resources</a>
         </div>
-
         <div class="links">
           <h4>Legal</h4>
           <a href="privacy.html">Privacy</a>
@@ -146,21 +142,12 @@
           <a href="contact.html">Contact</a>
         </div>
       </div>
-
-  <script>
-    // Mobile menu
-    const menuBtn = document.getElementById('menuBtn');
-    const mobilePanel = document.getElementById('mobilePanel');
-
-    if (menuBtn && mobilePanel) {
-      menuBtn.addEventListener('click', () => {
-        const open = mobilePanel.classList.toggle('open');
-        menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
-      });
-    }
-
-    // Footer year
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+      <div class="copyright">
+        <small>© <span id="year"></span> VardrSec. All rights reserved.</small>
+      </div>
+    </div>
+    <script src="js/site.js"></script>
+    <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+  </footer>
 </body>
 </html>
