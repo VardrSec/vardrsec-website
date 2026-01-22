@@ -1,1 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Terms of Use | VardrSec</title>
+  <meta name="description" content="Terms of use for VardrSec." />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="container">
+      <nav class="nav">
+        <a class="brand" href="index.html">
+          <div class="brand-mark" aria-hidden="true"><span>VS</span></div>
+          <div class="brand-name">
+            <strong>VardrSec</strong>
+            <span>Offensive Security Research &amp; Tooling</span>
+          </div>
+        </a>
 
+        <div class="nav-links">
+          <a href="about.html">About</a>
+          <a href="mission.html">Mission</a>
+          <a href="services.html">Services</a>
+          <a href="plans.html">Plans</a>
+          <a href="resources.html">Resources</a>
+          <a href="contact.html" class="btn btn-primary">Contact</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero hero--compact">
+      <div class="container">
+        <h1>Terms of Use</h1>
+        <p class="lead">By using this site, you agree to the following terms.</p>
+        <p class="tiny muted">Last updated: <span id="lastUpdated"></span></p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container prose">
+        <h2>Use of site</h2>
+        <p>
+          You may browse and use this website for informational purposes. You agree not to misuse the site,
+          attempt to disrupt service, or attempt unauthorized access to any system.
+        </p>
+
+        <h2>No professional advice</h2>
+        <p>
+          Content on this site is provided for general informational purposes and does not constitute legal,
+          financial, or professional advice. For specific needs, request a formal engagement.
+        </p>
+
+        <h2>Engagement terms</h2>
+        <p>
+          Any consulting services are governed by a written agreement (scope, rules of engagement, deliverables,
+          confidentiality, and authorization). Site content does not create a client relationship.
+        </p>
+
+        <h2>Authorization and ethical conduct</h2>
+        <p>
+          VardrSec does not perform unauthorized testing. Any security testing is performed only with explicit
+          written permission and within defined scope.
+        </p>
+
+        <h2>Intellectual property</h2>
+        <p>
+          Unless otherwise stated, site content is owned by VardrSec and may not be copied or redistributed
+          without permission.
+        </p>
+
+        <h2>Limitation of liability</h2>
+        <p>
+          To the maximum extent permitted by law, VardrSec is not liable for damages resulting from the use
+          or inability to use this site.
+        </p>
+
+        <h2>Changes</h2>
+        <p>
+          These terms may be updated periodically. Continued use of the site constitutes acceptance of updates.
+        </p>
+
+        <h2>Contact</h2>
+        <p>
+          Questions can be sent via the <a href="contact.html">contact page</a>.
+        </p>
+
+        <div class="notice">
+          This template is provided for general informational purposes and is not legal advice.
+          Consider reviewing with counsel for your jurisdiction and business structure.
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <strong>VardrSec</strong>
+        <p class="muted">Offensive Security Research &amp; Tooling</p>
+      </div>
+      <div class="footer-links">
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html" class="active">Terms</a>
+        <a href="resources.html">Resources</a>
+      </div>
+    </div>
+    <div class="container">
+      <p class="tiny muted">&copy; <span id="year"></span> VardrSec. All rights reserved.</p>
+    </div>
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+      document.getElementById("lastUpdated").textContent = new Date().toLocaleDateString();
+    </script>
+  </footer>
+</body>
+</html>
