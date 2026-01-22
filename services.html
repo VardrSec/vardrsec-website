@@ -1,1 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Services | VardrSec</title>
+  <meta name="description" content="Cybersecurity consulting services: assessments, hardening, detection engineering, incident response support, and security program enablement." />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="container">
+      <nav class="nav">
+        <a class="brand" href="index.html">
+          <div class="brand-mark" aria-hidden="true"><span>VS</span></div>
+          <div class="brand-name">
+            <strong>VardrSec</strong>
+            <span>Offensive Security Research &amp; Tooling</span>
+          </div>
+        </a>
 
+        <div class="nav-links">
+          <a href="about.html">About</a>
+          <a href="mission.html">Mission</a>
+          <a class="active" href="services.html">Services</a>
+          <a href="plans.html">Plans</a>
+          <a href="resources.html">Resources</a>
+          <a href="contact.html" class="btn btn-primary">Contact</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero hero--compact">
+      <div class="container">
+        <h1>Services</h1>
+        <p class="lead">
+          Practical security work focused on reducing real risk: hardening what you run, validating what you ship,
+          and improving detection and response.
+        </p>
+
+        <div class="grid grid-3">
+          <div class="card">
+            <h3>Web &amp; API Security</h3>
+            <p>Manual testing + targeted automation to identify auth flaws, IDOR/BOLA, misconfigurations, and injection risks.</p>
+            <ul class="bullets">
+              <li>OWASP API Top 10 / ASVS aligned</li>
+              <li>AuthZ analysis (horizontal/vertical)</li>
+              <li>Remediation guidance with repro steps</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>Cloud &amp; Infrastructure Hardening</h3>
+            <p>Secure baselines for Azure/AWS/GCP, identity, and network exposure reduction.</p>
+            <ul class="bullets">
+              <li>IAM review &amp; least privilege</li>
+              <li>Secure configuration + guardrails</li>
+              <li>Attack surface &amp; logging coverage</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>Detection Engineering</h3>
+            <p>Build and tune detection content so you can see the activity that matters and respond quickly.</p>
+            <ul class="bullets">
+              <li>SIEM rules + alert tuning</li>
+              <li>Threat hunting playbooks</li>
+              <li>Automation &amp; response workflows</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="spacer"></div>
+
+        <div class="grid grid-2">
+          <div class="card">
+            <h3>Security Program Enablement</h3>
+            <p>
+              Lightweight, scalable processes that help small teams ship faster without “security theater.”
+            </p>
+            <ul class="bullets">
+              <li>Secure SDLC checkpoints</li>
+              <li>PR review guidance &amp; checklists</li>
+              <li>Vulnerability triage workflows</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>Incident Support</h3>
+            <p>
+              Rapid support during a suspected incident: scoping, containment guidance, and post-incident improvements.
+            </p>
+            <ul class="bullets">
+              <li>Initial triage and log review</li>
+              <li>Containment recommendations</li>
+              <li>Root cause + lessons learned</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="spacer"></div>
+
+        <div class="callout">
+          <div>
+            <h3>How engagements typically work</h3>
+            <p>
+              Short discovery call → scoped statement of work → execution with weekly updates → final deliverables
+              (findings, fixes, and a prioritized plan).
+            </p>
+          </div>
+          <a href="plans.html" class="btn btn-secondary">See Plans</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2>Deliverables you can expect</h2>
+        <div class="grid grid-3">
+          <div class="card">
+            <h3>Executive Summary</h3>
+            <p>Risk overview, top issues, and impact in business terms.</p>
+          </div>
+          <div class="card">
+            <h3>Technical Findings</h3>
+            <p>Reproduction steps, evidence, severity, and remediation guidance.</p>
+          </div>
+          <div class="card">
+            <h3>Prioritized Roadmap</h3>
+            <p>Fix-first ordering, quick wins, and medium/long-term improvements.</p>
+          </div>
+        </div>
+
+        <div class="spacer"></div>
+
+        <div class="notice">
+          <strong>Note:</strong> I do not perform unauthorized testing. Any testing is performed only with
+          explicit written permission and a defined scope.
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--alt">
+      <div class="container">
+        <h2>Ready to scope it?</h2>
+        <p class="lead">Send your objectives and environment details. I’ll respond with a proposed scope and timeline.</p>
+        <a class="btn btn-primary" href="contact.html">Contact</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <strong>VardrSec</strong>
+        <p class="muted">Offensive Security Research &amp; Tooling</p>
+      </div>
+      <div class="footer-links">
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+        <a href="resources.html">Resources</a>
+      </div>
+    </div>
+    <div class="container">
+      <p class="tiny muted">&copy; <span id="year"></span> VardrSec. All rights reserved.</p>
+    </div>
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+  </footer>
+</body>
+</html>
