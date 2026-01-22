@@ -1,1 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About | VardrSec</title>
+  <meta name="description" content="About VardrSec cybersecurity consulting." />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="container">
+      <nav class="nav">
+        <a class="brand" href="index.html">
+          <div class="brand-mark" aria-hidden="true"><span>VS</span></div>
+          <div class="brand-name">
+            <strong>VardrSec</strong>
+            <small>Offensive Security Research & Consulting</small>
+          </div>
+        </a>
 
+        <div class="nav-links">
+          <a href="index.html">Home</a>
+          <a href="services.html">Services</a>
+          <a href="plans.html">Plans</a>
+          <a href="case-studies.html">Case Studies</a>
+          <a class="active" href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+        </div>
+
+        <div class="nav-cta">
+          <a class="btn" href="resources.html">Resources</a>
+          <a class="btn primary" href="contact.html">Request a consult</a>
+        </div>
+
+        <button id="menuBtn" class="menu-btn" aria-label="Open menu" aria-expanded="false">Menu</button>
+      </nav>
+
+      <div id="mobilePanel" class="mobile-panel">
+        <a href="index.html">Home</a>
+        <a href="services.html">Services</a>
+        <a href="plans.html">Plans</a>
+        <a href="case-studies.html">Case Studies</a>
+        <a class="active" href="about.html">About</a>
+        <a href="mission.html">Mission & Vision</a>
+        <a href="resources.html">Resources</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="container">
+        <div class="section-title">
+          <h2>About VardrSec</h2>
+          <p>Security consulting designed to be direct, practical, and engineering-compatible.</p>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <h3>Who we are</h3>
+            <p>
+              VardrSec is a cybersecurity consulting practice focused on offensive security testing,
+              cloud security posture, and security engineering support. We prioritize high-signal findings,
+              realistic threat models, and remediation guidance that teams can implement.
+            </p>
+            <div class="meta">Scope: web apps, APIs, identity, cloud configurations, and security controls.</div>
+          </div>
+
+          <div class="card">
+            <h3>About the founder</h3>
+            <p>
+              This section is written as a template. Replace it with your actual bio:
+              experience, domains you specialize in (AppSec, cloud, SOC), and how you approach engagements.
+            </p>
+            <div class="meta">Tip: keep this 5–7 sentences. Focus on outcomes and credibility.</div>
+          </div>
+        </div>
+
+        <div class="section compact">
+          <div class="note">
+            <strong>Professional standard:</strong> All testing is performed with explicit written authorization and
+            documented scope. No “grey” activity, no surprises.
+          </div>
+        </div>
+
+        <div class="grid-3">
+          <div class="card">
+            <h3>Principle: Clarity</h3>
+            <p>We translate technical risk into business impact and engineering tasks.</p>
+          </div>
+          <div class="card">
+            <h3>Principle: Proof</h3>
+            <p>Findings include evidence and reasoning, not vague warnings.</p>
+          </div>
+          <div class="card">
+            <h3>Principle: Fixability</h3>
+            <p>Remediation guidance is practical and validated where possible.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h4>VardrSec</h4>
+          <p>Offensive security research, assessments, and consulting. Focused on practical outcomes and engineering-aligned security.</p>
+        </div>
+        <div class="links">
+          <h4>Company</h4>
+          <a href="mission.html">Mission & Vision</a>
+          <a href="case-studies.html">Case Studies</a>
+          <a href="resources.html">Resources</a>
+        </div>
+        <div class="links">
+          <h4>Legal</h4>
+          <a href="privacy.html">Privacy</a>
+          <a href="terms.html">Terms</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+      <div class="copyright">
+        <small>© <span id="year"></span> VardrSec. All rights reserved.</small>
+        <small>Built on Cloudflare Pages.</small>
+      </div>
+    </div>
+    <script src="js/site.js"></script>
+    <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+  </footer>
+</body>
+</html>
