@@ -96,25 +96,32 @@
     </section>
   </main>
 
-  <footer class="footer">
-    <div class="container footer-grid">
-      <div>
-        <strong>VardrSec</strong>
-        <p class="muted">Offensive Security Research &amp; Tooling</p>
-      </div>
-      <div class="footer-links">
-        <a href="privacy.html">Privacy</a>
-        <a href="terms.html" class="active">Terms</a>
-        <a href="resources.html">Resources</a>
-      </div>
-    </div>
+ <footer class="footer">
     <div class="container">
-      <p class="tiny muted">&copy; <span id="year"></span> VardrSec. All rights reserved.</p>
+      <div class="footer-grid">
+        <div>
+          <h4>VardrSec</h4>
+          <p>Offensive security research, assessments, and consulting. Focused on practical outcomes and engineering-aligned security.</p>
+        </div>
+        <div class="links">
+          <h4>Company</h4>
+          <a href="mission.html">Mission & Vision</a>
+          <a href="case-studies.html">Case Studies</a>
+          <a href="resources.html">Resources</a>
+        </div>
+        <div class="links">
+          <h4>Legal</h4>
+          <a href="privacy.html">Privacy</a>
+          <a href="terms.html">Terms</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+      <div class="copyright">
+        <small>© <span id="year"></span> VardrSec. All rights reserved.</small>
+      </div>
     </div>
-    <script>
-      document.getElementById("year").textContent = new Date().getFullYear();
-      document.getElementById("lastUpdated").textContent = new Date().toLocaleDateString();
-    </script>
+    <script src="js/site.js"></script>
+    <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
   </footer>
 </body>
 </html>
