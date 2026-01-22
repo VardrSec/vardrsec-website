@@ -1,1 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact | VardrSec</title>
+  <meta name="description" content="Contact VardrSec for cybersecurity consulting, assessments, and advisory services." />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="container">
+      <nav class="nav">
+        <a class="brand" href="index.html">
+          <div class="brand-mark" aria-hidden="true"><span>VS</span></div>
+          <div class="brand-name">
+            <strong>VardrSec</strong>
+            <span>Offensive Security Research &amp; Tooling</span>
+          </div>
+        </a>
 
+        <div class="nav-links">
+          <a href="about.html">About</a>
+          <a href="mission.html">Mission</a>
+          <a href="services.html">Services</a>
+          <a href="plans.html">Plans</a>
+          <a href="resources.html">Resources</a>
+          <a class="active" href="contact.html">Contact</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero hero--compact">
+      <div class="container">
+        <h1>Contact</h1>
+        <p class="lead">
+          Describe what you need secured. I’ll respond with scope options and next steps.
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container contact-container">
+        <div class="contact-box">
+          <h2>Send a message</h2>
+          <p class="muted">
+            Please include a brief description of your environment (web app, API, cloud provider)
+            and what you’re looking to achieve.
+          </p>
+
+          <!-- 
+            ACTION PLACEHOLDER
+            Replace action="#" with:
+            - Formspree: https://formspree.io/f/XXXXXX
+            - Netlify: add data-netlify="true" and method="POST"
+            - Backend endpoint when ready
+          -->
+          <form action="#" method="POST" class="contact-form">
+            <div class="form-group">
+              <label for="email">Email address</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="you@company.com"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea
+                id="message"
+                name="message"
+                rows="6"
+                placeholder="What are you trying to secure? Timeline? Any specific concerns?"
+                required
+              ></textarea>
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary">
+                Send message
+              </button>
+            </div>
+          </form>
+
+          <div class="contact-note">
+            <p>
+              <strong>Important:</strong> I do not perform unauthorized testing.
+              Any security work requires explicit written authorization and defined scope.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--alt">
+      <div class="container">
+        <h2>What happens next</h2>
+        <div class="grid grid-3">
+          <div class="card">
+            <h3>1. Review</h3>
+            <p>I review your message and environment details.</p>
+          </div>
+          <div class="card">
+            <h3>2. Scope</h3>
+            <p>You receive scope options and engagement approach.</p>
+          </div>
+          <div class="card">
+            <h3>3. Execute</h3>
+            <p>Work begins after authorization and agreement.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <strong>VardrSec</strong>
+        <p class="muted">Offensive Security Research &amp; Tooling</p>
+      </div>
+      <div class="footer-links">
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+        <a href="resources.html">Resources</a>
+      </div>
+    </div>
+    <div class="container">
+      <p class="tiny muted">&copy; <span id="year"></span> VardrSec. All rights reserved.</p>
+    </div>
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+  </footer>
+</body>
+</html>
