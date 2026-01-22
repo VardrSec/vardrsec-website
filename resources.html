@@ -1,1 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resources | VardrSec</title>
+  <meta name="description" content="Security resources: checklists, hardening notes, and practical guidance for web, API, and cloud security." />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="container">
+      <nav class="nav">
+        <a class="brand" href="index.html">
+          <div class="brand-mark" aria-hidden="true"><span>VS</span></div>
+          <div class="brand-name">
+            <strong>VardrSec</strong>
+            <span>Offensive Security Research &amp; Tooling</span>
+          </div>
+        </a>
 
+        <div class="nav-links">
+          <a href="about.html">About</a>
+          <a href="mission.html">Mission</a>
+          <a href="services.html">Services</a>
+          <a href="plans.html">Plans</a>
+          <a class="active" href="resources.html">Resources</a>
+          <a href="contact.html" class="btn btn-primary">Contact</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero hero--compact">
+      <div class="container">
+        <h1>Resources</h1>
+        <p class="lead">
+          Short, usable checklists and notes. These are meant to be copied into tickets and PR reviews.
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2>Web &amp; API quick checks</h2>
+        <div class="grid grid-2">
+          <div class="card">
+            <h3>Authorization (BOLA/IDOR)</h3>
+            <ul class="bullets">
+              <li>Validate access using server-side policy, not UI state.</li>
+              <li>Test horizontal and vertical access paths across roles.</li>
+              <li>Do not rely on predictable IDs; protect by policy.</li>
+              <li>Log denied access attempts with context.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Authentication</h3>
+            <ul class="bullets">
+              <li>Enforce MFA for privileged accounts.</li>
+              <li>Rate-limit auth endpoints and add lockout protections.</li>
+              <li>Secure session handling (rotation, timeout, HttpOnly, SameSite).</li>
+              <li>Harden password reset flows and tokens.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Input handling</h3>
+            <ul class="bullets">
+              <li>Server-side validation and allowlists where possible.</li>
+              <li>Parameterized queries; avoid string building.</li>
+              <li>Normalize and validate JSON body structure.</li>
+              <li>Sanitize logs to avoid leaking secrets/PII.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Security headers</h3>
+            <ul class="bullets">
+              <li>HSTS, CSP (report-only first), X-Content-Type-Options.</li>
+              <li>Frame/Clickjacking protections (frame-ancestors).</li>
+              <li>Proper caching headers for sensitive content.</li>
+              <li>Disable verbose error pages in prod.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="spacer"></div>
+
+        <h2>Cloud and operations</h2>
+        <div class="grid grid-2">
+          <div class="card">
+            <h3>Logging &amp; detection</h3>
+            <ul class="bullets">
+              <li>Centralize logs (auth, admin actions, access denials).</li>
+              <li>Alert on impossible travel, token anomalies, privilege changes.</li>
+              <li>Baseline normal traffic and tune to reduce noise.</li>
+              <li>Keep an incident “minimum viable playbook.”</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>IAM baseline</h3>
+            <ul class="bullets">
+              <li>Least privilege roles; avoid shared admin accounts.</li>
+              <li>Protect secrets with a vault and rotation.</li>
+              <li>Require MFA and conditional access for admin surfaces.</li>
+              <li>Audit privileges regularly; remove dead access.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="spacer"></div>
+
+        <div class="notice">
+          If you want these resources customized for your stack, request a Baseline engagement and I’ll tailor
+          checklists for your environment and deployment pipeline.
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--alt">
+      <div class="container">
+        <h2>Need something specific?</h2>
+        <p class="lead">Ask for a checklist targeted to your app type (SaaS, internal API, e-commerce, etc.).</p>
+        <a class="btn btn-primary" href="contact.html">Contact</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <strong>VardrSec</strong>
+        <p class="muted">Offensive Security Research &amp; Tooling</p>
+      </div>
+      <div class="footer-links">
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+        <a href="resources.html">Resources</a>
+      </div>
+    </div>
+    <div class="container">
+      <p class="tiny muted">&copy; <span id="year"></span> VardrSec. All rights reserved.</p>
+    </div>
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+  </footer>
+</body>
+</html>
