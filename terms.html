@@ -15,88 +15,145 @@
           <div class="brand-mark" aria-hidden="true"><span>VS</span></div>
           <div class="brand-name">
             <strong>VardrSec</strong>
-            <span>Offensive Security Research &amp; Tooling</span>
+            <small>Offensive Security Research & Consulting</small>
           </div>
         </a>
-
+        
+        <!-- Desktop Navigation -->
         <div class="nav-links">
+          <a href="index.html">Home</a>
           <a href="about.html">About</a>
-          <a href="mission.html">Mission</a>
           <a href="services.html">Services</a>
-          <a href="plans.html">Plans</a>
-          <a href="resources.html">Resources</a>
-          <a href="contact.html" class="btn btn-primary">Contact</a>
+          <a href="case-studies.html">Case Studies</a>
+          <a href="contact.html">Contact</a>
         </div>
+        
+        <!-- Desktop CTA Buttons -->
+        <div class="nav-cta">
+          <a class="btn" href="resources.html">Resources</a>
+          <a class="btn primary" href="contact.html">Request a Consult</a>
+        </div>
+        
+        <!-- Mobile Menu Toggle -->
+        <button id="menuBtn" class="menu-btn" aria-label="Open menu" aria-expanded="false">
+          Menu
+        </button>
       </nav>
+      
+      <!-- Mobile Menu -->
+      <div class="mobile-panel" id="mobilePanel">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="case-studies.html">Case Studies</a>
+        <a href="resources.html">Resources</a>
+        <a href="contact.html">Contact</a>
+        <a class="btn primary" href="contact.html" style="margin-top:8px">Request a Consult</a>
+      </div>
     </div>
   </header>
 
   <main>
-    <section class="hero hero--compact">
-      <div class="container">
-        <h1>Terms of Use</h1>
-        <p class="lead">By using this site, you agree to the following terms.</p>
-        <p class="tiny muted">Last updated: <span id="lastUpdated"></span></p>
-      </div>
-    </section>
-
     <section class="section">
-      <div class="container prose">
-        <h2>Use of site</h2>
-        <p>
-          You may browse and use this website for informational purposes. You agree not to misuse the site,
-          attempt to disrupt service, or attempt unauthorized access to any system.
-        </p>
-
-        <h2>No professional advice</h2>
-        <p>
-          Content on this site is provided for general informational purposes and does not constitute legal,
-          financial, or professional advice. For specific needs, request a formal engagement.
-        </p>
-
-        <h2>Engagement terms</h2>
-        <p>
-          Any consulting services are governed by a written agreement (scope, rules of engagement, deliverables,
-          confidentiality, and authorization). Site content does not create a client relationship.
-        </p>
-
-        <h2>Authorization and ethical conduct</h2>
-        <p>
-          VardrSec does not perform unauthorized testing. Any security testing is performed only with explicit
-          written permission and within defined scope.
-        </p>
-
-        <h2>Intellectual property</h2>
-        <p>
-          Unless otherwise stated, site content is owned by VardrSec and may not be copied or redistributed
-          without permission.
-        </p>
-
-        <h2>Limitation of liability</h2>
-        <p>
-          To the maximum extent permitted by law, VardrSec is not liable for damages resulting from the use
-          or inability to use this site.
-        </p>
-
-        <h2>Changes</h2>
-        <p>
-          These terms may be updated periodically. Continued use of the site constitutes acceptance of updates.
-        </p>
-
-        <h2>Contact</h2>
-        <p>
-          Questions can be sent via the <a href="contact.html">contact page</a>.
-        </p>
-
-        <div class="notice">
-          This template is provided for general informational purposes and is not legal advice.
-          Consider reviewing with counsel for your jurisdiction and business structure.
+      <div class="container">
+        <div class="section-title">
+          <h2>Terms of Use</h2>
+          <p>By using this site, you agree to the following terms.</p>
         </div>
+        
+        <p style="color: var(--muted); font-size: 12px; margin-bottom: 24px;">
+          Last updated: January 2026
+        </p>
+
+        <div class="card" style="margin-bottom: 20px;">
+          <h3>Use of Site</h3>
+          <p style="margin-top: 12px;">
+            You may browse and use this website for informational purposes. You agree not to misuse the site,
+            attempt to disrupt service, or attempt unauthorized access to any system.
+          </p>
+        </div>
+
+        <div class="card" style="margin-bottom: 20px;">
+          <h3>No Professional Advice</h3>
+          <p style="margin-top: 12px;">
+            Content on this site is provided for general informational purposes and does not constitute legal,
+            financial, or professional security advice. For specific security needs, request a formal engagement.
+          </p>
+        </div>
+
+        <div class="card" style="margin-bottom: 20px;">
+          <h3>Engagement Terms</h3>
+          <p style="margin-top: 12px;">
+            Any consulting services are governed by a written agreement that defines scope, rules of engagement, 
+            deliverables, confidentiality requirements, and authorization boundaries. Site content does not create 
+            a client relationship or constitute a consulting engagement.
+          </p>
+        </div>
+
+        <div class="card" style="margin-bottom: 20px;">
+          <h3>Authorization and Ethical Conduct</h3>
+          <p style="margin-top: 12px;">
+            VardrSec does not perform unauthorized security testing. Any security testing or assessment is performed 
+            only with explicit written permission and within clearly defined scope. All work adheres to professional 
+            ethical standards and applicable laws.
+          </p>
+        </div>
+
+        <div class="card" style="margin-bottom: 20px;">
+          <h3>Confidentiality</h3>
+          <p style="margin-top: 12px;">
+            All client engagements operate under strict confidentiality. Vulnerability information, client data, 
+            and engagement details are protected. Any discussion of client work in case studies or public materials 
+            occurs only with explicit client permission and appropriate anonymization.
+          </p>
+        </div>
+
+        <div class="card" style="margin-bottom: 20px;">
+          <h3>Intellectual Property</h3>
+          <p style="margin-top: 12px;">
+            Unless otherwise stated, site content including text, graphics, logos, and methodologies are owned by 
+            VardrSec and may not be copied or redistributed without permission. Client deliverables and findings 
+            remain the property of the client.
+          </p>
+        </div>
+
+        <div class="card" style="margin-bottom: 20px;">
+          <h3>Limitation of Liability</h3>
+          <p style="margin-top: 12px;">
+            To the maximum extent permitted by law, VardrSec is not liable for damages resulting from the use
+            or inability to use this site. Liability for consulting services is governed by the written engagement 
+            agreement.
+          </p>
+        </div>
+
+        <div class="card" style="margin-bottom: 20px;">
+          <h3>Changes to Terms</h3>
+          <p style="margin-top: 12px;">
+            These terms may be updated periodically to reflect changes in our practices or legal requirements. 
+            Continued use of the site constitutes acceptance of updated terms. Material changes will be noted 
+            with an updated "last modified" date.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Contact</h3>
+          <p style="margin-top: 12px;">
+            Questions about these terms can be submitted via the 
+            <a href="contact.html" style="color: var(--accent); text-decoration: underline;">contact page</a>.
+          </p>
+        </div>
+
+        <div class="note" style="margin-top: 28px;">
+          <strong>Legal Notice:</strong> This document is provided for general informational purposes and is not 
+          legal advice. Organizations should review terms with qualified legal counsel appropriate for their 
+          jurisdiction and business structure.
+        </div>
+
       </div>
     </section>
   </main>
 
- <footer class="footer">
+  <footer class="footer">
     <div class="container">
       <div class="footer-grid">
         <div>
@@ -105,7 +162,7 @@
         </div>
         <div class="links">
           <h4>Company</h4>
-          <a href="mission.html">Mission & Vision</a>
+          <a href="about.html">About</a>
           <a href="case-studies.html">Case Studies</a>
           <a href="resources.html">Resources</a>
         </div>
