@@ -1,1 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Case Studies | VardrSec</title>
+  <meta name="description" content="Real-world security engagements and outcomes from VardrSec consulting." />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="container">
+      <nav class="nav">
+        <a class="brand" href="index.html">
+          <div class="brand-mark" aria-hidden="true"><span>VS</span></div>
+          <div class="brand-name">
+            <strong>VardrSec</strong>
+            <small>Offensive Security Research & Consulting</small>
+          </div>
+        </a>
+        
+        <!-- Desktop Navigation -->
+        <div class="nav-links">
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="services.html">Services</a>
+          <a href="plans.html">Plans</a>
+          <a class="active" href="case-studies.html">Case Studies</a>
+          <a href="contact.html">Contact</a>
+        </div>
+        
+        <!-- Desktop CTA Buttons -->
+        <div class="nav-cta">
+          <a class="btn" href="resources.html">Resources</a>
+          <a class="btn primary" href="contact.html">Request a Consult</a>
+        </div>
+        
+        <!-- Mobile Menu Toggle -->
+        <button id="menuBtn" class="menu-btn" aria-label="Open menu" aria-expanded="false">
+          Menu
+        </button>
+      </nav>
+      
+      <!-- Mobile Menu -->
+      <div class="mobile-panel" id="mobilePanel">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="plans.html">Plans</a>
+        <a class="active" href="case-studies.html">Case Studies</a>
+        <a href="resources.html">Resources</a>
+        <a href="contact.html">Contact</a>
+        <a class="btn primary" href="contact.html" style="margin-top:8px">Request a Consult</a>
+      </div>
+    </div>
+  </header>
 
+  <main>
+    <section class="section">
+      <div class="container">
+        <div class="section-title">
+          <h2>Case Studies</h2>
+          <p>Selected engagements demonstrating our approach to offensive security testing and risk assessment.</p>
+        </div>
+
+        <div class="note" style="margin-bottom: 28px;">
+          <strong>Confidentiality note:</strong> Client names and identifying details have been anonymized. 
+          All findings were disclosed responsibly and remediated before publication.
+        </div>
+
+        <!-- Case Study 1 -->
+        <div class="card" style="margin-bottom: 20px;">
+          <div class="kicker" style="margin-bottom: 12px;">
+            <span class="badge warn">API Security</span>
+            <span class="badge">SaaS Platform</span>
+          </div>
+          <h3>Authorization Bypass in Multi-Tenant SaaS Application</h3>
+          
+          <p style="margin-top: 12px;"><strong>Client:</strong> B2B SaaS company, 50K+ enterprise users</p>
+          
+          <p><strong>Challenge:</strong> Client required penetration testing prior to SOC 2 Type II audit. 
+          The application had complex role-based access controls across multiple tenant organizations.</p>
+          
+          <p><strong>Approach:</strong> We conducted white-box API testing with focus on authorization logic, 
+          tenant isolation, and privilege escalation paths. Testing included manipulation of API parameters, 
+          JWT token analysis, and role boundary testing.</p>
+          
+          <p><strong>Key Finding:</strong> Identified a critical authorization flaw allowing users to access 
+          resources across tenant boundaries by manipulating organization IDs in API requests. The vulnerability 
+          existed in 12 API endpoints handling sensitive customer data.</p>
+          
+          <p><strong>Impact:</strong> Complete tenant isolation failure. Any authenticated user could potentially 
+          access data belonging to other organizations by iterating organization identifiers.</p>
+          
+          <p><strong>Outcome:</strong> Provided detailed remediation guidance including code-level recommendations 
+          for centralized authorization middleware. Client implemented fixes within 72 hours. Verification testing 
+          confirmed successful remediation. Client achieved SOC 2 certification on schedule.</p>
+          
+          <div class="kpi" style="margin-top: 18px;">
+            <div class="box">
+              <strong>72hrs</strong>
+              <small>Time to remediation</small>
+            </div>
+            <div class="box">
+              <strong>Critical</strong>
+              <small>Severity rating</small>
+            </div>
+            <div class="box">
+              <strong>12</strong>
+              <small>Vulnerable endpoints</small>
+            </div>
+            <div class="box">
+              <strong>100%</strong>
+              <small>Remediation rate</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Case Study 2 -->
+        <div class="card" style="margin-bottom: 20px;">
+          <div class="kicker" style="margin-bottom: 12px;">
+            <span class="badge ok">Cloud Security</span>
+            <span class="badge">AWS</span>
+          </div>
+          <h3>AWS Security Posture Assessment for Series B Startup</h3>
+          
+          <p style="margin-top: 12px;"><strong>Client:</strong> Healthcare technology startup preparing for Series B funding</p>
+          
+          <p><strong>Challenge:</strong> Investors required third-party security assessment of cloud infrastructure 
+          before finalizing $25M funding round. Client needed clear prioritization of findings and realistic remediation timeline.</p>
+          
+          <p><strong>Approach:</strong> Conducted comprehensive AWS security review including IAM configuration, 
+          network architecture, S3 bucket policies, RDS security, secrets management, and CloudTrail logging. 
+          Used combination of automated tooling and manual configuration review.</p>
+          
+          <p><strong>Key Findings:</strong> Identified overly permissive IAM policies granting unnecessary access 
+          to production resources, publicly accessible S3 buckets containing application logs with PII, and insufficient 
+          network segmentation between development and production environments.</p>
+          
+          <p><strong>Delivered:</strong> Prioritized remediation roadmap with three phases: immediate (high-risk items), 
+          short-term (30 days), and strategic improvements (90 days). Provided Terraform code examples for 
+          implementing recommended changes.</p>
+          
+          <p><strong>Outcome:</strong> Client resolved all critical findings within 2 weeks. Successfully passed 
+          investor security diligence. Closed Series B funding round. Implemented our recommended baseline 
+          security configurations across all AWS accounts.</p>
+          
+          <div class="kpi" style="margin-top: 18px;">
+            <div class="box">
+              <strong>24</strong>
+              <small>Total findings</small>
+            </div>
+            <div class="box">
+              <strong>2 weeks</strong>
+              <small>Critical remediation</small>
+            </div>
+            <div class="box">
+              <strong>$25M</strong>
+              <small>Funding secured</small>
+            </div>
+            <div class="box">
+              <strong>5</strong>
+              <small>AWS accounts reviewed</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Case Study 3 -->
+        <div class="card" style="margin-bottom: 20px;">
+          <div class="kicker" style="margin-bottom: 12px;">
+            <span class="badge bad">Web Application</span>
+            <span class="badge">Authentication</span>
+          </div>
+          <h3>Authentication Weakness in Customer-Facing Portal</h3>
+          
+          <p style="margin-top: 12px;"><strong>Client:</strong> Financial services company, 200K+ active users</p>
+          
+          <p><strong>Challenge:</strong> Client experienced suspicious account activity and requested external 
+          security assessment of their customer authentication system before potential breach escalation.</p>
+          
+          <p><strong>Approach:</strong> Focused assessment of authentication and session management mechanisms. 
+          Tested password reset flows, session handling, MFA implementation, and account recovery procedures. 
+          Analyzed both web and mobile API authentication.</p>
+          
+          <p><strong>Key Finding:</strong> Password reset functionality was vulnerable to account takeover via 
+          reset token predictability. Tokens used insufficient entropy and could be enumerated. Additionally, 
+          session tokens did not properly invalidate after password changes.</p>
+          
+          <p><strong>Impact:</strong> Attackers could potentially compromise user accounts through password reset 
+          manipulation. Session persistence after password reset allowed continued access even after victim 
+          changed their password.</p>
+          
+          <p><strong>Outcome:</strong> Client immediately disabled password reset functionality, implemented 
+          secure token generation using cryptographically secure random values, and added proper session 
+          invalidation. Deployed mandatory password reset for all users. No confirmed account compromises 
+          after remediation.</p>
+          
+          <div class="kpi" style="margin-top: 18px;">
+            <div class="box">
+              <strong>24hrs</strong>
+              <small>Emergency response</small>
+            </div>
+            <div class="box">
+              <strong>High</strong>
+              <small>Risk severity</small>
+            </div>
+            <div class="box">
+              <strong>200K+</strong>
+              <small>Protected users</small>
+            </div>
+            <div class="box">
+              <strong>0</strong>
+              <small>Confirmed breaches</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Call to Action -->
+        <div class="section compact">
+          <div class="note">
+            <strong>Need security assessment?</strong> We provide penetration testing, security reviews, 
+            and cloud security assessments for organizations of all sizes. 
+            <a href="contact.html" style="color: var(--accent); text-decoration: underline;">Request a consultation</a> 
+            to discuss your security testing needs.
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h4>VardrSec</h4>
+          <p>Offensive security research, assessments, and consulting. Focused on practical outcomes and engineering-aligned security.</p>
+        </div>
+        <div class="links">
+          <h4>Company</h4>
+          <a href="mission.html">Mission & Vision</a>
+          <a href="case-studies.html">Case Studies</a>
+          <a href="resources.html">Resources</a>
+        </div>
+        <div class="links">
+          <h4>Legal</h4>
+          <a href="privacy.html">Privacy</a>
+          <a href="terms.html">Terms</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+      <div class="copyright">
+        <small>© <span id="year"></span> VardrSec. All rights reserved.</small>
+      </div>
+    </div>
+    <script src="js/site.js"></script>
+    <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+  </footer>
+</body>
+</html>
