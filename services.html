@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Services | VardrSec</title>
-  <meta name="description" content="Cybersecurity consulting services: penetration testing, cloud security assessments, detection engineering, and security program enablement." />
+  <meta name="description" content="Cybersecurity consulting services: penetration testing, cloud security, API assessment, and detection engineering." />
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
@@ -24,7 +24,6 @@
           <a href="index.html">Home</a>
           <a href="about.html">About</a>
           <a class="active" href="services.html">Services</a>
-          <a href="plans.html">Plans</a>
           <a href="case-studies.html">Case Studies</a>
           <a href="contact.html">Contact</a>
         </div>
@@ -46,7 +45,6 @@
         <a href="index.html">Home</a>
         <a href="about.html">About</a>
         <a class="active" href="services.html">Services</a>
-        <a href="plans.html">Plans</a>
         <a href="case-studies.html">Case Studies</a>
         <a href="resources.html">Resources</a>
         <a href="contact.html">Contact</a>
@@ -60,28 +58,31 @@
       <div class="container">
         <div class="section-title">
           <h2>Services</h2>
-          <p>
-            Practical security work focused on reducing real risk: hardening what you run, validating what you ship,
-            and improving detection and response.
-          </p>
+          <p>Technical capabilities deployed on your terms, focused on your risk priorities.</p>
+        </div>
+
+        <div class="note" style="margin-bottom: 32px;">
+          <strong>Your mission determines the operation.</strong> Tell us what keeps you up at night—unauthorized 
+          data access, cloud misconfigurations, API vulnerabilities, weak detection coverage, compliance gaps—and 
+          we'll scope an engagement that addresses those specific concerns. No forced methodologies. No unnecessary scope creep.
         </div>
 
         <!-- Core Services -->
-        <div class="grid-3" style="margin-bottom: 28px;">
+        <div class="grid-2" style="margin-bottom: 24px;">
           <div class="card">
             <div class="kicker" style="margin-bottom: 12px;">
-              <span class="badge">Application Security</span>
+              <span class="badge warn">Offensive Testing</span>
             </div>
-            <h3>Web & API Security Testing</h3>
-            <p style="margin-top: 12px;">
-              Manual testing combined with targeted automation to identify authorization flaws, IDOR/BOLA vulnerabilities, 
-              misconfigurations, and injection risks in web applications and APIs.
+            <h3>Application & API Security Assessment</h3>
+            <p style="margin-top: 14px;">
+              Manual security testing targeting your most critical applications and APIs. We focus on the 
+              vulnerabilities that matter—authorization bypasses, injection flaws, business logic failures, 
+              and authentication weaknesses. Not automated scans dumped into a report. Actual exploitation 
+              attempts with reproducible proof-of-concept and remediation paths your developers can follow.
             </p>
-            <div class="meta">
-              • OWASP API Top 10 / ASVS aligned<br/>
-              • Authorization analysis (horizontal/vertical)<br/>
-              • Remediation guidance with reproduction steps<br/>
-              • Validation testing after fixes
+            <div class="meta" style="margin-top: 14px;">
+              <strong>Common objectives:</strong> Pre-release security validation • SOC 2 audit preparation • 
+              Post-incident security review • Authorization logic verification • API endpoint security
             </div>
           </div>
 
@@ -89,138 +90,275 @@
             <div class="kicker" style="margin-bottom: 12px;">
               <span class="badge">Cloud Security</span>
             </div>
-            <h3>Cloud & Infrastructure Hardening</h3>
-            <p style="margin-top: 12px;">
-              Security baseline reviews for AWS, Azure, and GCP environments. Focus on identity management, 
-              network exposure reduction, and configuration hardening.
+            <h3>Cloud Security Posture Review</h3>
+            <p style="margin-top: 14px;">
+              Configuration assessment of your AWS, Azure, or GCP environment. We examine IAM policies, network 
+              architecture, storage security, logging coverage, and secrets management to identify excessive 
+              permissions, lateral movement risks, and gaps in visibility. Findings include specific infrastructure-as-code 
+              recommendations you can deploy immediately.
             </p>
-            <div class="meta">
-              • IAM review & least privilege implementation<br/>
-              • Secure configuration + guardrails<br/>
-              • Attack surface analysis<br/>
-              • Logging and monitoring coverage assessment
+            <div class="meta" style="margin-top: 14px;">
+              <strong>Common objectives:</strong> Pre-funding security diligence • Multi-account security baseline • 
+              Incident response readiness • Compliance requirement gaps • Migration security review
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-2" style="margin-bottom: 24px;">
+          <div class="card">
+            <div class="kicker" style="margin-bottom: 12px;">
+              <span class="badge ok">Detection & Response</span>
+            </div>
+            <h3>Detection Engineering & Analytics</h3>
+            <p style="margin-top: 14px;">
+              Build, tune, and validate detection capabilities so you can identify threats that matter and 
+              respond before damage compounds. We develop SIEM rules, threat hunting queries, and alert response 
+              playbooks tailored to your environment. Focus on high-fidelity signals that warrant investigation, 
+              not alert fatigue from misconfigured detections.
+            </p>
+            <div class="meta" style="margin-top: 14px;">
+              <strong>Common objectives:</strong> SIEM deployment & tuning • Detection gap analysis • 
+              Threat hunting capability development • Alert triage automation • Incident playbook creation
             </div>
           </div>
 
           <div class="card">
             <div class="kicker" style="margin-bottom: 12px;">
-              <span class="badge">Detection & Response</span>
+              <span class="badge bad">Incident Support</span>
             </div>
-            <h3>Detection Engineering</h3>
-            <p style="margin-top: 12px;">
-              Build and tune detection content to identify meaningful security events. Create threat hunting 
-              playbooks and automated response workflows.
+            <h3>Incident Response Assistance</h3>
+            <p style="margin-top: 14px;">
+              Rapid technical support when you suspect or confirm a security incident. We assist with scoping 
+              the compromise, identifying affected systems, analyzing logs for attacker activity, and developing 
+              containment strategies. Post-incident, we help identify root cause and recommend concrete improvements 
+              to prevent recurrence.
             </p>
-            <div class="meta">
-              • SIEM rule development & alert tuning<br/>
-              • Threat hunting playbooks<br/>
-              • Detection content testing & validation<br/>
-              • Response automation workflows
+            <div class="meta" style="margin-top: 14px;">
+              <strong>Common scenarios:</strong> Suspected unauthorized access • Ransomware/malware infection • 
+              Data exfiltration investigation • Account compromise • Supply chain compromise assessment
             </div>
           </div>
         </div>
 
-        <!-- Additional Services -->
-        <div class="grid-2" style="margin-bottom: 28px;">
-          <div class="card">
-            <div class="kicker" style="margin-bottom: 12px;">
-              <span class="badge ok">Program Development</span>
-            </div>
-            <h3>Security Program Enablement</h3>
-            <p style="margin-top: 12px;">
-              Lightweight, scalable security processes that help engineering teams ship faster without 
-              introducing unnecessary friction or "security theater."
-            </p>
-            <div class="meta">
-              • Secure SDLC checkpoint design<br/>
-              • Code review guidance & checklists<br/>
-              • Vulnerability triage workflows<br/>
-              • Security metrics & KPI definition
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="kicker" style="margin-bottom: 12px;">
-              <span class="badge warn">Incident Support</span>
-            </div>
-            <h3>Incident Response Support</h3>
-            <p style="margin-top: 12px;">
-              Rapid support during suspected security incidents. Assistance with scoping, containment guidance, 
-              forensic analysis, and post-incident improvements.
-            </p>
-            <div class="meta">
-              • Initial triage and log analysis<br/>
-              • Containment recommendations<br/>
-              • Root cause analysis<br/>
-              • Post-incident lessons learned
-            </div>
+        <!-- Additional Capabilities -->
+        <div class="card" style="margin-bottom: 36px;">
+          <h3>Security Program Development</h3>
+          <p style="margin-top: 14px;">
+            For organizations building or maturing security programs, we provide fractional security leadership 
+            and process development. This isn't abstract security strategy—it's hands-on work establishing secure 
+            development practices, vulnerability management workflows, security review processes, and metrics that 
+            actually drive improvement. We build programs that engineering teams can operate, not security theater 
+            that gets ignored.
+          </p>
+          <div class="meta" style="margin-top: 14px;">
+            <strong>Typical deliverables:</strong> Secure SDLC integration • Code review checklists • 
+            Vulnerability triage workflows • Security requirement templates • Incident response procedures • 
+            Security awareness programs
           </div>
         </div>
-
-        <!-- Engagement Process -->
-        <div class="note" style="margin-bottom: 28px;">
-          <strong>Typical engagement flow:</strong> Short discovery call → scoped statement of work → 
-          execution with weekly status updates → final deliverables (findings, remediation guidance, and prioritized roadmap).
-          <a href="plans.html" style="color: var(--accent); text-decoration: underline; margin-left: 8px;">View engagement models</a>
-        </div>
-
       </div>
     </section>
 
-    <!-- Deliverables Section -->
-    <section class="section compact">
+    <!-- How We Work -->
+    <section class="section" style="padding-top: 50px;">
       <div class="container">
         <div class="section-title">
-          <h2>Standard Deliverables</h2>
+          <h2>How We Work Together</h2>
+          <p>Flexible engagement models that match your budget, timeline, and operational requirements.</p>
         </div>
-        
-        <div class="grid-3">
+
+        <div class="grid-3" style="margin-bottom: 24px;">
+          <div class="card">
+            <h3>Project-Based Engagements</h3>
+            <p style="margin-top: 12px;">
+              Fixed-scope assessments with defined deliverables and timeline. You specify what needs testing, 
+              we provide a statement of work with cost and schedule, and we execute. Best for penetration tests, 
+              security reviews, and one-time assessments.
+            </p>
+            <div class="meta" style="margin-top: 14px;">
+              <strong>Typical duration:</strong> 1-4 weeks<br/>
+              <strong>Best for:</strong> Pre-release testing, compliance assessments, annual security reviews
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Retainer Arrangements</h3>
+            <p style="margin-top: 12px;">
+              Ongoing advisory and technical support with dedicated monthly hours. You get consistent access 
+              for security questions, code reviews, architecture consultations, or ad-hoc testing. We become 
+              an extension of your team without the overhead of a full-time hire.
+            </p>
+            <div class="meta" style="margin-top: 14px;">
+              <strong>Typical commitment:</strong> 10-40 hours/month<br/>
+              <strong>Best for:</strong> Continuous security support, growing teams, program development
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Incident Response Support</h3>
+            <p style="margin-top: 12px;">
+              On-demand assistance when security incidents occur. We provide immediate technical support for 
+              containment, investigation, and recovery. Scoped and billed based on actual incident response 
+              time required.
+            </p>
+            <div class="meta" style="margin-top: 14px;">
+              <strong>Typical response:</strong> Same-day engagement<br/>
+              <strong>Best for:</strong> Active compromises, suspected breaches, emergency security needs
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-bottom: 36px;">
+          <h3>Custom Engagements</h3>
+          <p style="margin-top: 12px;">
+            Need something different? We build custom arrangements that fit your situation. This could be supporting 
+            M&A security diligence, providing part-time security leadership during a transition, or assisting with 
+            complex multi-phase security initiatives. If you have a legitimate security need and reasonable constraints, 
+            we'll find a way to structure an engagement that works.
+          </p>
+        </div>
+
+        <div class="note" style="margin-bottom: 36px;">
+          <strong>Pricing philosophy:</strong> We provide fixed-price quotes for defined scope. You know the cost 
+          upfront. No surprise overages unless scope changes (which requires your written approval). For retainers, 
+          unused hours don't expire—they roll forward. For incident response, we provide estimated costs before 
+          beginning work. Transparency in both technical findings and business terms.
+        </div>
+      </div>
+    </section>
+
+    <!-- What You Get -->
+    <section class="section" style="padding-top: 50px;">
+      <div class="container">
+        <div class="section-title">
+          <h2>What You Can Expect</h2>
+          <p>Standard deliverables across all engagements.</p>
+        </div>
+
+        <div class="grid-3" style="margin-bottom: 24px;">
           <div class="card">
             <h3>Executive Summary</h3>
-            <p>High-level risk overview, critical findings, and business impact assessment presented in non-technical terms.</p>
+            <p style="margin-top: 12px;">
+              High-level overview of findings, risk assessment, and business impact. Written for technical and 
+              non-technical stakeholders. No jargon, no inflated severity—just honest assessment of what matters 
+              and why.
+            </p>
           </div>
-          
+
           <div class="card">
-            <h3>Technical Findings Report</h3>
-            <p>Detailed reproduction steps, evidence, severity ratings, affected systems, and specific remediation guidance.</p>
+            <h3>Technical Findings</h3>
+            <p style="margin-top: 12px;">
+              Detailed vulnerability reports with reproduction steps, affected systems, exploitation evidence, 
+              and severity ratings. If we report a critical finding, we can demonstrate it. If we can't reproduce 
+              it, we don't report it.
+            </p>
           </div>
-          
+
           <div class="card">
-            <h3>Prioritized Remediation Roadmap</h3>
-            <p>Fix-first ordering based on risk, quick wins identification, and medium/long-term improvement recommendations.</p>
+            <h3>Remediation Guidance</h3>
+            <p style="margin-top: 12px;">
+              Specific, actionable recommendations for fixing identified issues. Code examples, configuration 
+              changes, architectural improvements—whatever your team needs to actually implement the fixes. 
+              Retest verification available if needed.
+            </p>
+          </div>
+        </div>
+
+        <div class="grid-2" style="margin-bottom: 36px;">
+          <div class="card">
+            <h3>Communication Throughout</h3>
+            <p style="margin-top: 12px;">
+              Regular status updates during the engagement. Critical findings are reported immediately via your 
+              preferred channel (email, Slack, phone). You're never waiting weeks for a final report to learn 
+              about serious vulnerabilities we discovered on day two.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>Final Debrief</h3>
+            <p style="margin-top: 12px;">
+              Live walkthrough of findings, remediation priorities, and Q&A with your technical team. We explain 
+              the "why" behind recommendations and help you build a realistic remediation roadmap based on your 
+              resources and risk tolerance.
+            </p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Important Notes -->
-    <section class="section compact">
+    <!-- Engagement Process -->
+    <section class="section" style="padding-top: 50px;">
       <div class="container">
-        <div class="card">
-          <h3>Professional Standards</h3>
-          <p style="margin-top: 12px;">
-            <strong>Authorization:</strong> All security testing is performed only with explicit written authorization 
-            and clearly defined scope. No unauthorized or "grey area" testing activities.
-          </p>
-          <p style="margin-top: 12px;">
-            <strong>Confidentiality:</strong> All engagement details, findings, and client information are treated 
-            as strictly confidential and protected under NDA.
-          </p>
-          <p style="margin-top: 12px;">
-            <strong>Responsible Disclosure:</strong> Findings are reported directly to clients first, with appropriate 
-            time for remediation before any public disclosure.
-          </p>
+        <div class="section-title">
+          <h2>Engagement Process</h2>
+          <p>How we move from initial contact to delivered results.</p>
+        </div>
+
+        <div class="grid-2" style="margin-bottom: 36px;">
+          <div class="card">
+            <div class="kicker" style="margin-bottom: 10px;">
+              <span class="badge">Step 1</span>
+            </div>
+            <h3>Initial Consultation</h3>
+            <p style="margin-top: 12px;">
+              30-minute discovery call to understand your environment, objectives, and constraints. You describe 
+              what you're trying to protect, what you're concerned about, and what success looks like. No sales 
+              pitch—just technical discussion about your actual needs.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="kicker" style="margin-bottom: 10px;">
+              <span class="badge">Step 2</span>
+            </div>
+            <h3>Scope & Proposal</h3>
+            <p style="margin-top: 12px;">
+              We provide a written statement of work defining exactly what will be tested, methodology, deliverables, 
+              timeline, and fixed cost. Review it, negotiate if needed, sign when you're comfortable with the terms. 
+              NDA executed before we see any sensitive information.
+            </p>
+          </div>
+        </div>
+
+        <div class="grid-2" style="margin-bottom: 36px;">
+          <div class="card">
+            <div class="kicker" style="margin-bottom: 10px;">
+              <span class="badge">Step 3</span>
+            </div>
+            <h3>Execution</h3>
+            <p style="margin-top: 12px;">
+              Testing begins per agreed schedule. Weekly status updates. Critical findings reported immediately. 
+              You maintain contact with the consultant performing the work—no account managers as intermediaries. 
+              Questions answered in real-time, not through a ticketing system.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="kicker" style="margin-bottom: 10px;">
+              <span class="badge">Step 4</span>
+            </div>
+            <h3>Delivery & Closeout</h3>
+            <p style="margin-top: 12px;">
+              Final report delivered. Debrief call scheduled to walk through findings. Remediation verification 
+              available if scope includes retest. Post-engagement support for technical questions about implementing 
+              recommendations. No handoff to a different team—same consultant from start to finish.
+            </p>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- CTA Section -->
-    <section class="section compact">
+    <section class="section" style="padding-top: 50px; padding-bottom: 60px;">
       <div class="container">
-        <div class="note">
-          <strong>Ready to discuss your security needs?</strong> Send your objectives and environment details. 
-          I'll respond with a proposed scope, timeline, and engagement model recommendation.
-          <a href="contact.html" class="btn primary" style="margin-left: 12px;">Request a Consultation</a>
+        <div class="card" style="text-align: center; padding: 32px;">
+          <h3>Ready to scope an engagement?</h3>
+          <p style="margin-top: 12px; max-width: 700px; margin-left: auto; margin-right: auto;">
+            Tell us what you need tested, reviewed, or built. We'll provide an honest assessment of whether 
+            we're the right fit and, if so, a clear proposal with fixed pricing and deliverables. No obligation 
+            for the initial consultation.
+          </p>
+          <a href="contact.html" class="btn primary" style="margin-top: 20px; display: inline-flex;">Request a Consultation</a>
         </div>
       </div>
     </section>
@@ -235,7 +373,7 @@
         </div>
         <div class="links">
           <h4>Company</h4>
-          <a href="mission.html">Mission & Vision</a>
+          <a href="about.html">About</a>
           <a href="case-studies.html">Case Studies</a>
           <a href="resources.html">Resources</a>
         </div>
