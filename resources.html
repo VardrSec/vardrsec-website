@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Resources | VardrSec</title>
-  <meta name="description" content="Security resources: checklists, hardening notes, and practical guidance for web, API, and cloud security." />
+  <meta name="description" content="Security resources: checklists, hardening guides, and practical security guidance for development teams." />
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
@@ -15,112 +15,329 @@
           <div class="brand-mark" aria-hidden="true"><span>VS</span></div>
           <div class="brand-name">
             <strong>VardrSec</strong>
-            <span>Offensive Security Research &amp; Tooling</span>
+            <small>Offensive Security Research & Consulting</small>
           </div>
         </a>
-
+        
+        <!-- Desktop Navigation -->
         <div class="nav-links">
+          <a href="index.html">Home</a>
           <a href="about.html">About</a>
-          <a href="mission.html">Mission</a>
           <a href="services.html">Services</a>
-          <a href="plans.html">Plans</a>
-          <a class="active" href="resources.html">Resources</a>
-          <a href="contact.html" class="btn btn-primary">Contact</a>
+          <a href="case-studies.html">Case Studies</a>
+          <a href="contact.html">Contact</a>
         </div>
+        
+        <!-- Desktop CTA Buttons -->
+        <div class="nav-cta">
+          <a class="btn active" href="resources.html">Resources</a>
+          <a class="btn primary" href="contact.html">Request a Consult</a>
+        </div>
+        
+        <!-- Mobile Menu Toggle -->
+        <button id="menuBtn" class="menu-btn" aria-label="Open menu" aria-expanded="false">
+          Menu
+        </button>
       </nav>
+      
+      <!-- Mobile Menu -->
+      <div class="mobile-panel" id="mobilePanel">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="case-studies.html">Case Studies</a>
+        <a class="active" href="resources.html">Resources</a>
+        <a href="contact.html">Contact</a>
+        <a class="btn primary" href="contact.html" style="margin-top:8px">Request a Consult</a>
+      </div>
     </div>
   </header>
 
   <main>
-    <section class="hero hero--compact">
-      <div class="container">
-        <h1>Resources</h1>
-        <p class="lead">
-          Short, usable checklists and notes. These are meant to be copied into tickets and PR reviews.
-        </p>
-      </div>
-    </section>
-
     <section class="section">
       <div class="container">
-        <h2>Web &amp; API quick checks</h2>
-        <div class="grid grid-2">
+        <div class="section-title">
+          <h2>Security Resources</h2>
+          <p>Practical checklists and guidance for development teams. Copy these into tickets, PR reviews, and security documentation.</p>
+        </div>
+
+        <div class="note" style="margin-bottom: 32px;">
+          <strong>How to use these resources:</strong> These checklists are designed to be actionable starting points. 
+          They're not exhaustive security standards—they're quick references for common security concerns that frequently 
+          appear in real-world assessments.
+        </div>
+
+        <!-- Application Security -->
+        <div class="section-title" style="margin-top: 42px;">
+          <h3>Application Security</h3>
+        </div>
+
+        <div class="grid-2" style="margin-bottom: 32px;">
           <div class="card">
+            <div class="kicker" style="margin-bottom: 10px;">
+              <span class="badge warn">Critical</span>
+            </div>
             <h3>Authorization (BOLA/IDOR)</h3>
-            <ul class="bullets">
-              <li>Validate access using server-side policy, not UI state.</li>
-              <li>Test horizontal and vertical access paths across roles.</li>
-              <li>Do not rely on predictable IDs; protect by policy.</li>
-              <li>Log denied access attempts with context.</li>
-            </ul>
+            <p style="margin-top: 12px; margin-bottom: 12px;">
+              Authorization failures are consistently the most critical vulnerabilities we identify in assessments.
+            </p>
+            <div style="font-size: 13px; line-height: 1.6;">
+              ✓ Validate access using server-side policy, never UI state or client data<br/>
+              ✓ Test horizontal access (user A accessing user B's data)<br/>
+              ✓ Test vertical access (regular user accessing admin functions)<br/>
+              ✓ Don't rely on unpredictable IDs as security controls<br/>
+              ✓ Implement centralized authorization middleware<br/>
+              ✓ Log all access denials with user context<br/>
+              ✓ Test with multiple users at different privilege levels
+            </div>
           </div>
+
           <div class="card">
+            <div class="kicker" style="margin-bottom: 10px;">
+              <span class="badge warn">Critical</span>
+            </div>
             <h3>Authentication</h3>
-            <ul class="bullets">
-              <li>Enforce MFA for privileged accounts.</li>
-              <li>Rate-limit auth endpoints and add lockout protections.</li>
-              <li>Secure session handling (rotation, timeout, HttpOnly, SameSite).</li>
-              <li>Harden password reset flows and tokens.</li>
-            </ul>
-          </div>
-          <div class="card">
-            <h3>Input handling</h3>
-            <ul class="bullets">
-              <li>Server-side validation and allowlists where possible.</li>
-              <li>Parameterized queries; avoid string building.</li>
-              <li>Normalize and validate JSON body structure.</li>
-              <li>Sanitize logs to avoid leaking secrets/PII.</li>
-            </ul>
-          </div>
-          <div class="card">
-            <h3>Security headers</h3>
-            <ul class="bullets">
-              <li>HSTS, CSP (report-only first), X-Content-Type-Options.</li>
-              <li>Frame/Clickjacking protections (frame-ancestors).</li>
-              <li>Proper caching headers for sensitive content.</li>
-              <li>Disable verbose error pages in prod.</li>
-            </ul>
+            <p style="margin-top: 12px; margin-bottom: 12px;">
+              Weak authentication enables all other attacks. Get the fundamentals right.
+            </p>
+            <div style="font-size: 13px; line-height: 1.6;">
+              ✓ Enforce MFA for privileged accounts<br/>
+              ✓ Rate-limit authentication endpoints (lockout after N failures)<br/>
+              ✓ Implement secure session management (rotation, timeout)<br/>
+              ✓ Use HttpOnly, Secure, and SameSite cookie flags<br/>
+              ✓ Harden password reset flows (time-limited tokens, account verification)<br/>
+              ✓ Prevent username enumeration through timing or responses<br/>
+              ✓ Use bcrypt/Argon2 for password hashing (never MD5/SHA1)
+            </div>
           </div>
         </div>
 
-        <div class="spacer"></div>
-
-        <h2>Cloud and operations</h2>
-        <div class="grid grid-2">
+        <div class="grid-3" style="margin-bottom: 32px;">
           <div class="card">
-            <h3>Logging &amp; detection</h3>
-            <ul class="bullets">
-              <li>Centralize logs (auth, admin actions, access denials).</li>
-              <li>Alert on impossible travel, token anomalies, privilege changes.</li>
-              <li>Baseline normal traffic and tune to reduce noise.</li>
-              <li>Keep an incident “minimum viable playbook.”</li>
-            </ul>
+            <h3>Input Validation</h3>
+            <div style="font-size: 13px; line-height: 1.6; margin-top: 12px;">
+              ✓ Server-side validation always<br/>
+              ✓ Use allowlists over denylists<br/>
+              ✓ Parameterized queries for SQL<br/>
+              ✓ Validate JSON structure and types<br/>
+              ✓ Sanitize logs (no PII, no secrets)<br/>
+              ✓ Limit file upload size and types<br/>
+              ✓ Validate redirects and callbacks
+            </div>
           </div>
+
           <div class="card">
-            <h3>IAM baseline</h3>
-            <ul class="bullets">
-              <li>Least privilege roles; avoid shared admin accounts.</li>
-              <li>Protect secrets with a vault and rotation.</li>
-              <li>Require MFA and conditional access for admin surfaces.</li>
-              <li>Audit privileges regularly; remove dead access.</li>
-            </ul>
+            <h3>API Security</h3>
+            <div style="font-size: 13px; line-height: 1.6; margin-top: 12px;">
+              ✓ Authenticate every API request<br/>
+              ✓ Rate limit all endpoints<br/>
+              ✓ Validate content-type headers<br/>
+              ✓ Implement proper CORS policies<br/>
+              ✓ Version your APIs explicitly<br/>
+              ✓ Return consistent error messages<br/>
+              ✓ Document authentication requirements
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Security Headers</h3>
+            <div style="font-size: 13px; line-height: 1.6; margin-top: 12px;">
+              ✓ HSTS (max-age=31536000)<br/>
+              ✓ Content-Security-Policy<br/>
+              ✓ X-Content-Type-Options: nosniff<br/>
+              ✓ X-Frame-Options: DENY<br/>
+              ✓ Referrer-Policy: no-referrer<br/>
+              ✓ Disable verbose errors in production<br/>
+              ✓ Proper cache headers for sensitive data
+            </div>
           </div>
         </div>
 
-        <div class="spacer"></div>
-
-        <div class="notice">
-          If you want these resources customized for your stack, request a Baseline engagement and I’ll tailor
-          checklists for your environment and deployment pipeline.
+        <!-- Cloud Security -->
+        <div class="section-title" style="margin-top: 42px;">
+          <h3>Cloud Security</h3>
         </div>
-      </div>
-    </section>
 
-    <section class="section section--alt">
-      <div class="container">
-        <h2>Need something specific?</h2>
-        <p class="lead">Ask for a checklist targeted to your app type (SaaS, internal API, e-commerce, etc.).</p>
-        <a class="btn btn-primary" href="contact.html">Contact</a>
+        <div class="grid-2" style="margin-bottom: 32px;">
+          <div class="card">
+            <div class="kicker" style="margin-bottom: 10px;">
+              <span class="badge">IAM & Identity</span>
+            </div>
+            <h3>Identity & Access Management</h3>
+            <div style="font-size: 13px; line-height: 1.6; margin-top: 12px;">
+              ✓ Implement least privilege policies<br/>
+              ✓ No shared admin credentials<br/>
+              ✓ Rotate access keys regularly<br/>
+              ✓ Use temporary credentials where possible<br/>
+              ✓ Require MFA for console access<br/>
+              ✓ Implement service control policies (SCPs)<br/>
+              ✓ Audit unused permissions quarterly<br/>
+              ✓ Use IAM roles for service-to-service auth<br/>
+              ✓ Enable CloudTrail/equivalent logging
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="kicker" style="margin-bottom: 10px;">
+              <span class="badge">Storage & Data</span>
+            </div>
+            <h3>Data Protection</h3>
+            <div style="font-size: 13px; line-height: 1.6; margin-top: 12px;">
+              ✓ Encrypt data at rest and in transit<br/>
+              ✓ No public S3 buckets (unless explicitly required)<br/>
+              ✓ Enable versioning for critical buckets<br/>
+              ✓ Use KMS for encryption key management<br/>
+              ✓ Implement backup and retention policies<br/>
+              ✓ Tag sensitive data resources<br/>
+              ✓ Enable access logging on storage<br/>
+              ✓ Review bucket policies regularly
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-3" style="margin-bottom: 32px;">
+          <div class="card">
+            <h3>Network Security</h3>
+            <div style="font-size: 13px; line-height: 1.6; margin-top: 12px;">
+              ✓ Default deny security groups<br/>
+              ✓ Segment environments (dev/staging/prod)<br/>
+              ✓ Limit ingress to necessary IPs<br/>
+              ✓ Use private subnets for databases<br/>
+              ✓ Enable VPC Flow Logs<br/>
+              ✓ Use WAF for public endpoints<br/>
+              ✓ Implement DDoS protection
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Secrets Management</h3>
+            <div style="font-size: 13px; line-height: 1.6; margin-top: 12px;">
+              ✓ Use secrets manager/vault<br/>
+              ✓ Never commit secrets to code<br/>
+              ✓ Rotate secrets automatically<br/>
+              ✓ Limit secret access by role<br/>
+              ✓ Audit secret access logs<br/>
+              ✓ Use environment-specific secrets<br/>
+              ✓ Implement break-glass procedures
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Monitoring & Logging</h3>
+            <div style="font-size: 13px; line-height: 1.6; margin-top: 12px;">
+              ✓ Enable CloudTrail/equivalent<br/>
+              ✓ Centralize logs to SIEM<br/>
+              ✓ Alert on privilege escalation<br/>
+              ✓ Monitor failed auth attempts<br/>
+              ✓ Track configuration changes<br/>
+              ✓ Set up anomaly detection<br/>
+              ✓ Retain logs per compliance reqs
+            </div>
+          </div>
+        </div>
+
+        <!-- Detection & Response -->
+        <div class="section-title" style="margin-top: 42px;">
+          <h3>Detection & Response</h3>
+        </div>
+
+        <div class="grid-2" style="margin-bottom: 32px;">
+          <div class="card">
+            <div class="kicker" style="margin-bottom: 10px;">
+              <span class="badge ok">SIEM & Detection</span>
+            </div>
+            <h3>Detection Engineering Basics</h3>
+            <div style="font-size: 13px; line-height: 1.6; margin-top: 12px;">
+              ✓ Log authentication events (success and failure)<br/>
+              ✓ Log authorization denials with context<br/>
+              ✓ Alert on impossible travel patterns<br/>
+              ✓ Detect privilege escalation attempts<br/>
+              ✓ Monitor admin console access<br/>
+              ✓ Baseline normal behavior first<br/>
+              ✓ Tune alerts to reduce false positives<br/>
+              ✓ Document alert response procedures<br/>
+              ✓ Test detection rules regularly
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="kicker" style="margin-bottom: 10px;">
+              <span class="badge bad">Incident Response</span>
+            </div>
+            <h3>Incident Response Readiness</h3>
+            <div style="font-size: 13px; line-height: 1.6; margin-top: 12px;">
+              ✓ Maintain incident response playbook<br/>
+              ✓ Define escalation procedures<br/>
+              ✓ Document critical system owners<br/>
+              ✓ Test backup restoration regularly<br/>
+              ✓ Keep incident communication channels ready<br/>
+              ✓ Define what constitutes an incident<br/>
+              ✓ Practice tabletop exercises quarterly<br/>
+              ✓ Review and update runbooks<br/>
+              ✓ Document lessons learned
+            </div>
+          </div>
+        </div>
+
+        <!-- Secure Development -->
+        <div class="section-title" style="margin-top: 42px;">
+          <h3>Secure Development Practices</h3>
+        </div>
+
+        <div class="grid-3" style="margin-bottom: 32px;">
+          <div class="card">
+            <h3>Code Review Checklist</h3>
+            <div style="font-size: 13px; line-height: 1.6; margin-top: 12px;">
+              ✓ Authentication implemented?<br/>
+              ✓ Authorization checked server-side?<br/>
+              ✓ Input validated and sanitized?<br/>
+              ✓ SQL queries parameterized?<br/>
+              ✓ Secrets properly managed?<br/>
+              ✓ Error handling doesn't leak info?<br/>
+              ✓ Logging includes security events?<br/>
+              ✓ Dependencies up to date?
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Dependency Management</h3>
+            <div style="font-size: 13px; line-height: 1.6; margin-top: 12px;">
+              ✓ Scan dependencies for vulnerabilities<br/>
+              ✓ Keep packages updated regularly<br/>
+              ✓ Review new dependency additions<br/>
+              ✓ Use lock files for reproducibility<br/>
+              ✓ Monitor security advisories<br/>
+              ✓ Audit supply chain integrity<br/>
+              ✓ Remove unused dependencies<br/>
+              ✓ Pin production versions
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Pre-Deployment Checks</h3>
+            <div style="font-size: 13px; line-height: 1.6; margin-top: 12px;">
+              ✓ Run SAST/DAST scans<br/>
+              ✓ Review security headers<br/>
+              ✓ Verify secrets not in code<br/>
+              ✓ Check default credentials changed<br/>
+              ✓ Confirm logging enabled<br/>
+              ✓ Test authentication flows<br/>
+              ✓ Validate encryption in place<br/>
+              ✓ Review IAM permissions
+            </div>
+          </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="card" style="text-align: center; padding: 32px; margin-top: 42px;">
+          <h3>Need customized resources?</h3>
+          <p style="margin-top: 12px; max-width: 700px; margin-left: auto; margin-right: auto;">
+            These checklists can be tailored to your specific stack, deployment pipeline, and compliance requirements. 
+            We can create custom security runbooks, review templates, and implementation guides for your team.
+          </p>
+          <a href="contact.html" class="btn primary" style="margin-top: 20px; display: inline-flex;">Request Custom Resources</a>
+        </div>
+
       </div>
     </section>
   </main>
@@ -134,7 +351,7 @@
         </div>
         <div class="links">
           <h4>Company</h4>
-          <a href="mission.html">Mission & Vision</a>
+          <a href="about.html">About</a>
           <a href="case-studies.html">Case Studies</a>
           <a href="resources.html">Resources</a>
         </div>
