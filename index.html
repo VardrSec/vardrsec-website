@@ -4,58 +4,57 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>VardrSec | Cybersecurity Consulting</title>
-  <meta name="description" content="VardrSec provides offensive security, assessments, and pragmatic hardening for small and mid-sized organizations." />
+  <meta name="description" content="Cybersecurity consulting focused on actionable results. Penetration testing, cloud security, and detection engineering on your terms." />
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
   <header class="topbar">
-  <div class="container">
-    <nav class="nav">
-      <a class="brand" href="index.html">
-        <div class="brand-mark" aria-hidden="true"><span>VS</span></div>
-        <div class="brand-name">
-          <strong>VardrSec</strong>
-          <small>Offensive Security Research & Consulting</small>
+    <div class="container">
+      <nav class="nav">
+        <a class="brand" href="index.html">
+          <div class="brand-mark" aria-hidden="true"><span>VS</span></div>
+          <div class="brand-name">
+            <strong>VardrSec</strong>
+            <small>Offensive Security Research & Consulting</small>
+          </div>
+        </a>
+        
+        <!-- Desktop Navigation -->
+        <div class="nav-links">
+          <a class="active" href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="services.html">Services</a>
+          <a href="case-studies.html">Case Studies</a>
+          <a href="contact.html">Contact</a>
         </div>
-      </a>
+        
+        <!-- Desktop CTA Buttons -->
+        <div class="nav-cta">
+          <a class="btn" href="resources.html">Resources</a>
+          <a class="btn primary" href="contact.html">Request a Consult</a>
+        </div>
+        
+        <!-- Mobile Menu Toggle -->
+        <button id="menuBtn" class="menu-btn" aria-label="Open menu" aria-expanded="false">
+          Menu
+        </button>
+      </nav>
       
-      <!-- Desktop Navigation -->
-      <div class="nav-links">
+      <!-- Mobile Menu -->
+      <div class="mobile-panel" id="mobilePanel">
         <a class="active" href="index.html">Home</a>
         <a href="about.html">About</a>
         <a href="services.html">Services</a>
-        <a href="plans.html">Plans</a>
         <a href="case-studies.html">Case Studies</a>
+        <a href="resources.html">Resources</a>
         <a href="contact.html">Contact</a>
+        <a class="btn primary" href="contact.html" style="margin-top:8px">Request a Consult</a>
       </div>
-      
-      <!-- Desktop CTA Buttons -->
-      <div class="nav-cta">
-        <a class="btn" href="resources.html">Resources</a>
-        <a class="btn primary" href="contact.html">Request a Consult</a>
-      </div>
-      
-      <!-- Mobile Menu Toggle -->
-      <button id="menuBtn" class="menu-btn" aria-label="Open menu" aria-expanded="false">
-        Menu
-      </button>
-    </nav>
-    
-    <!-- Mobile Menu (hidden by default) - CHANGED CLASS NAME -->
-    <div class="mobile-panel" id="mobileMenu">
-      <a class="active" href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="services.html">Services</a>
-      <a href="plans.html">Plans</a>
-      <a href="case-studies.html">Case Studies</a>
-      <a href="resources.html">Resources</a>
-      <a href="contact.html">Contact</a>
-      <a class="btn primary" href="contact.html" style="margin-top:8px">Request a Consult</a>
     </div>
-  </div>
-</header>
+  </header>
 
   <main>
+    <!-- Hero Section -->
     <section class="hero">
       <div class="container">
         <div class="hero-grid">
@@ -64,151 +63,244 @@
               <img src="assets/orgbanner.png" alt="VardrSec banner logo" />
             </div>
             <div class="hero-body">
-              <div class="kicker"><span class="dot"></span> Practical security for real systems</div>
-              <h1>Cybersecurity consulting built for outcomes.</h1>
+              <div class="kicker"><span class="dot"></span> Security testing on your terms</div>
+              <h1>You define the mission. We bring the discipline.</h1>
               <p class="lead">
-                VardrSec helps organizations reduce risk with targeted assessments, actionable remediation,
-                and security engineering that survives production realities.
+                Cybersecurity consulting focused on findings you can act on, guidance you can implement, 
+                and results you can measure. No forced methodologies. No unnecessary complexity.
               </p>
-
               <div class="hero-actions">
-                <a class="btn primary" href="contact.html">Book an assessment</a>
-                <a class="btn" href="services.html">View services</a>
-                <a class="btn" href="plans.html">Plans & retainers</a>
+                <a class="btn primary" href="contact.html">Request a Consultation</a>
+                <a class="btn" href="services.html">View Services</a>
               </div>
-
               <div class="pills">
-                <span class="pill">Web & API Security</span>
-                <span class="pill">Cloud Security (Azure/AWS)</span>
-                <span class="pill">Security Reviews</span>
-                <span class="pill">Detection & Hardening</span>
+                <span class="pill">Application & API Security</span>
+                <span class="pill">Cloud Security Review</span>
+                <span class="pill">Detection Engineering</span>
+                <span class="pill">Incident Response Support</span>
               </div>
             </div>
           </div>
 
+          <!-- Side Card -->
           <aside class="side-card">
-            <h3>Engagement model</h3>
-            <p>Fast kickoff, clear scope, measurable deliverables, and a written report you can use with leadership and engineers.</p>
-
+            <h3>How We Operate</h3>
+            <p>
+              Explicit authorization. Fixed scope. Clear deliverables. Regular communication. 
+              Critical findings reported immediately—not buried in a report weeks later.
+            </p>
             <div class="kpi">
               <div class="box">
-                <strong>72h</strong>
-                <small>Typical kickoff window</small>
+                <strong>Your Rules</strong>
+                <small>You set the scope</small>
+              </div>
+              <div class="box">
+                <strong>Fast Start</strong>
+                <small>72-hour kickoff</small>
               </div>
               <div class="box">
                 <strong>Actionable</strong>
                 <small>Fix-focused findings</small>
               </div>
               <div class="box">
-                <strong>Clear</strong>
-                <small>Risk + impact mapping</small>
-              </div>
-              <div class="box">
-                <strong>Pragmatic</strong>
-                <small>Engineering-first</small>
+                <strong>Transparent</strong>
+                <small>Fixed pricing</small>
               </div>
             </div>
-
             <div class="note">
-              <strong>Security-first policy:</strong>
-              VardrSec performs testing only with explicit authorization and written scope.
+              <strong>Professional standard:</strong> All security testing performed only with explicit 
+              written authorization and documented scope. No grey areas, no surprises.
             </div>
           </aside>
         </div>
       </div>
     </section>
 
+    <!-- Core Services -->
     <section class="section compact">
       <div class="container">
         <div class="section-title">
-          <h2>What we do</h2>
-          <p>Core offerings designed for small and mid-sized teams that need high-signal security work without enterprise overhead.</p>
+          <h2>Core Capabilities</h2>
+          <p>Technical services deployed to address your specific security priorities.</p>
         </div>
-
         <div class="grid-3">
           <div class="card">
-            <h3>Web & API Security Assessments</h3>
-            <p>Modern testing focused on authZ, IDOR/BOLA, session/JWT risks, and real business logic abuse.</p>
-            <div class="meta">Deliverables: prioritized findings, proof-of-risk, fix guidance.</div>
+            <div class="kicker" style="margin-bottom: 10px;">
+              <span class="badge warn">Offensive Testing</span>
+            </div>
+            <h3>Application & API Security</h3>
+            <p>
+              Manual security testing targeting authorization flaws, business logic failures, and injection 
+              vulnerabilities. Real exploitation attempts with reproducible proof-of-concept.
+            </p>
+            <div class="meta">Focus: OWASP Top 10, API security, authorization bypass, session management</div>
           </div>
 
           <div class="card">
-            <h3>Cloud Security & Hardening</h3>
-            <p>Attack surface review, identity posture, logging, and practical guardrails for production environments.</p>
-            <div class="meta">Deliverables: control gaps, secure baselines, roadmap.</div>
+            <div class="kicker" style="margin-bottom: 10px;">
+              <span class="badge">Cloud Security</span>
+            </div>
+            <h3>Cloud Posture Assessment</h3>
+            <p>
+              Configuration review of AWS, Azure, or GCP environments. IAM policies, network architecture, 
+              storage security, and logging coverage with infrastructure-as-code recommendations.
+            </p>
+            <div class="meta">Focus: Identity, least privilege, attack surface, compliance gaps</div>
           </div>
 
           <div class="card">
-            <h3>Secure Engineering Support</h3>
-            <p>Threat modeling, design reviews, and remediation support that integrates with your delivery process.</p>
-            <div class="meta">Deliverables: architecture notes, secure patterns, verification.</div>
+            <div class="kicker" style="margin-bottom: 10px;">
+              <span class="badge ok">Detection & Response</span>
+            </div>
+            <h3>Detection Engineering</h3>
+            <p>
+              Build and tune detection capabilities for high-fidelity threat identification. SIEM rules, 
+              threat hunting queries, and alert response playbooks tailored to your environment.
+            </p>
+            <div class="meta">Focus: SIEM deployment, detection content, threat hunting, incident playbooks</div>
           </div>
         </div>
       </div>
     </section>
 
+    <!-- Engagement Process -->
     <section class="section">
       <div class="container">
         <div class="section-title">
-          <h2>Typical engagement flow</h2>
-          <p>Structured execution so you get value quickly, without ambiguity.</p>
+          <h2>Engagement Process</h2>
+          <p>Structured approach from initial contact to delivered results.</p>
         </div>
-
-        <table class="table" aria-label="Engagement flow table">
+        <table class="table" aria-label="Engagement process table">
           <thead>
             <tr>
               <th>Phase</th>
-              <th>What happens</th>
-              <th>Output</th>
+              <th>What Happens</th>
+              <th>Deliverable</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td><span class="badge ok">1. Scope</span></td>
-              <td>Confirm target systems, rules of engagement, and success criteria.</td>
-              <td>Written scope + schedule</td>
+              <td><span class="badge">Consultation</span></td>
+              <td>30-minute discovery call to understand environment, objectives, and constraints</td>
+              <td>Technical discussion</td>
             </tr>
             <tr>
-              <td><span class="badge warn">2. Assess</span></td>
-              <td>Testing and review with emphasis on exploitable risk and business impact.</td>
-              <td>Findings + evidence</td>
+              <td><span class="badge">Scope & Proposal</span></td>
+              <td>Written statement of work with methodology, timeline, and fixed cost</td>
+              <td>SOW + NDA</td>
             </tr>
             <tr>
-              <td><span class="badge ok">3. Report</span></td>
-              <td>Clear remediation steps, severity rationale, and validation approach.</td>
-              <td>Report + executive summary</td>
+              <td><span class="badge warn">Execution</span></td>
+              <td>Testing begins with weekly updates and immediate critical finding notification</td>
+              <td>Status updates + findings</td>
             </tr>
             <tr>
-              <td><span class="badge ok">4. Fix & Verify</span></td>
-              <td>Optional remediation support and re-test of critical items.</td>
-              <td>Verification notes</td>
+              <td><span class="badge ok">Delivery</span></td>
+              <td>Final report, debrief call, remediation Q&A, and optional verification testing</td>
+              <td>Report + debrief</td>
             </tr>
           </tbody>
         </table>
       </div>
     </section>
 
+    <!-- Engagement Models -->
     <section class="section compact">
       <div class="container">
         <div class="section-title">
-          <h2>Ready to start?</h2>
-          <p>Use a short intake form so we can reply with scope and pricing options.</p>
+          <h2>Flexible Engagement Models</h2>
+          <p>Work with us in the way that matches your needs and budget.</p>
         </div>
-
-        <div class="grid-2">
+        <div class="grid-3">
           <div class="card">
-            <h3>Request a consultation</h3>
-            <p>Tell us what you’re protecting and what you need validated.</p>
-            <div class="meta" style="margin-top:12px">
-              <a class="btn primary" href="contact.html">Contact VardrSec</a>
+            <h3>Project-Based</h3>
+            <p>
+              Fixed-scope assessments with defined deliverables and timeline. Best for penetration tests, 
+              security reviews, and compliance-driven assessments.
+            </p>
+            <div class="meta" style="margin-top: 12px;">
+              <strong>Duration:</strong> 1-4 weeks<br/>
+              <strong>Pricing:</strong> Fixed cost upfront
             </div>
           </div>
+
           <div class="card">
-            <h3>Prefer a plan?</h3>
-            <p>Monthly retainers for continuous security testing, reviews, and advisory.</p>
-            <div class="meta" style="margin-top:12px">
-              <a class="btn" href="plans.html">View plans</a>
+            <h3>Retainer Arrangements</h3>
+            <p>
+              Ongoing advisory and technical support with dedicated monthly hours. Continuous access for 
+              security questions, code reviews, and ad-hoc testing.
+            </p>
+            <div class="meta" style="margin-top: 12px;">
+              <strong>Hours:</strong> 10-40 hours/month<br/>
+              <strong>Pricing:</strong> Monthly commitment
             </div>
+          </div>
+
+          <div class="card">
+            <h3>Incident Response</h3>
+            <p>
+              On-demand support for active or suspected security incidents. Rapid technical assistance 
+              for containment, investigation, and recovery.
+            </p>
+            <div class="meta" style="margin-top: 12px;">
+              <strong>Response:</strong> Same-day engagement<br/>
+              <strong>Pricing:</strong> Based on incident scope
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Social Proof -->
+    <section class="section compact">
+      <div class="container">
+        <div class="section-title">
+          <h2>Proven Results</h2>
+          <p>Real engagements with measurable security improvements.</p>
+        </div>
+        <div class="grid-3">
+          <div class="card">
+            <h3>Critical Authorization Bypass</h3>
+            <p>
+              Identified tenant isolation failure in SaaS platform affecting 50K+ enterprise users. 
+              Client remediated within 72 hours and achieved SOC 2 certification on schedule.
+            </p>
+            <div class="meta"><a href="case-studies.html" style="color: var(--accent);">Read case study →</a></div>
+          </div>
+
+          <div class="card">
+            <h3>AWS Security Assessment</h3>
+            <p>
+              Cloud security review for Series B startup identified critical IAM and storage issues. 
+              All findings resolved within 2 weeks. Client successfully closed $25M funding round.
+            </p>
+            <div class="meta"><a href="case-studies.html" style="color: var(--accent);">Read case study →</a></div>
+          </div>
+
+          <div class="card">
+            <h3>Authentication Vulnerability</h3>
+            <p>
+              Discovered account takeover risk in customer portal serving 200K+ users. Emergency response 
+              and remediation prevented potential breach. Zero confirmed compromises post-fix.
+            </p>
+            <div class="meta"><a href="case-studies.html" style="color: var(--accent);">Read case study →</a></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section compact">
+      <div class="container">
+        <div class="card" style="text-align: center; padding: 32px;">
+          <h3>Ready to get started?</h3>
+          <p style="margin-top: 12px; max-width: 700px; margin-left: auto; margin-right: auto;">
+            Tell us what you need tested, reviewed, or built. We'll provide an honest assessment of whether 
+            we're the right fit and, if so, a clear proposal with fixed pricing and deliverables.
+          </p>
+          <div style="margin-top: 20px;">
+            <a class="btn primary" href="contact.html" style="display: inline-flex; margin-right: 10px;">Request a Consultation</a>
+            <a class="btn" href="services.html" style="display: inline-flex;">View All Services</a>
           </div>
         </div>
       </div>
@@ -224,7 +316,7 @@
         </div>
         <div class="links">
           <h4>Company</h4>
-          <a href="mission.html">Mission & Vision</a>
+          <a href="about.html">About</a>
           <a href="case-studies.html">Case Studies</a>
           <a href="resources.html">Resources</a>
         </div>
