@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Services | VardrSec</title>
-  <meta name="description" content="Cybersecurity consulting services: assessments, hardening, detection engineering, incident response support, and security program enablement." />
+  <meta name="description" content="Cybersecurity consulting services: penetration testing, cloud security assessments, detection engineering, and security program enablement." />
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
@@ -15,143 +15,218 @@
           <div class="brand-mark" aria-hidden="true"><span>VS</span></div>
           <div class="brand-name">
             <strong>VardrSec</strong>
-            <span>Offensive Security Research &amp; Tooling</span>
+            <small>Offensive Security Research & Consulting</small>
           </div>
         </a>
-
+        
+        <!-- Desktop Navigation -->
         <div class="nav-links">
+          <a href="index.html">Home</a>
           <a href="about.html">About</a>
-          <a href="mission.html">Mission</a>
           <a class="active" href="services.html">Services</a>
           <a href="plans.html">Plans</a>
-          <a href="resources.html">Resources</a>
-          <a href="contact.html" class="btn btn-primary">Contact</a>
+          <a href="case-studies.html">Case Studies</a>
+          <a href="contact.html">Contact</a>
         </div>
+        
+        <!-- Desktop CTA Buttons -->
+        <div class="nav-cta">
+          <a class="btn" href="resources.html">Resources</a>
+          <a class="btn primary" href="contact.html">Request a Consult</a>
+        </div>
+        
+        <!-- Mobile Menu Toggle -->
+        <button id="menuBtn" class="menu-btn" aria-label="Open menu" aria-expanded="false">
+          Menu
+        </button>
       </nav>
+      
+      <!-- Mobile Menu -->
+      <div class="mobile-panel" id="mobilePanel">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a class="active" href="services.html">Services</a>
+        <a href="plans.html">Plans</a>
+        <a href="case-studies.html">Case Studies</a>
+        <a href="resources.html">Resources</a>
+        <a href="contact.html">Contact</a>
+        <a class="btn primary" href="contact.html" style="margin-top:8px">Request a Consult</a>
+      </div>
     </div>
   </header>
 
   <main>
-    <section class="hero hero--compact">
-      <div class="container">
-        <h1>Services</h1>
-        <p class="lead">
-          Practical security work focused on reducing real risk: hardening what you run, validating what you ship,
-          and improving detection and response.
-        </p>
-
-        <div class="grid grid-3">
-          <div class="card">
-            <h3>Web &amp; API Security</h3>
-            <p>Manual testing + targeted automation to identify auth flaws, IDOR/BOLA, misconfigurations, and injection risks.</p>
-            <ul class="bullets">
-              <li>OWASP API Top 10 / ASVS aligned</li>
-              <li>AuthZ analysis (horizontal/vertical)</li>
-              <li>Remediation guidance with repro steps</li>
-            </ul>
-          </div>
-
-          <div class="card">
-            <h3>Cloud &amp; Infrastructure Hardening</h3>
-            <p>Secure baselines for Azure/AWS/GCP, identity, and network exposure reduction.</p>
-            <ul class="bullets">
-              <li>IAM review &amp; least privilege</li>
-              <li>Secure configuration + guardrails</li>
-              <li>Attack surface &amp; logging coverage</li>
-            </ul>
-          </div>
-
-          <div class="card">
-            <h3>Detection Engineering</h3>
-            <p>Build and tune detection content so you can see the activity that matters and respond quickly.</p>
-            <ul class="bullets">
-              <li>SIEM rules + alert tuning</li>
-              <li>Threat hunting playbooks</li>
-              <li>Automation &amp; response workflows</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="spacer"></div>
-
-        <div class="grid grid-2">
-          <div class="card">
-            <h3>Security Program Enablement</h3>
-            <p>
-              Lightweight, scalable processes that help small teams ship faster without “security theater.”
-            </p>
-            <ul class="bullets">
-              <li>Secure SDLC checkpoints</li>
-              <li>PR review guidance &amp; checklists</li>
-              <li>Vulnerability triage workflows</li>
-            </ul>
-          </div>
-
-          <div class="card">
-            <h3>Incident Support</h3>
-            <p>
-              Rapid support during a suspected incident: scoping, containment guidance, and post-incident improvements.
-            </p>
-            <ul class="bullets">
-              <li>Initial triage and log review</li>
-              <li>Containment recommendations</li>
-              <li>Root cause + lessons learned</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="spacer"></div>
-
-        <div class="callout">
-          <div>
-            <h3>How engagements typically work</h3>
-            <p>
-              Short discovery call → scoped statement of work → execution with weekly updates → final deliverables
-              (findings, fixes, and a prioritized plan).
-            </p>
-          </div>
-          <a href="plans.html" class="btn btn-secondary">See Plans</a>
-        </div>
-      </div>
-    </section>
-
     <section class="section">
       <div class="container">
-        <h2>Deliverables you can expect</h2>
-        <div class="grid grid-3">
+        <div class="section-title">
+          <h2>Services</h2>
+          <p>
+            Practical security work focused on reducing real risk: hardening what you run, validating what you ship,
+            and improving detection and response.
+          </p>
+        </div>
+
+        <!-- Core Services -->
+        <div class="grid-3" style="margin-bottom: 28px;">
           <div class="card">
-            <h3>Executive Summary</h3>
-            <p>Risk overview, top issues, and impact in business terms.</p>
+            <div class="kicker" style="margin-bottom: 12px;">
+              <span class="badge">Application Security</span>
+            </div>
+            <h3>Web & API Security Testing</h3>
+            <p style="margin-top: 12px;">
+              Manual testing combined with targeted automation to identify authorization flaws, IDOR/BOLA vulnerabilities, 
+              misconfigurations, and injection risks in web applications and APIs.
+            </p>
+            <div class="meta">
+              • OWASP API Top 10 / ASVS aligned<br/>
+              • Authorization analysis (horizontal/vertical)<br/>
+              • Remediation guidance with reproduction steps<br/>
+              • Validation testing after fixes
+            </div>
           </div>
+
           <div class="card">
-            <h3>Technical Findings</h3>
-            <p>Reproduction steps, evidence, severity, and remediation guidance.</p>
+            <div class="kicker" style="margin-bottom: 12px;">
+              <span class="badge">Cloud Security</span>
+            </div>
+            <h3>Cloud & Infrastructure Hardening</h3>
+            <p style="margin-top: 12px;">
+              Security baseline reviews for AWS, Azure, and GCP environments. Focus on identity management, 
+              network exposure reduction, and configuration hardening.
+            </p>
+            <div class="meta">
+              • IAM review & least privilege implementation<br/>
+              • Secure configuration + guardrails<br/>
+              • Attack surface analysis<br/>
+              • Logging and monitoring coverage assessment
+            </div>
           </div>
+
           <div class="card">
-            <h3>Prioritized Roadmap</h3>
-            <p>Fix-first ordering, quick wins, and medium/long-term improvements.</p>
+            <div class="kicker" style="margin-bottom: 12px;">
+              <span class="badge">Detection & Response</span>
+            </div>
+            <h3>Detection Engineering</h3>
+            <p style="margin-top: 12px;">
+              Build and tune detection content to identify meaningful security events. Create threat hunting 
+              playbooks and automated response workflows.
+            </p>
+            <div class="meta">
+              • SIEM rule development & alert tuning<br/>
+              • Threat hunting playbooks<br/>
+              • Detection content testing & validation<br/>
+              • Response automation workflows
+            </div>
           </div>
         </div>
 
-        <div class="spacer"></div>
+        <!-- Additional Services -->
+        <div class="grid-2" style="margin-bottom: 28px;">
+          <div class="card">
+            <div class="kicker" style="margin-bottom: 12px;">
+              <span class="badge ok">Program Development</span>
+            </div>
+            <h3>Security Program Enablement</h3>
+            <p style="margin-top: 12px;">
+              Lightweight, scalable security processes that help engineering teams ship faster without 
+              introducing unnecessary friction or "security theater."
+            </p>
+            <div class="meta">
+              • Secure SDLC checkpoint design<br/>
+              • Code review guidance & checklists<br/>
+              • Vulnerability triage workflows<br/>
+              • Security metrics & KPI definition
+            </div>
+          </div>
 
-        <div class="notice">
-          <strong>Note:</strong> I do not perform unauthorized testing. Any testing is performed only with
-          explicit written permission and a defined scope.
+          <div class="card">
+            <div class="kicker" style="margin-bottom: 12px;">
+              <span class="badge warn">Incident Support</span>
+            </div>
+            <h3>Incident Response Support</h3>
+            <p style="margin-top: 12px;">
+              Rapid support during suspected security incidents. Assistance with scoping, containment guidance, 
+              forensic analysis, and post-incident improvements.
+            </p>
+            <div class="meta">
+              • Initial triage and log analysis<br/>
+              • Containment recommendations<br/>
+              • Root cause analysis<br/>
+              • Post-incident lessons learned
+            </div>
+          </div>
+        </div>
+
+        <!-- Engagement Process -->
+        <div class="note" style="margin-bottom: 28px;">
+          <strong>Typical engagement flow:</strong> Short discovery call → scoped statement of work → 
+          execution with weekly status updates → final deliverables (findings, remediation guidance, and prioritized roadmap).
+          <a href="plans.html" style="color: var(--accent); text-decoration: underline; margin-left: 8px;">View engagement models</a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Deliverables Section -->
+    <section class="section compact">
+      <div class="container">
+        <div class="section-title">
+          <h2>Standard Deliverables</h2>
+        </div>
+        
+        <div class="grid-3">
+          <div class="card">
+            <h3>Executive Summary</h3>
+            <p>High-level risk overview, critical findings, and business impact assessment presented in non-technical terms.</p>
+          </div>
+          
+          <div class="card">
+            <h3>Technical Findings Report</h3>
+            <p>Detailed reproduction steps, evidence, severity ratings, affected systems, and specific remediation guidance.</p>
+          </div>
+          
+          <div class="card">
+            <h3>Prioritized Remediation Roadmap</h3>
+            <p>Fix-first ordering based on risk, quick wins identification, and medium/long-term improvement recommendations.</p>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="section section--alt">
+    <!-- Important Notes -->
+    <section class="section compact">
       <div class="container">
-        <h2>Ready to scope it?</h2>
-        <p class="lead">Send your objectives and environment details. I’ll respond with a proposed scope and timeline.</p>
-        <a class="btn btn-primary" href="contact.html">Contact</a>
+        <div class="card">
+          <h3>Professional Standards</h3>
+          <p style="margin-top: 12px;">
+            <strong>Authorization:</strong> All security testing is performed only with explicit written authorization 
+            and clearly defined scope. No unauthorized or "grey area" testing activities.
+          </p>
+          <p style="margin-top: 12px;">
+            <strong>Confidentiality:</strong> All engagement details, findings, and client information are treated 
+            as strictly confidential and protected under NDA.
+          </p>
+          <p style="margin-top: 12px;">
+            <strong>Responsible Disclosure:</strong> Findings are reported directly to clients first, with appropriate 
+            time for remediation before any public disclosure.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section compact">
+      <div class="container">
+        <div class="note">
+          <strong>Ready to discuss your security needs?</strong> Send your objectives and environment details. 
+          I'll respond with a proposed scope, timeline, and engagement model recommendation.
+          <a href="contact.html" class="btn primary" style="margin-left: 12px;">Request a Consultation</a>
+        </div>
       </div>
     </section>
   </main>
 
-<footer class="footer">
+  <footer class="footer">
     <div class="container">
       <div class="footer-grid">
         <div>
