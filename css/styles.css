@@ -656,6 +656,23 @@ h1{font-size:40px; line-height:1.08; letter-spacing:-1px}
   .spec > dt:first-of-type{padding-top:0}
   .spec > dt:first-of-type + dd{padding-top:0}
 
-  .tool-foot .link{margin-left:0; flex-basis:100%}
+  /* Keep the link right-aligned; let it wrap only if the tags genuinely fill the row. */
+  .tool-foot{gap:8px 10px}
   :root{--card-pad:18px; --row-gap:12px}
+}
+
+/* ---------------------------------------------------------------------------
+   A .kicker holding badges is a metadata row, not a pill in its own right.
+   Wrapping pills in another pill added a redundant border and full-width
+   background. The hero eyebrow keeps its pill because there it IS the chip.
+   --------------------------------------------------------------------------- */
+.kicker:has(.badge){
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:8px;
+  padding:0;
+  border:none;
+  border-radius:0;
+  background:none;
 }

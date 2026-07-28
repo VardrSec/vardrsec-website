@@ -341,3 +341,15 @@ CSS only. No content, markup, navigation, URL, or form behavior changes.
 
 - Three columns at desktop, two at ≤1024px, one at ≤760px. Label/value rows stack at
   ≤560px with dividers retained. Card padding and row gap tighten at that breakpoint.
+
+### Fixed
+
+- Card metadata badges sat inside a `.kicker`, which carried its own pill background,
+  border, radius and padding — a pill wrapping pills, drawn full width. When a `.kicker`
+  contains badges it is now a plain flex row: transparent, borderless, no radius, no
+  padding, `gap: 8px`, and only as tall as its contents. Individual badges keep their pill
+  styling. The hero eyebrow is unaffected, because there the `.kicker` is the chip rather
+  than a container for one.
+- Removed the forced wrap that pushed the repository link onto its own line in tool card
+  footers below 560px. Tags stay left and the link stays right on a single row down to
+  320px, wrapping only if content genuinely requires it.
