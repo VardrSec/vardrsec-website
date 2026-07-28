@@ -37,6 +37,14 @@ or on a real deployment.
    `mailto:` link.
 5. Set up Cloudflare Email Routing so mail to `contact@vardrsec.com` forwards to a real
    inbox.
+6. **Add a rate-limiting rule on `/api/contact`** (Security > WAF > Rate limiting rules).
+   Suggested: 5 requests per 10 minutes per IP, action Block.
+
+   This step is required, not optional. `/api/contact` is an unauthenticated endpoint
+   that causes mail to be sent. The honeypot field in the form stops naive bots but not
+   anyone who reads the HTML — without a rate limit, a single attacker can drain the
+   Resend quota or run up the bill. Cloudflare Turnstile is a stronger alternative if
+   abuse becomes a real problem.
 
 ## Images
 

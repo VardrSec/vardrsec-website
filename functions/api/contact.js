@@ -6,6 +6,10 @@
  *   CONTACT_TO     - destination inbox (e.g. contact@vardrsec.com)
  *
  * Submissions are relayed by email only; nothing is persisted.
+ *
+ * This endpoint is unauthenticated and causes mail to be sent. The honeypot below
+ * only deters naive bots. A Cloudflare WAF rate-limiting rule on /api/contact is a
+ * required part of deployment — see README. Do not rely on this file alone.
  */
 
 const MAX_MESSAGE = 5000;
