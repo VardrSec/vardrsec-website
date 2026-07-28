@@ -211,7 +211,8 @@ h1{
   display:flex; flex-direction:column; gap:16px;
 }
 .side-card h3{margin:0;font-size:16px}
-.side-card p{margin:0;color:rgba(231,237,247,.80); font-size:13px}
+.side-card p{margin:0;color:rgba(231,237,247,.80); font-size:13.5px; line-height:1.6}
+.side-card h3{margin:0;font-size:17px; letter-spacing:-.2px}
 .kpi{
   display:grid;
   grid-template-columns: 1fr 1fr;
@@ -238,21 +239,25 @@ h1{
 }
 .card{
   border-radius:var(--radius);
-  border:1px solid rgba(255,255,255,.14);
-  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.12);
+  background:linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.03));
   box-shadow: 0 18px 50px rgba(0,0,0,.32);
-  padding:18px;
+  padding:22px;
+  transition: border-color .18s ease, transform .18s ease;
 }
-.card h3{margin:0 0 6px;font-size:16px}
-.card p{margin:0;color:rgba(231,237,247,.78); font-size:13px}
-.card .meta{margin-top:10px; color:rgba(231,237,247,.62); font-size:12px}
+.card:hover{border-color:rgba(255,255,255,.2); transform:translateY(-2px)}
+.card h3{margin:0 0 6px;font-size:17px; letter-spacing:-.2px}
+.card p{margin:0;color:rgba(231,237,247,.78); font-size:14px; line-height:1.65}
+.card .meta{margin-top:12px; color:rgba(231,237,247,.62); font-size:12.5px; line-height:1.55}
+.card > .kicker + h3{margin-top:2px}
 
-.section-title{
-  display:flex; align-items:flex-end; justify-content:space-between;
-  gap:14px; margin-bottom:18px;
-}
-.section-title h1, .section-title h2{margin:0;font-size:24px; letter-spacing:-.3px; line-height:1.25}
-.section-title p{margin:0;color:rgba(231,237,247,.72); font-size:13px; max-width:70ch}
+/* Heading and its description read as one unit. These used to sit at opposite
+   ends of a space-between flex row, which left a gulf between them. */
+.section-title{margin-bottom:22px}
+.section-title h1{margin:0 0 10px;font-size:32px; letter-spacing:-.8px; line-height:1.15}
+.section-title h2{margin:0 0 8px;font-size:25px; letter-spacing:-.4px; line-height:1.2}
+.section-title h3{margin:0 0 8px;font-size:19px; letter-spacing:-.2px}
+.section-title p{margin:0;color:rgba(231,237,247,.70); font-size:14px; max-width:72ch; line-height:1.6}
 
 .table{
   width:100%;
@@ -368,4 +373,39 @@ textarea{min-height:120px; resize:vertical}
   .menu-btn{display:inline-flex; align-items:center; justify-content:center}
   .mobile-panel{display:none}
   .mobile-panel.open{display:block}
+}
+
+/* --- Layout rhythm ---------------------------------------------------------
+   Grids and stacked sections previously relied on per-element inline margins,
+   which drifted between pages. These set the spacing once. */
+.grid-2, .grid-3{gap:18px}
+.section .grid-2 + .grid-2,
+.section .grid-2 + .grid-3,
+.section .grid-3 + .grid-2,
+.section .grid-3 + .grid-3{margin-top:18px}
+.section .grid-2 + .note,
+.section .grid-3 + .note{margin-top:22px}
+.section .note + .section-title,
+.section .grid-2 + .section-title,
+.section .grid-3 + .section-title{margin-top:44px}
+
+.hero-grid{align-items:start}
+.side-card{gap:14px}
+.side-card-more{font-size:13px; align-self:flex-start; text-decoration:none}
+.side-card-more:hover{text-decoration:underline}
+
+.lead{font-size:15.5px; line-height:1.65}
+.pills{gap:8px}
+
+/* Larger hero headline, and a tighter ramp down at narrow widths. */
+h1{font-size:40px; line-height:1.08; letter-spacing:-1px}
+
+@media (max-width: 640px){
+  h1{font-size:29px; letter-spacing:-.6px}
+  .section-title h1{font-size:26px}
+  .section-title h2{font-size:22px}
+  .section{padding:48px 0}
+  .section.compact{padding:34px 0}
+  .card{padding:18px}
+  .hero-body{padding:20px}
 }

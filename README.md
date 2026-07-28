@@ -1,15 +1,19 @@
 # vardrsec-website
 
-Static site for VardrSec. No build step, no dependencies — plain HTML, one stylesheet,
-one script.
+Static site for VardrSec. No dependencies — plain HTML, one stylesheet, one script.
 
 ```
-index.html  about.html  services.html  resources.html  contact.html
-privacy.html  terms.html
-css/styles.css          all styling
-js/site.js              mobile nav, footer year, contact form submit
+index.html  tools.html  resources.html  collaboration.html
+about.html  contact.html  privacy.html  terms.html
+
+partials/                 shared header and footer (source of truth)
+build.js                  syncs partials into every page
+tools/verify.js           structure, link, spelling and house-style checks
+css/styles.css            all styling
+js/site.js                mobile nav, footer year, contact form submit
 functions/api/contact.js  Cloudflare Pages Function (contact form backend)
-assets/                 logo, banner, favicon
+assets/                   logo, banner, favicon
+_headers  _redirects      Cloudflare Pages configuration
 ```
 
 ## Local preview
@@ -111,3 +115,14 @@ sync — change the partial instead. `node build.js --check` catches drift befor
 Why this exists: the header and footer were copy-pasted across eight pages, and
 `contact.html` drifted far enough that its mobile menu referenced a stale element id.
 The nav was dead on the highest-intent page for months.
+
+## Checks
+
+```sh
+node build.js --check   # header/footer in sync with partials/
+node tools/verify.js .  # links, assets, headings, spelling, banned phrasing
+```
+
+`tools/verify.js` enforces house style as well as structure: American spelling, and no
+reintroduction of commercial framing (pricing, retainers, statements of work) or
+commitments that cannot be met alongside full-time employment.

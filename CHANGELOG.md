@@ -136,3 +136,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   below it under its own heading, so scoped engagements read as one possible outcome of a
   conversation rather than the purpose of the page.
 - Explicit invitation to students and career changers, which is true and costs nothing.
+
+## Visual revamp and collaboration-only framing
+
+### Fixed
+
+- `.section-title` used `display:flex; justify-content:space-between`, which pushed every
+  section's description to the far right edge, disconnected from its heading. Headings and
+  descriptions are now stacked and left-aligned. This was the root of the "nothing lines
+  up" problem and it affected every page.
+- Ten British spellings corrected to American ("authorised", "modelling", "organise",
+  "behaviour", "grey"). `tools/verify.js` now fails the build on a dozen more.
+
+### Removed
+
+- All commercial framing. The home page's "Engagement Process" and "How Engagements Work"
+  sections (including a pricing table) are gone, along with the entire paid half of the
+  collaboration page — service cards, deliverables, engagement process, and the incident
+  response disclaimer, which is noise once nothing is being sold.
+
+### Changed
+
+- Home hero rewritten. "The bug that returns 200 OK." replaced with "Security tooling for
+  the bugs that don't look like bugs."; four hero pills reduced to three so they no longer
+  wrap 3+1.
+- Collaboration page is now purely an invitation to work with other engineers: topics,
+  how I like to work, and an open door. 482 lines down to 233.
+- Type scale, card padding, hover states, and vertical rhythm tightened. Grid spacing is
+  now set by CSS rather than per-element inline margins that drifted between pages.
