@@ -45,6 +45,9 @@
         status.textContent = "Network error. Email contact@vardrsec.com instead.";
       } finally {
         submit.disabled = false;
+        // Turnstile tokens are single-use; without a reset a second attempt
+        // always fails verification.
+        if (window.turnstile) window.turnstile.reset();
       }
     });
   }

@@ -22,6 +22,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   submissions by email via Resend. Includes a honeypot field, input validation, and
   length caps. Requires `RESEND_API_KEY` and `CONTACT_TO` environment variables.
 - Client-side form submission with inline success/error status in `js/site.js`.
+- Cloudflare Turnstile on the contact form, verified server-side against
+  `challenges.cloudflare.com/turnstile/v0/siteverify` before any mail is sent. Adds a
+  required `TURNSTILE_SECRET_KEY` environment variable. The widget is reset after each
+  submission because tokens are single-use.
 - "Open Source Tools" section on the home page linking VardrGate, VardrMap, and
   VardrRunner — verifiable work replacing the removed placeholder case studies.
 - `assets/favicon.svg`, `robots.txt`, `sitemap.xml`.

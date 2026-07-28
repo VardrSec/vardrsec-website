@@ -1,9 +1,10 @@
 /**
  * Contact form handler (Cloudflare Pages Function).
  *
- * Requires two environment variables set in the Pages project:
- *   RESEND_API_KEY - API key from resend.com
- *   CONTACT_TO     - destination inbox (e.g. contact@vardrsec.com)
+ * Requires three environment variables set in the Pages project:
+ *   RESEND_API_KEY        - API key from resend.com (sending access only)
+ *   CONTACT_TO            - destination inbox (e.g. contact@vardrsec.com)
+ *   TURNSTILE_SECRET_KEY  - secret half of the Turnstile widget keypair
  *
  * Submissions are relayed by email only; nothing is persisted.
  *
@@ -29,7 +30,7 @@ export async function onRequest({ request, env }) {
   if (request.method !== "POST") {
     return json(405, { error: "Method not allowed." });
   }
-  if (!env.RESEND_API_KEY || !env.CONTACT_TO) {
+  if (!env.RESEND_API_KEY || !env.CONTACT_TO || !env.TURNSTILE_SECRET_KEY) {
     return json(500, { error: "Contact form is not configured." });
   }
 
@@ -55,6 +56,28 @@ export async function onRequest({ request, env }) {
   }
   if (message.length > MAX_MESSAGE) {
     return json(400, { error: `Message must be under ${MAX_MESSAGE} characters.` });
+  }
+
+  // Turnstile. Checked after field validation so malformed junk costs no
+  // outbound request, but always before anything is sent.
+  const token = form.get("cf-turnstile-response");
+  if (!token) {
+    return json(403, { error: "Please complete the verification check." });
+  }
+
+  const verify = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+    method: "POST",
+    body: new URLSearchParams({
+      secret: env.TURNSTILE_SECRET_KEY,
+      response: token,
+      remoteip: request.headers.get("CF-Connecting-IP") || "",
+    }),
+  });
+  const outcome = await verify.json().catch(() => ({ success: false }));
+
+  if (!outcome.success) {
+    console.warn("turnstile rejected", outcome["error-codes"]);
+    return json(403, { error: "Verification failed. Please try again." });
   }
 
   const res = await fetch("https://api.resend.com/emails", {

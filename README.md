@@ -27,10 +27,14 @@ or on a real deployment.
 2. Add the custom domain `vardrsec.com`.
 3. Set these environment variables in **Settings > Environment variables**:
 
-   | Variable | Value |
-   |---|---|
-   | `RESEND_API_KEY` | API key from [resend.com](https://resend.com) |
-   | `CONTACT_TO` | `contact@vardrsec.com` |
+   | Variable | Value | Encrypt? |
+   |---|---|---|
+   | `RESEND_API_KEY` | API key from [resend.com](https://resend.com), **sending access only**, scoped to `send.vardrsec.com` | yes |
+   | `CONTACT_TO` | `contact@vardrsec.com` | no |
+   | `TURNSTILE_SECRET_KEY` | secret half of the Turnstile keypair | yes |
+
+   Environment variables only apply to builds created after they are set — redeploy
+   after adding them.
 
 4. Verify **`send.vardrsec.com`** — not the root domain — as a sending domain in Resend,
    so `noreply@send.vardrsec.com` passes SPF/DKIM. Until this is done the form returns a
@@ -43,14 +47,16 @@ or on a real deployment.
 
 5. Set up Cloudflare Email Routing so mail to `contact@vardrsec.com` forwards to a real
    inbox. (Done: MX + SPF are live, `contact@` forwards to a personal address.)
-6. **Add a rate-limiting rule on `/api/contact`** (Security > WAF > Rate limiting rules).
-   Suggested: 5 requests per 10 minutes per IP, action Block.
+6. **Rate-limiting rule on `/api/contact`** (Security > WAF > Rate limiting rules):
+   `http.request.uri.path eq "/api/contact"`, 2 requests, per IP, action Block.
 
-   This step is required, not optional. `/api/contact` is an unauthenticated endpoint
-   that causes mail to be sent. The honeypot field in the form stops naive bots but not
-   anyone who reads the HTML — without a rate limit, a single attacker can drain the
-   Resend quota or run up the bill. Cloudflare Turnstile is a stronger alternative if
-   abuse becomes a real problem.
+   The Free plan fixes both the period and the mitigation timeout at 10 seconds, so
+   this is a speed bump rather than a real cap — a paced attacker still gets ~12
+   requests a minute. Turnstile is the actual control on this endpoint; the rate limit
+   only catches unsophisticated abuse.
+
+   If abuse ever becomes real, replace this with a KV-backed per-IP daily counter
+   inside the Function, where the window is not capped by the plan.
 
 ## Images
 
