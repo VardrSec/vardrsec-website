@@ -142,6 +142,10 @@ Optional: link a repository, spec, or existing report.
     </section>
   </main>
 
+  <!-- Must stay OUTSIDE the footer partial: build.js overwrites that region with the
+       shared footer, which silently deleted this script once already. -->
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+
   <!-- Footer -->
 <!-- @partial:footer -->
   <footer class="footer">

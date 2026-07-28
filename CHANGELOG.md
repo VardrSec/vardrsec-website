@@ -264,3 +264,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Repo had mixed CRLF and LF line endings, which silently broke multi-line edits and
   produced noisy diffs. All files normalized to LF, with `.gitattributes` to keep it that
   way.
+
+### Fixed
+
+- **The contact form was broken.** The Turnstile script tag sat inside the region that
+  `build.js` overwrites with the shared footer partial, so the first sync silently deleted
+  it. The widget div remained, but with no script it never rendered and never produced a
+  token, meaning every submission was rejected with 403. Broken since the partials change.
+  The script now sits outside the partial region, and `tools/verify.js` fails if a page has
+  a Turnstile widget without the script, if the script sits inside the footer partial, or
+  if a form posting to `/api/contact` has no widget at all.

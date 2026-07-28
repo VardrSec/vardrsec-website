@@ -34,6 +34,25 @@ for (const page of pages) {
     ok(open === close, `${page}: <${tag}> ${open} open vs ${close} close`);
   }
 
+  // The Turnstile widget is inert without its script. This pairing broke once when the
+  // script sat inside the region build.js overwrites with the shared footer.
+  if (s.includes("cf-turnstile")) {
+    ok(
+      s.includes("challenges.cloudflare.com/turnstile/v0/api.js"),
+      `${page}: has a Turnstile widget but never loads the Turnstile script`
+    );
+    const footerStart = s.indexOf("<!-- @partial:footer -->");
+    const scriptAt = s.indexOf("challenges.cloudflare.com/turnstile");
+    ok(
+      footerStart === -1 || scriptAt < footerStart,
+      `${page}: Turnstile script sits inside the footer partial and will be overwritten by build.js`
+    );
+  }
+  // A form posting to the Function must carry the widget, or every submit 403s.
+  if (s.includes('action="/api/contact"')) {
+    ok(s.includes("cf-turnstile"), `${page}: contact form has no Turnstile widget; submissions will 403`);
+  }
+
   ok(!s.includes("case-studies"), `${page}: references removed case-studies page`);
   ok(s.includes("contact@vardrsec.com"), `${page}: missing contact address`);
   ok(/<title>[^<]+<\/title>/.test(s), `${page}: missing <title>`);
