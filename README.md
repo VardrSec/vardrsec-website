@@ -70,6 +70,19 @@ npx sharp-cli -i assets/orgbanner.png -o assets/orgbanner.webp --format webp
 Keep `assets/orgbanner.png` — it is the `og:image` and some link scrapers do not
 accept WebP.
 
+## Security headers
+
+`_headers` holds the CSP and related response headers. **Do not also set these in a
+Cloudflare zone Transform Rule** — a zone rule overrides the origin header, so the two
+silently diverge and the file in this repo stops being the truth.
+
+This has already bitten once: a zone-level `script-src 'self'` blocked Turnstile on
+`vardrsec.com` while `*.pages.dev` — which carries no zone rules — kept working, making
+it look like a deploy problem.
+
+Adding any third-party script, frame, font, or fetch target means widening the matching
+directive here in the same commit.
+
 ## Known duplication
 
 The header and footer are copy-pasted across all seven pages. This has already caused one

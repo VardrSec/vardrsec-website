@@ -1,0 +1,18 @@
+# Security headers for Cloudflare Pages.
+#
+# The CSP lives here rather than in a zone Transform Rule so it stays next to the
+# code whose dependencies it governs: adding a third-party script and forgetting
+# to widen the policy silently breaks the page on the custom domain while it keeps
+# working on *.pages.dev, which carries no zone rules.
+#
+# challenges.cloudflare.com is Turnstile on the contact form. It needs three
+# directives - script-src to load api.js, frame-src for the widget iframe, and
+# connect-src for its verification callbacks.
+
+/*
+  Content-Security-Policy: default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data:; font-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' https://challenges.cloudflare.com https://static.cloudflareinsights.com; frame-src https://challenges.cloudflare.com; connect-src 'self' https://challenges.cloudflare.com https://cloudflareinsights.com; upgrade-insecure-requests
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=(), usb=()
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
