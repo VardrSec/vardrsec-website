@@ -66,7 +66,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 
 - **Incident response as an offering.** Same-day engagement and on-call availability
-  cannot be honoured alongside full-time employment. Both the service and the
+  cannot be honored alongside full-time employment. Both the service and the
   engagement tier are gone, replaced by an explicit statement that this is not offered
   and why.
 - Retainer tier promising 10-40 dedicated hours per month.
@@ -95,7 +95,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   single call to action. Tools is promoted to the top level; the two-button
   "Resources + Request a Consult" pairing is gone.
 - `services.html` renamed to `consulting.html`, with 301s from the old paths. The page
-  is no longer an agency-style services catalogue.
+  is no longer an agency-style services catalog.
 - Home page leads with built work rather than a capability list: new hero built around
   broken access control, the Open Source Tools section moved above the fold-adjacent
   content, and the side card now introduces Jorge rather than listing operating

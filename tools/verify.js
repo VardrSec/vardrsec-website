@@ -56,7 +56,7 @@ for (const cls of ["link", "hp", "form-status", "footer-contact", "brand-img", "
 ok(!css.includes("outline:none"), "css: outline:none reintroduced");
 ok(css.includes(":focus-visible"), "css: focus-visible rule missing");
 
-// Commitments that cannot be honoured alongside full-time employment, plus the
+// Commitments that cannot be honored alongside full-time employment, plus the
 // commercial framing the site deliberately dropped in favour of collaboration.
 const banned = [
   "Same-day engagement", "72-hour kickoff", "10-40 hours/month", "no account managers",
@@ -66,7 +66,7 @@ const banned = [
 // American spelling is the house style.
 const british = {
   authorised: "authorized", authorisation: "authorization", modelling: "modeling",
-  organise: "organize", behaviour: "behavior", catalogue: "catalog", analyse: "analyze",
+  organise: "organize", behaviour: "behavior", catalog: "catalog", analyse: "analyze",
   prioritise: "prioritize", recognise: "recognize", realise: "realize", defence: "defense",
   grey: "gray",
 };
