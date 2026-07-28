@@ -162,9 +162,9 @@ response:
           <div class="card tool-card">
             <h3>VardrGate</h3>
             <dl class="spec">
-              <dt>Finds</dt><dd>BOLA, cross-tenant access, privilege escalation</dd>
-              <dt>How</dt><dd>Replays one request as every identity, compares against a declared policy</dd>
-              <dt>Different</dt><dd>Runs in CI, so authorization is tested on every commit</dd>
+              <dt>Purpose</dt><dd>Verifies API authorization against a declared policy</dd>
+              <dt>How it works</dt><dd>Replays one request as every identity and compares the result to the policy</dd>
+              <dt>Why it matters</dt><dd>Runs in CI, so authorization is tested on every commit</dd>
             </dl>
             <div class="tool-foot">
               <span class="tag">Go</span><span class="tag">Apache-2.0</span>
@@ -175,9 +175,9 @@ response:
           <div class="card tool-card">
             <h3>VardrMap</h3>
             <dl class="spec">
-              <dt>Finds</dt><dd>Attack surface you forgot you had</dd>
-              <dt>How</dt><dd>Targets, hypotheses and findings in one workspace, with recon APIs wired in</dd>
-              <dt>Different</dt><dd>Tracks what you have <em>already tested</em>, not just what exists</dd>
+              <dt>Purpose</dt><dd>Untracked assets, unanswered testing hypotheses, and incomplete assessment coverage</dd>
+              <dt>How it works</dt><dd>Keeps scope, assets, hypotheses, evidence, and findings in one workspace</dd>
+              <dt>Why it matters</dt><dd>Tracks what has <em>already been tested</em>, not just what exists</dd>
             </dl>
             <div class="tool-foot">
               <span class="tag">Python</span><span class="tag">MIT</span>
@@ -188,9 +188,9 @@ response:
           <div class="card tool-card">
             <h3>VardrRunner</h3>
             <dl class="spec">
-              <dt>Finds</dt><dd>Nothing on its own — it runs the others</dd>
-              <dt>How</dt><dd>Claims queued jobs, executes locally, streams results back</dd>
-              <dt>Different</dt><dd>Your bandwidth, your IP, your tool versions. No vendor holds your credentials</dd>
+              <dt>Purpose</dt><dd>Executes security workflows locally</dd>
+              <dt>How it works</dt><dd>Claims queued jobs, runs them locally, and streams results back</dd>
+              <dt>Why it matters</dt><dd>Credentials, scan traffic, and tool execution remain on your machine</dd>
             </dl>
             <div class="tool-foot">
               <span class="tag">Python</span><span class="tag">MIT</span>

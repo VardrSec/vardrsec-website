@@ -1,0 +1,7 @@
+# Normalize line endings. The repo had mixed CRLF and LF, which silently broke
+# multi-line find-and-replace during editing and produced noisy diffs.
+* text=auto eol=lf
+
+*.png binary
+*.webp binary
+*.svg text eol=lf

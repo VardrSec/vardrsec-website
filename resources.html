@@ -144,10 +144,10 @@
           <div class="card">
             <h3>API Security</h3>
             <ul class="check">
-            <li>Authenticate every API request</li>
-            <li>Rate limit all endpoints</li>
+            <li>Require authentication for every non-public endpoint; explicitly classify public endpoints</li>
+            <li>Apply rate limits based on operation cost, authentication state, and abuse risk</li>
             <li>Validate content-type headers</li>
-            <li>Implement proper CORS policies</li>
+            <li>Allow only required origins, methods, and headers; never combine credentialed requests with wildcard origins</li>
             <li>Version your APIs explicitly</li>
             <li>Return consistent error messages</li>
             <li>Document authentication requirements</li>
@@ -219,7 +219,7 @@
             <li>Limit ingress to necessary IPs</li>
             <li>Use private subnets for databases</li>
             <li>Enable VPC Flow Logs</li>
-            <li>Use WAF for public endpoints</li>
+            <li>Use a WAF where the threat model and traffic justify it</li>
             <li>Implement DDoS protection</li>
           </ul>
           </div>
@@ -229,7 +229,7 @@
             <ul class="check">
             <li>Use secrets manager/vault</li>
             <li>Never commit secrets to code</li>
-            <li>Rotate secrets automatically</li>
+            <li>Automate rotation where supported, and test the rotation process</li>
             <li>Limit secret access by role</li>
             <li>Audit secret access logs</li>
             <li>Use environment-specific secrets</li>
@@ -246,7 +246,7 @@
             <li>Monitor failed auth attempts</li>
             <li>Track configuration changes</li>
             <li>Set up anomaly detection</li>
-            <li>Retain logs per compliance reqs</li>
+            <li>Retain logs according to documented security, operational, and compliance requirements</li>
           </ul>
           </div>
         </div>
@@ -324,7 +324,7 @@
             <li>Monitor security advisories</li>
             <li>Audit supply chain integrity</li>
             <li>Remove unused dependencies</li>
-            <li>Pin production versions</li>
+            <li>Lock production dependencies and maintain a tested update process</li>
           </ul>
           </div>
 

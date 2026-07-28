@@ -236,3 +236,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   a CSP `frame-ancestors` policy with the legacy header as fallback.
 - A visible space rendered before "the same courtesy" on the tools page, caused by an em
   dash ending a source line.
+
+## Copy refinements
+
+### Changed
+
+- Tools "common thread" rewritten to explain why broken access control resists automated
+  testing, rather than asserting it is the worst vulnerability class.
+- Home tool cards relabelled Purpose / How it works / Why it matters. The previous
+  Finds / How / Different did not fit VardrRunner, which finds nothing on its own.
+- Collaboration: the duplicated introduction removed, keeping the tighter version.
+  "Authorization first" renamed "Scope first" — the paragraph is about permission and
+  boundaries, not access-control logic.
+- About: the remaining absolute about human testing softened, VardrRunner described
+  without the ideological framing, and VardrForge's scope enforcement stated as being
+  designed rather than delivered, since it is still in development.
+- Contact: the duplicate authorization note removed, the request for context reduced from
+  three places to one, and the meta description rewritten around what VardrSec is
+  actually contacted about.
+- Seven resource checklist lines refined where the advice was too blunt to be correct,
+  including WAF use ("where the threat model and traffic justify it" rather than always),
+  rate limiting scoped to operation cost and abuse risk, and CORS spelled out to warn
+  against wildcard origins with credentials.
+
+### Fixed
+
+- Repo had mixed CRLF and LF line endings, which silently broke multi-line edits and
+  produced noisy diffs. All files normalized to LF, with `.gitattributes` to keep it that
+  way.
