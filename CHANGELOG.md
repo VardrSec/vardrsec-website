@@ -196,3 +196,43 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   page (12px at 360px). Grid and flex children default to `min-width:auto`, so the wide
   `<pre>` and the processors table refused to shrink. Found by rendering, not by the
   static checks, which passed throughout.
+
+## Editorial pass: one identity, less repetition, fewer absolutes
+
+### Changed
+
+- Home page repositioned around open-source authorization testing. New eyebrow, headline
+  ("Test the access rules your scanner can't infer."), and organizational supporting copy;
+  the previous headline is retained as a secondary brand statement.
+- Cloud Posture Assessment and Detection Engineering removed from the home page. They
+  broadened the positioning and diluted the authorization focus. The section is now
+  "Focus", covering application/API security, authorization design review, and tooling.
+- The "returns 200 and looks normal" explanation now has one home on About, with short
+  references elsewhere instead of three full retellings.
+- Absolutes replaced with claims that hold up: "no scanner on earth knows" became
+  "traditional scanners cannot reliably infer access rules that have never been expressed
+  in a machine-readable form"; "every automated test passes" became "the existing tests may
+  still pass"; "if I can't reproduce it, I don't report it" became "every reported finding
+  includes reproducible evidence or clearly labeled uncertainty".
+- Positioning by contrast removed. "I'm not a consultant who learned to read code" became
+  "I approach security as a working software engineer"; "rather than in slide decks",
+  "instead of agency ones", "no severity inflation" and "real exploitation attempts" all
+  cut.
+- Tool descriptions lead with the result and are roughly half their previous length.
+- Collaboration opening tightened; "genuinely", "talk your ear off" and "used in anger"
+  reduced to occasional rather than habitual.
+- Contact: the "Authorization required" badge read as though permission were needed to make
+  contact, and now states what it means. Company marked optional.
+- Privacy: "Like most websites" replaced with exactly what Cloudflare records; the vague
+  opt-out line replaced with a statement that no marketing messages are sent.
+- Consistent terminology: "penetration testing" throughout.
+
+### Fixed
+
+- Four resource checklist items that were too blunt to be good advice: account lockout
+  (a denial-of-service vector) now reads as throttling plus risk-based controls; "no public
+  S3 buckets" as account-level block public access with documented exceptions; "rotate
+  access keys regularly" as prefer short-lived credentials; and `X-Frame-Options: DENY` as
+  a CSP `frame-ancestors` policy with the legacy header as fallback.
+- A visible space rendered before "the same courtesy" on the tools page, caused by an em
+  dash ending a source line.

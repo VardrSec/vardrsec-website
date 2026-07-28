@@ -78,7 +78,7 @@
           <div>
             <h1 style="margin-bottom: 6px;">Contact</h1>
             <p style="margin-bottom: 18px;">
-              Tell me what you're building, breaking, or stuck on. Questions about the tools, an authorization design you want a second opinion on, or just an introduction — all of it is welcome.
+              Have a question about a tool, authorization model, or security review? Send a short description of the system, the problem, and the outcome you need. I usually respond within one to two business days.
               You can also email <a class="link" href="mailto:contact@vardrsec.com">contact@vardrsec.com</a> directly.
             </p>
           </div>
@@ -88,7 +88,7 @@
         <div class="card">
           <h3 style="margin-top: 0; margin-bottom: 8px;">Send a message</h3>
           <p class="meta" style="margin-top: 0; margin-bottom: 14px;">
-            A sentence or two of context helps. What are you working on, and what would be useful from me?
+            A sentence or two of context helps: what you are working on, and what would be useful from me.
           </p>
 
           <form class="form" id="contactForm" action="/api/contact" method="post">
@@ -104,7 +104,7 @@
 
             <!-- Honeypot: bots fill this, humans never see it. -->
             <div class="hp" aria-hidden="true">
-              <label for="company">Company</label>
+              <label for="company">Company (optional)</label>
               <input id="company" name="company" type="text" tabindex="-1" autocomplete="off" />
             </div>
 
@@ -112,14 +112,14 @@
 
             <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
               <button class="btn primary" type="submit">Send message</button>
-              <span class="badge warn">Authorization required</span>
+              <span class="badge warn">Security testing requires written authorization and defined scope</span>
               <span class="badge">Response: 1–2 business days</span>
             </div>
 
             <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
 
             <div class="note" style="margin-top: 10px;">
-              <strong>Important:</strong> I do not perform unauthorized testing. Any security work requires explicit written authorization and a defined scope.
+              <strong>Note:</strong> any security testing is performed only under written authorization with a defined scope, agreed before work begins.
             </div>
           </form>
         </div>

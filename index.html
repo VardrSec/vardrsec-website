@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>VardrSec | Offensive Security Research &amp; Tooling</title>
-  <meta name="description" content="Open-source security tooling and research by Jorge Aquino. API authorization testing, attack surface mapping, and practical guidance for engineering teams." />
+  <title>VardrSec | Open-source authorization testing</title>
+  <meta name="description" content="Open-source, local-first tools that compare intended access rules with real API behavior across users, roles, and tenants." />
   <link rel="canonical" href="https://vardrsec.com/" />
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="VardrSec" />
   <meta property="og:url" content="https://vardrsec.com/" />
-  <meta property="og:title" content="VardrSec | Offensive Security Research &amp; Tooling" />
-  <meta property="og:description" content="Open-source security tooling and research by Jorge Aquino. API authorization testing, attack surface mapping, and practical guidance for engineering teams." />
+  <meta property="og:title" content="VardrSec | Open-source authorization testing" />
+  <meta property="og:description" content="Open-source, local-first tools that compare intended access rules with real API behavior across users, roles, and tenants." />
   <meta property="og:image" content="https://vardrsec.com/assets/orgbanner.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="stylesheet" href="css/styles.css" />
@@ -74,22 +74,17 @@
       <div class="container">
         <div class="hero-card">
           <div class="hero-body">
-            <div class="kicker"><span class="dot"></span> Open source · Authorization &amp; access control</div>
-            <h1>Security tooling for the bugs that don't look like bugs.</h1>
+            <div class="kicker"><span class="dot"></span> Open-source authorization testing</div>
+            <h1>Test the access rules your scanner can't infer.</h1>
             <p class="lead">
-              An authorization flaw doesn't crash anything. The response is well-formed, the status code
-              is green, and the only thing wrong is <em>who</em> received the data. I build open-source
-              tools to catch that—and I'm always glad to hear from engineers working on the same problems.
+              VardrSec builds local-first tools that compare intended access rules with real API behavior
+              across users, roles, and tenants.
             </p>
             <div class="hero-actions">
-              <a class="btn primary" href="tools.html">Browse the tools</a>
-              <a class="btn" href="collaboration.html">Work together</a>
+              <a class="btn primary" href="#policy">Explore VardrGate</a>
+              <a class="btn" href="tools.html">View all tools</a>
             </div>
-            <div class="pills">
-              <span class="pill">Authorization testing</span>
-              <span class="pill">API security</span>
-              <span class="pill">Attack surface mapping</span>
-            </div>
+            <p class="tagline">Security tooling for the bugs that don't look like bugs.</p>
           </div>
           <div class="hero-banner">
             <picture>
@@ -102,11 +97,11 @@
     </section>
 
     <!-- Featured: what the tooling actually looks like -->
-    <section class="section compact">
+    <section class="section compact" id="policy">
       <div class="container">
         <div class="section-title">
           <h2>What "write the rules down" looks like</h2>
-          <p>A real VardrGate policy. You state how an endpoint should treat each caller; VardrGate runs the request as every one of them and reports where reality disagrees.</p>
+          <p>A real VardrGate policy. You state how an endpoint should treat each caller; VardrGate runs the request as every one of them and reports where behavior disagrees, with request and response evidence.</p>
         </div>
 
         <div class="demo">
@@ -216,13 +211,13 @@ response:
           <div class="bio-text">
             <h2>Who's behind this</h2>
             <p>
-              I'm Jorge Aquino. I spend my working hours building software and my spare ones trying to
-              break it. Marine Corps veteran, former Firefighter/EMT, and now a software engineer writing
-              the tooling I wished existed when I was hunting authorization bugs by hand.
+              VardrSec is built by Jorge Aquino, a software engineer focused on broken access control and
+              practical security tooling. His background in the Marine Corps and emergency services shaped
+              a bias toward clear scope, reproducible evidence, and systems that fail safely.
             </p>
             <p>
-              All security testing happens only with explicit written authorization and a documented
-              scope—which is why scope allowlists are compiled into the tools rather than left to memory.
+              Security testing requires written authorization and a defined scope. Scope allowlists are
+              compiled into the tools rather than left to memory.
             </p>
             <a class="link" href="about.html">Read the longer version →</a>
           </div>
@@ -240,48 +235,39 @@ response:
       </div>
     </section>
 
-    <!-- Core Services -->
+    <!-- Focus -->
     <section class="section compact">
       <div class="container">
         <div class="section-title">
-          <h2>What I Can Help With</h2>
-          <p>The problems behind the tools, and the areas I know well enough to be useful in.</p>
+          <h2>Focus</h2>
+          <p>Authorization is the through-line. Everything here comes back to whether the right caller reached the right resource.</p>
         </div>
         <div class="grid-3">
           <div class="card">
-            <div class="kicker" style="margin-bottom: 10px;">
-              <span class="badge warn">Offensive Testing</span>
-            </div>
-            <h3>Application & API Security</h3>
+            <h3>Application &amp; API security</h3>
             <p>
-              Manual security testing targeting authorization flaws, business logic failures, and injection 
-              vulnerabilities. Real exploitation attempts with reproducible proof-of-concept.
+              Manual testing of authorization logic, business logic, and injection paths, with reproducible
+              evidence for every reported finding.
             </p>
-            <div class="meta">Focus: OWASP Top 10, API security, authorization bypass, session management</div>
+            <div class="meta">OWASP API Top 10 · authorization bypass · session management</div>
           </div>
 
           <div class="card">
-            <div class="kicker" style="margin-bottom: 10px;">
-              <span class="badge">Cloud Security</span>
-            </div>
-            <h3>Cloud Posture Assessment</h3>
+            <h3>Authorization design review</h3>
             <p>
-              Configuration review of AWS, Azure, or GCP environments. IAM policies, network architecture, 
-              storage security, and logging coverage with infrastructure-as-code recommendations.
+              Reviewing a permissions model while it is still cheap to change, and turning the intended
+              rules into something a machine can test.
             </p>
-            <div class="meta">Focus: Identity, least privilege, attack surface, compliance gaps</div>
+            <div class="meta">Tenant isolation · role boundaries · ownership checks</div>
           </div>
 
           <div class="card">
-            <div class="kicker" style="margin-bottom: 10px;">
-              <span class="badge ok">Detection & Response</span>
-            </div>
-            <h3>Detection Engineering</h3>
+            <h3>Security tooling</h3>
             <p>
-              Build and tune detection capabilities for high-fidelity threat identification. SIEM rules, 
-              threat hunting queries, and alert response playbooks tailored to your environment.
+              Building and maintaining the open-source tools above, and helping teams wire authorization
+              testing into a pipeline they already run.
             </p>
-            <div class="meta">Focus: SIEM deployment, detection content, threat hunting, incident playbooks</div>
+            <div class="meta">CI integration · policy authoring · local-first workflows</div>
           </div>
         </div>
       </div>

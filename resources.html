@@ -117,7 +117,7 @@
             </p>
             <ul class="check">
             <li>Enforce MFA for privileged accounts</li>
-            <li>Rate-limit authentication endpoints (lockout after N failures)</li>
+            <li>Throttle authentication endpoints and add risk-based controls &mdash; avoid hard account lockout, which becomes a denial-of-service vector</li>
             <li>Implement secure session management (rotation, timeout)</li>
             <li>Use HttpOnly, Secure, and SameSite cookie flags</li>
             <li>Harden password reset flows (time-limited tokens, account verification)</li>
@@ -160,7 +160,7 @@
             <li>HSTS (max-age=31536000)</li>
             <li>Content-Security-Policy</li>
             <li>X-Content-Type-Options: nosniff</li>
-            <li>X-Frame-Options: DENY</li>
+            <li>Set a framing policy with CSP <code>frame-ancestors</code> based on what the app actually needs (<code>X-Frame-Options</code> only as a legacy fallback)</li>
             <li>Referrer-Policy: no-referrer</li>
             <li>Disable verbose errors in production</li>
             <li>Proper cache headers for sensitive data</li>
@@ -182,7 +182,7 @@
             <ul class="check">
             <li>Implement least privilege policies</li>
             <li>No shared admin credentials</li>
-            <li>Rotate access keys regularly</li>
+            <li>Prefer short-lived credentials and eliminate long-lived access keys where possible</li>
             <li>Use temporary credentials where possible</li>
             <li>Require MFA for console access</li>
             <li>Implement service control policies (SCPs)</li>
@@ -199,7 +199,7 @@
             <h3>Data Protection</h3>
             <ul class="check">
             <li>Encrypt data at rest and in transit</li>
-            <li>No public S3 buckets (unless explicitly required)</li>
+            <li>Block public access at the account level by default, and document every approved exception</li>
             <li>Enable versioning for critical buckets</li>
             <li>Use KMS for encryption key management</li>
             <li>Implement backup and retention policies</li>

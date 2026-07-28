@@ -93,8 +93,8 @@
           <p style="margin-top: 12px;">
             I do software now. I write code for a living, and I spend my own hours trying to break the kind
             of code I write. It turns out that habit of hunting the quiet failure transfers almost perfectly.
-            Security bugs that make noise get caught: the crash, the stack trace, the scanner alert. The ones
-            that survive to production are the ones that look completely fine.
+            Bugs that announce themselves tend to get caught: the crash, the stack trace, the scanner alert.
+            The ones that survive to production are usually the ones that look fine.
           </p>
 
           <p style="margin-top: 12px;">
@@ -106,10 +106,10 @@
           <h3>Why authorization, specifically</h3>
 
           <p style="margin-top: 14px;">
-            An authorization flaw doesn't crash anything. The endpoint returns 200. The JSON is well-formed.
-            Response times are normal, logs are clean, and every automated test passes. The only thing wrong
-            is <em>who</em> got the data—and no scanner on earth knows what your access rules were supposed
-            to be, because you never wrote them down anywhere a machine could read.
+            An authorization flaw does not announce itself. The endpoint returns 200, the JSON is
+            well-formed, response times are normal, and the existing tests may still pass. The only thing
+            wrong is <em>which caller</em> received the data. Traditional scanners cannot reliably infer
+            access rules that have never been expressed in a machine-readable form.
           </p>
 
           <p style="margin-top: 12px;">
@@ -132,44 +132,42 @@
           <div class="card">
             <h3>Being an engineer is the point</h3>
             <p style="margin-top: 12px;">
-              I'm not a consultant who learned to read code. I ship software, review pull requests, and
-              live with the consequences of my own architectural decisions. When I flag a problem, it comes with a
-              fix that accounts for your deadline and your existing patterns—because I know
-              exactly what it feels like to receive a report that says "implement centralized authorization"
-              two weeks before a release.
+              I approach security as a working software engineer. I ship code, review pull requests, and
+              live with the consequences of my own architectural decisions. Findings account for existing
+              architecture, engineering constraints, and practical remediation&mdash;because I know what it
+              feels like to receive a report saying "implement centralized authorization" two weeks before
+              a release.
             </p>
           </div>
 
           <div class="card">
-            <h3>Authorization is not negotiable</h3>
+            <h3>Scope is agreed in writing</h3>
             <p style="margin-top: 12px;">
-              Every piece of testing happens with explicit written permission and a documented scope. Nothing
-              outside that scope gets touched, ever. This is not a legal disclaimer—it's why
-              <a class="link" href="tools.html">VardrForge</a> bakes target allowlists into the tools it
-              generates, so a script physically cannot be pointed somewhere it was not authorized to go.
-              I'd rather the guardrail live in the code than in my memory.
+              Security testing requires written authorization and a defined scope. That constraint is built
+              into the tooling rather than left to discipline:
+              <a class="link" href="tools.html">VardrForge</a> compiles target allowlists into the scripts
+              it generates, so a generated tool cannot be pointed at a system it was not authorized to
+              reach.
             </p>
           </div>
         </div>
 
         <div class="grid-2" style="margin-bottom: 24px;">
           <div class="card">
-            <h3>Findings you can act on</h3>
+            <h3>Evidence over volume</h3>
             <p style="margin-top: 12px;">
-              If I report something critical, I can reproduce it in front of you. If I can't reproduce it,
-              I don't report it. No severity inflation, no padding the finding count,
-              no thirty-page appendix of scanner output nobody reads. A short report where everything is
-              real beats a long one where half of it isn't.
+              Every reported finding includes reproducible evidence or clearly labeled uncertainty. Severity
+              reflects demonstrated impact, and the report length reflects what was actually found. A short
+              report where every item is real is more useful than a long one padded with scanner output.
             </p>
           </div>
 
           <div class="card">
             <h3>Honest about the limits</h3>
             <p style="margin-top: 12px;">
-              I work full time as a software engineer, so whatever I take on runs alongside that. It means
-              realistic timelines rather than agency ones, and no pretending to offer emergency incident
-              response. If you have an active breach, you need a team that answers the phone at 3 a.m.
-              Telling you otherwise would cost you the one thing you can't get back.
+              I work full time as a software engineer, so anything I take on runs alongside that. Timelines
+              reflect that reality, and emergency incident response is outside what I can offer. An active
+              breach needs a team with 24-hour coverage.
             </p>
           </div>
         </div>

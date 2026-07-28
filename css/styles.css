@@ -514,3 +514,16 @@ h1{font-size:40px; line-height:1.08; letter-spacing:-1px}
 .demo-code pre, .cmd{max-width:100%}
 .table-scroll{overflow-x:auto; -webkit-overflow-scrolling:touch; max-width:100%}
 .table-scroll .table{min-width:520px}
+
+/* Secondary brand statement under the hero actions. */
+.tagline{
+  margin:20px 0 0; padding-top:16px;
+  border-top:1px solid rgba(255,255,255,.09);
+  font-size:13.5px; color:rgba(231,237,247,.6); font-style:italic;
+}
+
+.check code{
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size:.92em; padding:1px 5px; border-radius:5px;
+  background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.10);
+}
