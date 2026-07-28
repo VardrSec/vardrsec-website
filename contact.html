@@ -5,6 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contact | VardrSec</title>
   <meta name="description" content="Contact VardrSec for cybersecurity consulting. Send a message with your environment and goals to receive scope options and next steps." />
+  <link rel="canonical" href="https://vardrsec.com/contact.html" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="VardrSec" />
+  <meta property="og:url" content="https://vardrsec.com/contact.html" />
+  <meta property="og:title" content="Contact | VardrSec" />
+  <meta property="og:description" content="Contact VardrSec for cybersecurity consulting. Send a message with your environment and goals to receive scope options and next steps." />
+  <meta property="og:image" content="https://vardrsec.com/assets/orgbanner.png" />
+  <meta name="twitter:card" content="summary_large_image" />
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
@@ -14,7 +23,10 @@
     <nav class="nav">
       <a class="brand" href="index.html">
         <div class="brand-mark" aria-hidden="true">
-          <img src="assets/small-logo.png" alt="VardrSec logo" style="width: 100%; height: 100%; object-fit: contain;" />
+          <picture>
+              <source srcset="assets/small-logo.webp" type="image/webp" />
+              <img src="assets/small-logo.png" alt="VardrSec logo" width="128" height="129" class="brand-img" />
+            </picture>
          </div>
         <div class="brand-name">
           <strong>VardrSec</strong>
@@ -27,7 +39,6 @@
         <a href="index.html">Home</a>
         <a href="about.html">About</a>
         <a href="services.html">Services</a>
-        <a href="case-studies.html">Case Studies</a>
         <a class="active" href="contact.html">Contact</a>
       </div>
       
@@ -43,12 +54,11 @@
       </button>
     </nav>
     
-    <!-- Mobile Menu (hidden by default) - CHANGED CLASS NAME -->
-    <div class="mobile-panel" id="mobileMenu">
+    <!-- Mobile Menu -->
+    <div class="mobile-panel" id="mobilePanel">
       <a href="index.html">Home</a>
       <a href="about.html">About</a>
       <a href="services.html">Services</a>
-      <a href="case-studies.html">Case Studies</a>
       <a href="resources.html">Resources</a>
       <a class="active" href="contact.html">Contact</a>
       <a class="btn primary" href="contact.html" style="margin-top:8px">Request a Consult</a>
@@ -63,9 +73,10 @@
         <!-- Contact header (tight spacing) -->
         <div class="section-title" style="margin-bottom: 14px;">
           <div>
-            <h2 style="margin-bottom: 6px;">Contact</h2>
+            <h1 style="margin-bottom: 6px;">Contact</h1>
             <p style="margin-bottom: 18px;">
               Describe what you need secured or any additional questions. I’ll respond with scope options and next steps.
+              You can also email <a class="link" href="mailto:contact@vardrsec.com">contact@vardrsec.com</a> directly.
             </p>
           </div>
         </div>
@@ -77,12 +88,7 @@
             Please include a brief description of your environment (web app, API, cloud provider) and what you’re looking to achieve.
           </p>
 
-          <!--
-            NOTE:
-            This form is front-end only. To make "Send" actually deliver messages, you’ll need a backend or a form service.
-            Options: Formspree, Netlify Forms, Cloudflare Pages Functions, etc.
-          -->
-          <form class="form" action="#" method="post" onsubmit="return false;">
+          <form class="form" id="contactForm" action="/api/contact" method="post">
             <div class="field">
               <label for="email">Email address</label>
               <input id="email" name="email" type="email" placeholder="you@company.com" autocomplete="email" required />
@@ -93,11 +99,19 @@
               <textarea id="message" name="message" placeholder="What are you trying to secure? Timeline? Any specific concerns?" required></textarea>
             </div>
 
+            <!-- Honeypot: bots fill this, humans never see it. -->
+            <div class="hp" aria-hidden="true">
+              <label for="company">Company</label>
+              <input id="company" name="company" type="text" tabindex="-1" autocomplete="off" />
+            </div>
+
             <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
               <button class="btn primary" type="submit">Send message</button>
               <span class="badge warn">Authorization required</span>
               <span class="badge">Response: 1–2 business days</span>
             </div>
+
+            <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
 
             <div class="note" style="margin-top: 10px;">
               <strong>Important:</strong> I do not perform unauthorized testing. Any security work requires explicit written authorization and a defined scope.
@@ -134,11 +148,14 @@
         <div>
           <h4>VardrSec</h4>
           <p>Offensive security research, assessments, and consulting. Focused on practical outcomes and engineering-aligned security.</p>
+          <p class="footer-contact">
+            <a href="mailto:contact@vardrsec.com">contact@vardrsec.com</a><br/>
+            <a href="https://github.com/VardrSec" rel="noopener">github.com/VardrSec</a>
+          </p>
         </div>
         <div class="links">
           <h4>Company</h4>
           <a href="about.html">About</a>
-          <a href="case-studies.html">Case Studies</a>
           <a href="resources.html">Resources</a>
         </div>
         <div class="links">
@@ -153,7 +170,6 @@
       </div>
     </div>
     <script src="js/site.js"></script>
-    <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
   </footer>
 </body>
 </html>

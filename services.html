@@ -5,6 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Services | VardrSec</title>
   <meta name="description" content="Cybersecurity consulting services: penetration testing, cloud security, API assessment, and detection engineering." />
+  <link rel="canonical" href="https://vardrsec.com/services.html" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="VardrSec" />
+  <meta property="og:url" content="https://vardrsec.com/services.html" />
+  <meta property="og:title" content="Services | VardrSec" />
+  <meta property="og:description" content="Cybersecurity consulting services: penetration testing, cloud security, API assessment, and detection engineering." />
+  <meta property="og:image" content="https://vardrsec.com/assets/orgbanner.png" />
+  <meta name="twitter:card" content="summary_large_image" />
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
@@ -13,7 +22,10 @@
       <nav class="nav">
         <a class="brand" href="index.html">
           <div class="brand-mark" aria-hidden="true">
-            <img src="assets/small-logo.png" alt="VardrSec logo" style="width: 100%; height: 100%; object-fit: contain;" />
+            <picture>
+              <source srcset="assets/small-logo.webp" type="image/webp" />
+              <img src="assets/small-logo.png" alt="VardrSec logo" width="128" height="129" class="brand-img" />
+            </picture>
            </div>
           <div class="brand-name">
             <strong>VardrSec</strong>
@@ -26,7 +38,6 @@
           <a href="index.html">Home</a>
           <a href="about.html">About</a>
           <a class="active" href="services.html">Services</a>
-          <a href="case-studies.html">Case Studies</a>
           <a href="contact.html">Contact</a>
         </div>
         
@@ -47,7 +58,6 @@
         <a href="index.html">Home</a>
         <a href="about.html">About</a>
         <a class="active" href="services.html">Services</a>
-        <a href="case-studies.html">Case Studies</a>
         <a href="resources.html">Resources</a>
         <a href="contact.html">Contact</a>
         <a class="btn primary" href="contact.html" style="margin-top:8px">Request a Consult</a>
@@ -59,7 +69,7 @@
     <section class="section">
       <div class="container">
         <div class="section-title">
-          <h2>Services</h2>
+          <h1>Services</h1>
           <p>Technical capabilities, aligned to your risk priorities.</p>
         </div>
 
@@ -372,11 +382,14 @@
         <div>
           <h4>VardrSec</h4>
           <p>Offensive security research, assessments, and consulting. Focused on practical outcomes and engineering-aligned security.</p>
+          <p class="footer-contact">
+            <a href="mailto:contact@vardrsec.com">contact@vardrsec.com</a><br/>
+            <a href="https://github.com/VardrSec" rel="noopener">github.com/VardrSec</a>
+          </p>
         </div>
         <div class="links">
           <h4>Company</h4>
           <a href="about.html">About</a>
-          <a href="case-studies.html">Case Studies</a>
           <a href="resources.html">Resources</a>
         </div>
         <div class="links">
@@ -391,7 +404,6 @@
       </div>
     </div>
     <script src="js/site.js"></script>
-    <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
   </footer>
 </body>
 </html>

@@ -5,6 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>VardrSec | Cybersecurity Consulting</title>
   <meta name="description" content="Cybersecurity consulting focused on actionable results. Penetration testing, cloud security, and detection engineering on your terms." />
+  <link rel="canonical" href="https://vardrsec.com/" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="VardrSec" />
+  <meta property="og:url" content="https://vardrsec.com/" />
+  <meta property="og:title" content="VardrSec | Cybersecurity Consulting" />
+  <meta property="og:description" content="Cybersecurity consulting focused on actionable results. Penetration testing, cloud security, and detection engineering on your terms." />
+  <meta property="og:image" content="https://vardrsec.com/assets/orgbanner.png" />
+  <meta name="twitter:card" content="summary_large_image" />
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
@@ -13,7 +22,10 @@
       <nav class="nav">
         <a class="brand" href="index.html">
           <div class="brand-mark" aria-hidden="true">
-            <img src="assets/small-logo.png" alt="VardrSec logo" style="width: 100%; height: 100%; object-fit: contain;" />
+            <picture>
+              <source srcset="assets/small-logo.webp" type="image/webp" />
+              <img src="assets/small-logo.png" alt="VardrSec logo" width="128" height="129" class="brand-img" />
+            </picture>
            </div>
           <div class="brand-name">
             <strong>VardrSec</strong>
@@ -26,7 +38,6 @@
           <a class="active" href="index.html">Home</a>
           <a href="about.html">About</a>
           <a href="services.html">Services</a>
-          <a href="case-studies.html">Case Studies</a>
           <a href="contact.html">Contact</a>
         </div>
         
@@ -47,7 +58,6 @@
         <a class="active" href="index.html">Home</a>
         <a href="about.html">About</a>
         <a href="services.html">Services</a>
-        <a href="case-studies.html">Case Studies</a>
         <a href="resources.html">Resources</a>
         <a href="contact.html">Contact</a>
         <a class="btn primary" href="contact.html" style="margin-top:8px">Request a Consult</a>
@@ -62,7 +72,10 @@
         <div class="hero-grid">
           <div class="hero-card">
             <div class="hero-banner">
-              <img src="/assets/orgbanner.png" alt="VardrSec banner logo" />
+              <picture>
+                <source srcset="assets/orgbanner.webp" type="image/webp" />
+                <img src="assets/orgbanner.png" alt="VardrSec banner logo" width="1600" height="563" fetchpriority="high" />
+              </picture>
             </div>
             <div class="hero-body">
               <div class="kicker"><span class="dot"></span> Security testing on your terms</div>
@@ -253,39 +266,51 @@
       </div>
     </section>
 
-    <!-- Social Proof -->
+    <!-- Open Source Tools -->
     <section class="section compact">
       <div class="container">
         <div class="section-title">
-          <h2>Proven Results</h2>
-          <p>Real engagements with measurable security improvements.</p>
+          <h2>Open Source Tools</h2>
+          <p>Security tooling I build and maintain in the open. Read the code, run it yourself.</p>
         </div>
         <div class="grid-3">
           <div class="card">
-            <h3>Critical Authorization Bypass</h3>
+            <div class="kicker" style="margin-bottom: 10px;">
+              <span class="badge warn">Go</span>
+            </div>
+            <h3>VardrGate</h3>
             <p>
-              Identified tenant isolation failure in SaaS platform affecting 50K+ enterprise users. 
-              Client remediated within 72 hours and achieved SOC 2 certification on schedule.
+              Continuous API authorization assurance. Describe how an endpoint should treat different
+              callers, run the request as each of them, and get evidence-backed findings when real
+              behavior disagrees.
             </p>
-            <div class="meta"><a href="case-studies.html" style="color: var(--accent);">Read case study →</a></div>
+            <div class="meta"><a class="link" href="https://github.com/VardrSec/VardrGate" rel="noopener">github.com/VardrSec/VardrGate →</a></div>
           </div>
 
           <div class="card">
-            <h3>AWS Security Assessment</h3>
+            <div class="kicker" style="margin-bottom: 10px;">
+              <span class="badge">Python</span>
+            </div>
+            <h3>VardrMap</h3>
             <p>
-              Cloud security review for Series B startup identified critical IAM and storage issues. 
-              All findings resolved within 2 weeks. Client successfully closed $25M funding round.
+              Attack surface mapping and threat-modeling workspace. Organize targets, track testing
+              hypotheses, manage findings, and integrate reconnaissance and enrichment APIs during
+              an assessment.
             </p>
-            <div class="meta"><a href="case-studies.html" style="color: var(--accent);">Read case study →</a></div>
+            <div class="meta"><a class="link" href="https://github.com/VardrSec/VardrMap" rel="noopener">github.com/VardrSec/VardrMap →</a></div>
           </div>
 
           <div class="card">
-            <h3>Authentication Vulnerability</h3>
+            <div class="kicker" style="margin-bottom: 10px;">
+              <span class="badge ok">Python</span>
+            </div>
+            <h3>VardrRunner</h3>
             <p>
-              Discovered account takeover risk in customer portal serving 200K+ users. Emergency response 
-              and remediation prevented potential breach. Zero confirmed compromises post-fix.
+              Local automation runner for the VardrSec toolchain. Polls a backend for queued scan
+              jobs, executes tooling on your own machine, and streams results back. Recon runs on
+              the operator's box, not a vendor's.
             </p>
-            <div class="meta"><a href="case-studies.html" style="color: var(--accent);">Read case study →</a></div>
+            <div class="meta"><a class="link" href="https://github.com/VardrSec/VardrRunner" rel="noopener">github.com/VardrSec/VardrRunner →</a></div>
           </div>
         </div>
       </div>
@@ -315,11 +340,14 @@
         <div>
           <h4>VardrSec</h4>
           <p>Offensive security research, assessments, and consulting. Focused on practical outcomes and engineering-aligned security.</p>
+          <p class="footer-contact">
+            <a href="mailto:contact@vardrsec.com">contact@vardrsec.com</a><br/>
+            <a href="https://github.com/VardrSec" rel="noopener">github.com/VardrSec</a>
+          </p>
         </div>
         <div class="links">
           <h4>Company</h4>
           <a href="about.html">About</a>
-          <a href="case-studies.html">Case Studies</a>
           <a href="resources.html">Resources</a>
         </div>
         <div class="links">
@@ -334,7 +362,6 @@
       </div>
     </div>
     <script src="js/site.js"></script>
-    <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
   </footer>
 </body>
 </html>
