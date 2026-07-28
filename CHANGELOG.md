@@ -52,3 +52,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   `js/site.js`.
 - Removed unused CSS custom properties (`--card`, `--card2`, `--line`, `--warn`) and the
   dead `.brand-mark span` rule superseded by the logo image.
+
+## Phase 1 — Truth corrections
+
+### Changed
+
+- All site copy converted from the plural voice of a staffed firm to first person
+  singular (71 instances). `privacy.html` and `terms.html` use entity voice
+  ("VardrSec collects…"), which is conventional for legal text.
+- Brand tagline aligned to "Offensive Security Research & Tooling" across all pages,
+  matching what the banner image has always said.
+
+### Removed
+
+- **Incident response as an offering.** Same-day engagement and on-call availability
+  cannot be honoured alongside full-time employment. Both the service and the
+  engagement tier are gone, replaced by an explicit statement that this is not offered
+  and why.
+- Retainer tier promising 10-40 dedicated hours per month.
+- "72-hour kickoff" KPI.
+- "No account managers as intermediaries" and "same consultant from start to finish" —
+  both imply a firm with staff to choose between.
+
+### Added
+
+- Privacy policy now names its processors (Cloudflare, Cloudflare Turnstile, Resend),
+  what each receives, and that data is processed in the US. The contact form began
+  sending data to third parties when it was wired up; the policy had not caught up.
