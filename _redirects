@@ -1,0 +1,8 @@
+# Cloudflare Pages redirects.
+#
+# /case-studies held placeholder engagements that were never real work. It is
+# deleted, but a 404 lets Cloudflare "Always Online" resurrect an archived copy,
+# so the path is redirected instead: a 301 is not an error, leaving nothing for
+# Always Online to substitute. Inbound links land on the home page.
+/case-studies      /  301
+/case-studies.html /  301
