@@ -106,3 +106,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   filler ("Relentless Innovation", "Client-Centricity") removed.
 - Page titles and meta descriptions reflect tooling and research rather than
   consulting.
+
+## Phase 3 — Structure and accessibility
+
+### Added
+
+- `build.js` and `partials/` — the header and footer now have a single source of truth,
+  synced into each page between markers. `node build.js --check` fails if any page has
+  drifted. Runs on plain Node with no dependencies; pages stay directly servable and
+  Cloudflare Pages still needs no build command.
+
+### Fixed
+
+- The 15 checklists on the resources page were `<div>` elements with `<br/>` separators
+  and literal "✓" characters. Screen readers announced "check mark" before all 115 lines
+  and conveyed no list structure. They are now real `<ul>`/`<li>` lists with the tick
+  supplied by `::marker`, so it is decoration rather than content.
+- `contact.html` had drifted structurally from the other pages; the first sync
+  normalised 59 lines of it.

@@ -334,6 +334,20 @@ textarea{min-height:120px; resize:vertical}
   display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap;
 }
 
+/* Checklists. The tick is a list marker, not text content, so screen readers
+   announce list semantics instead of "check mark" on every line. */
+.check{
+  list-style: "\2713";
+  margin:12px 0 0;
+  padding-left:1.5em;
+  font-size:13px;
+  line-height:1.6;
+  color:rgba(231,237,247,.82);
+}
+.check li{padding-left:6px}
+.check li::marker{color:var(--accent2)}
+.check li + li{margin-top:2px}
+
 .note{
   border-left: 3px solid rgba(111,177,255,.7);
   padding:12px 14px;

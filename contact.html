@@ -18,44 +18,45 @@
 </head>
 <body>
   <!-- Top Nav -->
+<!-- @partial:header -->
   <header class="topbar">
-  <div class="container">
-    <nav class="nav">
-      <a class="brand" href="index.html">
-        <div class="brand-mark" aria-hidden="true">
-          <picture>
+    <div class="container">
+      <nav class="nav">
+        <a class="brand" href="index.html">
+          <div class="brand-mark" aria-hidden="true">
+            <picture>
               <source srcset="assets/small-logo.webp" type="image/webp" />
               <img src="assets/small-logo.png" alt="VardrSec logo" width="128" height="129" class="brand-img" />
             </picture>
-         </div>
-        <div class="brand-name">
-          <strong>VardrSec</strong>
-          <small>Offensive Security Research & Tooling</small>
-        </div>
-      </a>
-      
-      <!-- Desktop Navigation -->
-      <div class="nav-links">
+           </div>
+          <div class="brand-name">
+            <strong>VardrSec</strong>
+            <small>Offensive Security Research & Tooling</small>
+          </div>
+        </a>
+        
+        <!-- Desktop Navigation -->
+        <div class="nav-links">
           <a href="index.html">Home</a>
           <a href="tools.html">Tools</a>
           <a href="resources.html">Resources</a>
           <a href="consulting.html">Consulting</a>
           <a href="about.html">About</a>
         </div>
-      
-      <!-- Desktop CTA Buttons -->
-      <div class="nav-cta">
+        
+        <!-- Desktop CTA Buttons -->
+        <div class="nav-cta">
           <a class="btn primary" href="contact.html">Contact</a>
         </div>
+        
+        <!-- Mobile Menu Toggle -->
+        <button id="menuBtn" class="menu-btn" aria-label="Open menu" aria-expanded="false">
+          Menu
+        </button>
+      </nav>
       
-      <!-- Mobile Menu Toggle -->
-      <button id="menuBtn" class="menu-btn" aria-label="Open menu" aria-expanded="false">
-        Menu
-      </button>
-    </nav>
-    
-    <!-- Mobile Menu -->
-    <div class="mobile-panel" id="mobilePanel">
+      <!-- Mobile Menu -->
+      <div class="mobile-panel" id="mobilePanel">
         <a href="index.html">Home</a>
         <a href="tools.html">Tools</a>
         <a href="resources.html">Resources</a>
@@ -63,8 +64,9 @@
         <a href="about.html">About</a>
         <a class="btn primary" href="contact.html" style="margin-top:8px">Contact</a>
       </div>
-  </div>
-</header>
+    </div>
+  </header>
+  <!-- @endpartial -->
 
   <!-- Main -->
   <main>
@@ -144,6 +146,7 @@
   </main>
 
   <!-- Footer -->
+<!-- @partial:footer -->
   <footer class="footer">
     <div class="container">
       <div class="footer-grid">
@@ -173,8 +176,8 @@
         <small>© <span id="year"></span> VardrSec. All rights reserved.</small>
       </div>
     </div>
-    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     <script src="js/site.js"></script>
   </footer>
+  <!-- @endpartial -->
 </body>
 </html>

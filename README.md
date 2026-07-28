@@ -83,8 +83,31 @@ it look like a deploy problem.
 Adding any third-party script, frame, font, or fetch target means widening the matching
 directive here in the same commit.
 
-## Known duplication
+## Shared header and footer
 
-The header and footer are copy-pasted across all seven pages. This has already caused one
-bug (the mobile nav on `contact.html` used a stale element id and was dead for months).
-Introducing a small include step is tracked as the next structural change.
+`partials/header.html` and `partials/footer.html` are the single source of truth. Each
+page carries the synced region between markers:
+
+```html
+<!-- @partial:header -->
+  ...generated, do not hand-edit...
+  <!-- @endpartial -->
+```
+
+After editing anything in `partials/`, run:
+
+```sh
+node build.js           # write the changes into every page
+node build.js --check   # exit 1 if any page has drifted
+```
+
+This is a sync step rather than a build step by design: pages stay directly servable,
+`npx serve .` still works, and Cloudflare Pages needs no build command. Active nav state
+is applied per page automatically from the filename.
+
+Editing a header or footer directly in a page will be silently overwritten on the next
+sync — change the partial instead. `node build.js --check` catches drift before it ships.
+
+Why this exists: the header and footer were copy-pasted across eight pages, and
+`contact.html` drifted far enough that its mobile menu referenced a stale element id.
+The nav was dead on the highest-intent page for months.

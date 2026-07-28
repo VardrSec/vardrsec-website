@@ -17,6 +17,7 @@
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
+<!-- @partial:header -->
   <header class="topbar">
     <div class="container">
       <nav class="nav">
@@ -64,6 +65,7 @@
       </div>
     </div>
   </header>
+  <!-- @endpartial -->
 
   <main>
     <section class="section">
@@ -93,15 +95,15 @@
             <p style="margin-top: 12px; margin-bottom: 12px;">
               Authorization failures are consistently the most critical vulnerabilities I identify in assessments.
             </p>
-            <div style="font-size: 13px; line-height: 1.6;">
-              ✓ Validate access using server-side policy, never UI state or client data<br/>
-              ✓ Test horizontal access (user A accessing user B's data)<br/>
-              ✓ Test vertical access (regular user accessing admin functions)<br/>
-              ✓ Don't rely on unpredictable IDs as security controls<br/>
-              ✓ Implement centralized authorization middleware<br/>
-              ✓ Log all access denials with user context<br/>
-              ✓ Test with multiple users at different privilege levels
-            </div>
+            <ul class="check">
+            <li>Validate access using server-side policy, never UI state or client data</li>
+            <li>Test horizontal access (user A accessing user B's data)</li>
+            <li>Test vertical access (regular user accessing admin functions)</li>
+            <li>Don't rely on unpredictable IDs as security controls</li>
+            <li>Implement centralized authorization middleware</li>
+            <li>Log all access denials with user context</li>
+            <li>Test with multiple users at different privilege levels</li>
+          </ul>
           </div>
 
           <div class="card">
@@ -112,56 +114,56 @@
             <p style="margin-top: 12px; margin-bottom: 12px;">
               Weak authentication enables all other attacks. Get the fundamentals right.
             </p>
-            <div style="font-size: 13px; line-height: 1.6;">
-              ✓ Enforce MFA for privileged accounts<br/>
-              ✓ Rate-limit authentication endpoints (lockout after N failures)<br/>
-              ✓ Implement secure session management (rotation, timeout)<br/>
-              ✓ Use HttpOnly, Secure, and SameSite cookie flags<br/>
-              ✓ Harden password reset flows (time-limited tokens, account verification)<br/>
-              ✓ Prevent username enumeration through timing or responses<br/>
-              ✓ Use bcrypt/Argon2 for password hashing (never MD5/SHA1)
-            </div>
+            <ul class="check">
+            <li>Enforce MFA for privileged accounts</li>
+            <li>Rate-limit authentication endpoints (lockout after N failures)</li>
+            <li>Implement secure session management (rotation, timeout)</li>
+            <li>Use HttpOnly, Secure, and SameSite cookie flags</li>
+            <li>Harden password reset flows (time-limited tokens, account verification)</li>
+            <li>Prevent username enumeration through timing or responses</li>
+            <li>Use bcrypt/Argon2 for password hashing (never MD5/SHA1)</li>
+          </ul>
           </div>
         </div>
 
         <div class="grid-3" style="margin-bottom: 32px;">
           <div class="card">
             <h3>Input Validation</h3>
-            <div style="font-size: 13px; line-height: 1.6; margin-top: 12px;">
-              ✓ Server-side validation always<br/>
-              ✓ Use allowlists over denylists<br/>
-              ✓ Parameterized queries for SQL<br/>
-              ✓ Validate JSON structure and types<br/>
-              ✓ Sanitize logs (no PII, no secrets)<br/>
-              ✓ Limit file upload size and types<br/>
-              ✓ Validate redirects and callbacks
-            </div>
+            <ul class="check">
+            <li>Server-side validation always</li>
+            <li>Use allowlists over denylists</li>
+            <li>Parameterized queries for SQL</li>
+            <li>Validate JSON structure and types</li>
+            <li>Sanitize logs (no PII, no secrets)</li>
+            <li>Limit file upload size and types</li>
+            <li>Validate redirects and callbacks</li>
+          </ul>
           </div>
 
           <div class="card">
             <h3>API Security</h3>
-            <div style="font-size: 13px; line-height: 1.6; margin-top: 12px;">
-              ✓ Authenticate every API request<br/>
-              ✓ Rate limit all endpoints<br/>
-              ✓ Validate content-type headers<br/>
-              ✓ Implement proper CORS policies<br/>
-              ✓ Version your APIs explicitly<br/>
-              ✓ Return consistent error messages<br/>
-              ✓ Document authentication requirements
-            </div>
+            <ul class="check">
+            <li>Authenticate every API request</li>
+            <li>Rate limit all endpoints</li>
+            <li>Validate content-type headers</li>
+            <li>Implement proper CORS policies</li>
+            <li>Version your APIs explicitly</li>
+            <li>Return consistent error messages</li>
+            <li>Document authentication requirements</li>
+          </ul>
           </div>
 
           <div class="card">
             <h3>Security Headers</h3>
-            <div style="font-size: 13px; line-height: 1.6; margin-top: 12px;">
-              ✓ HSTS (max-age=31536000)<br/>
-              ✓ Content-Security-Policy<br/>
-              ✓ X-Content-Type-Options: nosniff<br/>
-              ✓ X-Frame-Options: DENY<br/>
-              ✓ Referrer-Policy: no-referrer<br/>
-              ✓ Disable verbose errors in production<br/>
-              ✓ Proper cache headers for sensitive data
-            </div>
+            <ul class="check">
+            <li>HSTS (max-age=31536000)</li>
+            <li>Content-Security-Policy</li>
+            <li>X-Content-Type-Options: nosniff</li>
+            <li>X-Frame-Options: DENY</li>
+            <li>Referrer-Policy: no-referrer</li>
+            <li>Disable verbose errors in production</li>
+            <li>Proper cache headers for sensitive data</li>
+          </ul>
           </div>
         </div>
 
@@ -176,17 +178,17 @@
               <span class="badge">IAM & Identity</span>
             </div>
             <h3>Identity & Access Management</h3>
-            <div style="font-size: 13px; line-height: 1.6; margin-top: 12px;">
-              ✓ Implement least privilege policies<br/>
-              ✓ No shared admin credentials<br/>
-              ✓ Rotate access keys regularly<br/>
-              ✓ Use temporary credentials where possible<br/>
-              ✓ Require MFA for console access<br/>
-              ✓ Implement service control policies (SCPs)<br/>
-              ✓ Audit unused permissions quarterly<br/>
-              ✓ Use IAM roles for service-to-service auth<br/>
-              ✓ Enable CloudTrail/equivalent logging
-            </div>
+            <ul class="check">
+            <li>Implement least privilege policies</li>
+            <li>No shared admin credentials</li>
+            <li>Rotate access keys regularly</li>
+            <li>Use temporary credentials where possible</li>
+            <li>Require MFA for console access</li>
+            <li>Implement service control policies (SCPs)</li>
+            <li>Audit unused permissions quarterly</li>
+            <li>Use IAM roles for service-to-service auth</li>
+            <li>Enable CloudTrail/equivalent logging</li>
+          </ul>
           </div>
 
           <div class="card">
@@ -194,57 +196,57 @@
               <span class="badge">Storage & Data</span>
             </div>
             <h3>Data Protection</h3>
-            <div style="font-size: 13px; line-height: 1.6; margin-top: 12px;">
-              ✓ Encrypt data at rest and in transit<br/>
-              ✓ No public S3 buckets (unless explicitly required)<br/>
-              ✓ Enable versioning for critical buckets<br/>
-              ✓ Use KMS for encryption key management<br/>
-              ✓ Implement backup and retention policies<br/>
-              ✓ Tag sensitive data resources<br/>
-              ✓ Enable access logging on storage<br/>
-              ✓ Review bucket policies regularly
-            </div>
+            <ul class="check">
+            <li>Encrypt data at rest and in transit</li>
+            <li>No public S3 buckets (unless explicitly required)</li>
+            <li>Enable versioning for critical buckets</li>
+            <li>Use KMS for encryption key management</li>
+            <li>Implement backup and retention policies</li>
+            <li>Tag sensitive data resources</li>
+            <li>Enable access logging on storage</li>
+            <li>Review bucket policies regularly</li>
+          </ul>
           </div>
         </div>
 
         <div class="grid-3" style="margin-bottom: 32px;">
           <div class="card">
             <h3>Network Security</h3>
-            <div style="font-size: 13px; line-height: 1.6; margin-top: 12px;">
-              ✓ Default deny security groups<br/>
-              ✓ Segment environments (dev/staging/prod)<br/>
-              ✓ Limit ingress to necessary IPs<br/>
-              ✓ Use private subnets for databases<br/>
-              ✓ Enable VPC Flow Logs<br/>
-              ✓ Use WAF for public endpoints<br/>
-              ✓ Implement DDoS protection
-            </div>
+            <ul class="check">
+            <li>Default deny security groups</li>
+            <li>Segment environments (dev/staging/prod)</li>
+            <li>Limit ingress to necessary IPs</li>
+            <li>Use private subnets for databases</li>
+            <li>Enable VPC Flow Logs</li>
+            <li>Use WAF for public endpoints</li>
+            <li>Implement DDoS protection</li>
+          </ul>
           </div>
 
           <div class="card">
             <h3>Secrets Management</h3>
-            <div style="font-size: 13px; line-height: 1.6; margin-top: 12px;">
-              ✓ Use secrets manager/vault<br/>
-              ✓ Never commit secrets to code<br/>
-              ✓ Rotate secrets automatically<br/>
-              ✓ Limit secret access by role<br/>
-              ✓ Audit secret access logs<br/>
-              ✓ Use environment-specific secrets<br/>
-              ✓ Implement break-glass procedures
-            </div>
+            <ul class="check">
+            <li>Use secrets manager/vault</li>
+            <li>Never commit secrets to code</li>
+            <li>Rotate secrets automatically</li>
+            <li>Limit secret access by role</li>
+            <li>Audit secret access logs</li>
+            <li>Use environment-specific secrets</li>
+            <li>Implement break-glass procedures</li>
+          </ul>
           </div>
 
           <div class="card">
             <h3>Monitoring & Logging</h3>
-            <div style="font-size: 13px; line-height: 1.6; margin-top: 12px;">
-              ✓ Enable CloudTrail/equivalent<br/>
-              ✓ Centralize logs to SIEM<br/>
-              ✓ Alert on privilege escalation<br/>
-              ✓ Monitor failed auth attempts<br/>
-              ✓ Track configuration changes<br/>
-              ✓ Set up anomaly detection<br/>
-              ✓ Retain logs per compliance reqs
-            </div>
+            <ul class="check">
+            <li>Enable CloudTrail/equivalent</li>
+            <li>Centralize logs to SIEM</li>
+            <li>Alert on privilege escalation</li>
+            <li>Monitor failed auth attempts</li>
+            <li>Track configuration changes</li>
+            <li>Set up anomaly detection</li>
+            <li>Retain logs per compliance reqs</li>
+          </ul>
           </div>
         </div>
 
@@ -259,17 +261,17 @@
               <span class="badge ok">SIEM & Detection</span>
             </div>
             <h3>Detection Engineering Basics</h3>
-            <div style="font-size: 13px; line-height: 1.6; margin-top: 12px;">
-              ✓ Log authentication events (success and failure)<br/>
-              ✓ Log authorization denials with context<br/>
-              ✓ Alert on impossible travel patterns<br/>
-              ✓ Detect privilege escalation attempts<br/>
-              ✓ Monitor admin console access<br/>
-              ✓ Baseline normal behavior first<br/>
-              ✓ Tune alerts to reduce false positives<br/>
-              ✓ Document alert response procedures<br/>
-              ✓ Test detection rules regularly
-            </div>
+            <ul class="check">
+            <li>Log authentication events (success and failure)</li>
+            <li>Log authorization denials with context</li>
+            <li>Alert on impossible travel patterns</li>
+            <li>Detect privilege escalation attempts</li>
+            <li>Monitor admin console access</li>
+            <li>Baseline normal behavior first</li>
+            <li>Tune alerts to reduce false positives</li>
+            <li>Document alert response procedures</li>
+            <li>Test detection rules regularly</li>
+          </ul>
           </div>
 
           <div class="card">
@@ -277,17 +279,17 @@
               <span class="badge bad">Incident Response</span>
             </div>
             <h3>Incident Response Readiness</h3>
-            <div style="font-size: 13px; line-height: 1.6; margin-top: 12px;">
-              ✓ Maintain incident response playbook<br/>
-              ✓ Define escalation procedures<br/>
-              ✓ Document critical system owners<br/>
-              ✓ Test backup restoration regularly<br/>
-              ✓ Keep incident communication channels ready<br/>
-              ✓ Define what constitutes an incident<br/>
-              ✓ Practice tabletop exercises quarterly<br/>
-              ✓ Review and update runbooks<br/>
-              ✓ Document lessons learned
-            </div>
+            <ul class="check">
+            <li>Maintain incident response playbook</li>
+            <li>Define escalation procedures</li>
+            <li>Document critical system owners</li>
+            <li>Test backup restoration regularly</li>
+            <li>Keep incident communication channels ready</li>
+            <li>Define what constitutes an incident</li>
+            <li>Practice tabletop exercises quarterly</li>
+            <li>Review and update runbooks</li>
+            <li>Document lessons learned</li>
+          </ul>
           </div>
         </div>
 
@@ -299,44 +301,44 @@
         <div class="grid-3" style="margin-bottom: 32px;">
           <div class="card">
             <h3>Code Review Checklist</h3>
-            <div style="font-size: 13px; line-height: 1.6; margin-top: 12px;">
-              ✓ Authentication implemented?<br/>
-              ✓ Authorization checked server-side?<br/>
-              ✓ Input validated and sanitized?<br/>
-              ✓ SQL queries parameterized?<br/>
-              ✓ Secrets properly managed?<br/>
-              ✓ Error handling doesn't leak info?<br/>
-              ✓ Logging includes security events?<br/>
-              ✓ Dependencies up to date?
-            </div>
+            <ul class="check">
+            <li>Authentication implemented?</li>
+            <li>Authorization checked server-side?</li>
+            <li>Input validated and sanitized?</li>
+            <li>SQL queries parameterized?</li>
+            <li>Secrets properly managed?</li>
+            <li>Error handling doesn't leak info?</li>
+            <li>Logging includes security events?</li>
+            <li>Dependencies up to date?</li>
+          </ul>
           </div>
 
           <div class="card">
             <h3>Dependency Management</h3>
-            <div style="font-size: 13px; line-height: 1.6; margin-top: 12px;">
-              ✓ Scan dependencies for vulnerabilities<br/>
-              ✓ Keep packages updated regularly<br/>
-              ✓ Review new dependency additions<br/>
-              ✓ Use lock files for reproducibility<br/>
-              ✓ Monitor security advisories<br/>
-              ✓ Audit supply chain integrity<br/>
-              ✓ Remove unused dependencies<br/>
-              ✓ Pin production versions
-            </div>
+            <ul class="check">
+            <li>Scan dependencies for vulnerabilities</li>
+            <li>Keep packages updated regularly</li>
+            <li>Review new dependency additions</li>
+            <li>Use lock files for reproducibility</li>
+            <li>Monitor security advisories</li>
+            <li>Audit supply chain integrity</li>
+            <li>Remove unused dependencies</li>
+            <li>Pin production versions</li>
+          </ul>
           </div>
 
           <div class="card">
             <h3>Pre-Deployment Checks</h3>
-            <div style="font-size: 13px; line-height: 1.6; margin-top: 12px;">
-              ✓ Run SAST/DAST scans<br/>
-              ✓ Review security headers<br/>
-              ✓ Verify secrets not in code<br/>
-              ✓ Check default credentials changed<br/>
-              ✓ Confirm logging enabled<br/>
-              ✓ Test authentication flows<br/>
-              ✓ Validate encryption in place<br/>
-              ✓ Review IAM permissions
-            </div>
+            <ul class="check">
+            <li>Run SAST/DAST scans</li>
+            <li>Review security headers</li>
+            <li>Verify secrets not in code</li>
+            <li>Check default credentials changed</li>
+            <li>Confirm logging enabled</li>
+            <li>Test authentication flows</li>
+            <li>Validate encryption in place</li>
+            <li>Review IAM permissions</li>
+          </ul>
           </div>
         </div>
 
@@ -354,6 +356,7 @@
     </section>
   </main>
 
+<!-- @partial:footer -->
   <footer class="footer">
     <div class="container">
       <div class="footer-grid">
@@ -385,5 +388,6 @@
     </div>
     <script src="js/site.js"></script>
   </footer>
+  <!-- @endpartial -->
 </body>
 </html>
