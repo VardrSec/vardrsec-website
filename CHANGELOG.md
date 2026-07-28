@@ -297,3 +297,47 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   fixed with `minmax(0, 1fr)`. The Turnstile widget renders at a fixed 300px, wider than a
   320px viewport minus padding; it now sits in a wrapper that caps the layout box, with the
   widget scaled to fit.
+
+## Card and information-panel design system
+
+CSS only. No content, markup, navigation, URL, or form behavior changes.
+
+### Added
+
+- Surface, border, and text-role tokens in `:root`: `--surface`, `--surface-2`,
+  `--surface-hover`, `--line`, `--line-strong`, `--line-soft`, `--text-2`, `--text-3`,
+  `--card-pad`, `--card-shadow`, `--row-gap`. Twenty-five hardcoded translucent literals
+  were replaced by these.
+- Focus-visible rings scoped to links inside cards, so the ring reads against the card
+  surface rather than only the page background.
+
+### Changed
+
+- Cards are now opaque panels (`--surface`) with a visible 1px border and an inset
+  highlight plus soft drop shadow, rather than translucent glass on a gradient. Contents
+  read as a group instead of floating.
+- Hover is limited to cards that actually contain a link, via `:has(a)`. Non-interactive
+  cards no longer imply clickability.
+- Tool card `<dl>` rows rebuilt as a fixed two-column grid: a 108px label column so rows
+  align across sibling cards, horizontal dividers between every row, and matched vertical
+  padding. Labels are 12px uppercase cyan at 12.38:1 contrast; values use body text color.
+- Card footers separated by a divider, pinned to the bottom with `margin-top:auto`, tags
+  left and repository link right. Tags gained a visible border and stronger background.
+- `.meta` blocks now act as card footers: pinned to the bottom with a divider above,
+  except where a `.meta` directly follows a heading, where it stays a caption.
+- Checklist rows gained dividers and vertical padding, so a long list reads as rows rather
+  than one uninterrupted block.
+- Side card, KPI boxes, bio facts, demo panels, notes, tables, badges, and pills all moved
+  onto the shared tokens.
+- Body text raised to 14px at 1.7 line-height; metadata to 13px. No important label is
+  below 12px.
+
+### Fixed
+
+- Duplicate declarations for `.side-card h3` removed. Obsolete narrow-width `.spec`
+  stacking replaced by the new row system.
+
+### Responsive
+
+- Three columns at desktop, two at ≤1024px, one at ≤760px. Label/value rows stack at
+  ≤560px with dividers retained. Card padding and row gap tighten at that breakpoint.
