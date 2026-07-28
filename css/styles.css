@@ -409,3 +409,108 @@ h1{font-size:40px; line-height:1.08; letter-spacing:-1px}
   .card{padding:18px}
   .hero-body{padding:20px}
 }
+
+/* --- Hero: message first, artwork second ----------------------------------
+   The banner used to sit above the headline and repeat the branding already in
+   the header, pushing the value proposition below the fold on mobile. */
+.hero-card{display:flex; flex-direction:column}
+.hero-body{padding:30px 30px 26px; order:1}
+.hero-banner{order:2; max-height:190px; overflow:hidden; border-bottom:none; border-top:1px solid rgba(255,255,255,.10)}
+.hero-banner img{width:100%; height:190px; object-fit:cover; object-position:center}
+
+/* Primary action needs to clearly outrank the secondary one. */
+.btn.primary{
+  background: linear-gradient(135deg, rgba(124,240,215,.30), rgba(111,177,255,.30));
+  border-color: rgba(124,240,215,.45);
+  color:#eafffb;
+  font-weight:600;
+  box-shadow: 0 0 0 1px rgba(124,240,215,.12), 0 8px 24px rgba(124,240,215,.16);
+}
+.btn.primary:hover{
+  background: linear-gradient(135deg, rgba(124,240,215,.40), rgba(111,177,255,.38));
+  box-shadow: 0 0 0 1px rgba(124,240,215,.2), 0 10px 30px rgba(124,240,215,.24);
+}
+
+/* --- Featured policy demo -------------------------------------------------- */
+.demo{display:grid; grid-template-columns: 1.15fr .85fr; gap:18px; align-items:start}
+.demo-code{
+  border-radius:var(--radius); border:1px solid rgba(255,255,255,.12);
+  background:rgba(6,11,22,.72); overflow:hidden;
+}
+.demo-head{
+  display:flex; align-items:center; justify-content:space-between; gap:10px;
+  padding:10px 14px; border-bottom:1px solid rgba(255,255,255,.10);
+  background:rgba(255,255,255,.035);
+}
+.demo-file{font-size:12.5px; color:rgba(231,237,247,.72); font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.demo-code pre{margin:0; padding:16px 18px; overflow-x:auto}
+.demo-code code, .cmd code{
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size:12.5px; line-height:1.7; color:rgba(231,237,247,.9); white-space:pre;
+}
+.demo-side{
+  border-radius:var(--radius); border:1px solid rgba(255,255,255,.12);
+  background:linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.03));
+  padding:22px;
+}
+.demo-side h3{margin:0 0 10px; font-size:16px}
+.demo-side .check li strong{color:rgba(231,237,247,.95); font-weight:600}
+.cmd{
+  margin:6px 0 0; padding:10px 12px; overflow-x:auto;
+  border-radius:12px; border:1px solid rgba(255,255,255,.12); background:rgba(6,11,22,.72);
+}
+
+/* --- Compact tool cards ---------------------------------------------------- */
+.tool-card{display:flex; flex-direction:column}
+.spec{margin:12px 0 0; display:grid; grid-template-columns:auto 1fr; gap:6px 12px; font-size:13.5px}
+.spec dt{color:var(--accent2); font-size:11.5px; text-transform:uppercase; letter-spacing:.06em; padding-top:3px}
+.spec dd{margin:0; color:rgba(231,237,247,.8); line-height:1.55}
+.tool-foot{
+  display:flex; align-items:center; gap:8px; flex-wrap:wrap;
+  margin-top:auto; padding-top:16px; font-size:12.5px;
+}
+.tool-foot .link{margin-left:auto}
+.tag{
+  font-size:11.5px; padding:4px 9px; border-radius:999px;
+  border:1px solid rgba(255,255,255,.14); background:rgba(255,255,255,.04);
+  color:rgba(231,237,247,.78);
+}
+
+/* --- Bio block ------------------------------------------------------------- */
+.bio{display:grid; grid-template-columns:1.4fr .6fr; gap:20px; align-items:start}
+.bio-text h2{margin:0 0 12px; font-size:25px; letter-spacing:-.4px}
+.bio-text p{margin:0 0 12px; color:rgba(231,237,247,.8); font-size:14.5px; line-height:1.7; max-width:66ch}
+.bio-facts{display:grid; gap:12px}
+.bio-facts .box{
+  border:1px solid rgba(255,255,255,.12); border-radius:16px; padding:16px;
+  background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.025));
+}
+.bio-facts .box strong{display:block; font-size:16px; margin-bottom:4px}
+.bio-facts .box small{color:rgba(231,237,247,.68); font-size:12.5px; line-height:1.5; display:block}
+
+@media (max-width: 980px){
+  .demo{grid-template-columns:1fr}
+  .bio{grid-template-columns:1fr}
+}
+@media (max-width: 640px){
+  .hero-body{padding:22px}
+  .hero-banner, .hero-banner img{max-height:130px; height:130px}
+  .spec{grid-template-columns:1fr; gap:2px 0}
+  .spec dt{padding-top:8px}
+}
+/* Below this the logo, wordmark and menu button start crowding each other. */
+@media (max-width: 420px){
+  .brand-name small{display:none}
+  .brand{min-width:0}
+}
+
+.btn.ghost{background:transparent; border-color:rgba(255,255,255,.16)}
+.btn.ghost:hover{background:rgba(255,255,255,.05)}
+@media (max-width: 1100px){ .nav-cta .ghost{display:none} }
+
+/* Grid and flex children default to min-width:auto, so a wide <pre> or table
+   refuses to shrink and pushes the page sideways. */
+.demo > *, .grid-2 > *, .grid-3 > *, .hero-card > *{min-width:0}
+.demo-code pre, .cmd{max-width:100%}
+.table-scroll{overflow-x:auto; -webkit-overflow-scrolling:touch; max-width:100%}
+.table-scroll .table{min-width:520px}

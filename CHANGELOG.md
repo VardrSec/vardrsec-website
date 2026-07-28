@@ -164,3 +164,35 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   how I like to work, and an open door. 482 lines down to 233.
 - Type scale, card padding, hover states, and vertical rhythm tightened. Grid spacing is
   now set by CSS rather than per-element inline margins that drifted between pages.
+
+## Product-led home page
+
+### Changed
+
+- Hero inverted: headline, lead and calls to action now sit above the banner, which is
+  reduced to a 190px strip. The artwork repeated branding already in the header and
+  pushed the value proposition off the first mobile screen. Headline now appears at
+  198px on a 390px viewport, with both CTAs visible without scrolling.
+- `.btn.primary` given a brighter cyan fill and glow so it clearly outranks the outline
+  secondary button.
+- Biography moved out of the hero and below the tools. Page order is now promise →
+  policy demo → tools → credibility → capabilities → contact.
+- "Who's behind this" cut from four tiles to two (Open source, Local-first); the scoping
+  and professional-standard text folded into the same block rather than a separate note.
+- Tool cards rewritten as compact Finds / How / Different specs with language and license
+  tags.
+
+### Added
+
+- A featured demo section showing a real VardrGate policy, taken verbatim from
+  `examples/profile_ownership.policy.yaml` in that repository, alongside the finding
+  categories it produces and the actual CLI invocation.
+- GitHub link in the main navigation.
+- Brand subtitle hidden below 420px so the logo and menu button have room.
+
+### Fixed
+
+- Horizontal overflow on the home page (18px at 390px, 48px at 360px) and the privacy
+  page (12px at 360px). Grid and flex children default to `min-width:auto`, so the wide
+  `<pre>` and the processors table refused to shrink. Found by rendering, not by the
+  static checks, which passed throughout.

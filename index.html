@@ -45,6 +45,7 @@
         
         <!-- Desktop CTA Buttons -->
         <div class="nav-cta">
+          <a class="btn ghost" href="https://github.com/VardrSec" rel="noopener" aria-label="VardrSec on GitHub">GitHub</a>
           <a class="btn primary" href="contact.html">Contact</a>
         </div>
         
@@ -71,66 +72,86 @@
     <!-- Hero Section -->
     <section class="hero">
       <div class="container">
-        <div class="hero-grid">
-          <div class="hero-card">
-            <div class="hero-banner">
-              <picture>
-                <source srcset="assets/orgbanner.webp" type="image/webp" />
-                <img src="assets/orgbanner.png" alt="VardrSec banner logo" width="1291" height="454" fetchpriority="high" />
-              </picture>
+        <div class="hero-card">
+          <div class="hero-body">
+            <div class="kicker"><span class="dot"></span> Open source · Authorization &amp; access control</div>
+            <h1>Security tooling for the bugs that don't look like bugs.</h1>
+            <p class="lead">
+              An authorization flaw doesn't crash anything. The response is well-formed, the status code
+              is green, and the only thing wrong is <em>who</em> received the data. I build open-source
+              tools to catch that—and I'm always glad to hear from engineers working on the same problems.
+            </p>
+            <div class="hero-actions">
+              <a class="btn primary" href="tools.html">Browse the tools</a>
+              <a class="btn" href="collaboration.html">Work together</a>
             </div>
-            <div class="hero-body">
-              <div class="kicker"><span class="dot"></span> Open source · Authorization &amp; access control</div>
-              <h1>Security tooling for the bugs that don't look like bugs.</h1>
-              <p class="lead">
-                An authorization flaw doesn't crash anything. The response is well-formed, the status code
-                is green, and the only thing wrong is <em>who</em> received the data. I build open-source
-                tools to catch that—and I'm always glad to hear from engineers working on the same problems.
-              </p>
-              <div class="hero-actions">
-                <a class="btn primary" href="tools.html">Browse the tools</a>
-                <a class="btn" href="collaboration.html">Work together</a>
-              </div>
-              <div class="pills">
-                <span class="pill">Authorization testing</span>
-                <span class="pill">API security</span>
-                <span class="pill">Attack surface mapping</span>
-              </div>
+            <div class="pills">
+              <span class="pill">Authorization testing</span>
+              <span class="pill">API security</span>
+              <span class="pill">Attack surface mapping</span>
             </div>
           </div>
+          <div class="hero-banner">
+            <picture>
+              <source srcset="assets/orgbanner.webp" type="image/webp" />
+              <img src="assets/orgbanner.png" alt="" width="1291" height="454" fetchpriority="high" />
+            </picture>
+          </div>
+        </div>
+      </div>
+    </section>
 
-          <!-- Side Card -->
-          <aside class="side-card">
-            <h3>Who's behind this</h3>
-            <p>
-              I'm Jorge Aquino. I spend my working hours building software and my spare ones trying to
-              break them. Marine Corps veteran, former Firefighter/EMT, and now a software engineer
-              writing the tooling I wished existed when I was hunting authorization bugs by hand.
+    <!-- Featured: what the tooling actually looks like -->
+    <section class="section compact">
+      <div class="container">
+        <div class="section-title">
+          <h2>What "write the rules down" looks like</h2>
+          <p>A real VardrGate policy. You state how an endpoint should treat each caller; VardrGate runs the request as every one of them and reports where reality disagrees.</p>
+        </div>
+
+        <div class="demo">
+          <div class="demo-code">
+            <div class="demo-head">
+              <span class="demo-file">profile_ownership.policy.yaml</span>
+              <span class="badge">YAML</span>
+            </div>
+<pre><code>api:
+  endpoint: GET /users/{user_id}/profile
+  owner: identity:owner
+  resource:
+    type: user_profile
+    id_param: user_id
+    tenant_field: tenant_id
+
+expect:
+  owner: allow
+  other_user: deny
+  anonymous: deny
+
+response:
+  deny_status: [401, 403, 404]
+  sensitive_fields:
+    forbidden_for:
+      - other_user
+      - anonymous</code></pre>
+          </div>
+
+          <div class="demo-side">
+            <h3>What it catches</h3>
+            <ul class="check">
+              <li><strong>potential_bola</strong> — a non-owner reached an identified object</li>
+              <li><strong>cross_tenant_access</strong> — an identity from another tenant got through</li>
+              <li><strong>missing_authentication</strong> — an anonymous caller reached a protected resource</li>
+              <li><strong>sensitive_data_exposure</strong> — a caller saw fields it must not (evidence names the fields, never the values)</li>
+            </ul>
+            <p class="meta" style="margin-top:14px">
+              Run it once, or on every commit:
             </p>
-            <div class="kpi">
-              <div class="box">
-                <strong>Open</strong>
-                <small>Tools are source-available</small>
-              </div>
-              <div class="box">
-                <strong>Local-first</strong>
-                <small>Scans run on your box</small>
-              </div>
-              <div class="box">
-                <strong>Scoped</strong>
-                <small>Allowlists enforced in code</small>
-              </div>
-              <div class="box">
-                <strong>Open door</strong>
-                <small>Questions always welcome</small>
-              </div>
+            <pre class="cmd"><code>vardrgate run --job job.json --out result.json</code></pre>
+            <div class="meta" style="margin-top:12px">
+              <a class="link" href="https://github.com/VardrSec/VardrGate" rel="noopener">Full docs and examples on GitHub →</a>
             </div>
-            <div class="note">
-              <strong>Professional standard:</strong> all security testing performed only with explicit
-              written authorization and documented scope. No gray areas, no surprises.
-            </div>
-            <a class="link side-card-more" href="about.html">Read the longer version →</a>
-          </aside>
+          </div>
         </div>
       </div>
     </section>
@@ -139,52 +160,83 @@
     <section class="section compact">
       <div class="container">
         <div class="section-title">
-          <h2>Open Source Tools</h2>
-          <p>Security tooling I build and maintain in the open. Read the code, run it yourself.</p>
+          <h2>The Tools</h2>
+          <p>Built and maintained in the open. Read the code, run it, tell me what's wrong with it.</p>
         </div>
         <div class="grid-3">
-          <div class="card">
-            <div class="kicker" style="margin-bottom: 10px;">
-              <span class="badge warn">Go</span>
-            </div>
+          <div class="card tool-card">
             <h3>VardrGate</h3>
-            <p>
-              Continuous API authorization assurance. Describe how an endpoint should treat different
-              callers, run the request as each of them, and get evidence-backed findings when real
-              behavior disagrees.
-            </p>
-            <div class="meta"><a class="link" href="https://github.com/VardrSec/VardrGate" rel="noopener">github.com/VardrSec/VardrGate →</a></div>
+            <dl class="spec">
+              <dt>Finds</dt><dd>BOLA, cross-tenant access, privilege escalation</dd>
+              <dt>How</dt><dd>Replays one request as every identity, compares against a declared policy</dd>
+              <dt>Different</dt><dd>Runs in CI, so authorization is tested on every commit</dd>
+            </dl>
+            <div class="tool-foot">
+              <span class="tag">Go</span><span class="tag">Apache-2.0</span>
+              <a class="link" href="https://github.com/VardrSec/VardrGate" rel="noopener">GitHub →</a>
+            </div>
           </div>
 
-          <div class="card">
-            <div class="kicker" style="margin-bottom: 10px;">
-              <span class="badge">Python</span>
-            </div>
+          <div class="card tool-card">
             <h3>VardrMap</h3>
-            <p>
-              Attack surface mapping and threat-modeling workspace. Organize targets, track testing
-              hypotheses, manage findings, and integrate reconnaissance and enrichment APIs during
-              an assessment.
-            </p>
-            <div class="meta"><a class="link" href="https://github.com/VardrSec/VardrMap" rel="noopener">github.com/VardrSec/VardrMap →</a></div>
+            <dl class="spec">
+              <dt>Finds</dt><dd>Attack surface you forgot you had</dd>
+              <dt>How</dt><dd>Targets, hypotheses and findings in one workspace, with recon APIs wired in</dd>
+              <dt>Different</dt><dd>Tracks what you have <em>already tested</em>, not just what exists</dd>
+            </dl>
+            <div class="tool-foot">
+              <span class="tag">Python</span><span class="tag">MIT</span>
+              <a class="link" href="https://github.com/VardrSec/VardrMap" rel="noopener">GitHub →</a>
+            </div>
           </div>
 
-          <div class="card">
-            <div class="kicker" style="margin-bottom: 10px;">
-              <span class="badge ok">Python</span>
-            </div>
+          <div class="card tool-card">
             <h3>VardrRunner</h3>
-            <p>
-              Local automation runner for the VardrSec toolchain. Polls a backend for queued scan
-              jobs, executes tooling on your own machine, and streams results back. Recon runs on
-              the operator's box, not a vendor's.
-            </p>
-            <div class="meta"><a class="link" href="https://github.com/VardrSec/VardrRunner" rel="noopener">github.com/VardrSec/VardrRunner →</a></div>
+            <dl class="spec">
+              <dt>Finds</dt><dd>Nothing on its own — it runs the others</dd>
+              <dt>How</dt><dd>Claims queued jobs, executes locally, streams results back</dd>
+              <dt>Different</dt><dd>Your bandwidth, your IP, your tool versions. No vendor holds your credentials</dd>
+            </dl>
+            <div class="tool-foot">
+              <span class="tag">Python</span><span class="tag">MIT</span>
+              <a class="link" href="https://github.com/VardrSec/VardrRunner" rel="noopener">GitHub →</a>
+            </div>
           </div>
         </div>
         <p style="margin-top:16px">
           <a class="link" href="tools.html">All tools, including what's still in development →</a>
         </p>
+      </div>
+    </section>
+
+    <!-- Credibility / ethics -->
+    <section class="section compact">
+      <div class="container">
+        <div class="bio">
+          <div class="bio-text">
+            <h2>Who's behind this</h2>
+            <p>
+              I'm Jorge Aquino. I spend my working hours building software and my spare ones trying to
+              break it. Marine Corps veteran, former Firefighter/EMT, and now a software engineer writing
+              the tooling I wished existed when I was hunting authorization bugs by hand.
+            </p>
+            <p>
+              All security testing happens only with explicit written authorization and a documented
+              scope—which is why scope allowlists are compiled into the tools rather than left to memory.
+            </p>
+            <a class="link" href="about.html">Read the longer version →</a>
+          </div>
+          <div class="bio-facts">
+            <div class="box">
+              <strong>Open source</strong>
+              <small>Apache-2.0 and MIT. Read the code before you trust it.</small>
+            </div>
+            <div class="box">
+              <strong>Local-first</strong>
+              <small>Scans run on your machine. No vendor holds your credentials.</small>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
