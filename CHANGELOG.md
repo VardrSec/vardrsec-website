@@ -124,3 +124,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   supplied by `::marker`, so it is decoration rather than content.
 - `contact.html` had drifted structurally from the other pages; the first sync
   normalised 59 lines of it.
+
+## Consulting becomes Collaboration
+
+### Changed
+
+- `consulting.html` renamed to `collaboration.html`, with 301s from `/consulting` and
+  `/services`. The page opens with what I want to work on rather than what I sell.
+- New "Topics I'm Interested In" section: authorization and access control, contributing
+  to the tools, API security, secure design review, and research/writing. Paid work moved
+  below it under its own heading, so scoped engagements read as one possible outcome of a
+  conversation rather than the purpose of the page.
+- Explicit invitation to students and career changers, which is true and costs nothing.

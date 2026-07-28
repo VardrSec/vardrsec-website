@@ -9,5 +9,10 @@
 
 # services.html was relabelled "Consulting" when the site stopped leading with
 # an agency-style services catalogue.
-/services      /consulting  301
-/services.html /consulting  301
+/services      /collaboration  301
+/services.html /collaboration  301
+
+# "Consulting" became "Collaboration" - the page is an invitation to work
+# together, not a services catalogue.
+/consulting      /collaboration  301
+/consulting.html /collaboration  301

@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Consulting | VardrSec</title>
-  <meta name="description" content="Security review and advisory from a working software engineer. Application and API security, authorization testing, and cloud configuration review." />
-  <link rel="canonical" href="https://vardrsec.com/consulting" />
+  <title>Collaboration | VardrSec</title>
+  <meta name="description" content="Topics I am interested in working on together - authorization and access control, API security, open-source tooling, and security review for engineering teams." />
+  <link rel="canonical" href="https://vardrsec.com/collaboration" />
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="VardrSec" />
-  <meta property="og:url" content="https://vardrsec.com/consulting" />
-  <meta property="og:title" content="Consulting | VardrSec" />
-  <meta property="og:description" content="Security review and advisory from a working software engineer. Application and API security, authorization testing, and cloud configuration review." />
+  <meta property="og:url" content="https://vardrsec.com/collaboration" />
+  <meta property="og:title" content="Collaboration | VardrSec" />
+  <meta property="og:description" content="Topics I am interested in working on together - authorization and access control, API security, open-source tooling, and security review for engineering teams." />
   <meta property="og:image" content="https://vardrsec.com/assets/orgbanner.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="stylesheet" href="css/styles.css" />
@@ -39,7 +39,7 @@
           <a href="index.html">Home</a>
           <a href="tools.html">Tools</a>
           <a href="resources.html">Resources</a>
-          <a class="active" href="consulting.html">Consulting</a>
+          <a class="active" href="collaboration.html">Collaboration</a>
           <a href="about.html">About</a>
         </div>
         
@@ -59,7 +59,7 @@
         <a href="index.html">Home</a>
         <a href="tools.html">Tools</a>
         <a href="resources.html">Resources</a>
-        <a class="active" href="consulting.html">Consulting</a>
+        <a class="active" href="collaboration.html">Collaboration</a>
         <a href="about.html">About</a>
         <a class="btn primary" href="contact.html" style="margin-top:8px">Contact</a>
       </div>
@@ -71,17 +71,90 @@
     <section class="section">
       <div class="container">
         <div class="section-title">
-          <h1>Consulting</h1>
-          <p>What I take on, how it works, and what I will not pretend to offer.</p>
+          <h1>Collaboration</h1>
+          <p>What I'm interested in working on, whether or not money is involved.</p>
         </div>
 
         <div class="note" style="margin-bottom: 32px;">
-          <strong>Your mission determines the operation.</strong> Tell me what keeps you up at night—unauthorized 
-          data access, cloud misconfigurations, API vulnerabilities, weak detection coverage, compliance gaps—and 
-          I’ll scope an engagement specifically around those risks—nothing more, nothing less.
+          <strong>The short version:</strong> if you're working on something in the space below, I'd like to
+          hear about it. Some of that turns into paid engagements and some of it is just two people comparing
+          notes on a hard problem. Both are worth my time.
+          <a class="link" href="contact.html">Send me a message</a>—tell me what you're building or breaking,
+          and I'll tell you honestly whether I'm useful to you.
         </div>
 
-        <!-- Core Services -->
+        <!-- Topics -->
+        <div class="section-title" style="margin-top: 42px;">
+          <h2>Topics I'm Interested In</h2>
+          <p>Not an exhaustive list, but this is where I'm most likely to be genuinely helpful.</p>
+        </div>
+
+        <div class="grid-2" style="margin-bottom: 24px;">
+          <div class="card">
+            <div class="kicker" style="margin-bottom: 12px;">
+              <span class="badge warn">Primary interest</span>
+            </div>
+            <h3>Authorization and access control</h3>
+            <p style="margin-top: 12px;">
+              BOLA, IDOR, tenant isolation, privilege boundaries, and the general problem of proving that
+              your access rules do what you think they do. This is the thing I care most about and the
+              reason most of the <a class="link" href="tools.html">tooling</a> exists. If you're designing a
+              permissions model or trying to test one, I will happily talk your ear off.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="kicker" style="margin-bottom: 12px;">
+              <span class="badge">Open source</span>
+            </div>
+            <h3>Contributing to the tools</h3>
+            <p style="margin-top: 12px;">
+              Issues, pull requests, feature arguments, and "this design is wrong because…" are all welcome
+              on any published repository. If you've used VardrGate or VardrMap in anger and it got in your
+              way, that feedback is more valuable to me than a star. Security issues in the tools: please
+              report privately first.
+            </p>
+          </div>
+        </div>
+
+        <div class="grid-3" style="margin-bottom: 24px;">
+          <div class="card">
+            <h3>API security</h3>
+            <p style="margin-top: 12px;">
+              Authentication flows, token handling, rate limiting, and the OWASP API Top 10 as it actually
+              shows up in real codebases rather than in slide decks.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>Secure design review</h3>
+            <p style="margin-top: 12px;">
+              Threat modelling a feature before it ships, or a second opinion on an architecture decision
+              while it's still cheap to change. Earlier is always better than later.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>Research and writing</h3>
+            <p style="margin-top: 12px;">
+              Co-authoring a writeup, reviewing a draft, or digging into a vulnerability class together.
+              I learn more from this than from almost anything else.
+            </p>
+          </div>
+        </div>
+
+        <div class="note" style="margin-bottom: 36px;">
+          <strong>Also genuinely welcome:</strong> students and career changers with questions. I came into
+          this from the Marine Corps and a fire department, not a computer science degree, and people
+          answering my questions early on is a large part of why I got anywhere. Ask.
+        </div>
+
+        <!-- Paid engagements -->
+        <div class="section-title" style="margin-top: 42px;">
+          <h2>Paid Engagements</h2>
+          <p>When a conversation turns into scoped work, this is what that looks like.</p>
+        </div>
+
         <div class="grid-2" style="margin-bottom: 24px;">
           <div class="card">
             <div class="kicker" style="margin-bottom: 12px;">
@@ -360,7 +433,7 @@
     <section class="section" style="padding-top: 50px; padding-bottom: 60px;">
       <div class="container">
         <div class="card" style="text-align: center; padding: 32px;">
-          <h3>Ready to scope an engagement?</h3>
+          <h3>Tell me what you're working on</h3>
           <p style="margin-top: 12px; max-width: 700px; margin-left: auto; margin-right: auto;">
             Tell me what you need tested, reviewed, or built. I’ll provide an honest assessment of whether 
             I’m the right fit and, if so, a clear proposal with fixed pricing and deliverables. No obligation 
@@ -388,7 +461,7 @@
           <h4>Site</h4>
           <a href="tools.html">Tools</a>
           <a href="resources.html">Resources</a>
-          <a href="consulting.html">Consulting</a>
+          <a href="collaboration.html">Collaboration</a>
           <a href="about.html">About</a>
         </div>
         <div class="links">
