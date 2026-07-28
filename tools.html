@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tools | VardrSec</title>
+  <meta name="description" content="Open-source security tooling built by VardrSec: API authorization testing, attack surface mapping, and local scan automation." />
+  <link rel="canonical" href="https://vardrsec.com/tools" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="VardrSec" />
+  <meta property="og:url" content="https://vardrsec.com/tools" />
+  <meta property="og:title" content="Tools | VardrSec" />
+  <meta property="og:description" content="Open-source security tooling built by VardrSec: API authorization testing, attack surface mapping, and local scan automation." />
+  <meta property="og:image" content="https://vardrsec.com/assets/orgbanner.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="container">
+      <nav class="nav">
+        <a class="brand" href="index.html">
+          <div class="brand-mark" aria-hidden="true">
+            <picture>
+              <source srcset="assets/small-logo.webp" type="image/webp" />
+              <img src="assets/small-logo.png" alt="VardrSec logo" width="128" height="129" class="brand-img" />
+            </picture>
+          </div>
+          <div class="brand-name">
+            <strong>VardrSec</strong>
+            <small>Offensive Security Research &amp; Tooling</small>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation -->
+        <div class="nav-links">
+          <a href="index.html">Home</a>
+          <a class="active" href="tools.html">Tools</a>
+          <a href="resources.html">Resources</a>
+          <a href="consulting.html">Consulting</a>
+          <a href="about.html">About</a>
+        </div>
+
+        <!-- Desktop CTA Buttons -->
+        <div class="nav-cta">
+          <a class="btn primary" href="contact.html">Contact</a>
+        </div>
+
+        <!-- Mobile Menu Toggle -->
+        <button id="menuBtn" class="menu-btn" aria-label="Open menu" aria-expanded="false">
+          Menu
+        </button>
+      </nav>
+
+      <!-- Mobile Menu -->
+      <div class="mobile-panel" id="mobilePanel">
+        <a href="index.html">Home</a>
+        <a class="active" href="tools.html">Tools</a>
+        <a href="resources.html">Resources</a>
+        <a href="consulting.html">Consulting</a>
+        <a href="about.html">About</a>
+        <a class="btn primary" href="contact.html" style="margin-top:8px">Contact</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="container">
+        <div class="section-title">
+          <h1>Tools</h1>
+          <p>Security tooling I build and maintain. The published ones are open source—read the code, run it, break it, tell me what's wrong with it.</p>
+        </div>
+
+        <div class="note" style="margin-bottom: 32px;">
+          <strong>A common thread:</strong> most of this exists because broken access control keeps
+          winning. It is the vulnerability class I find most often, the hardest to catch with a scanner,
+          and the one that does the most damage when it slips through. Nearly every tool here is an
+          attempt to make it cheaper to find before someone else does.
+        </div>
+
+        <!-- Published -->
+        <div class="section-title" style="margin-top: 42px;">
+          <h2>Published</h2>
+          <p>Open source, MIT-spirited, and usable today.</p>
+        </div>
+
+        <div class="grid-2" style="margin-bottom: 24px;">
+          <div class="card">
+            <div class="kicker" style="margin-bottom: 12px;">
+              <span class="badge warn">Go</span>
+              <span class="badge ok">Open source</span>
+            </div>
+            <h3>VardrGate</h3>
+            <p style="margin-top: 14px;">
+              Continuous API authorization assurance. You describe how an endpoint <em>should</em> treat
+              different callers—who may read, who may write, who should be refused outright—then VardrGate
+              runs the same request as each of them and reports, with evidence, wherever the real behaviour
+              disagrees with the intent.
+            </p>
+            <p style="margin-top: 12px;">
+              It exists because authorization bugs do not look like bugs. The endpoint returns 200. The
+              response is well-formed. Nothing crashes. The only thing wrong is <em>who</em> got the data,
+              and no scanner knows what your rules were supposed to be. So you have to write them down—and
+              once they are written down, they can be tested on every commit.
+            </p>
+            <div class="meta" style="margin-top: 14px;">
+              <a class="link" href="https://github.com/VardrSec/VardrGate" rel="noopener">github.com/VardrSec/VardrGate →</a>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="kicker" style="margin-bottom: 12px;">
+              <span class="badge">Python</span>
+              <span class="badge ok">Open source</span>
+            </div>
+            <h3>VardrMap</h3>
+            <p style="margin-top: 14px;">
+              An attack surface mapping and threat-modelling workspace. Organise targets, record what you
+              think is true about them, track which hypotheses you have actually tested, and pull in
+              reconnaissance and enrichment data without leaving the workspace.
+            </p>
+            <p style="margin-top: 12px;">
+              Built out of frustration with the real state of most assessments: findings in one document,
+              scope in an email, recon output in twelve terminal scrollbacks, and no honest answer to
+              "what have I actually looked at?" VardrMap makes that question answerable.
+            </p>
+            <div class="meta" style="margin-top: 14px;">
+              <a class="link" href="https://github.com/VardrSec/VardrMap" rel="noopener">github.com/VardrSec/VardrMap →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-bottom: 36px;">
+          <div class="kicker" style="margin-bottom: 12px;">
+            <span class="badge">Python</span>
+            <span class="badge ok">Open source</span>
+          </div>
+          <h3>VardrRunner</h3>
+          <p style="margin-top: 14px;">
+            The local automation runner for the rest of the toolchain. It polls a backend for queued scan
+            jobs, claims them atomically, executes the tool on <em>your</em> machine, streams progress back,
+            and uploads results.
+          </p>
+          <p style="margin-top: 12px;">
+            The design principle is deliberate: recon and scanning belong on the operator's box—their
+            bandwidth, their IP, their tool versions, their legal footing. The backend orchestrates and
+            stores; the runner does the work. The two are fully decoupled and only ever exchange JSON.
+            No vendor ever needs to hold your credentials or scan from their infrastructure.
+          </p>
+          <div class="meta" style="margin-top: 14px;">
+            <a class="link" href="https://github.com/VardrSec/VardrRunner" rel="noopener">github.com/VardrSec/VardrRunner →</a>
+          </div>
+        </div>
+
+        <!-- In development -->
+        <div class="section-title" style="margin-top: 42px;">
+          <h2>In Development</h2>
+          <p>Working, but not yet published. Listed so the roadmap is honest, not to imply availability.</p>
+        </div>
+
+        <div class="grid-3" style="margin-bottom: 24px;">
+          <div class="card">
+            <div class="kicker" style="margin-bottom: 10px;">
+              <span class="badge">Python</span>
+            </div>
+            <h3>VardrScanner</h3>
+            <p style="margin-top: 12px;">
+              An API security testing framework focused on the OWASP API Top 3. Architecture and design
+              notes are public; the implementation is not.
+            </p>
+            <div class="meta" style="margin-top: 12px;">
+              <a class="link" href="https://github.com/jorge-aquino/vardrscanner-docs" rel="noopener">Read the design docs →</a>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="kicker" style="margin-bottom: 10px;">
+              <span class="badge">Python</span>
+            </div>
+            <h3>VardrForge</h3>
+            <p style="margin-top: 12px;">
+              A local CLI that generates small, modular pen-testing tools from controlled templates—with
+              scope validation baked in. Every generated tool is restricted to an explicit target
+              allowlist, so it cannot be pointed somewhere it was never authorised to go.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="kicker" style="margin-bottom: 10px;">
+              <span class="badge warn">Go</span>
+            </div>
+            <h3>VardrVault</h3>
+            <p style="margin-top: 12px;">
+              A secrets manager with token auth, encrypted storage, and audit logging. Built mostly to
+              understand the problem properly—you learn a great deal about a threat model by having to
+              implement against it.
+            </p>
+          </div>
+        </div>
+
+        <div class="card" style="text-align: center; padding: 32px; margin-top: 42px;">
+          <h3>Found a bug? Have a better idea?</h3>
+          <p style="margin-top: 12px; max-width: 700px; margin-left: auto; margin-right: auto;">
+            Issues and pull requests are genuinely welcome on any of the published repositories. If you
+            have found something security-relevant in one of these tools, please report it privately first—
+            the same courtesy I ask of anyone testing a client system.
+          </p>
+          <div style="margin-top: 20px;">
+            <a class="btn primary" href="contact.html" style="display: inline-flex; margin-right: 10px;">Get in touch</a>
+            <a class="btn" href="https://github.com/VardrSec" rel="noopener" style="display: inline-flex;">Browse the org</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h4>VardrSec</h4>
+          <p>Offensive security research and tooling. Open-source security tools, practical guidance, and a small number of consulting engagements.</p>
+          <p class="footer-contact">
+            <a href="mailto:contact@vardrsec.com">contact@vardrsec.com</a><br/>
+            <a href="https://github.com/VardrSec" rel="noopener">github.com/VardrSec</a>
+          </p>
+        </div>
+        <div class="links">
+          <h4>Site</h4>
+          <a href="tools.html">Tools</a>
+          <a href="resources.html">Resources</a>
+          <a href="consulting.html">Consulting</a>
+          <a href="about.html">About</a>
+        </div>
+        <div class="links">
+          <h4>Legal</h4>
+          <a href="privacy.html">Privacy</a>
+          <a href="terms.html">Terms</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+      <div class="copyright">
+        <small>© <span id="year"></span> VardrSec. All rights reserved.</small>
+      </div>
+    </div>
+    <script src="js/site.js"></script>
+  </footer>
+</body>
+</html>

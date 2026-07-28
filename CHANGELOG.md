@@ -79,3 +79,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Privacy policy now names its processors (Cloudflare, Cloudflare Turnstile, Resend),
   what each receives, and that data is processed in the US. The contact form began
   sending data to third parties when it was wired up; the policy had not caught up.
+
+## Phase 2 — Repositioning
+
+### Added
+
+- `tools.html` — a first-class page for the toolchain. Published tools (VardrGate,
+  VardrMap, VardrRunner) link to their repositories; unpublished ones (VardrScanner,
+  VardrForge, VardrVault) are listed as in development without dead links to private
+  repos.
+
+### Changed
+
+- Navigation is now Home / Tools / Resources / Consulting / About, with Contact as the
+  single call to action. Tools is promoted to the top level; the two-button
+  "Resources + Request a Consult" pairing is gone.
+- `services.html` renamed to `consulting.html`, with 301s from the old paths. The page
+  is no longer an agency-style services catalogue.
+- Home page leads with built work rather than a capability list: new hero built around
+  broken access control, the Open Source Tools section moved above the fold-adjacent
+  content, and the side card now introduces Jorge rather than listing operating
+  promises.
+- About rewritten from 1,165 words to 913 that actually say something — the Marine
+  Corps and Firefighter/EMT background as the origin of a specific habit, why
+  authorization is the fixation, and what each tool was built to solve. Generic values
+  filler ("Relentless Innovation", "Client-Centricity") removed.
+- Page titles and meta descriptions reflect tooling and research rather than
+  consulting.

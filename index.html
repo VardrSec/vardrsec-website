@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>VardrSec | Cybersecurity Consulting</title>
-  <meta name="description" content="Cybersecurity consulting focused on actionable results. Penetration testing, cloud security, and detection engineering on your terms." />
+  <title>VardrSec | Offensive Security Research &amp; Tooling</title>
+  <meta name="description" content="Open-source security tooling and research by Jorge Aquino. API authorization testing, attack surface mapping, and practical guidance for engineering teams." />
   <link rel="canonical" href="https://vardrsec.com/" />
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="VardrSec" />
   <meta property="og:url" content="https://vardrsec.com/" />
-  <meta property="og:title" content="VardrSec | Cybersecurity Consulting" />
-  <meta property="og:description" content="Cybersecurity consulting focused on actionable results. Penetration testing, cloud security, and detection engineering on your terms." />
+  <meta property="og:title" content="VardrSec | Offensive Security Research &amp; Tooling" />
+  <meta property="og:description" content="Open-source security tooling and research by Jorge Aquino. API authorization testing, attack surface mapping, and practical guidance for engineering teams." />
   <meta property="og:image" content="https://vardrsec.com/assets/orgbanner.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="stylesheet" href="css/styles.css" />
@@ -36,15 +36,15 @@
         <!-- Desktop Navigation -->
         <div class="nav-links">
           <a class="active" href="index.html">Home</a>
+          <a href="tools.html">Tools</a>
+          <a href="resources.html">Resources</a>
+          <a href="consulting.html">Consulting</a>
           <a href="about.html">About</a>
-          <a href="services.html">Services</a>
-          <a href="contact.html">Contact</a>
         </div>
         
         <!-- Desktop CTA Buttons -->
         <div class="nav-cta">
-          <a class="btn" href="resources.html">Resources</a>
-          <a class="btn primary" href="contact.html">Request a Consult</a>
+          <a class="btn primary" href="contact.html">Contact</a>
         </div>
         
         <!-- Mobile Menu Toggle -->
@@ -56,11 +56,11 @@
       <!-- Mobile Menu -->
       <div class="mobile-panel" id="mobilePanel">
         <a class="active" href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="services.html">Services</a>
+        <a href="tools.html">Tools</a>
         <a href="resources.html">Resources</a>
-        <a href="contact.html">Contact</a>
-        <a class="btn primary" href="contact.html" style="margin-top:8px">Request a Consult</a>
+        <a href="consulting.html">Consulting</a>
+        <a href="about.html">About</a>
+        <a class="btn primary" href="contact.html" style="margin-top:8px">Contact</a>
       </div>
     </div>
   </header>
@@ -78,56 +78,112 @@
               </picture>
             </div>
             <div class="hero-body">
-              <div class="kicker"><span class="dot"></span> Security testing on your terms</div>
-              <h1>You define the mission. I bring the discipline.</h1>
+              <div class="kicker"><span class="dot"></span> Broken access control, and the tools to catch it</div>
+              <h1>The bug that returns 200 OK.</h1>
               <p class="lead">
-                Cybersecurity consulting focused on findings you can act on, guidance you can implement, 
-                and results you can measure. No forced methodologies. No unnecessary complexity.
+                Authorization flaws don't crash anything. The response is well-formed, the status code is
+                green, and the only thing wrong is <em>who</em> received the data. I build open-source tooling
+                to find that class of bug before someone else does—and write about what it takes.
               </p>
               <div class="hero-actions">
-                <a class="btn primary" href="contact.html">Request a Consultation</a>
-                <a class="btn" href="services.html">View Services</a>
+                <a class="btn primary" href="tools.html">Browse the tools</a>
+                <a class="btn" href="resources.html">Security checklists</a>
               </div>
               <div class="pills">
-                <span class="pill">Application & API Security</span>
-                <span class="pill">Cloud Security Review</span>
-                <span class="pill">Detection Engineering</span>
-                <span class="pill">Authorization Testing</span>
+                <span class="pill">API Authorization</span>
+                <span class="pill">Attack Surface Mapping</span>
+                <span class="pill">Application &amp; API Security</span>
+                <span class="pill">Cloud Configuration Review</span>
               </div>
             </div>
           </div>
 
           <!-- Side Card -->
           <aside class="side-card">
-            <h3>How I Operate</h3>
+            <h3>Who's behind this</h3>
             <p>
-              Explicit authorization. Fixed scope. Clear deliverables. Regular communication. 
-              Critical findings reported immediately—not buried in a report weeks later.
+              I'm Jorge Aquino—a software engineer who spends his working hours building systems and his
+              spare ones trying to break them. Marine Corps veteran, former Firefighter/EMT, now writing
+              the tooling I wished existed when I was hunting authorization bugs by hand.
             </p>
             <div class="kpi">
               <div class="box">
-                <strong>Your Rules</strong>
-                <small>You set the scope</small>
+                <strong>Open</strong>
+                <small>Tools are source-available</small>
+              </div>
+              <div class="box">
+                <strong>Local-first</strong>
+                <small>Scans run on your box</small>
+              </div>
+              <div class="box">
+                <strong>Scoped</strong>
+                <small>Allowlists enforced in code</small>
               </div>
               <div class="box">
                 <strong>Small Batch</strong>
                 <small>Few engagements at a time</small>
               </div>
-              <div class="box">
-                <strong>Actionable</strong>
-                <small>Fix-focused findings</small>
-              </div>
-              <div class="box">
-                <strong>Transparent</strong>
-                <small>Fixed pricing</small>
-              </div>
             </div>
             <div class="note">
-              <strong>Professional standard:</strong> All security testing performed only with explicit 
+              <strong>Professional standard:</strong> all security testing performed only with explicit
               written authorization and documented scope. No grey areas, no surprises.
             </div>
+            <a class="btn" href="about.html" style="align-self:flex-start">Read the longer version</a>
           </aside>
         </div>
+      </div>
+    </section>
+
+    <!-- Open Source Tools -->
+    <section class="section compact">
+      <div class="container">
+        <div class="section-title">
+          <h2>Open Source Tools</h2>
+          <p>Security tooling I build and maintain in the open. Read the code, run it yourself.</p>
+        </div>
+        <div class="grid-3">
+          <div class="card">
+            <div class="kicker" style="margin-bottom: 10px;">
+              <span class="badge warn">Go</span>
+            </div>
+            <h3>VardrGate</h3>
+            <p>
+              Continuous API authorization assurance. Describe how an endpoint should treat different
+              callers, run the request as each of them, and get evidence-backed findings when real
+              behavior disagrees.
+            </p>
+            <div class="meta"><a class="link" href="https://github.com/VardrSec/VardrGate" rel="noopener">github.com/VardrSec/VardrGate →</a></div>
+          </div>
+
+          <div class="card">
+            <div class="kicker" style="margin-bottom: 10px;">
+              <span class="badge">Python</span>
+            </div>
+            <h3>VardrMap</h3>
+            <p>
+              Attack surface mapping and threat-modeling workspace. Organize targets, track testing
+              hypotheses, manage findings, and integrate reconnaissance and enrichment APIs during
+              an assessment.
+            </p>
+            <div class="meta"><a class="link" href="https://github.com/VardrSec/VardrMap" rel="noopener">github.com/VardrSec/VardrMap →</a></div>
+          </div>
+
+          <div class="card">
+            <div class="kicker" style="margin-bottom: 10px;">
+              <span class="badge ok">Python</span>
+            </div>
+            <h3>VardrRunner</h3>
+            <p>
+              Local automation runner for the VardrSec toolchain. Polls a backend for queued scan
+              jobs, executes tooling on your own machine, and streams results back. Recon runs on
+              the operator's box, not a vendor's.
+            </p>
+            <div class="meta"><a class="link" href="https://github.com/VardrSec/VardrRunner" rel="noopener">github.com/VardrSec/VardrRunner →</a></div>
+          </div>
+        </div>
+        <p style="margin-top:16px">
+          <a class="link" href="tools.html">All tools, including what's still in development →</a>
+        </p>
       </div>
     </section>
 
@@ -135,8 +191,8 @@
     <section class="section compact">
       <div class="container">
         <div class="section-title">
-          <h2>Core Capabilities</h2>
-          <p>Technical services deployed to address your specific security priorities.</p>
+          <h2>What I Can Help With</h2>
+          <p>Where the tooling came from, and where the same thinking gets applied to client work.</p>
         </div>
         <div class="grid-3">
           <div class="card">
@@ -260,68 +316,21 @@
       </div>
     </section>
 
-    <!-- Open Source Tools -->
-    <section class="section compact">
-      <div class="container">
-        <div class="section-title">
-          <h2>Open Source Tools</h2>
-          <p>Security tooling I build and maintain in the open. Read the code, run it yourself.</p>
-        </div>
-        <div class="grid-3">
-          <div class="card">
-            <div class="kicker" style="margin-bottom: 10px;">
-              <span class="badge warn">Go</span>
-            </div>
-            <h3>VardrGate</h3>
-            <p>
-              Continuous API authorization assurance. Describe how an endpoint should treat different
-              callers, run the request as each of them, and get evidence-backed findings when real
-              behavior disagrees.
-            </p>
-            <div class="meta"><a class="link" href="https://github.com/VardrSec/VardrGate" rel="noopener">github.com/VardrSec/VardrGate →</a></div>
-          </div>
-
-          <div class="card">
-            <div class="kicker" style="margin-bottom: 10px;">
-              <span class="badge">Python</span>
-            </div>
-            <h3>VardrMap</h3>
-            <p>
-              Attack surface mapping and threat-modeling workspace. Organize targets, track testing
-              hypotheses, manage findings, and integrate reconnaissance and enrichment APIs during
-              an assessment.
-            </p>
-            <div class="meta"><a class="link" href="https://github.com/VardrSec/VardrMap" rel="noopener">github.com/VardrSec/VardrMap →</a></div>
-          </div>
-
-          <div class="card">
-            <div class="kicker" style="margin-bottom: 10px;">
-              <span class="badge ok">Python</span>
-            </div>
-            <h3>VardrRunner</h3>
-            <p>
-              Local automation runner for the VardrSec toolchain. Polls a backend for queued scan
-              jobs, executes tooling on your own machine, and streams results back. Recon runs on
-              the operator's box, not a vendor's.
-            </p>
-            <div class="meta"><a class="link" href="https://github.com/VardrSec/VardrRunner" rel="noopener">github.com/VardrSec/VardrRunner →</a></div>
-          </div>
-        </div>
-      </div>
-    </section>
+    
 
     <!-- CTA Section -->
     <section class="section compact">
       <div class="container">
         <div class="card" style="text-align: center; padding: 32px;">
-          <h3>Ready to get started?</h3>
+          <h3>Working on something that needs a second pair of eyes?</h3>
           <p style="margin-top: 12px; max-width: 700px; margin-left: auto; margin-right: auto;">
-            Tell me what you need tested, reviewed, or built. I’ll provide an honest assessment of whether 
-            I’m the right fit and, if so, a clear proposal with fixed pricing and deliverables.
+            Whether it's a question about one of the tools, an authorization design you're unsure about,
+            or a review you want scoped—tell me what you're building. If I'm not the right fit, I'll say
+            so and point you somewhere better.
           </p>
           <div style="margin-top: 20px;">
-            <a class="btn primary" href="contact.html" style="display: inline-flex; margin-right: 10px;">Request a Consultation</a>
-            <a class="btn" href="services.html" style="display: inline-flex;">View All Services</a>
+            <a class="btn primary" href="contact.html" style="display: inline-flex; margin-right: 10px;">Get in touch</a>
+            <a class="btn" href="consulting.html" style="display: inline-flex;">How engagements work</a>
           </div>
         </div>
       </div>
@@ -340,9 +349,11 @@
           </p>
         </div>
         <div class="links">
-          <h4>Company</h4>
-          <a href="about.html">About</a>
+          <h4>Site</h4>
+          <a href="tools.html">Tools</a>
           <a href="resources.html">Resources</a>
+          <a href="consulting.html">Consulting</a>
+          <a href="about.html">About</a>
         </div>
         <div class="links">
           <h4>Legal</h4>

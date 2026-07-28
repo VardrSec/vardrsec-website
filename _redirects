@@ -6,3 +6,8 @@
 # Always Online to substitute. Inbound links land on the home page.
 /case-studies      /  301
 /case-studies.html /  301
+
+# services.html was relabelled "Consulting" when the site stopped leading with
+# an agency-style services catalogue.
+/services      /consulting  301
+/services.html /consulting  301

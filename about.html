@@ -4,14 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>About | VardrSec</title>
-  <meta name="description" content="About VardrSec cybersecurity consulting - our approach, mission, and values." />
+  <meta name="description" content="Jorge Aquino - Marine Corps veteran, former Firefighter/EMT, now a software engineer building open-source tooling for broken access control." />
   <link rel="canonical" href="https://vardrsec.com/about" />
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="VardrSec" />
   <meta property="og:url" content="https://vardrsec.com/about" />
   <meta property="og:title" content="About | VardrSec" />
-  <meta property="og:description" content="About VardrSec cybersecurity consulting - our approach, mission, and values." />
+  <meta property="og:description" content="Jorge Aquino - Marine Corps veteran, former Firefighter/EMT, now a software engineer building open-source tooling for broken access control." />
   <meta property="og:image" content="https://vardrsec.com/assets/orgbanner.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="stylesheet" href="css/styles.css" />
@@ -36,15 +36,15 @@
         <!-- Desktop Navigation -->
         <div class="nav-links">
           <a href="index.html">Home</a>
+          <a href="tools.html">Tools</a>
+          <a href="resources.html">Resources</a>
+          <a href="consulting.html">Consulting</a>
           <a class="active" href="about.html">About</a>
-          <a href="services.html">Services</a>
-          <a href="contact.html">Contact</a>
         </div>
         
         <!-- Desktop CTA Buttons -->
         <div class="nav-cta">
-          <a class="btn" href="resources.html">Resources</a>
-          <a class="btn primary" href="contact.html">Request a Consult</a>
+          <a class="btn primary" href="contact.html">Contact</a>
         </div>
         
         <!-- Mobile Menu Toggle -->
@@ -56,250 +56,147 @@
       <!-- Mobile Menu -->
       <div class="mobile-panel" id="mobilePanel">
         <a href="index.html">Home</a>
-        <a class="active" href="about.html">About</a>
-        <a href="services.html">Services</a>
+        <a href="tools.html">Tools</a>
         <a href="resources.html">Resources</a>
-        <a href="contact.html">Contact</a>
-        <a class="btn primary" href="contact.html" style="margin-top:8px">Request a Consult</a>
+        <a href="consulting.html">Consulting</a>
+        <a class="active" href="about.html">About</a>
+        <a class="btn primary" href="contact.html" style="margin-top:8px">Contact</a>
       </div>
     </div>
   </header>
 
   <main>
-    <!-- Company Overview -->
     <section class="section">
       <div class="container">
         <div class="section-title">
-          <h1>About VardrSec</h1>
-          <p>Security consulting built on discipline, integrity, and client-driven engagement.</p>
+          <h1>About</h1>
+          <p>Who I am, what I build, and why this particular class of bug.</p>
         </div>
 
-        <!-- Company Description -->
         <div class="card" style="margin-bottom: 24px;">
           <div class="kicker" style="margin-bottom: 12px;">
-            <span class="badge ok">My Approach</span>
+            <span class="badge ok">Jorge Aquino</span>
           </div>
-          <h3>You define the battlefield. I adapt to your rules of engagement.</h3>
-          
+          <h3>Two careers spent on things that fail quietly.</h3>
+
           <p style="margin-top: 14px;">
-            VardrSec is a cybersecurity consulting practice focused on offensive security testing, cloud security 
-            assessment, and security program enablement. What sets me apart is my commitment to operating on your 
-            terms—your environment, your constraints, your objectives.
+            I was a Marine, and then a Firefighter/EMT. Both jobs teach you the same uncomfortable lesson:
+            the thing that hurts people is rarely the thing making noise. It's the detail nobody checked,
+            the assumption everyone shared, the step that got skipped because it had never mattered before.
+            You learn to look at a situation and ask what everyone is taking for granted—because that is
+            almost always where it went wrong.
           </p>
 
           <p style="margin-top: 12px;">
-            You choose the scope. You set the boundaries. You define success. My role is to bring technical 
-            precision, operational discipline, and actionable intelligence to whatever engagement model serves 
-            your needs best. Whether that's a comprehensive penetration test, targeted API assessment, cloud 
-            security review, or ongoing advisory support—I adapt.
+            I do software now. I write code for a living, and I spend my own hours trying to break the kind
+            of code I write. It turns out that habit of hunting the quiet failure transfers almost perfectly.
+            Security bugs that make noise get caught: the crash, the stack trace, the scanner alert. The ones
+            that survive to production are the ones that look completely fine.
           </p>
 
           <p style="margin-top: 12px;">
-            Every organization faces different threats, operates under different constraints, and defines risk 
-            differently. I don't believe in forcing clients into rigid methodologies or pre-packaged assessments. 
-            Instead, I listen, understand your actual risk landscape, and tailor my approach to deliver findings 
-            that matter to your business.
+            Which is how I ended up fixated on broken access control.
           </p>
-
-          <div class="meta" style="margin-top: 16px;">
-            Core capabilities: Web application testing • API security • Cloud architecture review • Authorization 
-            analysis • Detection engineering • Security program development
-          </div>
         </div>
 
-        <!-- Client-Centric Approach -->
+        <div class="card" style="margin-bottom: 24px;">
+          <h3>Why authorization, specifically</h3>
+
+          <p style="margin-top: 14px;">
+            An authorization flaw doesn't crash anything. The endpoint returns 200. The JSON is well-formed.
+            Response times are normal, logs are clean, and every automated test passes. The only thing wrong
+            is <em>who</em> got the data—and no scanner on earth knows what your access rules were supposed
+            to be, because you never wrote them down anywhere a machine could read.
+          </p>
+
+          <p style="margin-top: 12px;">
+            That gap is why it stays the most common serious finding in real assessments, and why it is
+            almost always found by a human being patiently trying one more request as one more user. It is
+            tedious, it does not automate well, and it is exactly the sort of problem worth building tools
+            for.
+          </p>
+
+          <p style="margin-top: 12px;">
+            So I did. <a class="link" href="tools.html">VardrGate</a> makes you state your access rules
+            explicitly and then tests them on every commit. <a class="link" href="tools.html">VardrMap</a>
+            exists because I got tired of not being able to answer "what have I actually looked at?"
+            <a class="link" href="tools.html">VardrRunner</a> keeps scanning on the operator's own machine,
+            where it belongs. Each one started as a thing I needed and could not find.
+          </p>
+        </div>
+
         <div class="grid-2" style="margin-bottom: 24px;">
           <div class="card">
-            <h3>Absolute Discretion</h3>
+            <h3>Being an engineer is the point</h3>
             <p style="margin-top: 12px;">
-              Your vulnerabilities, your data, your business operations—all are treated with strict confidentiality. 
-              Every engagement operates under NDA. Findings are reported directly to you first, with appropriate time 
-              for remediation before any discussion of disclosure.
+              I'm not a consultant who learned to read code. I ship software, review pull requests, and
+              live with the consequences of my own architectural decisions. When I hand you a finding, it
+              comes with a fix that accounts for your deadline and your existing patterns—because I know
+              exactly what it feels like to receive a report that says "implement centralized authorization"
+              two weeks before a release.
             </p>
           </div>
 
           <div class="card">
-            <h3>Explicit Authorization</h3>
+            <h3>Authorization is not negotiable</h3>
             <p style="margin-top: 12px;">
-              All testing is performed only with written authorization and clearly defined scope. No grey areas, 
-              no assumptions, no surprises. You maintain complete control over what gets tested, when, and how. 
-              If it's not in the scope document, it doesn't get touched.
+              Every piece of testing happens with explicit written permission and a documented scope. Nothing
+              outside that scope gets touched, ever. This is not a legal disclaimer—it's why
+              <a class="link" href="tools.html">VardrForge</a> bakes target allowlists into the tools it
+              generates, so a script physically cannot be pointed somewhere it was not authorised to go.
+              I'd rather the guardrail live in the code than in my memory.
             </p>
           </div>
         </div>
 
         <div class="grid-2" style="margin-bottom: 24px;">
           <div class="card">
-            <h3>Flexible Engagement Models</h3>
+            <h3>Findings you can act on</h3>
             <p style="margin-top: 12px;">
-              Project-based assessments, retainer arrangements, incident response support, or ongoing advisory—I 
-              work within the engagement structure that fits your budget, timeline, and operational needs. No forced 
-              packages, no minimum commitments that don't serve your goals.
+              If I report something critical, I can reproduce it in front of you. If I can't reproduce it,
+              I don't report it. No severity inflation to justify an invoice, no padding the finding count,
+              no thirty-page appendix of scanner output nobody reads. A short report where everything is
+              real beats a long one where half of it isn't.
             </p>
           </div>
 
           <div class="card">
-            <h3>Honest Communication</h3>
+            <h3>Honest about the limits</h3>
             <p style="margin-top: 12px;">
-              If I find critical issues, you'll hear about them immediately—not buried in a report weeks later. 
-              If your proposed scope won't address your actual risk, I’ll tell you. If a finding turns out to be 
-              less severe than initially assessed, I’ll say that too. Honesty over billable hours.
+              I work full time as a software engineer and take a small number of engagements alongside it.
+              That means realistic timelines instead of agency ones, and no pretending to offer emergency
+              incident response. If you have an active breach you need a team that answers the phone at 3am.
+              Telling you otherwise would cost you the one thing you can't get back.
             </p>
           </div>
         </div>
 
-        <!-- Founder Section -->
-        <div class="card" style="margin-bottom: 36px;">
-          <div class="kicker" style="margin-bottom: 12px;">
-            <span class="badge">Founder & Principal Consultant</span>
-          </div>
-          <h3>Jorge Aquino</h3>
-          
+        <div class="card" style="margin-bottom: 24px;">
+          <h3>What I'm working toward</h3>
           <p style="margin-top: 14px;">
-            Jorge founded VardrSec to bring the operational discipline and mission-focused mindset developed in 
-            high-stakes environments to cybersecurity consulting. As a Marine Corps veteran and former Firefighter/EMT, 
-            he learned that protecting people and systems requires the same fundamentals: clear assessment under pressure, 
-            evidence-based decision-making, and reliable execution when it matters most.
+            The tools are the long game. Every assessment I've done has left me with the same thought—that
+            most of what I just did by hand should have been catchable automatically, if only someone had
+            written the rules down. I want to close that gap: make authorization testing something a team
+            runs on every commit rather than something they buy once a year and hope covers enough.
           </p>
-
           <p style="margin-top: 12px;">
-            His approach to security consulting emphasizes precision over volume, substance over theater, and outcomes 
-            over compliance checkboxes. Whether conducting offensive security testing, reviewing cloud architectures, 
-            or building detection capabilities, Jorge focuses on findings that engineering teams can actually remediate 
-            and security measures that organizations can sustain.
-          </p>
-
-          <p style="margin-top: 12px;">
-            Technical focus areas include authorization vulnerabilities, API security patterns, cloud security posture, 
-            and detection engineering. He approaches every engagement with an engineering mindset—understanding how 
-            systems are designed, identifying how they fail under stress, and translating those failures into measurable 
-            business risk with practical remediation paths.
-          </p>
-
-          <p style="margin-top: 12px;">
-            VardrSec operates on the principle that security consulting should serve the client's mission, not the 
-            consultant's methodology. Your objectives define the engagement. Your constraints shape the approach. 
-            Your outcomes measure success.
+            Alongside that, the <a class="link" href="resources.html">checklists</a> on this site are the
+            short version of what I've learned, free and copy-pasteable into your own tickets and code
+            reviews. If they save one team from shipping an IDOR, they've done their job.
           </p>
         </div>
-      </div>
-    </section>
 
-    <!-- Mission & Vision -->
-    <section class="section" style="padding-top: 50px;" id="mission-vision">
-      <div class="container">
-        <div class="section-title">
-          <h2>Mission & Vision</h2>
-          <p>Why I do this work and where I’m headed.</p>
-        </div>
-
-        <div class="grid-2" style="margin-bottom: 36px;">
-          <div class="card">
-            <div class="kicker" style="margin-bottom: 12px;">
-              <span class="badge ok">Mission</span>
-            </div>
-            <h3>Protect what matters through actionable security</h3>
-            <p style="margin-top: 14px;">
-              Help organizations identify and remediate real security risks before they become incidents. Deliver 
-              findings you can act on, guidance you can implement, and results you can measure—without the noise, 
-              theater, or unnecessary complexity that often accompanies security consulting.
-            </p>
-            <p style="margin-top: 12px;">
-              I approach every engagement with the discipline and precision developed in high-accountability 
-              environments, where clear thinking under pressure and attention to detail aren't optional. Security 
-              should enable your business, not slow it down.
-            </p>
-          </div>
-
-          <div class="card">
-            <div class="kicker" style="margin-bottom: 12px;">
-              <span class="badge">Vision</span>
-            </div>
-            <h3>Security that teams trust and adopt</h3>
-            <p style="margin-top: 14px;">
-              Build a security practice where technical teams view security work as partnership rather than obstacle. 
-              Where findings come with context, remediation guidance is specific and validated, and security measures 
-              are designed to be sustainable.
-            </p>
-            <p style="margin-top: 12px;">
-              Organizations deserve practical security expertise that respects their constraints, understands their 
-              risk tolerance, and delivers proportional solutions. Security consulting should be measured by 
-              outcomes—reduced risk, faster response, teams that ship with confidence—not by report length or 
-              finding count.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Core Values -->
-    <section class="section" style="padding-top: 50px;" id="values">
-      <div class="container">
-        <div class="section-title">
-          <h2>Core Values</h2>
-          <p>The principles that guide every decision and engagement.</p>
-        </div>
-
-        <div class="grid-3" style="margin-bottom: 24px;">
-          <div class="card">
-            <h3>Integrity and Trust</h3>
-            <p style="margin-top: 12px;">
-              Operating with absolute honesty, ethics, and discretion. As consultants entrusted with sensitive 
-              data and vulnerability information, I maintain strict confidentiality and transparency about risks—even 
-              when the news is difficult to deliver.
-            </p>
-          </div>
-
-          <div class="card">
-            <h3>Relentless Innovation</h3>
-            <p style="margin-top: 12px;">
-              Staying ahead of evolving threats through continuous research, new methodologies, and modern analytics. 
-              I challenge the status quo to provide cutting-edge defense rather than just compliance-driven security.
-            </p>
-          </div>
-
-          <div class="card">
-            <h3>Client-Centricity</h3>
-            <p style="margin-top: 12px;">
-              Treating each client's security posture as a personal mission. I focus on tailored solutions aligned 
-              with business goals and risk appetite, building long-term collaborative partnerships rather than 
-              transactional engagements.
-            </p>
-          </div>
-        </div>
-
-        <div class="grid-2" style="margin-bottom: 36px;">
-          <div class="card">
-            <h3>Continuous Learning</h3>
-            <p style="margin-top: 12px;">
-              Cultivating ongoing education to keep pace with the rapidly changing cyber landscape. I invest in 
-              continuous skill development, certifications, and research to ensure my expertise remains current 
-              and relevant.
-            </p>
-          </div>
-
-          <div class="card">
-            <h3>Accountability and Excellence</h3>
-            <p style="margin-top: 12px;">
-              Taking ownership of outcomes and adhering to the highest quality standards in service delivery. 
-              I hold myself responsible for my actions, learn from mistakes, and consistently provide 
-              reliable, high-quality deliverables.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="section" style="padding-top: 50px; padding-bottom: 60px;">
-      <div class="container">
         <div class="card" style="text-align: center; padding: 32px;">
-          <h3>Ready to define your engagement?</h3>
+          <h3>Let's talk</h3>
           <p style="margin-top: 12px; max-width: 700px; margin-left: auto; margin-right: auto;">
-            Whether you need penetration testing, cloud security review, API assessment, or security program 
-            support—let's discuss how I can adapt to your specific needs, constraints, and objectives.
+            Questions about the tools, an authorization design you want a second opinion on, or a review
+            you'd like scoped—I'm interested in all three. If I'm not the right fit, I'll tell you that
+            plainly and point you somewhere better.
           </p>
-          <a href="contact.html" class="btn primary" style="margin-top: 20px; display: inline-flex;">Request a Consultation</a>
+          <div style="margin-top: 20px;">
+            <a class="btn primary" href="contact.html" style="display: inline-flex; margin-right: 10px;">Get in touch</a>
+            <a class="btn" href="tools.html" style="display: inline-flex;">See the tools</a>
+          </div>
         </div>
       </div>
     </section>
@@ -317,9 +214,11 @@
           </p>
         </div>
         <div class="links">
-          <h4>Company</h4>
-          <a href="about.html">About</a>
+          <h4>Site</h4>
+          <a href="tools.html">Tools</a>
           <a href="resources.html">Resources</a>
+          <a href="consulting.html">Consulting</a>
+          <a href="about.html">About</a>
         </div>
         <div class="links">
           <h4>Legal</h4>
