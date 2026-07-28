@@ -274,3 +274,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   The script now sits outside the partial region, and `tools/verify.js` fails if a page has
   a Turnstile widget without the script, if the script sits inside the footer partial, or
   if a form posting to `/api/contact` has no widget at all.
+
+## Hero rewritten; narrow-viewport overflow fixed
+
+### Changed
+
+- Hero replaced with direct product language: eyebrow "Open-source · Local-first",
+  headline "Verify authorization across users, roles, and tenants.", and supporting copy
+  describing what the tools actually do. The secondary tagline is gone; the headline no
+  longer needs a slogan under it.
+- Meta description now mirrors the hero.
+
+### Removed
+
+- Both previous headlines and the unused `.tagline` rule.
+
+### Fixed
+
+- Horizontal overflow on the contact page at narrow widths, from two separate causes.
+  `.form` is a single-column grid whose track sized to the widest child — a `<textarea>`
+  has a ~300px intrinsic width — so the form grew past its container instead of shrinking;
+  fixed with `minmax(0, 1fr)`. The Turnstile widget renders at a fixed 300px, wider than a
+  320px viewport minus padding; it now sits in a wrapper that caps the layout box, with the
+  widget scaled to fit.

@@ -515,15 +515,28 @@ h1{font-size:40px; line-height:1.08; letter-spacing:-1px}
 .table-scroll{overflow-x:auto; -webkit-overflow-scrolling:touch; max-width:100%}
 .table-scroll .table{min-width:520px}
 
-/* Secondary brand statement under the hero actions. */
-.tagline{
-  margin:20px 0 0; padding-top:16px;
-  border-top:1px solid rgba(255,255,255,.09);
-  font-size:13.5px; color:rgba(231,237,247,.6); font-style:italic;
-}
 
 .check code{
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   font-size:.92em; padding:1px 5px; border-radius:5px;
   background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.10);
+}
+
+
+/* A single-column grid sizes its track to the widest child, and a <textarea> has a
+   ~300px intrinsic width. Without minmax(0,…) the form grew past its container on
+   narrow screens instead of shrinking. */
+.form{grid-template-columns: minmax(0, 1fr)}
+.form > *{min-width:0}
+.form textarea, .form input{max-width:100%}
+/* Long badges must wrap rather than force the row wider. */
+.badge{max-width:100%}
+
+/* Turnstile renders a fixed 300px widget, which is wider than a 320px viewport once
+   container and card padding are removed. The wrapper caps the layout box; the inner
+   widget is visually scaled to fit, since transform alone does not change layout size. */
+.turnstile-wrap{max-width:100%; overflow:hidden}
+@media (max-width: 400px){
+  .turnstile-wrap{height:62px}
+  .turnstile-wrap .cf-turnstile{transform:scale(.78); transform-origin:left top}
 }
