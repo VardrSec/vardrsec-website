@@ -32,11 +32,17 @@ or on a real deployment.
    | `RESEND_API_KEY` | API key from [resend.com](https://resend.com) |
    | `CONTACT_TO` | `contact@vardrsec.com` |
 
-4. Verify `vardrsec.com` as a sending domain in Resend so `noreply@vardrsec.com` passes
-   SPF/DKIM. Until this is done the form returns a 502 and visitors fall back to the
-   `mailto:` link.
+4. Verify **`send.vardrsec.com`** — not the root domain — as a sending domain in Resend,
+   so `noreply@send.vardrsec.com` passes SPF/DKIM. Until this is done the form returns a
+   502 and visitors fall back to the `mailto:` link.
+
+   The subdomain is required, not cosmetic: a hostname carries only one SPF record, and
+   the root's belongs to Cloudflare Email Routing (`v=spf1 include:_spf.mx.cloudflare.net
+   ~all`). Adding a second SPF record at the root is a permerror that breaks sending
+   *and* receiving.
+
 5. Set up Cloudflare Email Routing so mail to `contact@vardrsec.com` forwards to a real
-   inbox.
+   inbox. (Done: MX + SPF are live, `contact@` forwards to a personal address.)
 6. **Add a rate-limiting rule on `/api/contact`** (Security > WAF > Rate limiting rules).
    Suggested: 5 requests per 10 minutes per IP, action Block.
 

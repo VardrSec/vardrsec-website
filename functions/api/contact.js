@@ -64,7 +64,9 @@ export async function onRequest({ request, env }) {
       "content-type": "application/json",
     },
     body: JSON.stringify({
-      from: "VardrSec Website <noreply@vardrsec.com>",
+      // Sends from the send.* subdomain: the root SPF record belongs to
+      // Cloudflare Email Routing, and a hostname can only carry one.
+      from: "VardrSec Website <noreply@send.vardrsec.com>",
       to: [env.CONTACT_TO],
       reply_to: email,
       subject: `Contact form: ${email}`,
