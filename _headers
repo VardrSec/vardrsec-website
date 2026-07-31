@@ -16,3 +16,22 @@
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=(), usb=()
   Strict-Transport-Security: max-age=31536000; includeSubDomains
+
+# Caching lives here, not in a Cloudflare Browser Cache TTL setting. A zone-level
+# TTL is invisible from the repo and diverges silently - the same failure mode that
+# hid a broken CSP. Set the zone to "Respect Existing Headers" so these win.
+#
+# HTML is revalidated every request so a deploy is visible immediately. CSS and JS
+# have no content hash in their filenames, so they get a short TTL with
+# stale-while-revalidate rather than a long one. Images are immutable in practice.
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+/css/*
+  Cache-Control: public, max-age=600, stale-while-revalidate=86400
+
+/js/*
+  Cache-Control: public, max-age=600, stale-while-revalidate=86400
+
+/assets/*
+  Cache-Control: public, max-age=2592000

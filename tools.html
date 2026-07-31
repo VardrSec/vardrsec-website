@@ -18,6 +18,7 @@
 </head>
 <body>
 <!-- @partial:header -->
+  <a class="skip-link" href="#main">Skip to content</a>
   <header class="topbar">
     <div class="container">
       <nav class="nav">
@@ -68,7 +69,7 @@
   </header>
   <!-- @endpartial -->
 
-  <main>
+  <main id="main" tabindex="-1">
     <section class="section">
       <div class="container">
         <div class="section-title">
@@ -76,105 +77,105 @@
           <p>Open-source tools for testing authorization, mapping attack surfaces, and running security workflows locally.</p>
         </div>
 
-        <div class="note" style="margin-bottom: 32px;">
+        <div class="note mb-7">
           <strong>A common thread:</strong> broken access control is difficult to test automatically
           because scanners cannot infer the permissions an application intended to enforce. These tools make
           those rules explicit, repeatable, and cheaper to verify.
         </div>
 
         <!-- Published -->
-        <div class="section-title" style="margin-top: 42px;">
+        <div class="section-title mt-9">
           <h2>Published</h2>
           <p>Released under permissive licenses and ready to use.</p>
         </div>
 
-        <div class="grid-2" style="margin-bottom: 24px;">
+        <div class="grid-2 mb-6">
           <div class="card">
-            <div class="kicker" style="margin-bottom: 12px;">
+            <div class="kicker mb-3">
               <span class="badge warn">Go</span>
               <span class="badge ok">Open source</span>
             </div>
             <h3>VardrGate</h3>
-            <p style="margin-top: 14px;">
+            <p class="mt-4">
               Define who should be allowed to call an endpoint. VardrGate repeats the request across users
               and roles, then flags where actual behavior violates the policy—with request and response
               evidence.
             </p>
-            <p style="margin-top: 12px;">
+            <p class="mt-3">
               Because the policy is a file, it runs in CI. Authorization gets tested on every commit rather
               than once a year.
             </p>
-            <div class="meta" style="margin-top: 14px;">
+            <div class="meta mt-4">
               <a class="link" href="https://github.com/VardrSec/VardrGate" rel="noopener">github.com/VardrSec/VardrGate →</a><br/>Apache-2.0 licensed
             </div>
           </div>
 
           <div class="card">
-            <div class="kicker" style="margin-bottom: 12px;">
+            <div class="kicker mb-3">
               <span class="badge">Python</span>
               <span class="badge ok">Open source</span>
             </div>
             <h3>VardrMap</h3>
-            <p style="margin-top: 14px;">
+            <p class="mt-4">
               Keep scope, assets, testing hypotheses, evidence, and findings in one workspace so you always
               know what has—and has not—been tested.
             </p>
-            <p style="margin-top: 12px;">
+            <p class="mt-3">
               Reconnaissance and enrichment APIs feed the same workspace, so context does not end up spread
               across a document, an email, and a terminal scrollback.
             </p>
-            <div class="meta" style="margin-top: 14px;">
+            <div class="meta mt-4">
               <a class="link" href="https://github.com/VardrSec/VardrMap" rel="noopener">github.com/VardrSec/VardrMap →</a><br/>MIT licensed
             </div>
           </div>
         </div>
 
-        <div class="card" style="margin-bottom: 36px;">
-          <div class="kicker" style="margin-bottom: 12px;">
+        <div class="card mb-8">
+          <div class="kicker mb-3">
             <span class="badge">Python</span>
             <span class="badge ok">Open source</span>
           </div>
           <h3>VardrRunner</h3>
-          <p style="margin-top: 14px;">
+          <p class="mt-4">
             Run queued security jobs on your own machine while a remote backend handles orchestration and
             results. Credentials and scan traffic remain local.
           </p>
-          <p style="margin-top: 12px;">
+          <p class="mt-3">
             The backend and the runner are fully decoupled and only ever exchange JSON, so orchestration
             never requires handing over access to the systems being tested.
           </p>
-          <div class="meta" style="margin-top: 14px;">
+          <div class="meta mt-4">
             <a class="link" href="https://github.com/VardrSec/VardrRunner" rel="noopener">github.com/VardrSec/VardrRunner →</a><br/>MIT licensed
           </div>
         </div>
 
         <!-- In development -->
-        <div class="section-title" style="margin-top: 42px;">
+        <div class="section-title mt-9">
           <h2>In Development</h2>
           <p>Active experiments and design work. These projects are not yet supported for production use.</p>
         </div>
 
-        <div class="grid-3" style="margin-bottom: 24px;">
+        <div class="grid-3 mb-6">
           <div class="card">
-            <div class="kicker" style="margin-bottom: 10px;">
+            <div class="kicker mb-3">
               <span class="badge">Python</span>
             </div>
             <h3>VardrScanner</h3>
-            <p style="margin-top: 12px;">
+            <p class="mt-3">
               An API security testing framework focused on the OWASP API Top 3. Architecture and design
               notes are public; the implementation is not.
             </p>
-            <div class="meta" style="margin-top: 12px;">
+            <div class="meta mt-3">
               <a class="link" href="https://github.com/jorge-aquino/vardrscanner-docs" rel="noopener">Read the design docs →</a>
             </div>
           </div>
 
           <div class="card">
-            <div class="kicker" style="margin-bottom: 10px;">
+            <div class="kicker mb-3">
               <span class="badge">Python</span>
             </div>
             <h3>VardrForge</h3>
-            <p style="margin-top: 12px;">
+            <p class="mt-3">
               A local CLI that generates small, modular penetration testing tools from controlled templates—with
               scope validation baked in. Every generated tool is restricted to an explicit target
               allowlist, so it cannot be pointed somewhere it was never authorized to go.
@@ -182,11 +183,11 @@
           </div>
 
           <div class="card">
-            <div class="kicker" style="margin-bottom: 10px;">
+            <div class="kicker mb-3">
               <span class="badge warn">Go</span>
             </div>
             <h3>VardrVault</h3>
-            <p style="margin-top: 12px;">
+            <p class="mt-3">
               A secrets manager with token auth, encrypted storage, and audit logging. Built mostly to
               understand the problem properly—you learn a great deal about a threat model by having to
               implement against it.
@@ -194,14 +195,14 @@
           </div>
         </div>
 
-        <div class="card" style="text-align: center; padding: 32px; margin-top: 42px;">
+        <div class="card mt-9" style="text-align: center; padding: 32px">
           <h3>Found a bug? Have a better idea?</h3>
-          <p style="margin-top: 12px; max-width: 700px; margin-left: auto; margin-right: auto;">
+          <p class="mt-3" style="max-width: 700px; margin-left: auto; margin-right: auto">
             Issues and pull requests are welcome on any of the published repositories. If you have found
             something security-relevant in one of these tools, please report it privately
             first&mdash;the same courtesy I would ask of anyone testing a system of mine.
           </p>
-          <div style="margin-top: 20px;">
+          <div class="mt-5">
             <a class="btn primary" href="contact.html" style="display: inline-flex; margin-right: 10px;">Get in touch</a>
             <a class="btn" href="https://github.com/VardrSec" rel="noopener" style="display: inline-flex;">Browse the org</a>
           </div>
@@ -216,7 +217,7 @@
     <div class="container">
       <div class="footer-grid">
         <div>
-          <h4>VardrSec</h4>
+          <h2 class="footer-h">VardrSec</h2>
           <p>Offensive security research and tooling. Open-source security tools, practical guidance, and an open door for engineers working on the same problems.</p>
           <p class="footer-contact">
             <a href="mailto:contact@vardrsec.com">contact@vardrsec.com</a><br/>
@@ -224,14 +225,14 @@
           </p>
         </div>
         <div class="links">
-          <h4>Site</h4>
+          <h2 class="footer-h">Site</h2>
           <a href="tools.html">Tools</a>
           <a href="resources.html">Resources</a>
           <a href="collaboration.html">Collaboration</a>
           <a href="about.html">About</a>
         </div>
         <div class="links">
-          <h4>Legal</h4>
+          <h2 class="footer-h">Legal</h2>
           <a href="privacy.html">Privacy</a>
           <a href="terms.html">Terms</a>
           <a href="contact.html">Contact</a>

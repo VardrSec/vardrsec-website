@@ -28,6 +28,19 @@ for (const page of pages) {
   const h1s = (s.match(/<h1[ >]/g) || []).length;
   ok(h1s === 1, `${page}: expected exactly 1 <h1>, found ${h1s}`);
 
+  // Heading levels must not skip downward. Five pages once jumped h1 -> h3, and
+  // fixing that then exposed an h2 -> h4 jump into the footer.
+  const levels = [...s.matchAll(/<h([1-6])[ >]/g)].map((m) => +m[1]);
+  for (let i = 1; i < levels.length; i++) {
+    ok(
+      levels[i] - levels[i - 1] <= 1,
+      `${page}: heading level skips h${levels[i - 1]} -> h${levels[i]}`
+    );
+  }
+
+  ok(s.includes('class="skip-link"'), `${page}: missing skip link`);
+  ok(s.includes('<main id="main"'), `${page}: <main> is not a skip-link target`);
+
   for (const tag of ["html", "head", "body", "main", "header", "footer", "nav", "form", "picture", "section", "table", "ul"]) {
     const open = (s.match(new RegExp(`<${tag}[ >]`, "g")) || []).length;
     const close = (s.match(new RegExp(`</${tag}>`, "g")) || []).length;

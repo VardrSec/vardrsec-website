@@ -14,6 +14,9 @@
  */
 
 const MAX_MESSAGE = 5000;
+// Neither upstream is under our control, so both calls are bounded. Without this a
+// hung dependency holds the invocation open until the platform kills it.
+const UPSTREAM_TIMEOUT_MS = 8000;
 const MAX_EMAIL = 254;
 
 const json = (status, body) =>
@@ -65,37 +68,52 @@ export async function onRequest({ request, env }) {
     return json(403, { error: "Please complete the verification check." });
   }
 
-  const verify = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
-    method: "POST",
-    body: new URLSearchParams({
-      secret: env.TURNSTILE_SECRET_KEY,
-      response: token,
-      remoteip: request.headers.get("CF-Connecting-IP") || "",
-    }),
-  });
-  const outcome = await verify.json().catch(() => ({ success: false }));
+  let outcome;
+  try {
+    const verify = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+      method: "POST",
+      signal: AbortSignal.timeout(UPSTREAM_TIMEOUT_MS),
+      body: new URLSearchParams({
+        secret: env.TURNSTILE_SECRET_KEY,
+        response: token,
+        remoteip: request.headers.get("CF-Connecting-IP") || "",
+      }),
+    });
+    outcome = await verify.json().catch(() => ({ success: false }));
+  } catch (err) {
+    // A timeout or network failure must not be treated as a pass.
+    console.error("turnstile unreachable", err.name);
+    return json(503, { error: "Verification is unavailable. Please email contact@vardrsec.com." });
+  }
 
   if (!outcome.success) {
     console.warn("turnstile rejected", outcome["error-codes"]);
     return json(403, { error: "Verification failed. Please try again." });
   }
 
-  const res = await fetch("https://api.resend.com/emails", {
-    method: "POST",
-    headers: {
-      authorization: `Bearer ${env.RESEND_API_KEY}`,
-      "content-type": "application/json",
-    },
-    body: JSON.stringify({
-      // Sends from the send.* subdomain: the root SPF record belongs to
-      // Cloudflare Email Routing, and a hostname can only carry one.
-      from: "VardrSec Website <noreply@send.vardrsec.com>",
-      to: [env.CONTACT_TO],
-      reply_to: email,
-      subject: `Contact form: ${email}`,
-      html: `<p><strong>From:</strong> ${escapeHtml(email)}</p><pre>${escapeHtml(message)}</pre>`,
-    }),
-  });
+  let res;
+  try {
+    res = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      signal: AbortSignal.timeout(UPSTREAM_TIMEOUT_MS),
+      headers: {
+        authorization: `Bearer ${env.RESEND_API_KEY}`,
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        // Sends from the send.* subdomain: the root SPF record belongs to
+        // Cloudflare Email Routing, and a hostname can only carry one.
+        from: "VardrSec Website <noreply@send.vardrsec.com>",
+        to: [env.CONTACT_TO],
+        reply_to: email,
+        subject: `Contact form: ${email}`,
+        html: `<p><strong>From:</strong> ${escapeHtml(email)}</p><pre>${escapeHtml(message)}</pre>`,
+      }),
+    });
+  } catch (err) {
+    console.error("resend unreachable", err.name);
+    return json(502, { error: "Could not send right now. Please email contact@vardrsec.com." });
+  }
 
   if (!res.ok) {
     // Detail stays server-side; the sender gets a generic failure and the

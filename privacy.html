@@ -18,6 +18,7 @@
 </head>
 <body>
 <!-- @partial:header -->
+  <a class="skip-link" href="#main">Skip to content</a>
   <header class="topbar">
     <div class="container">
       <nav class="nav">
@@ -68,7 +69,7 @@
   </header>
   <!-- @endpartial -->
 
-  <main>
+  <main id="main" tabindex="-1">
     <section class="section">
       <div class="container">
         <div class="section-title">
@@ -76,12 +77,12 @@
           <p>This policy explains what data is collected and how it is used.</p>
         </div>
         
-        <p style="color: var(--muted); font-size: 12px; margin-bottom: 24px;">
+        <p class="mb-6" style="color: var(--muted); font-size: 12px">
           Last updated: July 2026
         </p>
 
-        <div class="card" style="margin-bottom: 20px;">
-          <h3>Summary</h3>
+        <div class="card mb-5">
+          <h2>Summary</h2>
           <ul style="margin: 12px 0; padding-left: 20px;">
             <li>VardrSec collects only what is needed to respond to inquiries and deliver services.</li>
             <li>VardrSec does not sell personal information.</li>
@@ -90,23 +91,23 @@
           </ul>
         </div>
 
-        <div class="card" style="margin-bottom: 20px;">
-          <h3>Information collected</h3>
+        <div class="card mb-5">
+          <h2>Information collected</h2>
           
-          <p style="margin-top: 12px;"><strong>Information you provide</strong></p>
+          <p class="mt-3"><strong>Information you provide</strong></p>
           <p>
             When you contact VardrSec, you may provide your name, email address, company name, and project details.
             If you engage services, you may provide technical details necessary to perform the work.
           </p>
 
-          <p style="margin-top: 16px;"><strong>Automatically collected information</strong></p>
+          <p class="mt-4"><strong>Automatically collected information</strong></p>
           <p>
             Cloudflare, which hosts and serves this site, records the IP address, user agent, request path,
             and timestamp of each request. This data is used for security, performance, and troubleshooting.
             VardrSec does not run analytics or advertising scripts on this site.
           </p>
 
-          <p style="margin-top: 16px;"><strong>Contact form</strong></p>
+          <p class="mt-4"><strong>Contact form</strong></p>
           <p>
             Submitting the contact form sends your email address, your message, and your IP address to the
             processors listed below. Nothing from the form is stored in a database; it is relayed to a mailbox
@@ -114,13 +115,13 @@
           </p>
         </div>
 
-        <div class="card" style="margin-bottom: 20px;">
-          <h3>Processors</h3>
-          <p style="margin-top: 12px;">
+        <div class="card mb-5">
+          <h2>Processors</h2>
+          <p class="mt-3">
             VardrSec uses the following third parties to operate this site. Each receives only what its
             function requires.
           </p>
-          <div class="table-scroll"><table class="table" style="margin-top: 14px;">
+          <div class="table-scroll"><table class="table mt-4">
             <thead>
               <tr>
                 <th scope="col">Processor</th>
@@ -146,14 +147,14 @@
               </tr>
             </tbody>
           </table></div>
-          <div class="meta" style="margin-top: 12px;">
+          <div class="meta mt-3">
             Cloudflare and Resend are both US-based. Submitting the form means your message is processed in
             the United States.
           </div>
         </div>
 
-        <div class="card" style="margin-bottom: 20px;">
-          <h3>How information is used</h3>
+        <div class="card mb-5">
+          <h2>How information is used</h2>
           <ul style="margin: 12px 0; padding-left: 20px;">
             <li>To respond to requests and provide services</li>
             <li>To improve site reliability and security</li>
@@ -161,33 +162,33 @@
           </ul>
         </div>
 
-        <div class="card" style="margin-bottom: 20px;">
-          <h3>Data sharing</h3>
-          <p style="margin-top: 12px;">
+        <div class="card mb-5">
+          <h2>Data sharing</h2>
+          <p class="mt-3">
             Information is shared only with the processors listed above, and only to the extent each needs it
             to function. VardrSec does not sell personal information and does not share it for marketing
             purposes. Information may be disclosed where required by law.
           </p>
         </div>
 
-        <div class="card" style="margin-bottom: 20px;">
-          <h3>Data retention</h3>
-          <p style="margin-top: 12px;">
+        <div class="card mb-5">
+          <h2>Data retention</h2>
+          <p class="mt-3">
             Inquiry data is retained only as long as necessary for communication and business purposes.
             Engagement data is retained based on contractual needs and legal requirements.
           </p>
         </div>
 
-        <div class="card" style="margin-bottom: 20px;">
-          <h3>Security</h3>
-          <p style="margin-top: 12px;">
+        <div class="card mb-5">
+          <h2>Security</h2>
+          <p class="mt-3">
             Reasonable safeguards are used to protect information. However, no method of transmission or storage is
             guaranteed to be 100% secure.
           </p>
         </div>
 
-        <div class="card" style="margin-bottom: 20px;">
-          <h3>Your choices</h3>
+        <div class="card mb-5">
+          <h2>Your choices</h2>
           <ul style="margin: 12px 0; padding-left: 20px;">
             <li>You can request deletion of inquiry emails unless retention is legally required.</li>
             <li>VardrSec does not send marketing messages, so there is nothing to unsubscribe from.</li>
@@ -196,8 +197,8 @@
         </div>
 
         <div class="card">
-          <h3>Contact</h3>
-          <p style="margin-top: 12px;">
+          <h2>Contact</h2>
+          <p class="mt-3">
             For questions about this privacy policy or to exercise your privacy rights, email
             <a class="link" href="mailto:contact@vardrsec.com">contact@vardrsec.com</a>
             or use the <a class="link" href="contact.html">contact form</a>.
@@ -213,7 +214,7 @@
     <div class="container">
       <div class="footer-grid">
         <div>
-          <h4>VardrSec</h4>
+          <h2 class="footer-h">VardrSec</h2>
           <p>Offensive security research and tooling. Open-source security tools, practical guidance, and an open door for engineers working on the same problems.</p>
           <p class="footer-contact">
             <a href="mailto:contact@vardrsec.com">contact@vardrsec.com</a><br/>
@@ -221,14 +222,14 @@
           </p>
         </div>
         <div class="links">
-          <h4>Site</h4>
+          <h2 class="footer-h">Site</h2>
           <a href="tools.html">Tools</a>
           <a href="resources.html">Resources</a>
           <a href="collaboration.html">Collaboration</a>
           <a href="about.html">About</a>
         </div>
         <div class="links">
-          <h4>Legal</h4>
+          <h2 class="footer-h">Legal</h2>
           <a href="privacy.html">Privacy</a>
           <a href="terms.html">Terms</a>
           <a href="contact.html">Contact</a>

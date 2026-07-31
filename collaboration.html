@@ -18,6 +18,7 @@
 </head>
 <body>
 <!-- @partial:header -->
+  <a class="skip-link" href="#main">Skip to content</a>
   <header class="topbar">
     <div class="container">
       <nav class="nav">
@@ -68,7 +69,7 @@
   </header>
   <!-- @endpartial -->
 
-  <main>
+  <main id="main" tabindex="-1">
     <section class="section">
       <div class="container">
         <div class="section-title">
@@ -76,7 +77,7 @@
           <p>What I am most interested in building, breaking, and arguing about.</p>
         </div>
 
-        <div class="note" style="margin-bottom: 36px;">
+        <div class="note mb-8">
           The best work here usually starts with two engineers comparing notes on a difficult problem. If
           you are designing an authorization model, testing an API, improving one of the tools, or
           researching a vulnerability class, I would like to hear what you are working on.
@@ -88,13 +89,13 @@
           <p>Not an exhaustive list, but this is where I am most likely to be useful.</p>
         </div>
 
-        <div class="grid-2" style="margin-bottom: 18px;">
+        <div class="grid-2 mb-5">
           <div class="card">
-            <div class="kicker" style="margin-bottom: 12px;">
+            <div class="kicker mb-3">
               <span class="badge warn">Primary interest</span>
             </div>
             <h3>Authorization and access control</h3>
-            <p style="margin-top: 12px;">
+            <p class="mt-3">
               BOLA, IDOR, tenant isolation, privilege boundaries, and the general problem of proving that
               your access rules do what you think they do. This is the thing I care most about and the
               reason most of the <a class="link" href="tools.html">tooling</a> exists. If you are designing a
@@ -103,11 +104,11 @@
           </div>
 
           <div class="card">
-            <div class="kicker" style="margin-bottom: 12px;">
+            <div class="kicker mb-3">
               <span class="badge ok">Open source</span>
             </div>
             <h3>Contributing to the tools</h3>
-            <p style="margin-top: 12px;">
+            <p class="mt-3">
               Issues, pull requests, feature arguments, and "this design is wrong because…" are all welcome
               on any published repository. If you have used VardrGate or VardrMap on real work and it got in
               your way, that feedback is worth more to me than a star. Security issues in the tools themselves:
@@ -116,10 +117,10 @@
           </div>
         </div>
 
-        <div class="grid-3" style="margin-bottom: 18px;">
+        <div class="grid-3 mb-5">
           <div class="card">
             <h3>API security</h3>
-            <p style="margin-top: 12px;">
+            <p class="mt-3">
               Authentication flows, token handling, rate limiting, and the OWASP API Top 10 as it actually
               shows up in real codebases.
             </p>
@@ -127,7 +128,7 @@
 
           <div class="card">
             <h3>Secure design review</h3>
-            <p style="margin-top: 12px;">
+            <p class="mt-3">
               Threat modeling a feature before it ships, or a second opinion on an architecture decision
               while it's still cheap to change. Earlier is always better than later.
             </p>
@@ -135,14 +136,14 @@
 
           <div class="card">
             <h3>Research and writing</h3>
-            <p style="margin-top: 12px;">
+            <p class="mt-3">
               Co-authoring a writeup, reviewing a draft, or digging into a vulnerability class together.
               I learn more from this than from almost anything else.
             </p>
           </div>
         </div>
 
-        <div class="note" style="margin-bottom: 36px;">
+        <div class="note mb-8">
           <strong>Students and career changers are welcome too.</strong> I came into this from the Marine
           Corps and a fire department, not a computer science degree, and people answering my questions early
           on is a large part of why I got anywhere. Ask.
@@ -153,10 +154,10 @@
           <p>Whatever the shape of it, a few things hold.</p>
         </div>
 
-        <div class="grid-3" style="margin-bottom: 36px;">
+        <div class="grid-3 mb-8">
           <div class="card">
             <h3>Show the work</h3>
-            <p style="margin-top: 12px;">
+            <p class="mt-3">
               Claims come with reproducible evidence, or with the uncertainty stated plainly. That applies to
               a pull request review the same way it applies to a finding.
             </p>
@@ -164,7 +165,7 @@
 
           <div class="card">
             <h3>Scope first</h3>
-            <p style="margin-top: 12px;">
+            <p class="mt-3">
               Security testing requires written authorization and a defined scope. Scope allowlists are
               compiled into the tools rather than left to memory.
             </p>
@@ -172,7 +173,7 @@
 
           <div class="card">
             <h3>Plain language</h3>
-            <p style="margin-top: 12px;">
+            <p class="mt-3">
               Severity reflects demonstrated impact, and uncertainty gets labeled as uncertainty. If I am
               guessing, I will say so.
             </p>
@@ -181,11 +182,11 @@
 
         <div class="card" style="text-align: center; padding: 32px;">
           <h3>Tell me what you're working on</h3>
-          <p style="margin-top: 12px; max-width: 640px; margin-left: auto; margin-right: auto;">
+          <p class="mt-3" style="max-width: 640px; margin-left: auto; margin-right: auto">
             A question about one of the tools, a permissions model you are unsure about, an idea you want to
             argue about, or just an introduction. I read everything that comes in.
           </p>
-          <div style="margin-top: 20px;">
+          <div class="mt-5">
             <a class="btn primary" href="contact.html" style="display: inline-flex; margin-right: 10px;">Send a message</a>
             <a class="btn" href="https://github.com/VardrSec" rel="noopener" style="display: inline-flex;">Find me on GitHub</a>
           </div>
@@ -199,7 +200,7 @@
     <div class="container">
       <div class="footer-grid">
         <div>
-          <h4>VardrSec</h4>
+          <h2 class="footer-h">VardrSec</h2>
           <p>Offensive security research and tooling. Open-source security tools, practical guidance, and an open door for engineers working on the same problems.</p>
           <p class="footer-contact">
             <a href="mailto:contact@vardrsec.com">contact@vardrsec.com</a><br/>
@@ -207,14 +208,14 @@
           </p>
         </div>
         <div class="links">
-          <h4>Site</h4>
+          <h2 class="footer-h">Site</h2>
           <a href="tools.html">Tools</a>
           <a href="resources.html">Resources</a>
           <a href="collaboration.html">Collaboration</a>
           <a href="about.html">About</a>
         </div>
         <div class="links">
-          <h4>Legal</h4>
+          <h2 class="footer-h">Legal</h2>
           <a href="privacy.html">Privacy</a>
           <a href="terms.html">Terms</a>
           <a href="contact.html">Contact</a>

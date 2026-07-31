@@ -1,0 +1,21 @@
+# Local tooling. Nothing in this repo needs dependencies to build or serve.
+node_modules/
+package-lock.json
+package.json
+
+# Scratch space for experiments — per the engineering charter, no stray root files.
+scratch/
+*.local
+*.bak
+*.tmp
+
+# Build/verify output
+.wrangler/
+dist/
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+*.swp
+.vscode/
+.idea/

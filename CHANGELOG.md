@@ -5,7 +5,12 @@ All notable changes to this project are documented here.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [1.0.0] - 2026-07-31
+
+First tagged release. The site was rebuilt from a consulting brochure with placeholder
+case studies into an open-source authorization-testing site with a working contact path.
+Everything below happened in that rebuild.
+
 
 ### Removed
 
@@ -353,3 +358,42 @@ CSS only. No content, markup, navigation, URL, or form behavior changes.
 - Removed the forced wrap that pushed the repository link onto its own line in tool card
   footers below 560px. Tags stay left and the link stays right on a single row down to
   320px, wrapping only if content genuinely requires it.
+
+## Audit fixes
+
+### Fixed
+
+- **Skipped heading levels on five pages.** `about`, `contact`, `privacy`, `terms` and
+  `resources` jumped h1 to h3, a WCAG failure. On `resources` the section headings were
+  wrongly h3 and are now h2; on the other four the cards are the top-level sections, so
+  their headings became h2. Fixing that exposed a second skip — main content ended at h2
+  while the footer started at h4 — so footer column headings are now h2 as well, with
+  their appearance unchanged.
+- Dead CSS removed: `.hero-grid`, `.side-card`, `.side-card-more`, `.kpi`, `.pill`,
+  `.pills`, `.is-interactive`, all left over from sections deleted earlier and confirmed
+  unused. A stray trailing comma left by that removal, which had silently disabled the
+  card hover rule, is fixed.
+- Outbound calls in the contact Function are now bounded by an 8s `AbortSignal.timeout`
+  and wrapped in try/catch. A timeout previously threw an unhandled error; a Turnstile
+  timeout now returns 503 rather than being mistaken for a pass.
+
+### Added
+
+- Skip link on every page, targeting `<main id="main">`. The sticky header put seven
+  tab stops before content on every page.
+- `.gitignore` and an MIT `LICENSE`.
+- Spacing utility scale (`.mt-1`…`.mt-9`, `.mb-1`…`.mb-9`) replacing 146 inline margin
+  declarations. `margin-top: 12px` alone appeared 40 times across eight pages.
+- `lastmod` in `sitemap.xml`.
+- `tools/verify.js` now fails on skipped heading levels, a missing skip link, or a `<main>`
+  that is not a skip-link target.
+
+### Changed
+
+- Cache policy moved from a Cloudflare zone setting into `_headers`, where it is
+  versioned: HTML revalidates every request, CSS/JS get 10 minutes plus
+  `stale-while-revalidate`, assets get 30 days. The zone-level 4-hour browser TTL was
+  invisible from the repo and is what served stale CSS earlier in development.
+  **Requires setting the zone Browser Cache TTL to "Respect Existing Headers."**
+- GitHub metadata for the three published repos: topics, homepage pointing at
+  `/tools`, and a description for VardrRunner, which had none.

@@ -171,12 +171,6 @@ img{max-width:100%;display:block;height:auto}
 .hero{
   padding:55px 0 30px;
 }
-.hero-grid{
-  display:grid;
-  grid-template-columns: 1.25fr .75fr;
-  gap:26px;
-  align-items:stretch;
-}
 .hero-card{
   border-radius:var(--radius2);
   border:1px solid var(--line);
@@ -213,37 +207,6 @@ h1{
   max-width: 64ch;
 }
 .hero-actions{display:flex; gap:10px; margin-top:18px; flex-wrap:wrap}
-.pills{display:flex; gap:8px; flex-wrap:wrap; margin-top:18px}
-.pill{
-  font-size:12.5px; color:var(--text-2);
-  padding:7px 11px; border-radius:999px;
-  border:1px solid var(--line);
-  background:var(--surface-2);
-}
-
-.side-card{
-  border-radius:var(--radius2);
-  border:1px solid var(--line);
-  background:var(--surface);
-  box-shadow:var(--card-shadow);
-  padding:var(--card-pad);
-  display:flex; flex-direction:column; gap:16px;
-}
-.side-card h3{margin:0; font-size:17px; letter-spacing:-.2px}
-.side-card p{margin:0; color:var(--text-2); font-size:14px; line-height:1.65}
-.kpi{
-  display:grid;
-  grid-template-columns: 1fr 1fr;
-  gap:10px;
-}
-.kpi .box{
-  border:1px solid var(--line);
-  background:var(--surface-2);
-  border-radius:14px;
-  padding:14px;
-}
-.kpi .box strong{display:block; font-size:16px; margin-bottom:3px}
-.kpi .box small{color:var(--text-3); font-size:12.5px; line-height:1.5}
 
 .grid-3{
   display:grid;
@@ -272,18 +235,17 @@ h1{
   transition:border-color .18s ease, background-color .18s ease, transform .18s ease;
 }
 /* Only cards that actually lead somewhere respond to hover. */
-.card:has(a):hover,
-.card.is-interactive:hover{
+.card:has(a):hover{
   border-color:var(--line-strong);
   background:var(--surface-hover);
   transform:translateY(-2px);
 }
 .card:focus-within{border-color:var(--line-strong)}
 
-.card h3{margin:0 0 10px; font-size:17.5px; letter-spacing:-.2px; line-height:1.3}
+.card h2, .card h3{margin:0 0 10px; font-size:17.5px; letter-spacing:-.2px; line-height:1.3; font-weight:700}
 .card p{margin:0; color:var(--text-2); font-size:14px; line-height:1.7}
 .card p + p{margin-top:12px}
-.card > .kicker + h3{margin-top:2px}
+.card > .kicker + h2, .card > .kicker + h3{margin-top:2px}
 
 /* Metadata sits at the bottom of the card, separated by a divider so it reads as
    a footer rather than another paragraph. */
@@ -296,7 +258,7 @@ h1{
   line-height:1.55;
 }
 /* A meta block immediately after the heading is a caption, not a footer. */
-.card h3 + .meta{margin-top:0; padding-top:0; border-top:none}
+.card h2 + .meta, .card h3 + .meta{margin-top:0; padding-top:0; border-top:none}
 
 /* Heading and its description read as one unit. These used to sit at opposite
    ends of a space-between flex row, which left a gulf between them. */
@@ -375,7 +337,7 @@ textarea{min-height:120px; resize:vertical}
   font-size:12px;
 }
 .footer a:hover{color:rgba(231,237,247,.92)}
-.footer h4{margin:0 0 8px; font-size:13px}
+.footer .footer-h{margin:0 0 8px; font-size:13px; font-weight:700; letter-spacing:0}
 .footer p{margin:0; color:rgba(231,237,247,.70); font-size:12px; max-width:70ch}
 .footer-contact{margin-top:10px !important}
 .footer-contact a{text-decoration:underline}
@@ -415,7 +377,6 @@ textarea{min-height:120px; resize:vertical}
 }
 
 @media (max-width: 980px){
-  .hero-grid{grid-template-columns:1fr; }
   h1{font-size:36px}
   .grid-3{grid-template-columns:1fr}
   .grid-2{grid-template-columns:1fr}
@@ -440,13 +401,8 @@ textarea{min-height:120px; resize:vertical}
 .section .grid-2 + .section-title,
 .section .grid-3 + .section-title{margin-top:44px}
 
-.hero-grid{align-items:start}
-.side-card{gap:14px}
-.side-card-more{font-size:13px; align-self:flex-start; text-decoration:none}
-.side-card-more:hover{text-decoration:underline}
 
 .lead{font-size:15.5px; line-height:1.65}
-.pills{gap:8px}
 
 /* Larger hero headline, and a tighter ramp down at narrow widths. */
 h1{font-size:40px; line-height:1.08; letter-spacing:-1px}
@@ -597,13 +553,11 @@ h1{font-size:40px; line-height:1.08; letter-spacing:-1px}
 .table-scroll{overflow-x:auto; -webkit-overflow-scrolling:touch; max-width:100%}
 .table-scroll .table{min-width:520px}
 
-
 .check code{
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   font-size:.92em; padding:2px 6px; border-radius:5px;
   background:var(--surface-2); border:1px solid var(--line);
 }
-
 
 /* A single-column grid sizes its track to the widest child, and a <textarea> has a
    ~300px intrinsic width. Without minmax(0,…) the form grew past its container on
@@ -676,3 +630,29 @@ h1{font-size:40px; line-height:1.08; letter-spacing:-1px}
   border-radius:0;
   background:none;
 }
+
+/* Skip link: hidden until focused, then pinned above the sticky header so a
+   keyboard user is not forced through seven nav items on every page. */
+.skip-link{
+  position:absolute; left:12px; top:-60px; z-index:100;
+  padding:10px 16px; border-radius:0 0 12px 12px;
+  background:var(--surface-2); border:1px solid var(--line-strong);
+  color:var(--text); font-size:14px;
+  transition:top .15s ease;
+}
+.skip-link:focus{top:0}
+
+/* ---------------------------------------------------------------------------
+   Spacing scale. These replaced ~120 inline margin declarations that had drifted
+   across eight pages (margin-top:12px alone appeared 40 times), so vertical
+   rhythm can now be adjusted in one place.
+   --------------------------------------------------------------------------- */
+.mt-1{margin-top:4px}   .mb-1{margin-bottom:4px}
+.mt-2{margin-top:8px}   .mb-2{margin-bottom:8px}
+.mt-3{margin-top:12px}  .mb-3{margin-bottom:12px}
+.mt-4{margin-top:16px}  .mb-4{margin-bottom:16px}
+.mt-5{margin-top:20px}  .mb-5{margin-bottom:20px}
+.mt-6{margin-top:24px}  .mb-6{margin-bottom:24px}
+.mt-7{margin-top:32px}  .mb-7{margin-bottom:32px}
+.mt-8{margin-top:36px}  .mb-8{margin-bottom:36px}
+.mt-9{margin-top:42px}  .mb-9{margin-bottom:42px}

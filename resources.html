@@ -18,6 +18,7 @@
 </head>
 <body>
 <!-- @partial:header -->
+  <a class="skip-link" href="#main">Skip to content</a>
   <header class="topbar">
     <div class="container">
       <nav class="nav">
@@ -68,7 +69,7 @@
   </header>
   <!-- @endpartial -->
 
-  <main>
+  <main id="main" tabindex="-1">
     <section class="section">
       <div class="container">
         <div class="section-title">
@@ -76,24 +77,24 @@
           <p>Practical checklists and guidance for development teams. Copy these into tickets, PR reviews, and security documentation.</p>
         </div>
 
-        <div class="note" style="margin-bottom: 32px;">
+        <div class="note mb-7">
           <strong>How to use these resources:</strong> These checklists are designed to be actionable starting points. 
           They're not exhaustive security standards—they're quick references for common security concerns that frequently 
           appear in real-world assessments.
         </div>
 
         <!-- Application Security -->
-        <div class="section-title" style="margin-top: 42px;">
-          <h3>Application Security</h3>
+        <div class="section-title mt-9">
+          <h2>Application Security</h2>
         </div>
 
-        <div class="grid-2" style="margin-bottom: 32px;">
+        <div class="grid-2 mb-7">
           <div class="card">
-            <div class="kicker" style="margin-bottom: 10px;">
+            <div class="kicker mb-3">
               <span class="badge warn">Critical</span>
             </div>
             <h3>Authorization (BOLA/IDOR)</h3>
-            <p style="margin-top: 12px; margin-bottom: 12px;">
+            <p class="mt-3 mb-3">
               Authorization failures are consistently the most critical vulnerabilities I identify in assessments.
             </p>
             <ul class="check">
@@ -108,11 +109,11 @@
           </div>
 
           <div class="card">
-            <div class="kicker" style="margin-bottom: 10px;">
+            <div class="kicker mb-3">
               <span class="badge warn">Critical</span>
             </div>
             <h3>Authentication</h3>
-            <p style="margin-top: 12px; margin-bottom: 12px;">
+            <p class="mt-3 mb-3">
               Weak authentication enables all other attacks. Get the fundamentals right.
             </p>
             <ul class="check">
@@ -127,7 +128,7 @@
           </div>
         </div>
 
-        <div class="grid-3" style="margin-bottom: 32px;">
+        <div class="grid-3 mb-7">
           <div class="card">
             <h3>Input Validation</h3>
             <ul class="check">
@@ -169,13 +170,13 @@
         </div>
 
         <!-- Cloud Security -->
-        <div class="section-title" style="margin-top: 42px;">
-          <h3>Cloud Security</h3>
+        <div class="section-title mt-9">
+          <h2>Cloud Security</h2>
         </div>
 
-        <div class="grid-2" style="margin-bottom: 32px;">
+        <div class="grid-2 mb-7">
           <div class="card">
-            <div class="kicker" style="margin-bottom: 10px;">
+            <div class="kicker mb-3">
               <span class="badge">IAM & Identity</span>
             </div>
             <h3>Identity & Access Management</h3>
@@ -193,7 +194,7 @@
           </div>
 
           <div class="card">
-            <div class="kicker" style="margin-bottom: 10px;">
+            <div class="kicker mb-3">
               <span class="badge">Storage & Data</span>
             </div>
             <h3>Data Protection</h3>
@@ -210,7 +211,7 @@
           </div>
         </div>
 
-        <div class="grid-3" style="margin-bottom: 32px;">
+        <div class="grid-3 mb-7">
           <div class="card">
             <h3>Network Security</h3>
             <ul class="check">
@@ -252,13 +253,13 @@
         </div>
 
         <!-- Detection & Response -->
-        <div class="section-title" style="margin-top: 42px;">
-          <h3>Detection & Response</h3>
+        <div class="section-title mt-9">
+          <h2>Detection & Response</h2>
         </div>
 
-        <div class="grid-2" style="margin-bottom: 32px;">
+        <div class="grid-2 mb-7">
           <div class="card">
-            <div class="kicker" style="margin-bottom: 10px;">
+            <div class="kicker mb-3">
               <span class="badge ok">SIEM & Detection</span>
             </div>
             <h3>Detection Engineering Basics</h3>
@@ -276,7 +277,7 @@
           </div>
 
           <div class="card">
-            <div class="kicker" style="margin-bottom: 10px;">
+            <div class="kicker mb-3">
               <span class="badge bad">Incident Response</span>
             </div>
             <h3>Incident Response Readiness</h3>
@@ -295,11 +296,11 @@
         </div>
 
         <!-- Secure Development -->
-        <div class="section-title" style="margin-top: 42px;">
-          <h3>Secure Development Practices</h3>
+        <div class="section-title mt-9">
+          <h2>Secure Development Practices</h2>
         </div>
 
-        <div class="grid-3" style="margin-bottom: 32px;">
+        <div class="grid-3 mb-7">
           <div class="card">
             <h3>Code Review Checklist</h3>
             <ul class="check">
@@ -344,13 +345,13 @@
         </div>
 
         <!-- CTA Section -->
-        <div class="card" style="text-align: center; padding: 32px; margin-top: 42px;">
+        <div class="card mt-9" style="text-align: center; padding: 32px">
           <h3>Need customized resources?</h3>
-          <p style="margin-top: 12px; max-width: 700px; margin-left: auto; margin-right: auto;">
+          <p class="mt-3" style="max-width: 700px; margin-left: auto; margin-right: auto">
             These checklists can be tailored to your specific stack, deployment pipeline, and compliance requirements. 
             I can create custom security runbooks, review templates, and implementation guides for your team.
           </p>
-          <a href="contact.html" class="btn primary" style="margin-top: 20px; display: inline-flex;">Request Custom Resources</a>
+          <a href="contact.html" class="btn primary mt-5" style="display: inline-flex">Request Custom Resources</a>
         </div>
 
       </div>
@@ -362,7 +363,7 @@
     <div class="container">
       <div class="footer-grid">
         <div>
-          <h4>VardrSec</h4>
+          <h2 class="footer-h">VardrSec</h2>
           <p>Offensive security research and tooling. Open-source security tools, practical guidance, and an open door for engineers working on the same problems.</p>
           <p class="footer-contact">
             <a href="mailto:contact@vardrsec.com">contact@vardrsec.com</a><br/>
@@ -370,14 +371,14 @@
           </p>
         </div>
         <div class="links">
-          <h4>Site</h4>
+          <h2 class="footer-h">Site</h2>
           <a href="tools.html">Tools</a>
           <a href="resources.html">Resources</a>
           <a href="collaboration.html">Collaboration</a>
           <a href="about.html">About</a>
         </div>
         <div class="links">
-          <h4>Legal</h4>
+          <h2 class="footer-h">Legal</h2>
           <a href="privacy.html">Privacy</a>
           <a href="terms.html">Terms</a>
           <a href="contact.html">Contact</a>
