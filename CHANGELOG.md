@@ -406,3 +406,19 @@ CSS only. No content, markup, navigation, URL, or form behavior changes.
   from 10 minutes to 4 hours. Hashing makes a long cache correct rather than fighting it:
   changing a file changes its URL, so a returning visitor cannot receive a stale asset.
   `tools/verify.js` strips the query before checking that the file exists.
+
+## Content review fixes
+
+### Fixed
+
+- VardrMap's "Purpose" row on the home page listed what the tool *finds*, left over from
+  when the label read "Finds". It now states a purpose, matching the other two cards.
+- The home page bio card was third person ("His background") while the call to action two
+  sections below was first person. The bio now avoids the pronoun entirely.
+- Commercial framing that survived the removal of paid work: "a review you want scoped"
+  on the home page call to action, and the "Ways to work together" button label.
+- "reproducible evidence" appeared on three pages within a few hundred words; one instance
+  reworded.
+- `build.js` still described itself as "a sync step, not a build step" after it began
+  hashing asset URLs, and `_headers` still claimed the CSS and JS have no content hash.
+  Both comments now describe what the code actually does.

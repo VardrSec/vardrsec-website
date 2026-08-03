@@ -2,9 +2,11 @@
 /**
  * Syncs the shared header and footer from partials/ into every page.
  *
- * This is a sync step, not a build step: pages remain directly servable and
- * editable, `npx serve .` still works, and Cloudflare Pages needs no build
- * command. Only the regions between the markers below are ever rewritten.
+ * It also stamps a content hash onto the stylesheet and script URLs.
+ *
+ * Deliberately dependency-free: pages remain directly servable and editable,
+ * `npx serve .` still works, and Cloudflare Pages needs no build command. Only
+ * the regions between the markers below, and the asset URLs, are ever rewritten.
  *
  *   <!-- @partial:header -->  ...replaced...  <!-- @endpartial -->
  *
