@@ -441,3 +441,19 @@ CSS only. No content, markup, navigation, URL, or form behavior changes.
   invisible from the source. The policy now discloses it: what it records, that it sets no
   cookies and does no cross-site tracking, and a row in the processors table. The claim
   "VardrSec does not run analytics or advertising scripts on this site" is gone.
+
+## Security review hardening
+
+### Fixed
+
+- The contact form's email filter only excluded whitespace and `@`. That was enough to
+  block CRLF header injection and comma/semicolon multi-recipient tricks, but it still
+  admitted angle brackets, double quotes, NUL bytes, zero-width characters and Unicode
+  bidi overrides. The HTML body is escaped, but the subject line is not — a bidi override
+  there renders the subject deceptively in a mail client. The filter now rejects all of
+  those, and `tools/test-email-filter.js` exercises 20 cases against the shipped literal.
+
+### Added
+
+- `.gitignore` rules for `.env`, `.dev.vars`, `*.pem` and `*.key`. No secret has ever been
+  committed — verified across every ref in history — but nothing was stopping one.

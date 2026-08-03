@@ -1,3 +1,11 @@
+# Secrets never belong in this repo - they live in Cloudflare Pages env vars.
+.env
+.env.*
+*.pem
+*.key
+wrangler.toml.local
+.dev.vars
+
 # Local tooling. Nothing in this repo needs dependencies to build or serve.
 node_modules/
 package-lock.json

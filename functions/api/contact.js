@@ -19,6 +19,10 @@ const MAX_MESSAGE = 5000;
 const UPSTREAM_TIMEOUT_MS = 8000;
 const MAX_EMAIL = 254;
 
+/* eslint-disable no-control-regex */
+const EMAIL_OK =
+  /^[^\s@<>",;:\\\(\)\[\]\u0000-\u001f\u007f\u200b-\u200f\u202a-\u202e]+@[^\s@<>",;:\\\(\)\[\]\u0000-\u001f\u007f\u200b-\u200f\u202a-\u202e]+\.[a-zA-Z]{2,}$/;
+
 const json = (status, body) =>
   new Response(JSON.stringify(body), {
     status,
@@ -54,7 +58,12 @@ export async function onRequest({ request, env }) {
   if (!email || !message) {
     return json(400, { error: "Email and message are both required." });
   }
-  if (email.length > MAX_EMAIL || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+  // The previous filter only excluded whitespace and "@", which was enough to stop
+  // CRLF header injection and multi-recipient tricks but still admitted angle
+  // brackets, quotes, NULs and Unicode bidi overrides. The HTML body is escaped, but
+  // the subject line is not — a bidi override there renders the subject deceptively
+  // in a mail client.
+  if (email.length > MAX_EMAIL || !EMAIL_OK.test(email)) {
     return json(400, { error: "That email address does not look valid." });
   }
   if (message.length > MAX_MESSAGE) {
