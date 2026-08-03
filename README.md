@@ -116,12 +116,30 @@ Why this exists: the header and footer were copy-pasted across eight pages, and
 `contact.html` drifted far enough that its mobile menu referenced a stale element id.
 The nav was dead on the highest-intent page for months.
 
+## Asset versioning
+
+`build.js` appends a content hash to the stylesheet and script URLs
+(`css/styles.css?v=<hash>`). This is not cosmetic. Cloudflare's zone-level Browser Cache
+TTL raises any `max-age` shorter than its own setting, so the short TTL in `_headers`
+cannot be enforced from this repo — verified live, where `/assets/*` kept its 30-day
+header but `/css/*` was raised from 10 minutes to 4 hours.
+
+Hashing sidesteps that: a changed file gets a new URL, so a returning visitor cannot be
+served a stale asset regardless of how the zone is configured. Nothing to run by hand —
+`node build.js` recomputes the hashes, and `tools/verify.js` strips the query before
+checking that a file exists.
+
 ## Checks
 
 ```sh
 node build.js --check   # header/footer in sync with partials/
 node tools/verify.js .  # links, assets, headings, spelling, banned phrasing
 ```
+
+`tools/verify.js` also enforces heading order (no skipped levels), the presence of a skip
+link and its `<main id="main">` target, that a Turnstile widget is always accompanied by
+its script outside the footer partial, American spelling, and that removed commercial
+phrasing does not creep back.
 
 `tools/verify.js` enforces house style as well as structure: American spelling, and no
 reintroduction of commercial framing (pricing, retainers, statements of work) or

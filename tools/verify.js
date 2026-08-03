@@ -16,13 +16,16 @@ for (const page of pages) {
   const s = fs.readFileSync(path.join(ROOT, page), "utf8");
 
   for (const m of s.matchAll(/href="(?!https?:|mailto:|tel:|#)([^"]+)"/g)) {
-    const target = m[1].split("#")[0];
+    // Strip the fragment and the cache-busting query build.js appends.
+    const target = m[1].split("#")[0].split("?")[0];
     if (!target) continue;
     ok(fs.existsSync(path.join(ROOT, target)), `${page}: dead link -> ${m[1]}`);
   }
 
   for (const m of s.matchAll(/(?:src|srcset)="(?!https?:|data:)([^"]+)"/g)) {
-    ok(fs.existsSync(path.join(ROOT, m[1])), `${page}: missing asset -> ${m[1]}`);
+    // Strip the cache-busting query build.js appends.
+    const asset = m[1].split("?")[0];
+    ok(fs.existsSync(path.join(ROOT, asset)), `${page}: missing asset -> ${m[1]}`);
   }
 
   const h1s = (s.match(/<h1[ >]/g) || []).length;

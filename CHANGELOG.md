@@ -11,7 +11,6 @@ First tagged release. The site was rebuilt from a consulting brochure with place
 case studies into an open-source authorization-testing site with a working contact path.
 Everything below happened in that rebuild.
 
-
 ### Removed
 
 - **`case-studies.html` and the "Proven Results" section on the home page.** The three
@@ -397,3 +396,13 @@ CSS only. No content, markup, navigation, URL, or form behavior changes.
   **Requires setting the zone Browser Cache TTL to "Respect Existing Headers."**
 - GitHub metadata for the three published repos: topics, homepage pointing at
   `/tools`, and a description for VardrRunner, which had none.
+
+### Changed
+
+- `build.js` now appends a content hash to the stylesheet and script URLs
+  (`css/styles.css?v=<sha256-8>`). Cloudflare's zone Browser Cache TTL raises any
+  `max-age` shorter than its own setting, so a short TTL cannot be enforced from this
+  repo — verified live, where `/assets/*` kept its 30-day header but `/css/*` was raised
+  from 10 minutes to 4 hours. Hashing makes a long cache correct rather than fighting it:
+  changing a file changes its URL, so a returning visitor cannot receive a stale asset.
+  `tools/verify.js` strips the query before checking that the file exists.

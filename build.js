@@ -19,8 +19,35 @@
 const fs = require("fs");
 const path = require("path");
 
+const crypto = require("crypto");
+
 const ROOT = __dirname;
 const CHECK = process.argv.includes("--check");
+
+/**
+ * Content-hash the stylesheet and script into their query strings.
+ *
+ * Cloudflare's zone-level Browser Cache TTL raises any max-age shorter than its
+ * own setting, so a short TTL in _headers cannot be enforced from this repo. A
+ * content hash makes a long cache correct instead of fighting it: when the file
+ * changes the URL changes, so a returning visitor can never get a stale asset.
+ */
+const ASSETS = ["css/styles.css", "js/site.js"];
+const hashes = Object.fromEntries(
+  ASSETS.map((rel) => [
+    rel,
+    crypto.createHash("sha256").update(fs.readFileSync(path.join(ROOT, rel))).digest("hex").slice(0, 8),
+  ])
+);
+
+function versionAssets(html) {
+  for (const [rel, hash] of Object.entries(hashes)) {
+    // Match the path with or without an existing ?v=, so re-running is idempotent.
+    const re = new RegExp(`("|')${rel.replace(/\//g, "\\/")}(\\?v=[a-f0-9]+)?\\1`, "g");
+    html = html.replace(re, (_, q) => `${q}${rel}?v=${hash}${q}`);
+  }
+  return html;
+}
 
 const partial = (name) =>
   fs.readFileSync(path.join(ROOT, "partials", `${name}.html`), "utf8").trimEnd();
@@ -56,6 +83,8 @@ for (const page of pages) {
     const body = name === "header" ? applyActive(partial(name), page) : partial(name);
     src = src.slice(0, start) + open + "\n" + body + "\n  " + src.slice(end);
   }
+
+  src = versionAssets(src);
 
   if (src !== original) {
     stale.push(page);
