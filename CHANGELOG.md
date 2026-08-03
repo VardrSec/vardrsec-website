@@ -422,3 +422,22 @@ CSS only. No content, markup, navigation, URL, or form behavior changes.
 - `build.js` still described itself as "a sync step, not a build step" after it began
   hashing asset URLs, and `_headers` still claimed the CSS and JS have no content hash.
   Both comments now describe what the code actually does.
+
+## 404 page and accurate analytics disclosure
+
+### Added
+
+- `404.html`. Any unknown path previously returned the home page with HTTP 200 — a soft
+  404 that let search engines index unlimited duplicate URLs and made broken links look
+  like they worked. The page is `noindex`, declares no canonical, is excluded from the
+  sitemap, and points at the tools and resources. `tools/verify.js` enforces those two
+  properties for it and the opposite for every other page.
+
+### Fixed
+
+- **The privacy policy said the site runs no analytics. It does.** Loading the live home
+  page in a browser shows a request to `static.cloudflareinsights.com` — Cloudflare Web
+  Analytics, injected at the edge rather than by any script in this repository, so it is
+  invisible from the source. The policy now discloses it: what it records, that it sets no
+  cookies and does no cross-site tracking, and a row in the processors table. The claim
+  "VardrSec does not run analytics or advertising scripts on this site" is gone.

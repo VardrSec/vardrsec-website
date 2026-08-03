@@ -72,7 +72,14 @@ for (const page of pages) {
   ok(!s.includes("case-studies"), `${page}: references removed case-studies page`);
   ok(s.includes("contact@vardrsec.com"), `${page}: missing contact address`);
   ok(/<title>[^<]+<\/title>/.test(s), `${page}: missing <title>`);
-  ok(s.includes('rel="canonical"'), `${page}: missing canonical`);
+  // A 404 must not canonicalise itself to a URL that does not exist, and must not be
+  // indexable. Every other page needs the opposite.
+  if (page === "404.html") {
+    ok(s.includes('name="robots" content="noindex"'), `${page}: 404 page must be noindex`);
+    ok(!s.includes('rel="canonical"'), `${page}: 404 page must not declare a canonical`);
+  } else {
+    ok(s.includes('rel="canonical"'), `${page}: missing canonical`);
+  }
   ok(s.includes("js/site.js"), `${page}: missing site.js`);
 
   // Plural voice should not survive outside the legal pages.
