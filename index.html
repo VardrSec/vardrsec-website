@@ -140,9 +140,12 @@ response:
               <li><strong>sensitive_data_exposure</strong> — a caller saw fields it must not (evidence names the fields, never the values)</li>
             </ul>
             <p class="meta mt-4">
-              Run it once, or on every commit:
+              Run that policy once, or on every commit. It exits non-zero when a finding lands at or
+              above the severity you name, so a build fails on a real regression:
             </p>
-            <pre class="cmd"><code>vardrgate run --job job.json --out result.json</code></pre>
+            <pre class="cmd"><code>vardrgate policy run --policy profile_ownership.policy.yaml \
+  --base https://api.example.com --param user_id=42 \
+  --identities identities.json --fail-on high</code></pre>
             <div class="meta mt-3">
               <a class="link" href="https://github.com/VardrSec/VardrGate" rel="noopener">Full docs and examples on GitHub →</a>
             </div>
