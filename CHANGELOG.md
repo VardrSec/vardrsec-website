@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- `abuseipdb-verification` meta tag in the `index.html` head, which proves ownership of
+  `vardrsec.com` to AbuseIPDB (Account > Webmasters). The token is public by design.
+
 - AbuseIPDB contributor badge on `about.html`. Loading it from `vardrsec.com` sends the
   Referer that AbuseIPDB uses to verify the domain on the account. `img-src` in
   `_headers` now allows `https://www.abuseipdb.com`, and AbuseIPDB is listed as a
