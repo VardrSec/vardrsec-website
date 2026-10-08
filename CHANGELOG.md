@@ -28,6 +28,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `contact.html` no longer promises a 1–2 business day reply, since replies fit around
   a full-time job. The hidden `company` honeypot field is unchanged.
 
+- About and Contact no longer state current employment ("I work full time", "I write
+  code for a living"). The wording now holds regardless of job status.
+
 ### Removed
 
 - `collaboration.html`. Its content was folded into `about.html` and `tools.html`.
