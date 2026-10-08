@@ -19,6 +19,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - `about.html` rewritten to be shorter and plainer: background, what I work on, how I
   work, and contact. The narrative intro and the pitch-style sections were removed.
+- Plain-language pass across the site. Removed self-promotional and sales copy: the
+  home page services list and slogans, the "Need customized resources?" box on
+  `resources.html`, and similar lines on the tools page and in the footer.
+- `about.html` gained the "why" behind each tool, the career-changer note from the old
+  Collaboration page, and an "Elsewhere" card with GitHub links and the AbuseIPDB badge.
+- Nav order is now Home, About, Tools, Resources.
+- `contact.html` no longer promises a 1–2 business day reply, since replies fit around
+  a full-time job. The hidden `company` honeypot field is unchanged.
+
+### Removed
+
+- `collaboration.html`. Its content was folded into `about.html` and `tools.html`.
+  `/collaboration`, `/services` and `/consulting` now 301 straight to `/about`.
+
+### Fixed
+
+- VardrMap was listed as MIT on the home and tools pages; it is AGPL-3.0. The tools page
+  also described all published tools as "permissive licenses", which AGPL is not.
+- "Scope allowlists are compiled into the tools" on the home page was only true of
+  VardrForge, which is still in design. Removed.
 
 ## [1.0.0] - 2026-07-31
 
