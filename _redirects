@@ -7,12 +7,13 @@
 /case-studies      /  301
 /case-studies.html /  301
 
-# services.html was relabelled "Consulting" when the site stopped leading with
-# an agency-style services catalogue.
-/services      /collaboration  301
-/services.html /collaboration  301
-
-# "Consulting" became "Collaboration" - the page is an invitation to work
-# together, not a services catalogue.
-/consulting      /collaboration  301
-/consulting.html /collaboration  301
+# collaboration.html (earlier services.html, then consulting.html) was removed.
+# Its content moved to about.html and tools.html. Every old name points straight
+# at /about so no request goes through a redirect chain, and, as with
+# /case-studies, a 301 leaves nothing for Always Online to resurrect.
+/collaboration      /about  301
+/collaboration.html /about  301
+/services           /about  301
+/services.html      /about  301
+/consulting         /about  301
+/consulting.html    /about  301

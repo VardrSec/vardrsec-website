@@ -39,10 +39,9 @@
         <!-- Desktop Navigation -->
         <div class="nav-links">
           <a href="index.html">Home</a>
+          <a href="about.html">About</a>
           <a href="tools.html">Tools</a>
           <a href="resources.html">Resources</a>
-          <a href="collaboration.html">Collaboration</a>
-          <a href="about.html">About</a>
         </div>
         
         <!-- Desktop CTA Buttons -->
@@ -60,10 +59,9 @@
       <!-- Mobile Menu -->
       <div class="mobile-panel" id="mobilePanel">
         <a href="index.html">Home</a>
+        <a href="about.html">About</a>
         <a href="tools.html">Tools</a>
         <a href="resources.html">Resources</a>
-        <a href="collaboration.html">Collaboration</a>
-        <a href="about.html">About</a>
         <a class="btn primary" href="contact.html" style="margin-top:8px">Contact</a>
       </div>
     </div>
@@ -79,28 +77,25 @@
           <div>
             <h1 class="mb-2">Contact</h1>
             <p class="mb-5">
-              Have a question about a tool, authorization model, or security review? Send a short description of the system, the problem, and the outcome you need. I usually respond within one to two business days.
-              You can also email <a class="link" href="mailto:contact@vardrsec.com">contact@vardrsec.com</a> directly.
+              Questions about the tools, an authorization design, or anything else on this site are welcome.
+              I work full time, so I'll reply when I can. You can also email <a class="link" href="mailto:contact@vardrsec.com">contact@vardrsec.com</a> directly.
             </p>
           </div>
         </div>
 
         <!-- Form Card -->
         <div class="card">
-          <h2 class="mb-2" style="margin-top: 0">Send a message</h2>
-          <p class="meta mb-4" style="margin-top: 0">
-Optional: link a repository, spec, or existing report.
-          </p>
+          <h2 class="mb-4" style="margin-top: 0">Send a message</h2>
 
           <form class="form" id="contactForm" action="/api/contact" method="post">
             <div class="field">
               <label for="email">Email address</label>
-              <input id="email" name="email" type="email" placeholder="you@company.com" autocomplete="email" required />
+              <input id="email" name="email" type="email" placeholder="you@example.com" autocomplete="email" required />
             </div>
 
             <div class="field">
               <label for="message">Message</label>
-              <textarea id="message" name="message" placeholder="What are you trying to secure? Timeline? Any specific concerns?" required></textarea>
+              <textarea id="message" name="message" placeholder="What are you working on, and what's the question?" required></textarea>
             </div>
 
             <!-- Honeypot: bots fill this, humans never see it. -->
@@ -115,9 +110,7 @@ Optional: link a repository, spec, or existing report.
 
             <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
               <button class="btn primary" type="submit">Send message</button>
-              <span class="badge warn">Security testing requires written authorization and defined scope</span>
-              <span class="badge">Response: 1–2 business days</span>
-            </div>
+              <span class="badge warn">Security testing requires written authorization and defined scope</span>            </div>
 
             <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
 
@@ -129,7 +122,8 @@ Optional: link a repository, spec, or existing report.
           <div class="card">
             <h2>What to include</h2>
             <p>
-              What you're working on, what you've already tried, and what a useful answer would look like.
+              What you're working on and what you've already tried. A link to a repository, spec, or
+              report helps.
             </p>
           </div>
 
@@ -156,7 +150,7 @@ Optional: link a repository, spec, or existing report.
       <div class="footer-grid">
         <div>
           <h2 class="footer-h">VardrSec</h2>
-          <p>Offensive security research and tooling. Open-source security tools, practical guidance, and an open door for engineers working on the same problems.</p>
+          <p>Open-source security tools and checklists, mostly about broken access control.</p>
           <p class="footer-contact">
             <a href="mailto:contact@vardrsec.com">contact@vardrsec.com</a><br/>
             <a href="https://github.com/VardrSec" rel="noopener">github.com/VardrSec</a>
@@ -164,10 +158,9 @@ Optional: link a repository, spec, or existing report.
         </div>
         <div class="links">
           <h2 class="footer-h">Site</h2>
+          <a href="about.html">About</a>
           <a href="tools.html">Tools</a>
           <a href="resources.html">Resources</a>
-          <a href="collaboration.html">Collaboration</a>
-          <a href="about.html">About</a>
         </div>
         <div class="links">
           <h2 class="footer-h">Legal</h2>

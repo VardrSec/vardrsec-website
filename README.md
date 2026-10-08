@@ -3,8 +3,8 @@
 Static site for VardrSec. No dependencies — plain HTML, one stylesheet, one script.
 
 ```
-index.html  tools.html  resources.html  collaboration.html
-about.html  contact.html  privacy.html  terms.html
+index.html  about.html  tools.html  resources.html
+contact.html  privacy.html  terms.html  404.html
 
 partials/                 shared header and footer (source of truth)
 build.js                  syncs partials into every page
