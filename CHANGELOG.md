@@ -5,6 +5,16 @@ All notable changes to this project are documented here.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+
+- AbuseIPDB contributor badge on `about.html`. Loading it from `vardrsec.com` sends the
+  Referer that AbuseIPDB uses to verify the domain on the account. `img-src` in
+  `_headers` now allows `https://www.abuseipdb.com`, and AbuseIPDB is listed as a
+  processor in the privacy policy, because the image request sends the visitor's IP
+  address to it.
+
 ## [1.0.0] - 2026-07-31
 
 First tagged release. The site was rebuilt from a consulting brochure with placeholder
