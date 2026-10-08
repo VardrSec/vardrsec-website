@@ -15,6 +15,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   processor in the privacy policy, because the image request sends the visitor's IP
   address to it.
 
+### Changed
+
+- `about.html` rewritten to be shorter and plainer: background, what I work on, how I
+  work, and contact. The narrative intro and the pitch-style sections were removed.
+
 ## [1.0.0] - 2026-07-31
 
 First tagged release. The site was rebuilt from a consulting brochure with placeholder
