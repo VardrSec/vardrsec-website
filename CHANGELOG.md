@@ -30,6 +30,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - About and Contact no longer state current employment ("I work full time", "I write
   code for a living"). The wording now holds regardless of job status.
+- About, Background: OWASP Foundation membership and interest in the OWASP Top 10 and
+  API Security Top 10, with links to both lists.
 
 ### Removed
 
