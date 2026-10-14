@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="robots" content="noindex, nofollow" />
-  <title>Threat Observatory Preview | VardrSec</title>
-  <meta name="description" content="Preview of VardrSec Threat Observatory. Public telemetry is not connected." />
+  <title>Threat Observatory | VardrSec</title>
+  <meta name="description" content="Aggregated security research from VardrSec instrumented honeypot sensors." />
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="css/styles.css?v=d6e3b655" />
   <link rel="stylesheet" href="css/observatory.css" />
@@ -65,26 +65,26 @@
     <div class="obs-heading">
       <div><p class="obs-eyebrow">VardrSec / Defensive research</p><h1>Threat Observatory</h1>
       <p class="obs-lead">Observed intrusion attempts against instrumented decoy services, presented as privacy-preserving aggregate research.</p></div>
-      <span class="obs-status">Preview · Feed disconnected</span>
+      <span class="obs-status" id="obs-status" role="status" aria-live="polite">Loading telemetry</span>
     </div>
-    <p class="obs-notice"><strong>Design preview.</strong> No live telemetry is connected. No sample figures are represented as real observations.</p>
+    <p class="obs-notice" id="obs-notice" hidden></p>
     <div class="obs-stats" aria-label="Observation statistics">
-      <article class="obs-card obs-stat"><span>Observed sessions</span><strong>—</strong><small>Aggregate events</small></article>
-      <article class="obs-card obs-stat"><span>Unique sources</span><strong>—</strong><small>No raw addresses exposed</small></article>
-      <article class="obs-card obs-stat"><span>SSH authentication activity</span><strong>—</strong><small>Decoy-service observations</small></article>
-      <article class="obs-card obs-stat"><span>Last published</span><strong class="obs-last">Not yet</strong><small>Delayed, sanitized snapshot</small></article>
+      <article class="obs-card obs-stat"><span>Observed sessions</span><strong id="obs-sessions">—</strong><small>Past 24 complete hours</small></article>
+      <article class="obs-card obs-stat"><span>Unique sources</span><strong id="obs-sources">—</strong><small>No raw addresses exposed</small></article>
+      <article class="obs-card obs-stat"><span>SSH authentication activity</span><strong id="obs-auth">—</strong><small>Decoy-service observations</small></article>
+      <article class="obs-card obs-stat"><span>Last published</span><strong class="obs-last" id="obs-updated">—</strong><small>Delayed, sanitized snapshot</small></article>
     </div>
     <div class="obs-columns">
-      <section class="obs-card obs-panel" aria-labelledby="obs-trend"><div class="obs-panel-heading"><h2 id="obs-trend">Activity over time</h2><span>Hourly UTC buckets</span></div><div class="obs-empty-chart"><p>Trends will appear after the secure publication pipeline is validated.</p></div></section>
-      <section class="obs-card obs-panel" aria-labelledby="obs-categories"><div class="obs-panel-heading"><h2 id="obs-categories">Observed activity</h2><span>Aggregates only</span></div><dl class="obs-categories"><div><dt>Authentication attempts</dt><dd>—</dd></div><div><dt>Commands observed</dt><dd>—</dd></div><div><dt>File-transfer events</dt><dd>—</dd></div></dl><p class="obs-disclaimer">Activity within a simulated service does not establish compromise of the host.</p></section>
+      <section class="obs-card obs-panel" aria-labelledby="obs-trend"><div class="obs-panel-heading"><h2 id="obs-trend">Activity over time</h2><span>Hourly UTC buckets</span></div><div class="obs-empty-chart" id="obs-chart"><p>Loading activity statistics…</p></div></section>
+      <section class="obs-card obs-panel" aria-labelledby="obs-categories"><div class="obs-panel-heading"><h2 id="obs-categories">Observed activity</h2><span>Aggregates only</span></div><dl class="obs-categories"><div><dt>Authentication attempts</dt><dd id="obs-auth-detail">—</dd></div><div><dt>Commands observed</dt><dd id="obs-commands-count">—</dd></div><div><dt>File-transfer events</dt><dd id="obs-files-count">—</dd></div></dl><p class="obs-disclaimer">Activity within a simulated service does not establish compromise of the host.</p></section>
     </div>
     <div class="obs-columns obs-findings">
       <section class="obs-card obs-panel" aria-labelledby="obs-commands"><div class="obs-panel-heading"><h2 id="obs-commands">Commonly observed commands</h2><span>Reviewed command templates</span></div>
-        <div class="obs-table-wrap"><table class="obs-table"><thead><tr><th scope="col">Command / technique</th><th scope="col">Observations</th></tr></thead><tbody><tr><td class="obs-muted">Awaiting reviewed command statistics</td><td>—</td></tr></tbody></table></div>
+        <div class="obs-table-wrap"><table class="obs-table"><thead><tr><th scope="col">Command / technique</th><th scope="col">Observations</th></tr></thead><tbody id="obs-command-rows"><tr><td class="obs-muted">Awaiting reviewed command statistics</td><td>—</td></tr></tbody></table></div>
         <p class="obs-disclaimer">Sensitive arguments, credentials, endpoint addresses and raw attacker input are excluded.</p>
       </section>
       <section class="obs-card obs-panel" aria-labelledby="obs-artifacts"><div class="obs-panel-heading"><h2 id="obs-artifacts">Observed artifacts</h2><span>SHA-256 indicators</span></div>
-        <div class="obs-table-wrap"><table class="obs-table"><thead><tr><th scope="col">SHA-256</th><th scope="col">Observations</th><th scope="col">Analysis</th></tr></thead><tbody><tr><td class="obs-muted">No reviewed artifacts published yet</td><td>—</td><td>—</td></tr></tbody></table></div>
+        <div class="obs-table-wrap"><table class="obs-table"><thead><tr><th scope="col">SHA-256</th><th scope="col">Observations</th><th scope="col">Analysis</th></tr></thead><tbody id="obs-artifact-rows"><tr><td class="obs-muted">No reviewed artifacts published yet</td><td>—</td><td>—</td></tr></tbody></table></div>
         <p class="obs-disclaimer">Reviewed SHA-256 indicators will link to VirusTotal file reports (external site). A hash alone does not establish maliciousness; files are never uploaded automatically.</p>
       </section>
     </div>
@@ -123,5 +123,6 @@
     <script src="js/site.js?v=8fbf366c"></script>
   </footer>
   <!-- @endpartial -->
+  <script src="js/observatory.js" defer></script>
 </body>
 </html>
