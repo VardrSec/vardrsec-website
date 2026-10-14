@@ -105,6 +105,7 @@
       if(age>20*60*1000){note.hidden=false;note.textContent="Latest data may be stale; the publisher has not updated recently.";}
       else note.hidden=true;
       drawChart(data.hourly);
+      // Ignore command text even when an older cached API response contains it.
       renderRows("obs-command-rows",[],"commands",data.version);
       renderRows("obs-artifact-rows",data.artifacts,"artifacts");
     } catch(error){showError("Unable to load the observatory snapshot. Previously displayed data may be stale.");}
