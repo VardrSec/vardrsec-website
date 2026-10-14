@@ -55,7 +55,7 @@
     if (!data.length){
       const tr=document.createElement("tr"),td=document.createElement("td");
       td.colSpan=mode==="artifacts"?3:2;td.className="obs-muted";
-      td.textContent=mode==="artifacts"?"No reviewed artifacts published yet":"No reviewed command templates published yet";
+      td.textContent=mode==="artifacts"?"No reviewed artifacts published yet":"Command details are temporarily withheld for privacy review. Activity counts remain available.";
       tr.append(td);tbody.append(tr);return;
     }
     for(const item of data.slice(0,10)){
@@ -105,7 +105,7 @@
       if(age>20*60*1000){note.hidden=false;note.textContent="Latest data may be stale; the publisher has not updated recently.";}
       else note.hidden=true;
       drawChart(data.hourly);
-      renderRows("obs-command-rows",data.commands,"commands",data.version);
+      renderRows("obs-command-rows",[],"commands",data.version);
       renderRows("obs-artifact-rows",data.artifacts,"artifacts");
     } catch(error){showError("Unable to load the observatory snapshot. Previously displayed data may be stale.");}
   }
