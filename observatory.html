@@ -80,9 +80,9 @@
       <section class="obs-card obs-panel" aria-labelledby="obs-categories"><div class="obs-panel-heading"><h2 id="obs-categories">Observed activity</h2><span>Aggregates only</span></div><dl class="obs-categories"><div><dt>Authentication attempts</dt><dd id="obs-auth-detail">—</dd></div><div><dt>Commands observed</dt><dd id="obs-commands-count">—</dd></div><div><dt>File-transfer events</dt><dd id="obs-files-count">—</dd></div></dl><p class="obs-disclaimer">Activity within a simulated service does not establish compromise of the host.</p></section>
     </div>
     <div class="obs-columns obs-findings">
-      <section class="obs-card obs-panel" aria-labelledby="obs-commands"><div class="obs-panel-heading"><h2 id="obs-commands">Observed attacker commands</h2><span>Sanitized from Cowrie telemetry</span></div>
+      <section class="obs-card obs-panel" aria-labelledby="obs-commands"><div class="obs-panel-heading"><h2 id="obs-commands">Observed attacker commands</h2><span id="obs-command-window">Separate seven-day reporting period</span></div>
         <div class="obs-table-wrap"><table class="obs-table"><thead><tr><th scope="col">Command / technique</th><th scope="col">Observations</th></tr></thead><tbody id="obs-command-rows"><tr><td class="obs-muted">Awaiting reviewed command statistics</td><td>—</td></tr></tbody></table></div>
-        <p class="obs-disclaimer">Command details are temporarily withheld for privacy review. The activity chart, counts and reviewed artifact indicators continue to cover the delayed 24-hour window.</p>
+        <p class="obs-disclaimer" id="obs-command-note">Sanitized command patterns use a separate seven-day reporting period. The activity chart, counts and reviewed artifact indicators continue to cover the delayed 24-hour window. Redaction markers are for research display, not executable instructions.</p>
       </section>
       <section class="obs-card obs-panel" aria-labelledby="obs-artifacts"><div class="obs-panel-heading"><h2 id="obs-artifacts">Observed artifacts</h2><span>SHA-256 indicators</span></div>
         <div class="obs-table-wrap"><table class="obs-table"><thead><tr><th scope="col">SHA-256</th><th scope="col">Observations</th><th scope="col">Analysis</th></tr></thead><tbody id="obs-artifact-rows"><tr><td class="obs-muted">No reviewed artifacts published yet</td><td>—</td><td>—</td></tr></tbody></table></div>
@@ -124,6 +124,7 @@
     <script src="js/site.js?v=8fbf366c"></script>
   </footer>
   <!-- @endpartial -->
-  <script src="js/observatory.js?v=29c11ab9" defer></script>
+  <script src="js/observatory-policy.js?v=38d753bd" defer></script>
+  <script src="js/observatory.js?v=1df6820b" defer></script>
 </body>
 </html>

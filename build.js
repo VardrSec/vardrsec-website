@@ -34,7 +34,7 @@ const CHECK = process.argv.includes("--check");
  * content hash makes a long cache correct instead of fighting it: when the file
  * changes the URL changes, so a returning visitor can never get a stale asset.
  */
-const ASSETS = ["css/styles.css", "js/site.js", "css/observatory.css", "js/observatory.js"];
+const ASSETS = ["css/styles.css", "js/site.js", "css/observatory.css", "js/observatory-policy.js", "js/observatory.js"];
 const hashes = Object.fromEntries(
   ASSETS.map((rel) => [
     rel,

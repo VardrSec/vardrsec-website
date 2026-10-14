@@ -1,6 +1,7 @@
 // Authenticated ingestion for sanitized telemetry only.
 // Provide OBSERVATORY_PUBLISH_SECRET as a Cloudflare Pages encrypted secret,
 // plus OBSERVATORY_KV as the dedicated KV binding.
+import { safeTemplate, policyVersion } from '../../lib/observatory-command-policy.mjs';
 const json = (value, status) => Response.json(value, {
   status,
   headers: { "Cache-Control": "no-store", "X-Content-Type-Options": "nosniff" },
@@ -9,20 +10,14 @@ const isObject = (v) => v !== null && typeof v === "object" && !Array.isArray(v)
 const integer = (v, max = 1e9) => Number.isSafeInteger(v) && v >= 0 && v <= max;
 const sha256 = (v) => typeof v === "string" && /^[a-f0-9]{64}$/.test(v);
 const exactKeys = (v, names) => isObject(v) && Object.keys(v).length === names.length && names.every((key) => Object.hasOwn(v, key));
-const utc = (v) => typeof v === "string" && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/.test(v) && Number.isFinite(Date.parse(v));
-const safeCommand = (v) => typeof v === "string" && v.length >= 1 && v.length <= 96
-  && /^[a-zA-Z0-9_./ *-]+$/.test(v) && !v.includes("..") && !v.includes("//")
-  && !v.includes("://") && !v.includes("@") && !/\b(ssh-rsa|ssh-ed25519|password|token|secret)\b/i.test(v);
-// v2: sanitized real command sequences. The publisher is the only permitted source.
-const safeObservedCommand = (v) => typeof v === "string" && v.length >= 20 && v.length <= 350
-  && /^[a-zA-Z0-9_.\/~ :;|&<>!=+\-\[\]()"'\$,*\\]+$/.test(v)
-  && /(?:&&|\|\||[;|<>]|\$\(|<\()/.test(v)
-  && /(?:authorized_keys|\.ssh|\bcurl\b|\bwget\b|\btftp\b|\bcrontab\b|\/etc\/cron)/i.test(v)
-  && !/(?:BEGIN[^\n]*PRIVATE KEY|PRIVATE KEY|https?:\/\/|ftp:\/\/|ssh-rsa\s+[A-Za-z0-9+/=]{30,}|[A-Za-z0-9+/]{70,})/i.test(v)
-  && !/\b(?:password|passwd|bearer|authorization|token\s*[=:]|secret\s*[=:])\b/i.test(v);
-function valid(payload) {
-  if (!exactKeys(payload, ["version","published_at","window_hours","totals","hourly","commands","artifacts"])) return false;
-  if (![1,2].includes(payload.version) || !utc(payload.published_at) || payload.window_hours !== 24) return false;
+const utc = (v) => typeof v === "string" && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/.test(v)
+  && Number.isFinite(Date.parse(v)) && new Date(v).toISOString().replace('.000Z', 'Z') === v;
+export function valid(payload) {
+  if (!isObject(payload)) return false;
+  const keys = ["version","published_at","window_hours","totals","hourly","commands","artifacts"];
+  if (payload.version === 3) keys.push('command_window_hours','command_window_start','command_window_end','command_policy_version');
+  if (!exactKeys(payload, keys)) return false;
+  if (![1,2,3].includes(payload.version) || !utc(payload.published_at) || payload.window_hours !== 24) return false;
   const when = Date.parse(payload.published_at);
   const now = Date.now();
   if (when > now + 5 * 60_000 || when < now - 60 * 60_000) return false;
@@ -37,11 +32,18 @@ function valid(payload) {
   // The last bucket must be a completed UTC hour (with an additional publication delay).
   if (hours.some(h => h % 3_600_000 !== 0)) return false;
   if (hours[23] !== Math.floor(when / 3_600_000) * 3_600_000 - 2 * 3_600_000) return false;
-  // Temporary privacy hold: no attacker-derived command text enters public KV.
-  // Restore only after the exporter and validator pass security regression review.
-  if (!Array.isArray(payload.commands) || payload.commands.length !== 0) return false;
-  if (!Array.isArray(payload.commands) || payload.commands.length > 10 ||
-      !payload.commands.every(c => exactKeys(c, ["template","count"]) && (payload.version === 1 ? safeCommand(c.template) : safeObservedCommand(c.template)) && integer(c.count))) return false;
+  if (!Array.isArray(payload.commands) || payload.commands.length > 10) return false;
+  // Legacy publishers remain compatible only with the safe privacy-hold payload.
+  if (payload.version !== 3 && payload.commands.length !== 0) return false;
+  if (payload.version === 3) {
+    const end = Math.floor(when / 3_600_000) * 3_600_000 - 3_600_000;
+    if (payload.command_policy_version !== policyVersion || payload.command_window_hours !== 168
+        || !utc(payload.command_window_start) || !utc(payload.command_window_end)
+        || Date.parse(payload.command_window_end) !== end
+        || Date.parse(payload.command_window_start) !== end - 168 * 3_600_000) return false;
+    if (!payload.commands.every(c => exactKeys(c, ['template','count'])
+        && safeTemplate(c.template) && integer(c.count) && c.count > 0)) return false;
+  }
   if (!Array.isArray(payload.artifacts) || payload.artifacts.length > 10 ||
       !payload.artifacts.every(a => exactKeys(a, ["sha256","count","type"]) && sha256(a.sha256) &&
          integer(a.count) && ["ssh_key","script","binary","other"].includes(a.type))) return false;
