@@ -79,9 +79,9 @@
       <section class="obs-card obs-panel" aria-labelledby="obs-categories"><div class="obs-panel-heading"><h2 id="obs-categories">Observed activity</h2><span>Aggregates only</span></div><dl class="obs-categories"><div><dt>Authentication attempts</dt><dd id="obs-auth-detail">—</dd></div><div><dt>Commands observed</dt><dd id="obs-commands-count">—</dd></div><div><dt>File-transfer events</dt><dd id="obs-files-count">—</dd></div></dl><p class="obs-disclaimer">Activity within a simulated service does not establish compromise of the host.</p></section>
     </div>
     <div class="obs-columns obs-findings">
-      <section class="obs-card obs-panel" aria-labelledby="obs-commands"><div class="obs-panel-heading"><h2 id="obs-commands">Commonly observed commands</h2><span>Reviewed command templates</span></div>
+      <section class="obs-card obs-panel" aria-labelledby="obs-commands"><div class="obs-panel-heading"><h2 id="obs-commands">Observed attacker commands</h2><span>Sanitized from Cowrie telemetry</span></div>
         <div class="obs-table-wrap"><table class="obs-table"><thead><tr><th scope="col">Command / technique</th><th scope="col">Observations</th></tr></thead><tbody id="obs-command-rows"><tr><td class="obs-muted">Awaiting reviewed command statistics</td><td>—</td></tr></tbody></table></div>
-        <p class="obs-disclaimer">Sensitive arguments, credentials, endpoint addresses and raw attacker input are excluded.</p>
+        <p class="obs-disclaimer">Multi-step commands observed within the delayed 24-hour window. Routine single commands are excluded. Key material, URLs and sensitive values are redacted.</p>
       </section>
       <section class="obs-card obs-panel" aria-labelledby="obs-artifacts"><div class="obs-panel-heading"><h2 id="obs-artifacts">Observed artifacts</h2><span>SHA-256 indicators</span></div>
         <div class="obs-table-wrap"><table class="obs-table"><thead><tr><th scope="col">SHA-256</th><th scope="col">Observations</th><th scope="col">Analysis</th></tr></thead><tbody id="obs-artifact-rows"><tr><td class="obs-muted">No reviewed artifacts published yet</td><td>—</td><td>—</td></tr></tbody></table></div>
@@ -123,6 +123,6 @@
     <script src="js/site.js?v=8fbf366c"></script>
   </footer>
   <!-- @endpartial -->
-  <script src="js/observatory.js?v=be2e311" defer></script>
+  <script src="js/observatory.js?v=d89db7e" defer></script>
 </body>
 </html>
