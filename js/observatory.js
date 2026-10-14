@@ -2,6 +2,7 @@
 (() => {
   "use strict";
   const endpoint = "/api/observatory";
+  const commandPolicy = window.VardrCommandPolicy;
   const byId = (id) => document.getElementById(id);
   const fmt = (n) => Number(n).toLocaleString("en-US");
   const isCount = (n) => Number.isSafeInteger(n) && n >= 0 && n <= 1e9;
@@ -14,12 +15,16 @@
     return node;
   }
   function validate(data) {
-    return data && [1,2].includes(data.version) && data.window_hours === 24 &&
+    return data && [1,2,3].includes(data.version) && data.window_hours === 24 &&
       typeof data.published_at === "string" && Number.isFinite(Date.parse(data.published_at)) &&
       data.totals && ["sessions","unique_sources","auth_events","command_events","file_events"].every(k => isCount(data.totals[k])) &&
       Array.isArray(data.hourly) && data.hourly.length === 24 && data.hourly.every(h =>
         h && Number.isFinite(Date.parse(h.hour)) && isCount(h.sessions) && isCount(h.auth_events)) &&
-      Array.isArray(data.commands) && Array.isArray(data.artifacts);
+      Array.isArray(data.commands) && Array.isArray(data.artifacts) &&
+      (data.version !== 3 || (commandPolicy && data.command_policy_version === commandPolicy.policyVersion
+        && data.command_window_hours === 168 && Number.isFinite(Date.parse(data.command_window_start))
+        && Number.isFinite(Date.parse(data.command_window_end))
+        && Date.parse(data.command_window_end) - Date.parse(data.command_window_start) === 168 * 3_600_000));
   }
   function drawChart(points) {
     const host = byId("obs-chart");
@@ -55,7 +60,9 @@
     if (!data.length){
       const tr=document.createElement("tr"),td=document.createElement("td");
       td.colSpan=mode==="artifacts"?3:2;td.className="obs-muted";
-      td.textContent=mode==="artifacts"?"No reviewed artifacts published yet":"Command details are temporarily withheld for privacy review. Activity counts remain available.";
+      td.textContent=mode==="artifacts"?"No reviewed artifacts published yet":dataVersion===3
+        ?"No supported multi-step command patterns in this seven-day reporting period."
+        :"Command details are temporarily withheld for privacy review. Activity counts remain available.";
       tr.append(td);tbody.append(tr);return;
     }
     for(const item of data.slice(0,10)){
@@ -65,7 +72,7 @@
         if(!validHash || !isCount(item.count))continue;
         const code=document.createElement("code");code.textContent=item.sha256;first.append(code);
       } else {
-        if(typeof item.template!=="string" || item.template.length>(dataVersion===2?350:96) || !isCount(item.count))continue;
+        if(dataVersion!==3 || !commandPolicy?.safeTemplate(item.template) || !isCount(item.count) || item.count===0)continue;
         const code=document.createElement("code");code.textContent=item.template;first.append(code);
       }
       const count=document.createElement("td");count.textContent=fmt(item.count);
@@ -105,8 +112,12 @@
       if(age>20*60*1000){note.hidden=false;note.textContent="Latest data may be stale; the publisher has not updated recently.";}
       else note.hidden=true;
       drawChart(data.hourly);
-      // Ignore command text even when an older cached API response contains it.
-      renderRows("obs-command-rows",[],"commands",data.version);
+      // Only v3 carries the independently validated fixed-vocabulary projection.
+      renderRows("obs-command-rows",data.version===3?data.commands:[],"commands",data.version);
+      text('obs-command-window',data.version===3?'Seven-day reporting period':'Privacy review');
+      if(data.version===3) text('obs-command-note',
+        `Sanitized patterns observed ${data.command_window_start.slice(0,16).replace('T',' ')} to ${data.command_window_end.slice(0,16).replace('T',' ')} UTC (end exclusive). Counts combine observations of the same sanitized pattern. These are attempts in a simulated service, not proof of successful execution.`);
+      else text('obs-command-note','Command details are temporarily withheld. Activity statistics and reviewed artifacts cover the delayed 24-hour window.');
       renderRows("obs-artifact-rows",data.artifacts,"artifacts");
     } catch(error){showError("Unable to load the observatory snapshot. Previously displayed data may be stale.");}
   }
