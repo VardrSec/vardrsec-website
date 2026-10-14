@@ -11,6 +11,12 @@ export async function onRequestGet({ env }) {
   if (!raw) {
     return Response.json({ status: "awaiting_data" }, { headers });
   }
-  // Snapshots have already been validated before persistence.
-  return new Response(raw, { headers: { ...headers, "Content-Type": "application/json; charset=utf-8" } });
+  // Also suppress historical command rows accepted before the privacy hold.
+  try {
+    const snapshot = JSON.parse(raw);
+    snapshot.commands = [];
+    return Response.json(snapshot, { headers });
+  } catch {
+    return Response.json({ error: "observatory_unavailable" }, { status: 503, headers: { ...headers, "Cache-Control": "no-store" } });
+  }
 }

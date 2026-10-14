@@ -36,6 +36,10 @@ function valid(payload) {
   if (!hours.every((h,i) => i === 0 || (h - hours[i-1] === 3_600_000))) return false;
   // The last bucket must be a completed UTC hour (with an additional publication delay).
   if (hours.some(h => h % 3_600_000 !== 0)) return false;
+  if (hours[23] !== Math.floor(when / 3_600_000) * 3_600_000 - 2 * 3_600_000) return false;
+  // Temporary privacy hold: no attacker-derived command text enters public KV.
+  // Restore only after the exporter and validator pass security regression review.
+  if (!Array.isArray(payload.commands) || payload.commands.length !== 0) return false;
   if (!Array.isArray(payload.commands) || payload.commands.length > 10 ||
       !payload.commands.every(c => exactKeys(c, ["template","count"]) && (payload.version === 1 ? safeCommand(c.template) : safeObservedCommand(c.template)) && integer(c.count))) return false;
   if (!Array.isArray(payload.artifacts) || payload.artifacts.length > 10 ||
