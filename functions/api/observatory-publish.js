@@ -13,9 +13,16 @@ const utc = (v) => typeof v === "string" && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2
 const safeCommand = (v) => typeof v === "string" && v.length >= 1 && v.length <= 96
   && /^[a-zA-Z0-9_./ *-]+$/.test(v) && !v.includes("..") && !v.includes("//")
   && !v.includes("://") && !v.includes("@") && !/\b(ssh-rsa|ssh-ed25519|password|token|secret)\b/i.test(v);
+// v2: sanitized real command sequences. The publisher is the only permitted source.
+const safeObservedCommand = (v) => typeof v === "string" && v.length >= 20 && v.length <= 350
+  && /^[a-zA-Z0-9_./~ :;|&<>!=+\\-\\[\\]()"'$,*\\\\]+$/.test(v)
+  && /(?:&&|\\|\\||[;|<>]|\\$\\(|<\\()/.test(v)
+  && /\\b(?:authorized_keys|\\.ssh|curl|wget|tftp|crontab|\\/etc\\/cron)\\b/i.test(v)
+  && !/(?:BEGIN[^\\n]*PRIVATE KEY|PRIVATE KEY|https?:\\/\\/|ftp:\\/\\/|ssh-rsa\\s+[A-Za-z0-9+/=]{30,}|[A-Za-z0-9+/]{70,})/i.test(v)
+  && !/\\b(?:password|passwd|bearer|authorization|token\\s*[=:]|secret\\s*[=:])\\b/i.test(v);
 function valid(payload) {
   if (!exactKeys(payload, ["version","published_at","window_hours","totals","hourly","commands","artifacts"])) return false;
-  if (payload.version !== 1 || !utc(payload.published_at) || payload.window_hours !== 24) return false;
+  if (![1,2].includes(payload.version) || !utc(payload.published_at) || payload.window_hours !== 24) return false;
   const when = Date.parse(payload.published_at);
   const now = Date.now();
   if (when > now + 5 * 60_000 || when < now - 60 * 60_000) return false;
@@ -30,7 +37,7 @@ function valid(payload) {
   // The last bucket must be a completed UTC hour (with an additional publication delay).
   if (hours.some(h => h % 3_600_000 !== 0)) return false;
   if (!Array.isArray(payload.commands) || payload.commands.length > 10 ||
-      !payload.commands.every(c => exactKeys(c, ["template","count"]) && safeCommand(c.template) && integer(c.count))) return false;
+      !payload.commands.every(c => exactKeys(c, ["template","count"]) && (payload.version === 1 ? safeCommand(c.template) : safeObservedCommand(c.template)) && integer(c.count))) return false;
   if (!Array.isArray(payload.artifacts) || payload.artifacts.length > 10 ||
       !payload.artifacts.every(a => exactKeys(a, ["sha256","count","type"]) && sha256(a.sha256) &&
          integer(a.count) && ["ssh_key","script","binary","other"].includes(a.type))) return false;
