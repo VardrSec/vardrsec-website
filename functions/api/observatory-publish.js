@@ -1,6 +1,6 @@
 // Authenticated ingestion for sanitized telemetry only.
 // Provide OBSERVATORY_PUBLISH_SECRET as a Cloudflare Pages encrypted secret,
-// plus OBSERVATORY_KV as the preview KV binding.
+// plus OBSERVATORY_KV as the dedicated KV binding.
 const json = (value, status) => Response.json(value, {
   status,
   headers: { "Cache-Control": "no-store", "X-Content-Type-Options": "nosniff" },
@@ -8,29 +8,31 @@ const json = (value, status) => Response.json(value, {
 const isObject = (v) => v !== null && typeof v === "object" && !Array.isArray(v);
 const integer = (v, max = 1e9) => Number.isSafeInteger(v) && v >= 0 && v <= max;
 const sha256 = (v) => typeof v === "string" && /^[a-f0-9]{64}$/.test(v);
-const allowedKeys = (v, names) => isObject(v) && Object.keys(v).every((key) => names.includes(key));
+const exactKeys = (v, names) => isObject(v) && Object.keys(v).length === names.length && names.every((key) => Object.hasOwn(v, key));
 const utc = (v) => typeof v === "string" && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/.test(v) && Number.isFinite(Date.parse(v));
 const safeCommand = (v) => typeof v === "string" && v.length >= 1 && v.length <= 96
   && /^[a-zA-Z0-9_./ *-]+$/.test(v) && !v.includes("..") && !v.includes("//")
   && !v.includes("://") && !v.includes("@") && !/\b(ssh-rsa|ssh-ed25519|password|token|secret)\b/i.test(v);
 function valid(payload) {
-  if (!allowedKeys(payload, ["version","published_at","window_hours","totals","hourly","commands","artifacts"])) return false;
+  if (!exactKeys(payload, ["version","published_at","window_hours","totals","hourly","commands","artifacts"])) return false;
   if (payload.version !== 1 || !utc(payload.published_at) || payload.window_hours !== 24) return false;
   const when = Date.parse(payload.published_at);
   const now = Date.now();
   if (when > now + 5 * 60_000 || when < now - 60 * 60_000) return false;
-  if (!allowedKeys(payload.totals, ["sessions","unique_sources","auth_events","command_events","file_events"])) return false;
+  if (!exactKeys(payload.totals, ["sessions","unique_sources","auth_events","command_events","file_events"])) return false;
   if (!["sessions","unique_sources","auth_events","command_events","file_events"].every(k => integer(payload.totals[k]))) return false;
   if (!Array.isArray(payload.hourly) || payload.hourly.length !== 24) return false;
-  if (!payload.hourly.every(h => allowedKeys(h, ["hour","sessions","auth_events"]) && utc(h.hour) &&
+  if (!payload.hourly.every(h => exactKeys(h, ["hour","sessions","auth_events"]) && utc(h.hour) &&
        integer(h.sessions) && integer(h.auth_events) && Date.parse(h.hour) <= now - 30 * 60_000 &&
        Date.parse(h.hour) >= now - 49 * 60 * 60_000)) return false;
   const hours = payload.hourly.map(h => Date.parse(h.hour));
   if (!hours.every((h,i) => i === 0 || (h - hours[i-1] === 3_600_000))) return false;
+  // The last bucket must be a completed UTC hour (with an additional publication delay).
+  if (hours.some(h => h % 3_600_000 !== 0)) return false;
   if (!Array.isArray(payload.commands) || payload.commands.length > 10 ||
-      !payload.commands.every(c => allowedKeys(c, ["template","count"]) && safeCommand(c.template) && integer(c.count))) return false;
+      !payload.commands.every(c => exactKeys(c, ["template","count"]) && safeCommand(c.template) && integer(c.count))) return false;
   if (!Array.isArray(payload.artifacts) || payload.artifacts.length > 10 ||
-      !payload.artifacts.every(a => allowedKeys(a, ["sha256","count","type"]) && sha256(a.sha256) &&
+      !payload.artifacts.every(a => exactKeys(a, ["sha256","count","type"]) && sha256(a.sha256) &&
          integer(a.count) && ["ssh_key","script","binary","other"].includes(a.type))) return false;
   if (new Set(payload.commands.map(c => c.template)).size !== payload.commands.length) return false;
   if (new Set(payload.artifacts.map(a => a.sha256)).size !== payload.artifacts.length) return false;
@@ -76,7 +78,17 @@ export async function onRequestPost({ request, env }) {
   if (!valid(body)) return json({ error: "invalid_snapshot" }, 422);
   // No client-controlled KV keys. Abuse possible if the publisher itself is compromised;
   // keep credential write-only to this endpoint and rotate if needed.
+  // Best-effort replay/downgrade defense. KV is eventually consistent: this is NOT
+  // a linearizable replay lock. For strict sequencing use a Durable Object or D1.
+  const previous = await env.OBSERVATORY_KV.get("public_snapshot", { type: "json" });
+  if (previous && typeof previous.published_at === "string" &&
+      Date.parse(body.published_at) <= Date.parse(previous.published_at)) {
+    return json({ error: "stale_snapshot" }, 409);
+  }
   await env.OBSERVATORY_KV.put("public_snapshot", JSON.stringify(body));
   return json({ status: "accepted" }, 202);
 }
 export async function onRequestGet() { return json({ error: "method_not_allowed" }, 405); }
+export async function onRequestPut() { return json({ error: "method_not_allowed" }, 405); }
+export async function onRequestPatch() { return json({ error: "method_not_allowed" }, 405); }
+export async function onRequestDelete() { return json({ error: "method_not_allowed" }, 405); }
