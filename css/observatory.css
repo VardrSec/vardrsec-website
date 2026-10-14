@@ -33,3 +33,16 @@
 .obs-method-aside strong{color:var(--accent2);font-size:.87rem}
 @media(max-width:880px){.obs-heading{flex-direction:column;align-items:start}.obs-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.obs-columns,.obs-method{grid-template-columns:1fr}.obs-method-aside{border-left:0;border-top:1px solid var(--line);padding:15px 0 0}}
 @media(max-width:500px){.obs-wrap{padding-top:30px}.obs-stat{padding:14px;min-height:125px}.obs-stat strong{font-size:1.8rem}.obs-panel-heading{align-items:start;flex-direction:column}}
+
+/* Reviewed research evidence panels */
+.obs-findings{grid-template-columns:1fr 1fr}
+.obs-table-wrap{overflow-x:auto;max-width:100%}
+.obs-table{width:100%;border-collapse:collapse;margin-top:18px;text-align:left;font-size:.83rem}
+.obs-table th{font-size:.71rem;text-transform:uppercase;letter-spacing:.055em;color:var(--text-3);font-weight:600;padding:0 6px 12px 0;border-bottom:1px solid var(--line)}
+.obs-table td{padding:16px 6px 14px 0;border-bottom:1px solid var(--line-soft);color:var(--text-2);overflow-wrap:anywhere}
+.obs-table td:last-child,.obs-table th:last-child{text-align:right;white-space:nowrap}
+.obs-muted{font-style:italic;color:var(--text-3)!important}
+.obs-about{margin-top:13px;padding:19px 22px}
+.obs-about h2{font-size:1rem;margin:0 0 6px}
+.obs-about p{font-size:.81rem;line-height:1.65;margin:0;color:var(--text-3)}
+@media(max-width:880px){.obs-findings{grid-template-columns:1fr}}
