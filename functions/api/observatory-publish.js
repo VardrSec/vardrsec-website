@@ -15,11 +15,11 @@ const safeCommand = (v) => typeof v === "string" && v.length >= 1 && v.length <=
   && !v.includes("://") && !v.includes("@") && !/\b(ssh-rsa|ssh-ed25519|password|token|secret)\b/i.test(v);
 // v2: sanitized real command sequences. The publisher is the only permitted source.
 const safeObservedCommand = (v) => typeof v === "string" && v.length >= 20 && v.length <= 350
-  && /^[a-zA-Z0-9_./~ :;|&<>!=+\\-\\[\\]()"'$,*\\\\]+$/.test(v)
-  && /(?:&&|\\|\\||[;|<>]|\\$\\(|<\\()/.test(v)
-  && /\\b(?:authorized_keys|\\.ssh|curl|wget|tftp|crontab|\\/etc\\/cron)\\b/i.test(v)
-  && !/(?:BEGIN[^\\n]*PRIVATE KEY|PRIVATE KEY|https?:\\/\\/|ftp:\\/\\/|ssh-rsa\\s+[A-Za-z0-9+/=]{30,}|[A-Za-z0-9+/]{70,})/i.test(v)
-  && !/\\b(?:password|passwd|bearer|authorization|token\\s*[=:]|secret\\s*[=:])\\b/i.test(v);
+  && /^[a-zA-Z0-9_.\/~ :;|&<>!=+\-\[\]()"'\$,*\\]+$/.test(v)
+  && /(?:&&|\|\||[;|<>]|\$\(|<\()/.test(v)
+  && /(?:authorized_keys|\.ssh|\bcurl\b|\bwget\b|\btftp\b|\bcrontab\b|\/etc\/cron)/i.test(v)
+  && !/(?:BEGIN[^\n]*PRIVATE KEY|PRIVATE KEY|https?:\/\/|ftp:\/\/|ssh-rsa\s+[A-Za-z0-9+/=]{30,}|[A-Za-z0-9+/]{70,})/i.test(v)
+  && !/\b(?:password|passwd|bearer|authorization|token\s*[=:]|secret\s*[=:])\b/i.test(v);
 function valid(payload) {
   if (!exactKeys(payload, ["version","published_at","window_hours","totals","hourly","commands","artifacts"])) return false;
   if (![1,2].includes(payload.version) || !utc(payload.published_at) || payload.window_hours !== 24) return false;
