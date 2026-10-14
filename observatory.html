@@ -78,7 +78,17 @@
       <section class="obs-card obs-panel" aria-labelledby="obs-trend"><div class="obs-panel-heading"><h2 id="obs-trend">Activity over time</h2><span>Hourly UTC buckets</span></div><div class="obs-empty-chart"><p>Trends will appear after the secure publication pipeline is validated.</p></div></section>
       <section class="obs-card obs-panel" aria-labelledby="obs-categories"><div class="obs-panel-heading"><h2 id="obs-categories">Observed activity</h2><span>Aggregates only</span></div><dl class="obs-categories"><div><dt>Authentication attempts</dt><dd>—</dd></div><div><dt>Commands observed</dt><dd>—</dd></div><div><dt>File-transfer events</dt><dd>—</dd></div></dl><p class="obs-disclaimer">Activity within a simulated service does not establish compromise of the host.</p></section>
     </div>
-    <section class="obs-card obs-method" aria-labelledby="obs-method"><div><h2 id="obs-method">Methodology and limitations</h2><p>Metrics will be derived from isolated honeypot instrumentation and published in delayed time buckets. Raw IP addresses, credentials, commands, artifacts, session identifiers, and sensor infrastructure will not be published.</p></div><div class="obs-method-aside"><strong>Designed for isolation</strong><span>Outbound-only publishing from the sensor</span><span>No public access to investigation systems</span><span>Observation does not prove attacker identity</span></div></section>
+    <div class="obs-columns obs-findings">
+      <section class="obs-card obs-panel" aria-labelledby="obs-commands"><div class="obs-panel-heading"><h2 id="obs-commands">Commonly observed commands</h2><span>Reviewed command templates</span></div>
+        <div class="obs-table-wrap"><table class="obs-table"><thead><tr><th scope="col">Command / technique</th><th scope="col">Observations</th></tr></thead><tbody><tr><td class="obs-muted">Awaiting reviewed command statistics</td><td>—</td></tr></tbody></table></div>
+        <p class="obs-disclaimer">Sensitive arguments, credentials, endpoint addresses and raw attacker input are excluded.</p>
+      </section>
+      <section class="obs-card obs-panel" aria-labelledby="obs-artifacts"><div class="obs-panel-heading"><h2 id="obs-artifacts">Observed artifacts</h2><span>SHA-256 indicators</span></div>
+        <div class="obs-table-wrap"><table class="obs-table"><thead><tr><th scope="col">Artifact / SHA-256</th><th scope="col">Observations</th></tr></thead><tbody><tr><td class="obs-muted">No reviewed artifacts published yet</td><td>—</td></tr></tbody></table></div>
+        <p class="obs-disclaimer">Hashes identify observed files, not necessarily confirmed malware. Suspicious artifacts are reviewed before publication.</p>
+      </section>
+    </div>
+    <section class="obs-card obs-about" aria-labelledby="obs-method"><h2 id="obs-method">About this data</h2><p>VardrSec collects activity observed by instrumented decoy services. Public statistics are aggregated and delayed; source IPs and sensitive session details are withheld. Activity in a honeypot does not mean the underlying host was compromised.</p></section>
   </section>
 </main>
 <!-- @partial:footer -->
