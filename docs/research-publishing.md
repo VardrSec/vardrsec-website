@@ -4,6 +4,12 @@ The shared navigation includes the Threat Observatory and Blog. The homepage
 preview describes the two reporting periods without introducing a second telemetry
 API or changing the existing tools content.
 
+The first blog post, `blog-ssh-key-takeover.html`, is the public entry point. It
+reports figures from the frozen October snapshot and cites outside sources for any
+claim the sensor cannot support on its own. The October 2026 draft report is no
+longer listed in the blog, homepage or sitemap, and carries `noindex`; republish it
+in those places only once it is a finished revision.
+
 The October 2026 report is revision 0.1, a public **working draft**. It uses a frozen
 already-public delayed snapshot. Activity counters describe 24 hours; command
 patterns cover seven days. Monthly totals are explicitly absent. No raw captures,

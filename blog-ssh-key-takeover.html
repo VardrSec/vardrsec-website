@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The SSH Key Takeover | VardrSec</title>
+<meta name="description" content="What a week of SSH honeypot traffic shows: a short, automated routine that deletes every existing SSH key on a server and installs the attacker's own." />
+<link rel="canonical" href="https://vardrsec.com/blog-ssh-key-takeover" />
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+<meta property="og:type" content="article" /><meta property="og:title" content="Wipe the keys, plant your own: the SSH takeover my sensor keeps seeing" />
+<meta property="og:description" content="Two command patterns from the VardrSec SSH sensor, what each step does, who else has seen them, and how to check your own servers." />
+<meta property="og:url" content="https://vardrsec.com/blog-ssh-key-takeover" /><meta property="og:image" content="https://vardrsec.com/assets/orgbanner.png" />
+<link rel="stylesheet" href="css/styles.css?v=d6e3b655" /><link rel="stylesheet" href="css/research.css?v=419ed7f4" />
+</head><body>
+<!-- @partial:header -->
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="topbar">
+    <div class="container">
+      <nav class="nav">
+        <a class="brand" href="index.html">
+          <div class="brand-mark" aria-hidden="true">
+            <picture>
+              <source srcset="assets/small-logo.webp" type="image/webp" />
+              <img src="assets/small-logo.png" alt="VardrSec logo" width="128" height="129" class="brand-img" />
+            </picture>
+           </div>
+          <div class="brand-name">
+            <strong>VardrSec</strong>
+            <small>Offensive Security Research & Tooling</small>
+          </div>
+        </a>
+        
+        <!-- Desktop Navigation -->
+        <div class="nav-links">
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="tools.html">Tools</a>
+          <a href="observatory.html">Threat Observatory</a>
+          <a href="blog.html">Blog</a>
+          <a href="resources.html">Resources</a>
+        </div>
+        
+        <!-- Desktop CTA Buttons -->
+        <div class="nav-cta">
+          <a class="btn ghost" href="https://github.com/VardrSec" rel="noopener" aria-label="VardrSec on GitHub">GitHub</a>
+          <a class="btn primary" href="contact.html">Contact</a>
+        </div>
+        
+        <!-- Mobile Menu Toggle -->
+        <button id="menuBtn" class="menu-btn" aria-label="Open menu" aria-expanded="false">
+          Menu
+        </button>
+      </nav>
+      
+      <!-- Mobile Menu -->
+      <div class="mobile-panel" id="mobilePanel">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="tools.html">Tools</a>
+        <a href="observatory.html">Threat Observatory</a>
+        <a href="blog.html">Blog</a>
+        <a href="resources.html">Resources</a>
+        <a class="btn primary" href="contact.html" style="margin-top:8px">Contact</a>
+      </div>
+    </div>
+  </header>
+  <!-- @endpartial -->
+<main id="main" tabindex="-1"><section class="section"><div class="container"><article class="research-article">
+<a class="link" href="blog.html">Research Blog</a>
+<p class="research-label">Honeypot observations</p>
+<h1>Wipe the keys, plant your own: the SSH takeover my sensor keeps seeing</h1>
+<p class="research-note">15 October 2026 · Jorge Aquino · Data from one VardrSec SSH sensor</p>
+<p class="lead">If you expose SSH to the internet with a weak password, the first thing that logs in probably won't be a person. My sensor shows what tends to happen next: a short chain of shell commands that removes every existing key and leaves the attacker holding the only one.</p>
+
+<h2>A day at the sensor</h2>
+<p>I run a <a class="link" href="https://github.com/cowrie/cowrie" rel="noopener">Cowrie</a> SSH honeypot. It's a fake server that accepts logins, pretends to be Linux, and records what visitors type. Nothing they run touches a real system. Here is one 24-hour window, 14 October 01:00 to 15 October 01:00 UTC:</p>
+<div class="research-table-wrap"><table class="research-table"><caption>One SSH sensor, one 24-hour window.</caption><thead><tr><th scope="col">What I counted</th><th scope="col">Count</th></tr></thead><tbody>
+<tr><th scope="row">SSH sessions</th><td>7,602</td></tr>
+<tr><th scope="row">Distinct source addresses</th><td>161</td></tr>
+<tr><th scope="row">Login attempts</th><td>7,405</td></tr>
+<tr><th scope="row">Commands typed</th><td>7,556</td></tr>
+<tr><th scope="row">File transfers</th><td>151</td></tr>
+</tbody></table></div>
+<p>That works out to roughly 47 sessions for every source address. No person logs in that often. This is automated scanning, typically run from machines that were already compromised and are now looking for more.</p>
+
+<h2>The two commands that keep coming back</h2>
+<p>Over the seven days from 8 to 15 October, two multi-step patterns came up again and again, almost the same number of times:</p>
+<pre><code>cd ~ ; chattr -ia .ssh ; [EXECUTABLE] -ia .ssh</code></pre>
+<p class="research-note">Seen 150 times in seven days.</p>
+<pre><code>cd ~ &amp;&amp; rm -rf .ssh &amp;&amp; mkdir .ssh &amp;&amp; echo [SSH_KEY] &gt;&gt; .ssh/authorized_keys &amp;&amp; chmod -R go= ~/.ssh &amp;&amp; cd ~</code></pre>
+<p class="research-note">Seen 146 times in seven days.</p>
+<p>My publishing filter replaces anything that might be sensitive or unrecognized with a placeholder like <code>[SSH_KEY]</code>, which is why you see those brackets. The two counts are nearly equal, and as the outside reports below show, other sensors record these commands back to back. My read is that they are two halves of one routine.</p>
+
+<h2>What each step does</h2>
+<ol>
+<li><strong><code>chattr -ia .ssh</code></strong> removes the <em>immutable</em> and <em>append-only</em> flags from the SSH folder. Admins, and rival bots, sometimes set those flags so the folder can't be changed. This step undoes that.</li>
+<li><strong><code>[EXECUTABLE] -ia .ssh</code></strong> repeats the same flags with a program my filter didn't recognize, so it was replaced with a placeholder. Other honeypot operators record a program called <code>lockr</code> in this position, which their fake shells answer with "command not found." It looks like a backup in case <code>chattr</code> was renamed or removed.</li>
+<li><strong><code>rm -rf .ssh</code></strong> deletes the folder, which removes every key that could already log in as this user. That locks out the real owner, and any competing bot, in one step.</li>
+<li><strong><code>mkdir .ssh</code> and <code>echo [SSH_KEY] &gt;&gt; .ssh/authorized_keys</code></strong> recreate the folder with a single key: the attacker's.</li>
+<li><strong><code>chmod -R go= ~/.ssh</code></strong> removes access for everyone except the owner. The SSH server ignores key files that other users can write to, so this step makes sure the new key is actually accepted.</li>
+</ol>
+<p>The result: a password that was guessed once becomes key access that survives a password change. Rotating the password afterward doesn't remove the attacker. MITRE ATT&amp;CK lists this as <a class="link" href="https://attack.mitre.org/techniques/T1098/004/" rel="noopener">T1098.004, SSH Authorized Keys</a>.</p>
+
+<h2>I'm not the only one seeing it</h2>
+<p>Other honeypot operators have recorded this same chain, step for step, for years. In public write-ups the planted key ends with the comment <code>mdrfckr</code>, which is how the campaign got its name (<a class="link" href="https://blog.port22.dk/mdrfckrs-part-two/" rel="noopener">port22, 2023</a>; <a class="link" href="https://dev.to/demodex/mdrfckr-the-outlawdota-botnet-changes-its-ssh-fingerprint-again-c89" rel="noopener">DEV Community, 2026</a>). Some researchers link it to the Outlaw (also called Dota) cryptomining group. Others say the bot is separate from that group. I'm not attributing it to anyone.</p>
+<p>One limit is my own doing. I redact keys before publishing, so the public data on this page can't show whether my sensor received that exact key. My claim is that the commands match the published reports, nothing more.</p>
+
+<h2>Check your own servers</h2>
+<ul>
+<li>Read every <code>authorized_keys</code> file, including root's, and remove any key you can't account for. A quick first check: <code>grep -r mdrfckr /root/.ssh /home/*/.ssh</code>.</li>
+<li>Turn off password logins for SSH with <code>PasswordAuthentication no</code>, and use <code>PermitRootLogin no</code> (or <code>prohibit-password</code>). This routine only works after a password has been guessed.</li>
+<li>Get an alert when any <code>authorized_keys</code> file changes, for example with an auditd watch or file-integrity monitoring.</li>
+<li>Limit or block repeated failed logins with tools like fail2ban or a cloud firewall rule.</li>
+</ul>
+
+<h2>How this data was collected</h2>
+<p>The <a class="link" href="observatory.html">Threat Observatory</a> publishes the sensor's numbers with a delay and never shows source addresses, typed passwords or keys. A command pattern is only published if every word is on a fixed list of known commands, flags and paths. Anything else is either replaced by a placeholder or dropped. The figures on this page come from one Observatory snapshot, published 15 October 2026 at 02:00 UTC.</p>
+<p class="research-note">Limits: this is one sensor, one protocol and one week. It doesn't measure how common these attacks are across the internet. A login to a honeypot is not access to a real machine, and a command I recorded is an attempt, not proof it would have worked. Corrections are welcome at <a class="link" href="mailto:contact@vardrsec.com">contact@vardrsec.com</a>.</p>
+
+<h2>Sources</h2>
+<ul>
+<li>MITRE ATT&amp;CK, <a class="link" href="https://attack.mitre.org/techniques/T1098/004/" rel="noopener">T1098.004: Account Manipulation, SSH Authorized Keys</a></li>
+<li>port22, <a class="link" href="https://blog.port22.dk/mdrfckrs-part-two/" rel="noopener">mdrfckrs, part two</a> (31 July 2023)</li>
+<li>DEV Community, <a class="link" href="https://dev.to/demodex/mdrfckr-the-outlawdota-botnet-changes-its-ssh-fingerprint-again-c89" rel="noopener">mdrfckr: the Outlaw/Dota botnet changes its SSH fingerprint again</a> (1 October 2026)</li>
+</ul>
+</article></div></section></main>
+<!-- @partial:footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h2 class="footer-h">VardrSec</h2>
+          <p>Independent security research, open-source tooling, and observations from an SSH research sensor.</p>
+          <p class="footer-contact">
+            <a href="mailto:contact@vardrsec.com">contact@vardrsec.com</a><br/>
+            <a href="https://github.com/VardrSec" rel="noopener">github.com/VardrSec</a>
+          </p>
+        </div>
+        <div class="links">
+          <h2 class="footer-h">Site</h2>
+          <a href="about.html">About</a>
+          <a href="tools.html">Tools</a>
+          <a href="observatory.html">Threat Observatory</a>
+          <a href="blog.html">Research Blog</a>
+          <a href="resources.html">Resources</a>
+        </div>
+        <div class="links">
+          <h2 class="footer-h">Legal</h2>
+          <a href="privacy.html">Privacy</a>
+          <a href="terms.html">Terms</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+      <div class="copyright">
+        <small>© <span id="year"></span> VardrSec. All rights reserved.</small>
+      </div>
+    </div>
+    <script src="js/site.js?v=8fbf366c"></script>
+  </footer>
+  <!-- @endpartial -->
+</body></html>

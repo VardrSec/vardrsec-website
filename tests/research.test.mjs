@@ -27,5 +27,19 @@ test('both navigation surfaces and homepage expose the requested research sectio
     assert.equal(header.split(`href="${page}"`).length-1, 2);
     assert.ok(read('index.html').includes(`href="${page}"`));
   }
-  assert.match(read('blog.html'), /report-2026-10.html/);
+  assert.match(read('blog.html'), /blog-ssh-key-takeover.html/);
+});
+test('first post is listed in place of the unlisted draft and matches the frozen snapshot', () => {
+  const data = JSON.parse(read('research/2026-10/public-snapshot.json'));
+  const post = read('blog-ssh-key-takeover.html');
+  const unescape = s => s.replaceAll('&amp;', '&').replaceAll('&gt;', '>');
+  for (const count of Object.values(data.totals)) assert.ok(post.includes(count.toLocaleString('en-US')));
+  for (const row of data.commands) {
+    assert.ok(unescape(post).includes(row.template));
+    assert.ok(post.includes(`Seen ${row.count} times`));
+  }
+  assert.doesNotMatch(post, /[Ww]orking draft/);
+  for (const page of ['blog.html', 'index.html', 'sitemap.xml']) assert.doesNotMatch(read(page), /report-2026-10/);
+  assert.match(read('report-2026-10.html'), /<meta name="robots" content="noindex"/);
+  assert.match(read('sitemap.xml'), /blog-ssh-key-takeover/);
 });
