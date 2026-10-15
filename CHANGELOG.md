@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- First research blog post, `blog-ssh-key-takeover.html`: the two SSH-key takeover
+  command patterns from the frozen October snapshot, step-by-step explanation,
+  matching public reports, and hardening checks. Listed on the blog and in the sitemap.
 - `abuseipdb-verification` meta tag in the `index.html` head, which proves ownership of
   `vardrsec.com` to AbuseIPDB (Account > Webmasters). The token is public by design.
 
@@ -19,6 +22,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   address to it.
 
 ### Changed
+
+- The October 2026 working-draft report is unlisted: removed from the blog, the homepage
+  research card and the sitemap, and marked `noindex`. The page and artifacts remain.
 
 - `about.html` rewritten to be shorter and plainer: background, what I work on, how I
   work, and contact. The narrative intro and the pitch-style sections were removed.
