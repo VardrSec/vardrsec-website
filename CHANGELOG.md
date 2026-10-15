@@ -23,6 +23,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- `resources.html` rewritten: learning paths, an access-control testing method, API and
+  web testing tools, recon and OSINT, cloud practice and auditing, developer checks with
+  the reason for each, detection, and reporting. Every external link was checked.
+- Plain-language pass: the blog intro, Observatory wording and status labels, homepage
+  Observatory section, header tagline ("Offensive" dropped) and footer. Observatory and
+  footer copy no longer describe the sensor setup.
+- VardrMap is described as a multi-tenant engagement platform on the homepage and tools
+  page, matching the GitHub description.
+
+### Fixed
+
+- `tools/verify.js` listed `catalog` as a British spelling; the entry is now `catalogue`.
+
 - The October 2026 working-draft report is unlisted: removed from the blog, the homepage
   research card and the sitemap, and marked `noindex`. The page and artifacts remain.
 

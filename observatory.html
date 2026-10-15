@@ -6,9 +6,9 @@
   <meta name="robots" content="noindex, nofollow" />
   <link rel="canonical" href="https://vardrsec.com/observatory.html" />
   <title>Threat Observatory | VardrSec</title>
-  <meta name="description" content="Aggregated security research from VardrSec instrumented honeypot sensors." />
+  <meta name="description" content="Delayed, anonymized statistics on attacks against a VardrSec SSH honeypot." />
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
-  <link rel="stylesheet" href="css/styles.css?v=d6e3b655" />
+  <link rel="stylesheet" href="css/styles.css?v=4134f0e9" />
   <link rel="stylesheet" href="css/observatory.css?v=5c84c11f" />
 </head>
 <body>
@@ -26,7 +26,7 @@
            </div>
           <div class="brand-name">
             <strong>VardrSec</strong>
-            <small>Offensive Security Research & Tooling</small>
+            <small>Security Research & Tooling</small>
           </div>
         </a>
         
@@ -68,9 +68,9 @@
 <main id="main" tabindex="-1" class="observatory">
   <section class="container obs-wrap">
     <div class="obs-heading">
-      <div><p class="obs-eyebrow">VardrSec / Defensive research</p><h1>Threat Observatory</h1>
-      <p class="obs-lead">Observed intrusion attempts against instrumented decoy services, presented as privacy-preserving aggregate research.</p></div>
-      <span class="obs-status" id="obs-status" role="status" aria-live="polite">Loading telemetry</span>
+      <div><p class="obs-eyebrow">VardrSec</p><h1>Threat Observatory</h1>
+      <p class="obs-lead">Attacks against a VardrSec SSH honeypot, published with a delay. No IP addresses or credentials are shown.</p></div>
+      <span class="obs-status" id="obs-status" role="status" aria-live="polite">Loading</span>
     </div>
     <p class="obs-notice" id="obs-notice" hidden></p>
     <div class="obs-stats" aria-label="Observation statistics">
@@ -93,7 +93,7 @@
         <p class="obs-disclaimer">Reviewed SHA-256 indicators will link to VirusTotal file reports (external site). A hash alone does not establish maliciousness; files are never uploaded automatically.</p>
       </section>
     </div>
-    <section class="obs-card obs-about" aria-labelledby="obs-method"><h2 id="obs-method">About this data</h2><p>VardrSec collects activity observed by instrumented decoy services. Public statistics are aggregated and delayed; source IPs and sensitive session details are withheld. Activity in a honeypot does not mean the underlying host was compromised.</p></section>
+    <section class="obs-card obs-about" aria-labelledby="obs-method"><h2 id="obs-method">About this data</h2><p>These are totals from a honeypot, a fake server that records what attackers try. They are published with a delay, and IP addresses, credentials and other session details are left out. Activity in a honeypot does not mean the underlying host was compromised.</p></section>
   </section>
 </main>
 <!-- @partial:footer -->
@@ -102,7 +102,7 @@
       <div class="footer-grid">
         <div>
           <h2 class="footer-h">VardrSec</h2>
-          <p>Independent security research, open-source tooling, and observations from an SSH research sensor.</p>
+          <p>Security research and open-source tools, mostly about broken access control.</p>
           <p class="footer-contact">
             <a href="mailto:contact@vardrsec.com">contact@vardrsec.com</a><br/>
             <a href="https://github.com/VardrSec" rel="noopener">github.com/VardrSec</a>
@@ -131,6 +131,6 @@
   </footer>
   <!-- @endpartial -->
   <script src="js/observatory-policy.js?v=38d753bd" defer></script>
-  <script src="js/observatory.js?v=1df6820b" defer></script>
+  <script src="js/observatory.js?v=149c7cdf" defer></script>
 </body>
 </html>

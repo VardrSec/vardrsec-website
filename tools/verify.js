@@ -108,7 +108,7 @@ const banned = [
 // American spelling is the house style.
 const british = {
   authorised: "authorized", authorisation: "authorization", modelling: "modeling",
-  organise: "organize", behaviour: "behavior", catalog: "catalog", analyse: "analyze",
+  organise: "organize", behaviour: "behavior", catalogue: "catalog", analyse: "analyze",
   prioritise: "prioritize", recognise: "recognize", realise: "realize", defence: "defense",
   grey: "gray",
 };
