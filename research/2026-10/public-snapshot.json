@@ -1,0 +1,36 @@
+{
+  "schema": 1,
+  "status": "working-draft",
+  "month": "2026-10",
+  "source": "https://vardrsec.com/api/observatory",
+  "snapshot_published_at": "2026-10-15T02:00:09Z",
+  "activity_window_start": "2026-10-14T01:00:00Z",
+  "activity_window_end": "2026-10-15T01:00:00Z",
+  "activity_window_hours": 24,
+  "command_window_start": "2026-10-08T01:00:00Z",
+  "command_window_end": "2026-10-15T01:00:00Z",
+  "command_window_hours": 168,
+  "totals": {
+    "sessions": 7602,
+    "unique_sources": 161,
+    "auth_events": 7405,
+    "command_events": 7556,
+    "file_events": 151
+  },
+  "commands": [
+    {
+      "template": "cd ~ ; chattr -ia .ssh ; [EXECUTABLE] -ia .ssh",
+      "count": 150
+    },
+    {
+      "template": "cd ~ && rm -rf .ssh && mkdir .ssh && echo [SSH_KEY] >> .ssh/authorized_keys && chmod -R go= ~/.ssh && cd ~",
+      "count": 146
+    }
+  ],
+  "monthly_totals": null,
+  "notes": [
+    "Activity values describe one delayed 24-hour window, not monthly totals.",
+    "Command patterns describe a separately labeled seven-day window.",
+    "This is a partial-month draft; no attribution or confirmed malware verdict is asserted."
+  ]
+}

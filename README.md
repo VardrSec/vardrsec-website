@@ -1,6 +1,6 @@
 # vardrsec-website
 
-Static site for VardrSec. No dependencies — plain HTML, one stylesheet, one script.
+Static site for VardrSec: plain HTML, CSS and JavaScript with Cloudflare Pages API Functions.
 
 ```
 index.html  about.html  tools.html  resources.html

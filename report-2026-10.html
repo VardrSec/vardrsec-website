@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>October 2026 Research Draft | VardrSec</title>
+<meta name="description" content="A working draft of VardrSec's first monthly threat intelligence report: delayed SSH sensor observations, sanitized command patterns, methods, and limitations." />
+<link rel="canonical" href="https://vardrsec.com/report-2026-10" />
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+<meta property="og:type" content="article" /><meta property="og:title" content="October 2026: establishing the research baseline" />
+<meta property="og:description" content="Working draft. Partial month, one SSH sensor, explicit evidence limits." />
+<meta property="og:url" content="https://vardrsec.com/report-2026-10" /><meta property="og:image" content="https://vardrsec.com/assets/orgbanner.png" />
+<link rel="stylesheet" href="css/styles.css?v=d6e3b655" /><link rel="stylesheet" href="css/research.css?v=419ed7f4" />
+</head><body>
+<!-- @partial:header -->
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="topbar">
+    <div class="container">
+      <nav class="nav">
+        <a class="brand" href="index.html">
+          <div class="brand-mark" aria-hidden="true">
+            <picture>
+              <source srcset="assets/small-logo.webp" type="image/webp" />
+              <img src="assets/small-logo.png" alt="VardrSec logo" width="128" height="129" class="brand-img" />
+            </picture>
+           </div>
+          <div class="brand-name">
+            <strong>VardrSec</strong>
+            <small>Offensive Security Research & Tooling</small>
+          </div>
+        </a>
+        
+        <!-- Desktop Navigation -->
+        <div class="nav-links">
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="tools.html">Tools</a>
+          <a href="observatory.html">Threat Observatory</a>
+          <a href="blog.html">Blog</a>
+          <a href="resources.html">Resources</a>
+        </div>
+        
+        <!-- Desktop CTA Buttons -->
+        <div class="nav-cta">
+          <a class="btn ghost" href="https://github.com/VardrSec" rel="noopener" aria-label="VardrSec on GitHub">GitHub</a>
+          <a class="btn primary" href="contact.html">Contact</a>
+        </div>
+        
+        <!-- Mobile Menu Toggle -->
+        <button id="menuBtn" class="menu-btn" aria-label="Open menu" aria-expanded="false">
+          Menu
+        </button>
+      </nav>
+      
+      <!-- Mobile Menu -->
+      <div class="mobile-panel" id="mobilePanel">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="tools.html">Tools</a>
+        <a href="observatory.html">Threat Observatory</a>
+        <a href="blog.html">Blog</a>
+        <a href="resources.html">Resources</a>
+        <a class="btn primary" href="contact.html" style="margin-top:8px">Contact</a>
+      </div>
+    </div>
+  </header>
+  <!-- @endpartial -->
+<main id="main" tabindex="-1"><section class="section"><div class="container"><article class="research-article">
+<a class="link" href="blog.html">Research Blog</a>
+<p class="research-label">Monthly threat intelligence · Revision 0.1</p>
+<h1>October 2026: establishing the research baseline</h1>
+<p class="lead">A first look at the evidence collected by the VardrSec SSH sensor, and the standards that will govern monthly reporting.</p>
+<div class="research-draft"><strong>Working draft — partial month.</strong> October is still in progress. The figures below describe an already-public snapshot, not full-month totals. No threat actor attribution or confirmed malware-family claim is made.</div>
+<div class="research-links"><a class="btn primary" href="research/2026-10/vardrsec-october-2026-draft-v0.1.pdf" download>Download draft PDF</a>
+<a class="btn" href="https://github.com/VardrSec/vardrsec-website/tree/main/research/2026-10" rel="noopener">Technical artifacts on GitHub</a></div>
+<h2>Observed activity: a 24-hour reference window</h2>
+<p>This reference snapshot was published at <strong>2026-10-15T02:00:09Z</strong>. Activity covers <strong>2026-10-14T01:00:00Z to 2026-10-15T01:00:00Z (end exclusive)</strong>. It is deliberately delayed and does not expose individual source addresses.</p>
+<div class="research-table-wrap"><table class="research-table"><caption>One delayed 24-hour window; these are not monthly totals.</caption><thead><tr><th scope="col">Observation</th><th scope="col">Count</th></tr></thead><tbody><tr><th scope="row">Unique sessions</th><td>7,602</td></tr><tr><th scope="row">Unique source addresses</th><td>161</td></tr><tr><th scope="row">Authentication events</th><td>7,405</td></tr><tr><th scope="row">Command-input events</th><td>7,556</td></tr><tr><th scope="row">File-transfer events</th><td>151</td></tr></tbody></table></div>
+<p>These counts measure events at one SSH decoy. A login accepted by the honeypot is not evidence of access to the host. File-transfer events do not establish that a captured file is malware. Source counts do not identify distinct people or campaigns.</p>
+<h2>Selected command patterns: a seven-day window</h2>
+<p>Command reporting covers <strong>2026-10-08T01:00:00Z to 2026-10-15T01:00:00Z (end exclusive)</strong>. Templates replace keys, arbitrary arguments, paths, and destinations with fixed markers; unsupported syntax is omitted.</p>
+<pre><code>cd ~ ; chattr -ia .ssh ; [EXECUTABLE] -ia .ssh</code></pre><p class="research-note">150 normalized command occurrences in the seven-day window.</p><pre><code>cd ~ &amp;&amp; rm -rf .ssh &amp;&amp; mkdir .ssh &amp;&amp; echo [SSH_KEY] &gt;&gt; .ssh/authorized_keys &amp;&amp; chmod -R go= ~/.ssh &amp;&amp; cd ~</code></pre><p class="research-note">146 normalized command occurrences in the seven-day window.</p>
+<p>The authorized-keys pattern expresses an attempt to prepare an SSH directory and add a key. The attribute-change pattern includes a redacted executable, so the template alone cannot establish that executable's identity or intent. Counts combine normalized inputs and do not prove that any action succeeded.</p>
+<h2>Interpretation and TTP context</h2>
+<p>SSH authorized-key modification is consistent with the behavior described in <a class="link" href="https://attack.mitre.org/techniques/T1098/004/">MITRE ATT&amp;CK T1098.004</a>. This is a behavioral mapping, not attribution. The sensor's emulated environment and selective command grammar limit what can be concluded.</p>
+<p><a class="link" href="https://attack.mitre.org/techniques/T1105/">MITRE ATT&amp;CK T1105</a> provides context for tool-transfer attempts in future analysis. It is reference material, not evidence that this draft identified a particular transfer campaign. External campaign research and emerging-threat assessments remain pending for the monthly close.</p>
+<h2>Malware analysis and IOCs</h2>
+<p>No captured sample or unreviewed hash is published with this draft. Static triage uses cryptographic hashes, file signatures, and bounded heuristic rules in an isolated environment. A match is an observation for investigation, not a malware verdict. Human conclusions are kept separately from automated observations.</p>
+<p>The reviewed <a class="link" href="research/2026-10/triage.yar">YARA triage rules</a> are available as a technical artifact. The rules contain no captured payload. Public IOCs will require evidence, context, confidence, and review before release.</p>
+<h2>How monthly reporting will be completed</h2>
+<p>Detailed telemetry has a 30-day retention policy. Incremental private archival preserves calendar-month counts before records expire, including late imports and deduplicated reimports. Captured samples remain outside automatic deletion. Monthly distinct counts are computed over the month, not by adding daily unique counts.</p>
+<p>At month close, review collection gaps, freeze the report revision, analyze representative evidence, approve any IOCs, and add dated primary-source research. The report will distinguish original observations, analyst inference, externally reported findings, and unresolved questions.</p>
+<h2>Methods, limitations, and corrections</h2>
+<p>One sensor and one protocol cannot measure global threat prevalence. The first and last recorded observations do not prove continuous uptime. The command table is intentionally selective. A partial month does not support a monthly trend comparison.</p>
+<p>Review the <a class="link" href="research/2026-10/methodology.md">methodology</a> and <a class="link" href="research/2026-10/public-snapshot.json">frozen public snapshot</a>. Follow the <a class="link" href="observatory.html">Threat Observatory</a> for current delayed observations. Send corrections to <a class="link" href="mailto:contact@vardrsec.com">contact@vardrsec.com</a>.</p>
+</article></div></section></main>
+<!-- @partial:footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h2 class="footer-h">VardrSec</h2>
+          <p>Independent security research, open-source tooling, and observations from an SSH research sensor.</p>
+          <p class="footer-contact">
+            <a href="mailto:contact@vardrsec.com">contact@vardrsec.com</a><br/>
+            <a href="https://github.com/VardrSec" rel="noopener">github.com/VardrSec</a>
+          </p>
+        </div>
+        <div class="links">
+          <h2 class="footer-h">Site</h2>
+          <a href="about.html">About</a>
+          <a href="tools.html">Tools</a>
+          <a href="observatory.html">Threat Observatory</a>
+          <a href="blog.html">Research Blog</a>
+          <a href="resources.html">Resources</a>
+        </div>
+        <div class="links">
+          <h2 class="footer-h">Legal</h2>
+          <a href="privacy.html">Privacy</a>
+          <a href="terms.html">Terms</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+      <div class="copyright">
+        <small>© <span id="year"></span> VardrSec. All rights reserved.</small>
+      </div>
+    </div>
+    <script src="js/site.js?v=8fbf366c"></script>
+  </footer>
+  <!-- @endpartial -->
+</body></html>
