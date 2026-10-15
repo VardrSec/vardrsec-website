@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en"><head>
 <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>The SSH Key Takeover | VardrSec</title>
+<title>SSH Key Takeover | VardrSec</title>
 <meta name="description" content="What a week of SSH honeypot traffic shows: a short, automated routine that deletes every existing SSH key on a server and installs the attacker's own." />
 <link rel="canonical" href="https://vardrsec.com/blog-ssh-key-takeover" />
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
-<meta property="og:type" content="article" /><meta property="og:title" content="Wipe the keys, plant your own: the SSH takeover my sensor keeps seeing" />
-<meta property="og:description" content="Two command patterns from the VardrSec SSH sensor, what each step does, who else has seen them, and how to check your own servers." />
+<meta property="og:type" content="article" /><meta property="og:title" content="How SSH bots take over accounts through authorized_keys" />
+<meta property="og:description" content="Two SSH command patterns, what each step does, who else has seen them, and how to check your own servers." />
 <meta property="og:url" content="https://vardrsec.com/blog-ssh-key-takeover" /><meta property="og:image" content="https://vardrsec.com/assets/orgbanner.png" />
 <link rel="stylesheet" href="css/styles.css?v=d6e3b655" /><link rel="stylesheet" href="css/research.css?v=419ed7f4" />
 </head><body>
@@ -66,20 +66,20 @@
 <main id="main" tabindex="-1"><section class="section"><div class="container"><article class="research-article">
 <a class="link" href="blog.html">Research Blog</a>
 <p class="research-label">Honeypot observations</p>
-<h1>Wipe the keys, plant your own: the SSH takeover my sensor keeps seeing</h1>
-<p class="research-note">15 October 2026 · Jorge Aquino · Data from one VardrSec SSH sensor</p>
-<p class="lead">If you expose SSH to the internet with a weak password, the first thing that logs in probably won't be a person. My sensor shows what tends to happen next: a short chain of shell commands that removes every existing key and leaves the attacker holding the only one.</p>
+<h1>How SSH bots take over accounts through authorized_keys</h1>
+<p class="research-note">15 October 2026 · Jorge Aquino</p>
+<p class="lead">Servers that accept SSH password logins from the internet get a steady stream of automated guessing. This post looks at what one common bot does once a guess works: it deletes every existing SSH key and installs its own.</p>
 
-<h2>A day at the sensor</h2>
-<p>I run a <a class="link" href="https://github.com/cowrie/cowrie" rel="noopener">Cowrie</a> SSH honeypot. It's a fake server that accepts logins, pretends to be Linux, and records what visitors type. Nothing they run touches a real system. Here is one 24-hour window, 14 October 01:00 to 15 October 01:00 UTC:</p>
-<div class="research-table-wrap"><table class="research-table"><caption>One SSH sensor, one 24-hour window.</caption><thead><tr><th scope="col">What I counted</th><th scope="col">Count</th></tr></thead><tbody>
+<h2>Volume</h2>
+<p>Counts from one 24-hour window, 14 October 01:00 to 15 October 01:00 UTC:</p>
+<div class="research-table-wrap"><table class="research-table"><caption>One 24-hour window.</caption><thead><tr><th scope="col">What I counted</th><th scope="col">Count</th></tr></thead><tbody>
 <tr><th scope="row">SSH sessions</th><td>7,602</td></tr>
 <tr><th scope="row">Distinct source addresses</th><td>161</td></tr>
 <tr><th scope="row">Login attempts</th><td>7,405</td></tr>
 <tr><th scope="row">Commands typed</th><td>7,556</td></tr>
 <tr><th scope="row">File transfers</th><td>151</td></tr>
 </tbody></table></div>
-<p>That works out to roughly 47 sessions for every source address. No person logs in that often. This is automated scanning, typically run from machines that were already compromised and are now looking for more.</p>
+<p>That averages about 47 sessions per source address, which points to automated scanning rather than people.</p>
 
 <h2>The two commands that keep coming back</h2>
 <p>Over the seven days from 8 to 15 October, two multi-step patterns came up again and again, almost the same number of times:</p>
