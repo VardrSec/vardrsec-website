@@ -4,17 +4,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Resources | VardrSec</title>
-  <meta name="description" content="Security resources: checklists, hardening guides, and practical security guidance for development teams." />
+  <meta name="description" content="Security references I actually use: learning paths, access control and API testing, web exploitation, recon and OSINT, cloud, secure development, detection and reporting." />
   <link rel="canonical" href="https://vardrsec.com/resources" />
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="VardrSec" />
   <meta property="og:url" content="https://vardrsec.com/resources" />
   <meta property="og:title" content="Resources | VardrSec" />
-  <meta property="og:description" content="Security resources: checklists, hardening guides, and practical security guidance for development teams." />
+  <meta property="og:description" content="Security references I actually use: learning paths, access control and API testing, web exploitation, recon and OSINT, cloud, secure development, detection and reporting." />
   <meta property="og:image" content="https://vardrsec.com/assets/orgbanner.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <link rel="stylesheet" href="css/styles.css?v=d6e3b655" />
+  <link rel="stylesheet" href="css/styles.css?v=4134f0e9" />
 </head>
 <body>
 <!-- @partial:header -->
@@ -31,7 +31,7 @@
            </div>
           <div class="brand-name">
             <strong>VardrSec</strong>
-            <small>Offensive Security Research & Tooling</small>
+            <small>Security Research & Tooling</small>
           </div>
         </a>
         
@@ -75,277 +75,267 @@
     <section class="section">
       <div class="container">
         <div class="section-title">
-          <h1>Security Resources</h1>
-          <p>Practical checklists and guidance for development teams. Copy these into tickets, PR reviews, and security documentation.</p>
+          <h1>Resources</h1>
+          <p>The references, tools and habits I actually use, for testing web apps and APIs and for building them so they hold up. Each entry says what it's good for.</p>
         </div>
 
         <div class="note mb-7">
-          <strong>How to use these resources:</strong> These checklists are designed to be actionable starting points. 
-          They're not exhaustive security standards—they're quick references for common security concerns that frequently 
-          appear in real-world assessments.
+          <strong>Only test what you're allowed to.</strong> Everything in the offensive sections assumes written permission and a defined scope: a bug bounty program, a client agreement, or your own lab. Passive recon is still recon, and leaked credentials you find are for reporting, not for logging in.
         </div>
 
-        <!-- Application Security -->
-        <div class="section-title mt-9">
-          <h2>Application Security</h2>
-        </div>
+        <p class="mb-7">Jump to:
+          <a class="link" href="#learn">Learn</a> ·
+          <a class="link" href="#access-control">Access control</a> ·
+          <a class="link" href="#api">APIs</a> ·
+          <a class="link" href="#web">Web</a> ·
+          <a class="link" href="#recon">Recon &amp; OSINT</a> ·
+          <a class="link" href="#cloud">Cloud</a> ·
+          <a class="link" href="#build">Building it right</a> ·
+          <a class="link" href="#detect">Detection</a> ·
+          <a class="link" href="#report">Reporting</a>
+        </p>
 
+        <div class="section-title" id="learn">
+          <h2>Where to learn</h2>
+          <p>If you're starting out, do the PortSwigger labs first. Most of what follows will make more sense after.</p>
+        </div>
         <div class="grid-2 mb-7">
           <div class="card">
-            <div class="kicker mb-3">
-              <span class="badge warn">Critical</span>
-            </div>
-            <h3>Authorization (BOLA/IDOR)</h3>
-            <p class="mt-3 mb-3">
-              Authorization failures are among the most common serious API bugs.
-            </p>
-            <ul class="check">
-            <li>Validate access using server-side policy, never UI state or client data</li>
-            <li>Test horizontal access (user A accessing user B's data)</li>
-            <li>Test vertical access (regular user accessing admin functions)</li>
-            <li>Don't rely on unpredictable IDs as security controls</li>
-            <li>Implement centralized authorization middleware</li>
-            <li>Log all access denials with user context</li>
-            <li>Test with multiple users at different privilege levels</li>
-          </ul>
+            <h3>Free courses and references</h3>
+            <ul class="check ref">
+              <li><a class="link" href="https://portswigger.net/web-security" rel="noopener">PortSwigger Web Security Academy</a>: free, hands-on labs for every major web bug class. The best place to start.</li>
+              <li><a class="link" href="https://owasp.org/www-project-web-security-testing-guide/" rel="noopener">OWASP Web Security Testing Guide</a>: a test-by-test methodology to make sure you don't skip whole areas.</li>
+              <li><a class="link" href="https://owasp.org/API-Security/editions/2023/en/0x11-t10/" rel="noopener">OWASP API Security Top 10 (2023)</a>: the most common ways APIs break, with examples.</li>
+              <li><a class="link" href="https://book.hacktricks.wiki/" rel="noopener">HackTricks</a>: practical notes by technology and service. Useful when you hit something unfamiliar.</li>
+            </ul>
           </div>
-
           <div class="card">
-            <div class="kicker mb-3">
-              <span class="badge warn">Critical</span>
-            </div>
-            <h3>Authentication</h3>
-            <p class="mt-3 mb-3">
-              Weak authentication enables all other attacks. Get the fundamentals right.
-            </p>
-            <ul class="check">
-            <li>Enforce MFA for privileged accounts</li>
-            <li>Throttle authentication endpoints and add risk-based controls &mdash; avoid hard account lockout, which becomes a denial-of-service vector</li>
-            <li>Implement secure session management (rotation, timeout)</li>
-            <li>Use HttpOnly, Secure, and SameSite cookie flags</li>
-            <li>Harden password reset flows (time-limited tokens, account verification)</li>
-            <li>Prevent username enumeration through timing or responses</li>
-            <li>Use bcrypt/Argon2 for password hashing (never MD5/SHA1)</li>
-          </ul>
+            <h3>Places to practice</h3>
+            <ul class="check ref">
+              <li><a class="link" href="https://github.com/juice-shop/juice-shop" rel="noopener">OWASP Juice Shop</a>: a deliberately vulnerable shop you run locally. Covers most of the OWASP Top 10.</li>
+              <li><a class="link" href="https://github.com/OWASP/crAPI" rel="noopener">OWASP crAPI</a>: a vulnerable API-first app. Good for BOLA, mass assignment and JWT issues.</li>
+              <li><a class="link" href="https://pentesterlab.com/" rel="noopener">PentesterLab</a>: short exercises that build from basics up to code review.</li>
+              <li><a class="link" href="https://www.hackthebox.com/" rel="noopener">Hack The Box</a> and <a class="link" href="https://tryhackme.com/" rel="noopener">TryHackMe</a>: full machines and guided rooms. TryHackMe is gentler to begin with.</li>
+            </ul>
           </div>
         </div>
 
-        <div class="grid-3 mb-7">
-          <div class="card">
-            <h3>Input Validation</h3>
-            <ul class="check">
-            <li>Server-side validation always</li>
-            <li>Use allowlists over denylists</li>
-            <li>Parameterized queries for SQL</li>
-            <li>Validate JSON structure and types</li>
-            <li>Sanitize logs (no PII, no secrets)</li>
-            <li>Limit file upload size and types</li>
-            <li>Validate redirects and callbacks</li>
-          </ul>
-          </div>
-
-          <div class="card">
-            <h3>API Security</h3>
-            <ul class="check">
-            <li>Require authentication for every non-public endpoint; explicitly classify public endpoints</li>
-            <li>Apply rate limits based on operation cost, authentication state, and abuse risk</li>
-            <li>Validate content-type headers</li>
-            <li>Allow only required origins, methods, and headers; never combine credentialed requests with wildcard origins</li>
-            <li>Version your APIs explicitly</li>
-            <li>Return consistent error messages</li>
-            <li>Document authentication requirements</li>
-          </ul>
-          </div>
-
-          <div class="card">
-            <h3>Security Headers</h3>
-            <ul class="check">
-            <li>HSTS (max-age=31536000)</li>
-            <li>Content-Security-Policy</li>
-            <li>X-Content-Type-Options: nosniff</li>
-            <li>Set a framing policy with CSP <code>frame-ancestors</code> based on what the app actually needs (<code>X-Frame-Options</code> only as a legacy fallback)</li>
-            <li>Referrer-Policy: no-referrer</li>
-            <li>Disable verbose errors in production</li>
-            <li>Proper cache headers for sensitive data</li>
-          </ul>
-          </div>
+        <div class="section-title" id="access-control">
+          <h2>Testing access control</h2>
+          <p>This is where I spend most of my time. Broken access control rarely shows up as an error. The request works; it just works for the wrong person.</p>
         </div>
-
-        <!-- Cloud Security -->
-        <div class="section-title mt-9">
-          <h2>Cloud Security</h2>
-        </div>
-
         <div class="grid-2 mb-7">
           <div class="card">
-            <div class="kicker mb-3">
-              <span class="badge">IAM & Identity</span>
-            </div>
-            <h3>Identity & Access Management</h3>
+            <h3>A method that finds real bugs</h3>
             <ul class="check">
-            <li>Implement least privilege policies</li>
-            <li>No shared admin credentials</li>
-            <li>Prefer short-lived credentials and eliminate long-lived access keys where possible</li>
-            <li>Use temporary credentials where possible</li>
-            <li>Require MFA for console access</li>
-            <li>Implement service control policies (SCPs)</li>
-            <li>Audit unused permissions quarterly</li>
-            <li>Use IAM roles for service-to-service auth</li>
-            <li>Enable CloudTrail/equivalent logging</li>
-          </ul>
+              <li>Create at least two users with the same role, one user per other role, and one user in a second tenant or organization. Also test with no session at all.</li>
+              <li>Do everything as the most privileged user and record the traffic. Then replay each request as every other user and compare the <em>response bodies</em>, not just the status codes.</li>
+              <li>Swap identifiers wherever they appear: path, query string, JSON body, headers. Get valid IDs from list, search and export endpoints.</li>
+              <li>Test writes, not just reads. <code>PUT</code>, <code>PATCH</code> and <code>DELETE</code> often skip a check that <code>GET</code> has.</li>
+              <li>Add fields the UI never sends, like <code>role</code>, <code>org_id</code> or <code>is_admin</code>, to create and update requests. That's how mass-assignment bugs show up.</li>
+              <li>Try older API versions, mobile endpoints and bulk operations. The check is often missing in exactly one of them.</li>
+            </ul>
           </div>
-
           <div class="card">
-            <div class="kicker mb-3">
-              <span class="badge">Storage & Data</span>
-            </div>
-            <h3>Data Protection</h3>
-            <ul class="check">
-            <li>Encrypt data at rest and in transit</li>
-            <li>Block public access at the account level by default, and document every approved exception</li>
-            <li>Enable versioning for critical buckets</li>
-            <li>Use KMS for encryption key management</li>
-            <li>Implement backup and retention policies</li>
-            <li>Tag sensitive data resources</li>
-            <li>Enable access logging on storage</li>
-            <li>Review bucket policies regularly</li>
-          </ul>
+            <h3>References and tools</h3>
+            <ul class="check ref">
+              <li><a class="link" href="https://portswigger.net/web-security/access-control" rel="noopener">PortSwigger: access control</a>: IDOR, privilege escalation and multi-step flaws, with labs.</li>
+              <li><a class="link" href="https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html" rel="noopener">OWASP Authorization Cheat Sheet</a>: the defender's side. Worth reading so you know what a correct check looks like.</li>
+              <li><a class="link" href="https://github.com/PortSwigger/autorize" rel="noopener">Autorize</a>: a Burp extension that replays every request with a second user's session while you browse.</li>
+              <li><a class="link" href="tools.html">VardrGate</a>: my tool for writing the expected access rules down as a policy and testing them on every commit.</li>
+            </ul>
           </div>
         </div>
 
+        <div class="section-title" id="api">
+          <h2>API testing</h2>
+          <p>Start by finding the API's documentation. Try <code>/openapi.json</code>, <code>/swagger.json</code> and <code>/api-docs</code>, and read the front end's JavaScript, which usually lists every endpoint it calls.</p>
+        </div>
         <div class="grid-3 mb-7">
           <div class="card">
-            <h3>Network Security</h3>
-            <ul class="check">
-            <li>Default deny security groups</li>
-            <li>Segment environments (dev/staging/prod)</li>
-            <li>Limit ingress to necessary IPs</li>
-            <li>Use private subnets for databases</li>
-            <li>Enable VPC Flow Logs</li>
-            <li>Use a WAF where the threat model and traffic justify it</li>
-            <li>Implement DDoS protection</li>
-          </ul>
+            <h3>Finding endpoints</h3>
+            <ul class="check ref">
+              <li><a class="link" href="https://github.com/assetnote/kiterunner" rel="noopener">Kiterunner</a>: finds API routes using wordlists built from real API specs, not just paths.</li>
+              <li><a class="link" href="https://github.com/s0md3v/Arjun" rel="noopener">Arjun</a>: finds hidden query and body parameters.</li>
+              <li><a class="link" href="https://github.com/ffuf/ffuf" rel="noopener">ffuf</a>: fast fuzzing for paths, parameters and virtual hosts.</li>
+            </ul>
           </div>
-
           <div class="card">
-            <h3>Secrets Management</h3>
-            <ul class="check">
-            <li>Use secrets manager/vault</li>
-            <li>Never commit secrets to code</li>
-            <li>Automate rotation where supported, and test the rotation process</li>
-            <li>Limit secret access by role</li>
-            <li>Audit secret access logs</li>
-            <li>Use environment-specific secrets</li>
-            <li>Implement break-glass procedures</li>
-          </ul>
+            <h3>Tokens and auth</h3>
+            <ul class="check ref">
+              <li><a class="link" href="https://github.com/ticarpi/jwt_tool" rel="noopener">jwt_tool</a>: tests JWTs for unsigned (<code>alg: none</code>) tokens, weak secrets, key confusion and claim tampering.</li>
+              <li>Check what happens with an expired token, a token from another environment, and a token after logout or password change.</li>
+            </ul>
           </div>
-
           <div class="card">
-            <h3>Monitoring & Logging</h3>
-            <ul class="check">
-            <li>Enable CloudTrail/equivalent</li>
-            <li>Centralize logs to SIEM</li>
-            <li>Alert on privilege escalation</li>
-            <li>Monitor failed auth attempts</li>
-            <li>Track configuration changes</li>
-            <li>Set up anomaly detection</li>
-            <li>Retain logs according to documented security, operational, and compliance requirements</li>
-          </ul>
+            <h3>GraphQL</h3>
+            <ul class="check ref">
+              <li><a class="link" href="https://github.com/dolevf/graphw00f" rel="noopener">graphw00f</a>: identifies which GraphQL server you're talking to.</li>
+              <li><a class="link" href="https://github.com/doyensec/inql" rel="noopener">InQL</a>: a Burp extension that turns the schema into ready-to-send queries.</li>
+              <li><a class="link" href="https://github.com/nikitastupin/clairvoyance" rel="noopener">Clairvoyance</a>: recovers the schema even when introspection is turned off.</li>
+            </ul>
           </div>
         </div>
 
-        <!-- Detection & Response -->
-        <div class="section-title mt-9">
-          <h2>Detection & Response</h2>
+        <div class="section-title" id="web">
+          <h2>Web exploitation</h2>
         </div>
-
         <div class="grid-2 mb-7">
           <div class="card">
-            <div class="kicker mb-3">
-              <span class="badge ok">SIEM & Detection</span>
-            </div>
-            <h3>Detection Engineering Basics</h3>
-            <ul class="check">
-            <li>Log authentication events (success and failure)</li>
-            <li>Log authorization denials with context</li>
-            <li>Alert on impossible travel patterns</li>
-            <li>Detect privilege escalation attempts</li>
-            <li>Monitor admin console access</li>
-            <li>Baseline normal behavior first</li>
-            <li>Tune alerts to reduce false positives</li>
-            <li>Document alert response procedures</li>
-            <li>Test detection rules regularly</li>
-          </ul>
+            <h3>Proxies and wordlists</h3>
+            <ul class="check ref">
+              <li><a class="link" href="https://portswigger.net/burp/communitydownload" rel="noopener">Burp Suite Community</a>: the standard intercepting proxy. The free edition is enough for learning and most manual testing.</li>
+              <li><a class="link" href="https://www.zaproxy.org/" rel="noopener">ZAP</a>: a free, open-source alternative that's easy to script and run in CI.</li>
+              <li><a class="link" href="https://github.com/danielmiessler/SecLists" rel="noopener">SecLists</a>: wordlists for paths, parameters, usernames and payloads. Pairs with ffuf.</li>
+            </ul>
           </div>
-
           <div class="card">
-            <div class="kicker mb-3">
-              <span class="badge bad">Incident Response</span>
-            </div>
-            <h3>Incident Response Readiness</h3>
-            <ul class="check">
-            <li>Maintain incident response playbook</li>
-            <li>Define escalation procedures</li>
-            <li>Document critical system owners</li>
-            <li>Test backup restoration regularly</li>
-            <li>Keep incident communication channels ready</li>
-            <li>Define what constitutes an incident</li>
-            <li>Practice tabletop exercises quarterly</li>
-            <li>Review and update runbooks</li>
-            <li>Document lessons learned</li>
-          </ul>
+            <h3>Payload references</h3>
+            <ul class="check ref">
+              <li><a class="link" href="https://github.com/swisskyrepo/PayloadsAllTheThings" rel="noopener">PayloadsAllTheThings</a>: payloads and bypasses for each bug class, including SSRF, SSTI, XXE, deserialization and file upload.</li>
+              <li><a class="link" href="https://portswigger.net/web-security/all-labs" rel="noopener">PortSwigger lab list</a>: when you find a bug class in the wild, do its labs first to learn the variations.</li>
+            </ul>
           </div>
         </div>
 
-        <!-- Secure Development -->
-        <div class="section-title mt-9">
-          <h2>Secure Development Practices</h2>
+        <div class="section-title" id="recon">
+          <h2>Recon and OSINT</h2>
+          <p>Recon decides what you get to test. Forgotten hosts and old endpoints are often where the bugs are.</p>
         </div>
-
         <div class="grid-3 mb-7">
           <div class="card">
-            <h3>Code Review Checklist</h3>
-            <ul class="check">
-            <li>Authentication implemented?</li>
-            <li>Authorization checked server-side?</li>
-            <li>Input validated and sanitized?</li>
-            <li>SQL queries parameterized?</li>
-            <li>Secrets properly managed?</li>
-            <li>Error handling doesn't leak info?</li>
-            <li>Logging includes security events?</li>
-            <li>Dependencies up to date?</li>
-          </ul>
+            <h3>Subdomains and hosts</h3>
+            <ul class="check ref">
+              <li><a class="link" href="https://crt.sh/" rel="noopener">crt.sh</a>: searches certificate transparency logs. Every certificate an organization issues names its hosts.</li>
+              <li><a class="link" href="https://github.com/projectdiscovery/subfinder" rel="noopener">subfinder</a> and <a class="link" href="https://github.com/owasp-amass/amass" rel="noopener">Amass</a>: passive subdomain enumeration from many sources.</li>
+              <li><a class="link" href="https://github.com/projectdiscovery/httpx" rel="noopener">httpx</a>: checks which of those hosts are live, and their titles, status codes and technologies.</li>
+            </ul>
           </div>
-
           <div class="card">
-            <h3>Dependency Management</h3>
-            <ul class="check">
-            <li>Scan dependencies for vulnerabilities</li>
-            <li>Keep packages updated regularly</li>
-            <li>Review new dependency additions</li>
-            <li>Use lock files for reproducibility</li>
-            <li>Monitor security advisories</li>
-            <li>Audit supply chain integrity</li>
-            <li>Remove unused dependencies</li>
-            <li>Lock production dependencies and maintain a tested update process</li>
-          </ul>
+            <h3>History and exposure</h3>
+            <ul class="check ref">
+              <li><a class="link" href="https://web.archive.org/" rel="noopener">Wayback Machine</a> and <a class="link" href="https://github.com/lc/gau" rel="noopener">gau</a>: old URLs, parameters and endpoints that may still respond.</li>
+              <li><a class="link" href="https://www.shodan.io/" rel="noopener">Shodan</a> and <a class="link" href="https://search.censys.io/" rel="noopener">Censys</a>: internet-wide scans that show exposed services, certificates and banners.</li>
+              <li><a class="link" href="https://github.com/trufflesecurity/trufflehog" rel="noopener">TruffleHog</a>: finds and verifies leaked secrets in public repositories. Report what you find, never use it.</li>
+            </ul>
           </div>
-
           <div class="card">
-            <h3>Pre-Deployment Checks</h3>
-            <ul class="check">
-            <li>Run SAST/DAST scans</li>
-            <li>Review security headers</li>
-            <li>Verify secrets not in code</li>
-            <li>Check default credentials changed</li>
-            <li>Confirm logging enabled</li>
-            <li>Test authentication flows</li>
-            <li>Validate encryption in place</li>
-            <li>Review IAM permissions</li>
-          </ul>
+            <h3>People and organizations</h3>
+            <ul class="check ref">
+              <li><a class="link" href="https://github.com/laramies/theHarvester" rel="noopener">theHarvester</a>: collects emails, names and hosts from public sources.</li>
+              <li><a class="link" href="https://osintframework.com/" rel="noopener">OSINT Framework</a>: a directory of OSINT tools sorted by what you're trying to find.</li>
+              <li><a class="link" href="https://bellingcat.gitbook.io/toolkit" rel="noopener">Bellingcat's toolkit</a>: investigation tools with notes on how and when to use each one.</li>
+            </ul>
           </div>
         </div>
 
+        <div class="section-title" id="cloud">
+          <h2>Cloud</h2>
+        </div>
+        <div class="grid-2 mb-7">
+          <div class="card">
+            <h3>Practice</h3>
+            <ul class="check ref">
+              <li><a class="link" href="http://flaws.cloud/" rel="noopener">flaws.cloud</a> and <a class="link" href="http://flaws2.cloud/" rel="noopener">flaws2.cloud</a>: short, free AWS challenges based on common real mistakes. flaws2 includes a defender track.</li>
+              <li><a class="link" href="https://github.com/RhinoSecurityLabs/cloudgoat" rel="noopener">CloudGoat</a>: vulnerable-by-design AWS scenarios you deploy into your own account.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Checking your own account</h3>
+            <ul class="check">
+              <li>Run <a class="link" href="https://github.com/prowler-cloud/prowler" rel="noopener">Prowler</a> against it. It covers AWS, Azure and GCP and maps results to common benchmarks.</li>
+              <li>Replace long-lived access keys with roles and short-lived credentials. Leaked keys are one of the most common ways into a cloud account.</li>
+              <li>Block public storage at the account level, and keep a written list of the exceptions.</li>
+              <li>Turn on audit logging (CloudTrail or the equivalent) in every region, including ones you don't use.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="section-title" id="build">
+          <h2>Building it right</h2>
+          <p>For developers. These are the checks I'd want in a code review, and why each one matters.</p>
+        </div>
+        <div class="grid-2 mb-7">
+          <div class="card">
+            <h3>Authorization</h3>
+            <ul class="check">
+              <li>Deny by default, and make the decision in one shared place. Checks scattered across handlers are where one gets forgotten.</li>
+              <li>Take the user and tenant from the session, never from a request field the client controls.</li>
+              <li>Check ownership on every object access, including updates, deletes, bulk actions and exports.</li>
+              <li>Random IDs aren't access control. They leak through URLs, logs and shared links.</li>
+              <li>Write the expected rules down and test them automatically, so a regression fails the build.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Authentication and sessions</h3>
+            <ul class="check">
+              <li>Give admins phishing-resistant MFA (passkeys or security keys). SMS codes can be phished.</li>
+              <li>Rate-limit login by account and by IP instead of locking accounts. Lockouts let anyone lock out your users.</li>
+              <li>Return the same response for "no such user" and "wrong password", and take the same time to do it.</li>
+              <li>Issue a new session ID at login and whenever privileges change. Make reset tokens single-use and short-lived.</li>
+              <li>Hash passwords with Argon2id or bcrypt. See the <a class="link" href="https://cheatsheetseries.owasp.org/" rel="noopener">OWASP Cheat Sheets</a> for current settings.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Code, secrets and dependencies</h3>
+            <ul class="check">
+              <li>Scan commits for secrets with <a class="link" href="https://github.com/gitleaks/gitleaks" rel="noopener">Gitleaks</a> before they're pushed. Once a secret reaches a public repo, rotating it is the only fix.</li>
+              <li>Look up dependencies on <a class="link" href="https://osv.dev/" rel="noopener">OSV</a>, and fix anything in CISA's <a class="link" href="https://www.cisa.gov/known-exploited-vulnerabilities-catalog" rel="noopener">Known Exploited Vulnerabilities</a> list first.</li>
+              <li>Add <a class="link" href="https://github.com/semgrep/semgrep" rel="noopener">Semgrep</a> rules for the mistakes your team actually makes, not just the default rule pack.</li>
+              <li>Use the <a class="link" href="https://owasp.org/www-project-application-security-verification-standard/" rel="noopener">OWASP ASVS</a> when you need a real requirements list rather than a checklist.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Servers and headers</h3>
+            <ul class="check">
+              <li>SSH: keys only (<code>PasswordAuthentication no</code>), no root login, and an alert when any <code>authorized_keys</code> file changes. <a class="link" href="blog-ssh-key-takeover.html">Here's why.</a> Check your config with <a class="link" href="https://github.com/jtesta/ssh-audit" rel="noopener">ssh-audit</a>.</li>
+              <li>Set a <a class="link" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy" rel="noopener">Content-Security-Policy</a> with <code>frame-ancestors</code>. Start in report-only mode so you don't break the site.</li>
+              <li>HSTS, <code>X-Content-Type-Options: nosniff</code> and <code>Referrer-Policy: strict-origin-when-cross-origin</code> are safe defaults almost everywhere.</li>
+              <li>Send <code>Cache-Control: no-store</code> on responses that contain personal or account data.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="section-title" id="detect">
+          <h2>Detection</h2>
+        </div>
+        <div class="grid-3 mb-7">
+          <div class="card">
+            <h3>MITRE ATT&amp;CK</h3>
+            <p><a class="link" href="https://attack.mitre.org/" rel="noopener">ATT&amp;CK</a> gives attacker behavior shared names. Use it to see which techniques you can detect and which you can't.</p>
+          </div>
+          <div class="card">
+            <h3>Sigma</h3>
+            <p><a class="link" href="https://github.com/SigmaHQ/sigma" rel="noopener">Sigma</a> is a rule format that works across SIEMs, with thousands of community rules. Read a few before writing your own.</p>
+          </div>
+          <div class="card">
+            <h3>Atomic Red Team</h3>
+            <p><a class="link" href="https://github.com/redcanaryco/atomic-red-team" rel="noopener">Atomic Red Team</a> runs small tests mapped to ATT&amp;CK, so you can check that an alert actually fires instead of assuming it does.</p>
+          </div>
+        </div>
+
+        <div class="section-title" id="report">
+          <h2>Reporting what you find</h2>
+        </div>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Writing a report people act on</h3>
+            <ul class="check">
+              <li>Lead with the impact in one sentence: who can do what to whose data.</li>
+              <li>Give exact reproduction steps with the requests, using test accounts you own.</li>
+              <li>Collect only as much data as you need to prove the bug, and say so in the report.</li>
+              <li>Read disclosed reports on <a class="link" href="https://hackerone.com/hacktivity" rel="noopener">HackerOne Hacktivity</a> to see what clear reports look like.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Disclosure</h3>
+            <ul class="check">
+              <li>Look for a <a class="link" href="https://securitytxt.org/" rel="noopener">security.txt</a> file or a published policy before contacting anyone.</li>
+              <li><a class="link" href="https://disclose.io/" rel="noopener">disclose.io</a> lists safe-harbor policies and explains how good-faith research is protected.</li>
+              <li>If you run a site, publish a security.txt yourself so researchers know where to reach you.</li>
+            </ul>
+          </div>
+        </div>
       </div>
     </section>
   </main>
@@ -356,7 +346,7 @@
       <div class="footer-grid">
         <div>
           <h2 class="footer-h">VardrSec</h2>
-          <p>Independent security research, open-source tooling, and observations from an SSH research sensor.</p>
+          <p>Security research and open-source tools, mostly about broken access control.</p>
           <p class="footer-contact">
             <a href="mailto:contact@vardrsec.com">contact@vardrsec.com</a><br/>
             <a href="https://github.com/VardrSec" rel="noopener">github.com/VardrSec</a>

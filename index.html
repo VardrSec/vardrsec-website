@@ -16,7 +16,7 @@
   <meta property="og:description" content="Define expected access by user, role, and tenant. VardrSec compares those rules against real API behavior and reports mismatches with request and response evidence." />
   <meta property="og:image" content="https://vardrsec.com/assets/orgbanner.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <link rel="stylesheet" href="css/styles.css?v=d6e3b655" />
+  <link rel="stylesheet" href="css/styles.css?v=4134f0e9" />
 </head>
 <body>
 <!-- @partial:header -->
@@ -33,7 +33,7 @@
            </div>
           <div class="brand-name">
             <strong>VardrSec</strong>
-            <small>Offensive Security Research & Tooling</small>
+            <small>Security Research & Tooling</small>
           </div>
         </a>
         
@@ -104,8 +104,8 @@
       <div class="container">
         <div class="section-title">
           <div class="kicker"><span class="dot"></span> New: Threat Observatory</div>
-          <h2 id="observatory-preview-title">See what reaches an SSH research sensor.</h2>
-          <p>Real observations from the VardrSec honeypot, published with a delay and privacy controls. A focused view of attempted attacker behavior, with the evidence limits made explicit.</p>
+          <h2 id="observatory-preview-title">What bots try on an exposed SSH server.</h2>
+          <p>Real activity from a VardrSec honeypot, published with a delay and with IP addresses and credentials removed.</p>
         </div>
         <div class="grid-3">
           <div class="card"><h3>24-hour activity</h3><p>Sessions, authentication attempts, and hourly changes across the latest delayed reporting window.</p></div>
@@ -201,9 +201,9 @@ response:
           <div class="card tool-card">
             <h3>VardrMap</h3>
             <dl class="spec">
-              <dt>Purpose</dt><dd>Tracks attack surface and assessment coverage in one workspace</dd>
-              <dt>How it works</dt><dd>Keeps scope, assets, hypotheses, evidence, and findings in one workspace</dd>
-              <dt>Why it matters</dt><dd>Tracks what has <em>already been tested</em>, not just what exists</dd>
+              <dt>Purpose</dt><dd>Runs security engagements: scope, authorization and findings</dd>
+              <dt>How it works</dt><dd>Multi-tenant app that starts scans and authorization tests through VardrRunner and VardrGate</dd>
+              <dt>Why it matters</dt><dd>Each user sees only their own organization's engagements and findings</dd>
             </dl>
             <div class="tool-foot">
               <span class="tag">Python</span><span class="tag">AGPL-3.0</span>
@@ -281,7 +281,7 @@ response:
       <div class="footer-grid">
         <div>
           <h2 class="footer-h">VardrSec</h2>
-          <p>Independent security research, open-source tooling, and observations from an SSH research sensor.</p>
+          <p>Security research and open-source tools, mostly about broken access control.</p>
           <p class="footer-contact">
             <a href="mailto:contact@vardrsec.com">contact@vardrsec.com</a><br/>
             <a href="https://github.com/VardrSec" rel="noopener">github.com/VardrSec</a>

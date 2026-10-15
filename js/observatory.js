@@ -95,7 +95,7 @@
       const response=await fetch(endpoint,{headers:{"Accept":"application/json"},cache:"no-store"});
       if(!response.ok)throw new Error("Snapshot endpoint returned "+response.status);
       const data=await response.json();
-      if(data.status==="awaiting_data"){showError("Awaiting first published telemetry snapshot.");return;}
+      if(data.status==="awaiting_data"){showError("No data has been published yet.");return;}
       if(!validate(data))throw new Error("Unexpected snapshot structure");
       const t=data.totals;
       text("obs-sessions",fmt(t.sessions));
@@ -107,7 +107,7 @@
       const at=new Date(data.published_at);
       text("obs-updated",at.toLocaleString(undefined,{month:"short",day:"numeric",hour:"2-digit",minute:"2-digit",timeZoneName:"short"}));
       const age=Date.now()-at.getTime();
-      text("obs-status",age>20*60*1000?"Snapshot delayed":"Telemetry online");
+      text("obs-status",age>20*60*1000?"Data delayed":"Up to date");
       const note=byId("obs-notice");
       if(age>20*60*1000){note.hidden=false;note.textContent="Latest data may be stale; the publisher has not updated recently.";}
       else note.hidden=true;
