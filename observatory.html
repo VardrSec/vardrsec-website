@@ -9,7 +9,7 @@
   <meta name="description" content="Delayed, anonymized statistics on attacks against a VardrSec SSH honeypot." />
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="css/styles.css?v=4134f0e9" />
-  <link rel="stylesheet" href="css/observatory.css?v=5c84c11f" />
+  <link rel="stylesheet" href="css/observatory.css?v=1d116254" />
 </head>
 <body>
 <!-- @partial:header -->
@@ -73,6 +73,25 @@
       <span class="obs-status" id="obs-status" role="status" aria-live="polite">Loading</span>
     </div>
     <p class="obs-notice" id="obs-notice" hidden></p>
+    <section class="obs-history" aria-labelledby="obs-lifetime-title">
+      <div class="obs-panel-heading"><h2 id="obs-lifetime-title">Since collection began</h2><span>Historical totals</span></div>
+      <p class="obs-disclaimer" id="obs-lifetime-period">Historical totals are awaiting a delayed archive summary.</p>
+      <div class="obs-stats obs-lifetime-stats">
+        <article class="obs-card obs-stat"><span>SSH connections</span><strong id="obs-lifetime-connections">—</strong><small>Recorded connection events</small></article>
+        <article class="obs-card obs-stat"><span>Login attempts</span><strong id="obs-lifetime-auth">—</strong><small>Multiple attempts can share a connection</small></article>
+        <article class="obs-card obs-stat"><span>Commands observed</span><strong id="obs-lifetime-commands">—</strong><small>Attempts inside the decoy</small></article>
+        <article class="obs-card obs-stat"><span>File-transfer events</span><strong id="obs-lifetime-files">—</strong><small>Repeated transfers count separately</small></article>
+        <article class="obs-card obs-stat"><span>Unique source addresses</span><strong id="obs-lifetime-sources">—</strong><small>Deduplicated across archived months</small></article>
+        <article class="obs-card obs-stat"><span>Unique captured hashes</span><strong id="obs-lifetime-hashes">—</strong><small>Distinct files; not malware verdicts</small></article>
+      </div>
+      <details class="obs-card obs-panel obs-months">
+        <summary>Monthly comparison</summary>
+        <div class="obs-table-wrap"><table class="obs-table"><caption class="obs-disclaimer">Latest 12 months with archived observations · UTC</caption><thead><tr><th scope="col">Month</th><th scope="col">Connections</th><th scope="col">Login attempts</th><th scope="col">Commands</th><th scope="col">File events</th></tr></thead><tbody id="obs-month-rows"><tr><td colspan="5">Monthly totals will appear with the historical summary.</td></tr></tbody></table></div>
+        <p class="obs-disclaimer">Partial months are marked. Closed months can still have collection gaps or late arrivals. Totals cover archived observations from one sensor, not global attack activity. Source addresses are not individual people.</p>
+      </details>
+      <p class="obs-disclaimer">Historical counts survive the 30-day detailed-event retention policy. They are kept separately from the recent activity below.</p>
+    </section>
+    <h2 class="obs-recent-title">Past 24 complete hours</h2>
     <div class="obs-stats" aria-label="Observation statistics">
       <article class="obs-card obs-stat"><span>Observed sessions</span><strong id="obs-sessions">—</strong><small>Past 24 complete hours</small></article>
       <article class="obs-card obs-stat"><span>Unique sources</span><strong id="obs-sources">—</strong><small>No raw addresses exposed</small></article>
@@ -131,6 +150,6 @@
   </footer>
   <!-- @endpartial -->
   <script src="js/observatory-policy.js?v=38d753bd" defer></script>
-  <script src="js/observatory.js?v=149c7cdf" defer></script>
+  <script src="js/observatory.js?v=77d52515" type="module"></script>
 </body>
 </html>

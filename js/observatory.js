@@ -1,4 +1,5 @@
-/* VardrSec Threat Observatory — client-only read access to public sanitized aggregates. */
+import { validHistory } from '../lib/observatory-history.mjs?v=1';
+/* VardrSec Threat Observatory: read-only sanitized aggregates. */
 (() => {
   "use strict";
   const endpoint = "/api/observatory";
@@ -15,16 +16,17 @@
     return node;
   }
   function validate(data) {
-    return data && [1,2,3].includes(data.version) && data.window_hours === 24 &&
+    return data && [1,2,3,4].includes(data.version) && data.window_hours === 24 &&
       typeof data.published_at === "string" && Number.isFinite(Date.parse(data.published_at)) &&
       data.totals && ["sessions","unique_sources","auth_events","command_events","file_events"].every(k => isCount(data.totals[k])) &&
       Array.isArray(data.hourly) && data.hourly.length === 24 && data.hourly.every(h =>
         h && Number.isFinite(Date.parse(h.hour)) && isCount(h.sessions) && isCount(h.auth_events)) &&
       Array.isArray(data.commands) && Array.isArray(data.artifacts) &&
-      (data.version !== 3 || (commandPolicy && data.command_policy_version === commandPolicy.policyVersion
+      (data.version < 3 || (commandPolicy && data.command_policy_version === commandPolicy.policyVersion
         && data.command_window_hours === 168 && Number.isFinite(Date.parse(data.command_window_start))
         && Number.isFinite(Date.parse(data.command_window_end))
-        && Date.parse(data.command_window_end) - Date.parse(data.command_window_start) === 168 * 3_600_000));
+        && Date.parse(data.command_window_end) - Date.parse(data.command_window_start) === 168 * 3_600_000)) &&
+      (data.version !== 4 || validHistory(data.lifetime, Math.floor(Date.parse(data.published_at) / 3_600_000) * 3_600_000 - 3_600_000));
   }
   function drawChart(points) {
     const host = byId("obs-chart");
@@ -60,7 +62,7 @@
     if (!data.length){
       const tr=document.createElement("tr"),td=document.createElement("td");
       td.colSpan=mode==="artifacts"?3:2;td.className="obs-muted";
-      td.textContent=mode==="artifacts"?"No reviewed artifacts published yet":dataVersion===3
+      td.textContent=mode==="artifacts"?"No reviewed artifacts published yet":dataVersion>=3
         ?"No supported multi-step command patterns in this seven-day reporting period."
         :"Command details are temporarily withheld for privacy review. Activity counts remain available.";
       tr.append(td);tbody.append(tr);return;
@@ -72,7 +74,7 @@
         if(!validHash || !isCount(item.count))continue;
         const code=document.createElement("code");code.textContent=item.sha256;first.append(code);
       } else {
-        if(dataVersion!==3 || !commandPolicy?.safeTemplate(item.template) || !isCount(item.count) || item.count===0)continue;
+        if(dataVersion<3 || !commandPolicy?.safeTemplate(item.template) || !isCount(item.count) || item.count===0)continue;
         const code=document.createElement("code");code.textContent=item.template;first.append(code);
       }
       const count=document.createElement("td");count.textContent=fmt(item.count);
@@ -80,10 +82,30 @@
       if(mode==="artifacts"){
         const td=document.createElement("td"),a=document.createElement("a");
         a.href="https://www.virustotal.com/gui/file/"+item.sha256;
-        a.target="_blank";a.rel="noopener noreferrer";a.className="obs-vt-link";a.textContent="VirusTotal ↗";
+        a.target="_blank";a.rel="noopener noreferrer";a.className="obs-vt-link";a.textContent="VirusTotal \u2197";
         td.append(a);tr.append(td);
       }
       tbody.append(tr);
+    }
+  }
+  function renderHistory(value) {
+    const body = byId('obs-month-rows'); body.replaceChildren();
+    const fields = {connections:'connections', auth:'auth_events', commands:'command_events',
+      files:'file_events', sources:'unique_sources', hashes:'unique_captured_hashes'};
+    for (const [id,key] of Object.entries(fields)) text('obs-lifetime-'+id, value ? fmt(value.totals[key]) : '—');
+    if (!value) {
+      text('obs-lifetime-period','Historical totals are awaiting a delayed archive summary.');
+      const row=document.createElement('tr'),cell=document.createElement('td');
+      cell.colSpan=5; cell.textContent='Monthly totals will appear with the historical summary.';
+      row.append(cell); body.append(row); return;
+    }
+    text('obs-lifetime-period',`Archived observations since ${value.started_at.slice(0,10)} · Summary as of ${value.as_of.slice(0,16).replace('T',' ')} UTC. Published with a delay.`);
+    for (const entry of value.months) {
+      const row=document.createElement('tr');
+      for (const item of [entry.month + (entry.partial ? ' (partial)' : ''), ...['connections','auth_events','command_events','file_events'].map(k=>fmt(entry[k]))]) {
+        const cell=document.createElement('td'); cell.textContent=item; row.append(cell);
+      }
+      body.append(row);
     }
   }
   function showError(message) {
@@ -111,11 +133,12 @@
       const note=byId("obs-notice");
       if(age>20*60*1000){note.hidden=false;note.textContent="Latest data may be stale; the publisher has not updated recently.";}
       else note.hidden=true;
+      renderHistory(data.version === 4 ? data.lifetime : null);
       drawChart(data.hourly);
-      // Only v3 carries the independently validated fixed-vocabulary projection.
-      renderRows("obs-command-rows",data.version===3?data.commands:[],"commands",data.version);
-      text('obs-command-window',data.version===3?'Seven-day reporting period':'Privacy review');
-      if(data.version===3) text('obs-command-note',
+      // v3 and v4 carry the independently validated fixed-vocabulary projection.
+      renderRows("obs-command-rows",data.version>=3?data.commands:[],"commands",data.version);
+      text('obs-command-window',data.version>=3?'Seven-day reporting period':'Privacy review');
+      if(data.version>=3) text('obs-command-note',
         `Sanitized patterns observed ${data.command_window_start.slice(0,16).replace('T',' ')} to ${data.command_window_end.slice(0,16).replace('T',' ')} UTC (end exclusive). Counts combine observations of the same sanitized pattern. These are attempts in a simulated service, not proof of successful execution.`);
       else text('obs-command-note','Command details are temporarily withheld. Activity statistics and reviewed artifacts cover the delayed 24-hour window.');
       renderRows("obs-artifact-rows",data.artifacts,"artifacts");
