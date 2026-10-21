@@ -3,10 +3,13 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import vm from 'node:vm';
 
+import { validHistory } from '../lib/observatory-history.mjs';
+const historyUrl = new URL('../lib/observatory-history.mjs', import.meta.url).href;
 const policyUrl = new URL('../lib/observatory-command-policy.mjs', import.meta.url).href;
 async function loadFunction(name) {
   const source = readFileSync(new URL('../functions/api/' + name, import.meta.url), 'utf8')
-    .replace("'../../lib/observatory-command-policy.mjs'", JSON.stringify(policyUrl));
+    .replace("'../../lib/observatory-command-policy.mjs'", JSON.stringify(policyUrl))
+    .replace("'../../lib/observatory-history.mjs'", JSON.stringify(historyUrl));
   return import('data:text/javascript;base64,' + Buffer.from(source).toString('base64'));
 }
 const publisher = await loadFunction('observatory-publish.js');
@@ -94,9 +97,9 @@ async function render(value) {
   const nodes=new Map();
   const document={getElementById:id=>{if(!nodes.has(id))nodes.set(id,new Element('div'));return nodes.get(id);},
     createElement:tag=>new Element(tag),createElementNS:(_,tag)=>new Element(tag)};
-  const context=vm.createContext({window:{},document,setInterval(){},fetch:async()=>({ok:true,json:async()=>value})});
+  const context=vm.createContext({validHistory,window:{},document,setInterval(){},fetch:async()=>({ok:true,json:async()=>value})});
   vm.runInContext(readFileSync(new URL('../js/observatory-policy.js',import.meta.url),'utf8'),context);
-  vm.runInContext(readFileSync(new URL('../js/observatory.js',import.meta.url),'utf8'),context);
+  vm.runInContext(readFileSync(new URL('../js/observatory.js',import.meta.url),'utf8').replace(/^import .*;\n/,''),context);
   await new Promise(resolve=>setImmediate(resolve));
   return nodes;
 }
@@ -109,4 +112,51 @@ test('browser labels seven-day commands separately and rejects unsafe/legacy row
   assert.equal(nodes.get('obs-command-window').textContent,'Seven-day reporting period');
   const legacy=snapshot(2);legacy.commands=[{template:'synthetic-private-command',count:1}];
   nodes=await render(legacy);assert.equal(contents(nodes.get('obs-command-rows')).includes('synthetic-private-command'),false);
+});
+
+function lifetimeSnapshot() {
+  const value=snapshot(); value.version=4;
+  const asOf=value.command_window_end;
+  const month=asOf.slice(0,7);
+  value.lifetime={started_at:stamp(Date.parse(asOf)-24*3600000),as_of:asOf,
+    totals:{connections:100,auth_events:500,command_events:20,file_events:10,unique_sources:5,unique_captured_hashes:2},
+    months:[{month,partial:true,connections:100,auth_events:500,command_events:20,file_events:10}]};
+  return value;
+}
+test('v4 authenticates and renders lifetime counts separately from recent windows',async()=>{
+  const value=lifetimeSnapshot();const env=environment();
+  assert.equal(publisher.valid(value),true);
+  assert.equal((await publisher.onRequestPost({request:request(value),env})).status,202);
+  assert.deepEqual(getter.publicSnapshot(value).lifetime,value.lifetime);
+  const nodes=await render(value);
+  assert.equal(nodes.get('obs-lifetime-auth').textContent,'500');
+  assert.equal(nodes.get('obs-auth').textContent,'2');
+  assert.equal(nodes.get('obs-command-window').textContent,'Seven-day reporting period');
+  assert.match(contents(nodes.get('obs-month-rows')),/partial/);
+  assert.ok(JSON.stringify(value).length<16384);
+});
+test('all v4 public boundaries reject private fields, bad counts, fresh or stale history',async()=>{
+  const changes=[v=>v.lifetime.secret='private-value',
+    v=>v.lifetime.totals.secret='private-value',v=>v.lifetime.totals.auth_events=true,
+    v=>v.lifetime.totals.connections=-1,v=>v.lifetime.totals.unique_sources=101,
+    v=>v.lifetime.as_of=stamp(Date.parse(v.lifetime.as_of)+3600000),
+    v=>v.lifetime.as_of=stamp(Date.parse(v.lifetime.as_of)-4*3600000),
+    v=>v.lifetime.started_at='2026-02-31T00:00:00Z',
+    v=>v.lifetime.months.push({...v.lifetime.months[0]}),
+    v=>v.lifetime.months[0].partial=false,v=>v.lifetime.months[0].connections=101,
+    v=>v.lifetime.months[0].month='<script>private-value</script>'];
+  for(const mutate of changes){
+    const value=lifetimeSnapshot();mutate(value);
+    assert.equal(publisher.valid(value),false);
+    assert.throws(()=>getter.publicSnapshot(value));
+    const nodes=await render(value);
+    assert.equal(nodes.get('obs-status').textContent,'Data unavailable');
+    assert.equal([...nodes.values()].map(contents).join(' ').includes('private-value'),false);
+  }
+});
+test('v3 remains available while delayed lifetime history warms up',async()=>{
+  const nodes=await render(snapshot());
+  assert.equal(nodes.get('obs-lifetime-auth').textContent,'—');
+  assert.match(nodes.get('obs-lifetime-period').textContent,/awaiting/);
+  assert.equal(nodes.get('obs-auth').textContent,'2');
 });

@@ -1,3 +1,4 @@
+import { validHistory } from '../../lib/observatory-history.mjs';
 // Read-only public snapshot. No Oracle connectivity or secrets.
 import { safeTemplate, policyVersion } from '../../lib/observatory-command-policy.mjs';
 const count = value => Number.isSafeInteger(value) && value >= 0 && value <= 1e9;
@@ -6,7 +7,7 @@ const utc = value => typeof value === 'string' && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2
 
 export function publicSnapshot(snapshot) {
   if (!snapshot || typeof snapshot !== 'object' || Array.isArray(snapshot)) throw new Error('Invalid snapshot');
-  if (![1,2,3].includes(snapshot.version) || snapshot.window_hours !== 24 || !utc(snapshot.published_at)) throw new Error('Invalid metadata');
+  if (![1,2,3,4].includes(snapshot.version) || snapshot.window_hours !== 24 || !utc(snapshot.published_at)) throw new Error('Invalid metadata');
   const clean = {version:snapshot.version,published_at:snapshot.published_at,window_hours:24,totals:{},hourly:[],artifacts:[],commands:[]};
   for (const key of ['sessions','unique_sources','auth_events','command_events','file_events']) {
     if (!count(snapshot.totals?.[key])) throw new Error('Invalid totals');
@@ -21,7 +22,7 @@ export function publicSnapshot(snapshot) {
   clean.artifacts = snapshot.artifacts.filter(a => a && typeof a.sha256 === 'string' && /^[a-f0-9]{64}$/.test(a.sha256)
     && count(a.count) && ['ssh_key','script','binary','other'].includes(a.type)).slice(0,10)
     .map(a => ({sha256:a.sha256,count:a.count,type:a.type}));
-  if (snapshot.version === 3) {
+  if (snapshot.version >= 3) {
     const end = Math.floor(Date.parse(snapshot.published_at) / 3_600_000) * 3_600_000 - 3_600_000;
     if (snapshot.command_policy_version !== policyVersion || snapshot.command_window_hours !== 168
         || !utc(snapshot.command_window_start) || !utc(snapshot.command_window_end)
@@ -32,6 +33,11 @@ export function publicSnapshot(snapshot) {
       && Object.keys(c).length === 2 && safeTemplate(c.template)
       && count(c.count) && c.count > 0).slice(0,10)
       .map(c => ({template:c.template,count:c.count})) : [];
+  }
+  if (snapshot.version === 4) {
+    const end = Math.floor(Date.parse(snapshot.published_at) / 3_600_000) * 3_600_000 - 3_600_000;
+    if (!validHistory(snapshot.lifetime, end)) throw new Error('Invalid lifetime summary');
+    clean.lifetime = snapshot.lifetime; // Exact keys and count-only values validated above.
   }
   return clean;
 }
