@@ -9,7 +9,7 @@
   <meta name="description" content="Delayed, anonymized statistics on attacks against a VardrSec SSH honeypot." />
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="css/styles.css?v=4134f0e9" />
-  <link rel="stylesheet" href="css/observatory.css?v=1d116254" />
+  <link rel="stylesheet" href="css/observatory.css?v=498eae4c" />
 </head>
 <body>
 <!-- @partial:header -->
@@ -112,6 +112,22 @@
         <p class="obs-disclaimer">Reviewed SHA-256 indicators will link to VirusTotal file reports (external site). A hash alone does not establish maliciousness; files are never uploaded automatically.</p>
       </section>
     </div>
+    <section class="obs-api" aria-labelledby="obs-api-title">
+      <div class="obs-panel-heading"><h2 id="obs-api-title">API sensor research</h2><span id="obs-api-status" role="status" aria-live="polite">Awaiting real traffic</span></div>
+      <p class="obs-disclaimer" id="obs-api-period">A low-interaction REST API decoy is being validated privately. Public findings will appear only after live collection is approved and a full delayed reporting period is available.</p>
+      <div class="obs-stats" aria-label="API observation statistics">
+        <article class="obs-card obs-stat"><span>API requests</span><strong id="obs-api-requests">—</strong><small>Separate 24-hour period</small></article>
+        <article class="obs-card obs-stat"><span>Authentication probes</span><strong id="obs-api-auth">—</strong><small>Attempts, not successful access</small></article>
+        <article class="obs-card obs-stat"><span>Schema discovery</span><strong id="obs-api-schema">—</strong><small>OpenAPI and related requests</small></article>
+        <article class="obs-card obs-stat"><span>Data access probes</span><strong id="obs-api-data">—</strong><small>Requests to simulated resources</small></article>
+      </div>
+      <div class="obs-columns">
+        <section class="obs-card obs-panel" aria-labelledby="obs-api-techniques-title"><div class="obs-panel-heading"><h3 id="obs-api-techniques-title">Observed request patterns</h3><span>Fixed research categories</span></div><div class="obs-table-wrap"><table class="obs-table"><thead><tr><th scope="col">Pattern</th><th scope="col">Requests</th></tr></thead><tbody id="obs-api-patterns"><tr><td class="obs-muted">Awaiting live observations</td><td>—</td></tr></tbody></table></div></section>
+        <section class="obs-card obs-panel" aria-labelledby="obs-api-methods-title"><div class="obs-panel-heading"><h3 id="obs-api-methods-title">HTTP methods</h3><span>Aggregated counts</span></div><div class="obs-table-wrap"><table class="obs-table"><thead><tr><th scope="col">Method</th><th scope="col">Requests</th></tr></thead><tbody id="obs-api-methods"><tr><td class="obs-muted">Awaiting live observations</td><td>—</td></tr></tbody></table></div></section>
+      </div>
+      <section class="obs-card obs-panel obs-api-clients" aria-labelledby="obs-api-clients-title"><div class="obs-panel-heading"><h3 id="obs-api-clients-title">Self-reported client tools</h3><span>User-Agent family labels</span></div><div class="obs-table-wrap"><table class="obs-table"><thead><tr><th scope="col">Claimed tool family</th><th scope="col">Requests</th></tr></thead><tbody id="obs-api-clients"><tr><td class="obs-muted">Awaiting live observations</td><td>—</td></tr></tbody></table></div><p class="obs-disclaimer">User-Agent strings are easy to spoof. These fixed labels are hints about tooling, not bot identity or reliable fingerprints. Raw headers are not retained.</p></section>
+      <p class="obs-disclaimer">The API decoy returns fixed responses. Counts describe requests, not authenticated access, executed payloads, or host compromise. Source addresses, credentials, query strings, request bodies and raw paths are never displayed.</p>
+    </section>
     <section class="obs-card obs-about" aria-labelledby="obs-method"><h2 id="obs-method">About this data</h2><p>These are totals from a honeypot, a fake server that records what attackers try. They are published with a delay, and IP addresses, credentials and other session details are left out. Activity in a honeypot does not mean the underlying host was compromised.</p></section>
   </section>
 </main>
@@ -151,5 +167,6 @@
   <!-- @endpartial -->
   <script src="js/observatory-policy.js?v=38d753bd" defer></script>
   <script src="js/observatory.js?v=77d52515" type="module"></script>
+  <script src="js/api-research.js?v=1c53fc66" type="module"></script>
 </body>
 </html>
