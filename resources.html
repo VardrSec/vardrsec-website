@@ -14,7 +14,7 @@
   <meta property="og:description" content="Security references I actually use: learning paths, access control and API testing, web exploitation, recon and OSINT, cloud, secure development, detection and reporting." />
   <meta property="og:image" content="https://vardrsec.com/assets/orgbanner.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <link rel="stylesheet" href="css/styles.css?v=b5901ccb" />
+  <link rel="stylesheet" href="css/styles.css?v=07f654ad" />
 </head>
 <body>
 <!-- @partial:header -->
@@ -65,7 +65,7 @@
         <a href="observatory.html">Threat Observatory</a>
         <a href="blog.html">Blog</a>
         <a class="active" href="resources.html">Resources</a>
-        <a class="btn primary" href="contact.html" style="margin-top:8px">Contact</a>
+        <a class="btn primary" href="contact.html">Contact</a>
       </div>
     </div>
   </header>
@@ -80,7 +80,7 @@
         </div>
 
         <div class="note mb-7">
-          <strong>Only test what you're allowed to.</strong> Everything in the offensive sections assumes written permission and a defined scope: a bug bounty program, a client agreement, or your own lab. Passive recon is still recon, and leaked credentials you find are for reporting, not for logging in.
+          <strong>Authorization required.</strong> Everything in the offensive sections assumes written permission and a defined scope: a bug bounty program, a client agreement, or your own lab. That includes passive reconnaissance. Leaked credentials are reported, never used.
         </div>
 
         <nav class="resource-nav mb-7" aria-label="Resource sections">
@@ -91,14 +91,14 @@
           <a href="#web">Web</a>
           <a href="#recon">Recon &amp; OSINT</a>
           <a href="#cloud">Cloud</a>
-          <a href="#build">Building it right</a>
+          <a href="#build">Secure development</a>
           <a href="#detect">Detection</a>
           <a href="#report">Reporting</a>
         </nav>
 
         <div class="section-title" id="learn">
           <h2>Where to learn</h2>
-          <p>If you're starting out, do the PortSwigger labs first. Most of what follows will make more sense after.</p>
+          <p>Start with the PortSwigger labs. Most of the material below assumes that baseline.</p>
         </div>
         <div class="grid-2 mb-7">
           <div class="card">
@@ -123,11 +123,11 @@
 
         <div class="section-title" id="access-control">
           <h2>Testing access control</h2>
-          <p>This is where I spend most of my time. Broken access control rarely shows up as an error. The request works; it just works for the wrong person.</p>
+          <p>Broken access control rarely produces an error. The request succeeds; it succeeds for the wrong user.</p>
         </div>
         <div class="grid-2 mb-7">
           <div class="card">
-            <h3>A method that finds real bugs</h3>
+            <h3>Test method</h3>
             <ul class="check">
               <li>Create at least two users with the same role, one user per other role, and one user in a second tenant or organization. Also test with no session at all.</li>
               <li>Do everything as the most privileged user and record the traffic. Then replay each request as every other user and compare the <em>response bodies</em>, not just the status codes.</li>
@@ -201,7 +201,7 @@
 
         <div class="section-title" id="recon">
           <h2>Recon and OSINT</h2>
-          <p>Recon decides what you get to test. Forgotten hosts and old endpoints are often where the bugs are.</p>
+          <p>Reconnaissance defines the attack surface. Forgotten hosts and deprecated endpoints are frequent sources of findings.</p>
         </div>
         <div class="grid-3 mb-7">
           <div class="card">
@@ -253,8 +253,8 @@
         </div>
 
         <div class="section-title" id="build">
-          <h2>Building it right</h2>
-          <p>For developers. These are the checks I'd want in a code review, and why each one matters.</p>
+          <h2>Secure development</h2>
+          <p>Code-review checks for developers, each with the failure it prevents.</p>
         </div>
         <div class="grid-2 mb-7">
           <div class="card">
@@ -289,7 +289,7 @@
           <div class="card">
             <h3>Servers and headers</h3>
             <ul class="check">
-              <li>SSH: keys only (<code>PasswordAuthentication no</code>), no root login, and an alert when any <code>authorized_keys</code> file changes. <a class="link" href="blog-ssh-key-takeover.html">Here's why.</a> Check your config with <a class="link" href="https://github.com/jtesta/ssh-audit" rel="noopener">ssh-audit</a>.</li>
+              <li>SSH: keys only (<code>PasswordAuthentication no</code>), no root login, and an alert when any <code>authorized_keys</code> file changes. <a class="link" href="blog-ssh-key-takeover.html">See the write-up.</a> Check your config with <a class="link" href="https://github.com/jtesta/ssh-audit" rel="noopener">ssh-audit</a>.</li>
               <li>Set a <a class="link" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy" rel="noopener">Content-Security-Policy</a> with <code>frame-ancestors</code>. Start in report-only mode so you don't break the site.</li>
               <li>HSTS, <code>X-Content-Type-Options: nosniff</code> and <code>Referrer-Policy: strict-origin-when-cross-origin</code> are safe defaults almost everywhere.</li>
               <li>Send <code>Cache-Control: no-store</code> on responses that contain personal or account data.</li>
@@ -320,7 +320,7 @@
         </div>
         <div class="grid-2">
           <div class="card">
-            <h3>Writing a report people act on</h3>
+            <h3>Writing actionable reports</h3>
             <ul class="check">
               <li>Lead with the impact in one sentence: who can do what to whose data.</li>
               <li>Give exact reproduction steps with the requests, using test accounts you own.</li>
@@ -372,7 +372,7 @@
         <small>© <span id="year"></span> VardrSec. All rights reserved.</small>
       </div>
     </div>
-    <script src="js/site.js?v=8fbf366c"></script>
+    <script src="js/site.js?v=b479d60a"></script>
   </footer>
   <!-- @endpartial -->
 </body>

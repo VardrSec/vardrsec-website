@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Self-hosted Inter and JetBrains Mono variable fonts (Latin subset, OFL-licensed) in
+  `assets/fonts/`, with their license files. No CSP change: `font-src 'self'` already
+  covers them.
+- `.cta` and `.list` classes, replacing the inline `style=` attributes on call-to-action
+  cards and prose lists in `index.html`, `about.html` and `tools.html`, and on the mobile
+  Contact button in the header partial.
+- Fact strip under the homepage hero (sensors, publishing model, licenses).
+
 - First research blog post, `blog-ssh-key-takeover.html`: the two SSH-key takeover
   command patterns from the frozen October snapshot, step-by-step explanation,
   matching public reports, and hardening checks. Listed on the blog and in the sitemap.
@@ -23,6 +31,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Visual refresh in `css/styles.css`: darker base with a faded grid backdrop, tighter
+  radii, monospace labels for eyebrows, badges, tags and spec rows, a solid primary button,
+  an underline active state in the nav, an editor-style header on the policy demo, and a
+  restyled footer. Token names are unchanged, and every documented layout fix (grid
+  `min-width:0`, form `minmax(0,1fr)`, Turnstile scaling, `.spec` stacking, skip link) is
+  kept. `observatory.css` and `research.css` were aligned to the same radii and type.
+- Copy: informal phrasing replaced with plain technical language on the homepage, About,
+  Tools, Contact, 404, Resources and the SSH blog post. Figures, dates, limits and
+  sources are unchanged.
 - `resources.html` rewritten: learning paths, an access-control testing method, API and
   web testing tools, recon and OSINT, cloud practice and auditing, developer checks with
   the reason for each, detection, and reporting. Every external link was checked.
@@ -34,6 +51,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- The contact form's success message promised a reply "within 1–2 business days", which
+  contradicted the About page. It now reads "Message sent."
 - `tools/verify.js` listed `catalog` as a British spelling; the entry is now `catalogue`.
 
 - The October 2026 working-draft report is unlisted: removed from the blog, the homepage
@@ -57,6 +76,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+- VardrVault is no longer listed on the site: its card on `tools.html` (the prototypes
+  grid is now two columns) and its entry in the `about.html` tools list.
 - `collaboration.html`. Its content was folded into `about.html` and `tools.html`.
   `/collaboration`, `/services` and `/consulting` now 301 straight to `/about`.
 
