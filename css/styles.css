@@ -1,56 +1,121 @@
+/* ---------------------------------------------------------------------------
+   Fonts. Self-hosted because the CSP allows font-src 'self' only, and a font CDN
+   would add a third-party request on every page. Both are OFL-licensed variable
+   fonts (licenses in assets/fonts/), Latin subset.
+   --------------------------------------------------------------------------- */
+@font-face{
+  font-family:"Inter";
+  src:url("../assets/fonts/inter-latin-wght.woff2") format("woff2");
+  font-weight:100 900;
+  font-style:normal;
+  font-display:swap;
+}
+@font-face{
+  font-family:"JetBrains Mono";
+  src:url("../assets/fonts/jetbrains-mono-latin-wght.woff2") format("woff2");
+  font-weight:100 800;
+  font-style:normal;
+  font-display:swap;
+}
+
 :root{
-  --bg:#0b1220;
-  --bg2:#0f1b32;
-  --text:#e7edf7;
-  --muted:#b2c0d6;
-  --accent:#6fb1ff;
-  --accent2:#7cf0d7;
+  --bg:#080c13;
+  --bg2:#0a0f18;
+  --text:#e9eef6;
+  --muted:#a9b6ca;
+  --accent:#78b6ff;
+  --accent2:#6ee7d2;
   --ok:#65d88a;
-  --bad:#ff6b6b;
+  --warn:#f2c46b;
+  --bad:#ff7a7a;
 
-  --shadow: 0 20px 60px rgba(0,0,0,.55);
-  --radius: 18px;
-  --radius2: 24px;
+  --font-sans:"Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono:"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
-  --max: 1120px;
+  --shadow: 0 24px 64px rgba(0,0,0,.5);
+  --radius-sm: 8px;
+  --radius: 12px;
+  --radius2: 16px;
 
-  /* Surfaces. Cards sit above the page background as opaque-feeling panels rather
-     than translucent glass, so contents read as a group instead of floating. */
-  --surface:      #131c30;
-  --surface-2:    #18233b;
-  --surface-hover:#1b2740;
+  --max: 1140px;
+
+  /* Surfaces. Cards sit above the page background as opaque panels rather than
+     translucent glass, so contents read as a group instead of floating. */
+  --surface:      #0e141f;
+  --surface-2:    #131b29;
+  --surface-hover:#111927;
+  --code-bg:      #070b11;
 
   /* Borders, strongest for card edges, softer for internal dividers. */
-  --line:       rgba(255,255,255,.16);
-  --line-strong:rgba(255,255,255,.26);
-  --line-soft:  rgba(255,255,255,.09);
+  --line:       rgba(148,170,204,.15);
+  --line-strong:rgba(148,170,204,.30);
+  --line-soft:  rgba(148,170,204,.08);
+  --line-accent:rgba(110,231,210,.38);
 
   /* Text roles. --text-2 is body copy, --text-3 metadata; both hold AA on --surface. */
-  --text-2: #c8d4e6;
-  --text-3: #a7b6cd;
+  --text-2: #c2ccdb;
+  --text-3: #93a2b8;
 
-  --card-pad: 22px;
-  --card-shadow: 0 1px 0 rgba(255,255,255,.05) inset, 0 10px 28px rgba(0,0,0,.35);
+  --card-pad: 24px;
+  --card-shadow: 0 1px 0 rgba(255,255,255,.04) inset, 0 12px 32px rgba(0,0,0,.32);
   --row-gap: 14px;
 }
 
 *{box-sizing:border-box}
 html,body{margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
 body{
-  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-  background: radial-gradient(1200px 700px at 20% 10%, rgba(111,177,255,.18), transparent 55%),
-              radial-gradient(900px 500px at 80% 20%, rgba(124,240,215,.12), transparent 60%),
-              linear-gradient(180deg, var(--bg), var(--bg2));
+  font-family:var(--font-sans);
+  font-feature-settings:"cv11","ss01";
+  background:var(--bg);
   color:var(--text);
-  line-height:1.55;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  text-rendering:optimizeLegibility;
 }
 
+/* Backdrop: a faint engineering grid that fades out below the fold, plus a low
+   glow behind the header. Fixed and non-interactive so it never affects layout. */
+body::before, body::after{
+  content:"";
+  position:fixed; inset:0;
+  z-index:-1;
+  pointer-events:none;
+}
+body::before{
+  background-image:
+    linear-gradient(rgba(148,170,204,.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148,170,204,.055) 1px, transparent 1px);
+  background-size:56px 56px;
+  background-position:-1px -1px;
+  -webkit-mask-image:radial-gradient(ellipse 90% 70% at 50% 0%, #000 25%, transparent 78%);
+          mask-image:radial-gradient(ellipse 90% 70% at 50% 0%, #000 25%, transparent 78%);
+}
+body::after{
+  background:
+    radial-gradient(900px 420px at 15% -8%, rgba(120,182,255,.13), transparent 65%),
+    radial-gradient(700px 360px at 88% -4%, rgba(110,231,210,.08), transparent 65%);
+}
+
+::selection{background:rgba(110,231,210,.28); color:#fff}
+
 a{color:inherit;text-decoration:none}
-a:hover{opacity:.9}
 img{max-width:100%;display:block;height:auto}
+strong{font-weight:600}
+
+code, kbd, samp, pre{font-family:var(--font-mono)}
 
 /* Inline links inside prose need to look like links; nav/button anchors don't. */
-.link{color:var(--accent); text-decoration:underline}
+.link{
+  color:var(--accent);
+  text-decoration:underline;
+  text-decoration-color:rgba(120,182,255,.45);
+  text-underline-offset:3px;
+  text-decoration-thickness:1px;
+  transition:text-decoration-color .15s ease, color .15s ease;
+}
+.link:hover{color:#a3ccff; text-decoration-color:currentColor}
 
 :focus-visible{
   outline:2px solid var(--accent2);
@@ -63,161 +128,230 @@ img{max-width:100%;display:block;height:auto}
   .btn:hover{transform:none}
 }
 
-.container{width:100%;max-width:var(--max);margin:0 auto;padding:0 20px}
-.section{padding:70px 0}
-.section.compact{padding:45px 0}
+.container{width:100%;max-width:var(--max);margin:0 auto;padding:0 24px}
+.section{padding:80px 0}
+.section.compact{padding:52px 0}
 
+/* --- Header ---------------------------------------------------------------- */
 .topbar{
   position:sticky; top:0; z-index:50;
-  backdrop-filter: blur(14px);
-  background: rgba(10,16,30,.62);
-  border-bottom:1px solid rgba(255,255,255,.08);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+          backdrop-filter: blur(14px) saturate(140%);
+  background: rgba(8,12,19,.78);
+  border-bottom:1px solid var(--line-soft);
 }
 
 .nav{
   display:flex; align-items:center; justify-content:space-between;
-  gap:14px; padding:14px 0;
+  gap:14px; padding:12px 0;
 }
 .brand{
-  display:flex; align-items:center; gap:10px; min-width:220px;
+  display:flex; align-items:center; gap:12px; min-width:220px;
 }
 .brand-mark{
-  width:38px; height:38px; border-radius:12px;
-  background: linear-gradient(135deg, rgba(111,177,255,.22), rgba(124,240,215,.16));
-  border:1px solid rgba(255,255,255,.12);
+  width:36px; height:36px; border-radius:9px;
+  background:var(--surface);
+  border:1px solid var(--line);
   display:grid; place-items:center;
-  box-shadow: 0 10px 25px rgba(0,0,0,.35);
   overflow:hidden;
 }
 .brand-mark picture{display:block; width:100%; height:100%}
 .brand-img{width:100%; height:100%; object-fit:contain}
 .brand-name{
-  display:flex; flex-direction:column; line-height:1.1;
+  display:flex; flex-direction:column; line-height:1.15; gap:2px;
 }
-.brand-name strong{font-size:14px; letter-spacing:.6px}
-.brand-name small{color:var(--muted); font-size:12px}
+.brand-name strong{font-size:15px; font-weight:650; letter-spacing:-.01em}
+.brand-name small{
+  color:var(--text-3);
+  font-family:var(--font-mono);
+  font-size:10.5px;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+}
 
 .nav-links{
-  display:flex; gap:18px; align-items:center;
+  display:flex; gap:2px; align-items:center;
 }
 .nav-links a{
-  color:rgba(231,237,247,.92);
-  font-size:13px;
-  padding:10px 10px;
-  border-radius:12px;
-  border:1px solid transparent;
+  position:relative;
+  color:var(--text-2);
+  font-size:13.5px;
+  font-weight:500;
+  padding:8px 12px;
+  border-radius:var(--radius-sm);
+  transition:color .15s ease, background-color .15s ease;
 }
-.nav-links a.active{
-  border-color:rgba(255,255,255,.16);
-  background:rgba(255,255,255,.05);
-}
-.nav-links a:hover{
-  background:rgba(255,255,255,.05);
-  border-color:rgba(255,255,255,.10);
+.nav-links a:hover{color:var(--text); background:rgba(148,170,204,.07)}
+/* Active state is an underline rule, not a filled pill, so the current page is
+   marked without competing with the Contact button. */
+.nav-links a.active{color:var(--text)}
+.nav-links a.active::after{
+  content:"";
+  position:absolute; left:12px; right:12px; bottom:-13px;
+  height:2px; border-radius:2px;
+  background:var(--accent2);
 }
 
 .nav-cta{
-  display:flex; gap:10px; align-items:center;
+  display:flex; gap:8px; align-items:center;
 }
+
+/* --- Buttons --------------------------------------------------------------- */
 .btn{
   display:inline-flex; align-items:center; justify-content:center;
-  padding:10px 14px;
-  border-radius:14px;
-  border:1px solid rgba(255,255,255,.14);
-  background:rgba(255,255,255,.05);
+  min-height:38px;
+  padding:8px 16px;
+  border-radius:var(--radius-sm);
+  border:1px solid var(--line-strong);
+  background:rgba(148,170,204,.05);
   color:var(--text);
-  font-size:13px;
+  font-family:inherit;
+  font-size:13.5px;
+  font-weight:500;
+  line-height:1.2;
   gap:8px;
+  cursor:pointer;
+  transition:background-color .15s ease, border-color .15s ease, transform .15s ease, box-shadow .15s ease;
 }
+.btn:hover{background:rgba(148,170,204,.10); border-color:rgba(148,170,204,.45); transform:translateY(-1px)}
+.btn:active{transform:translateY(0)}
+/* Primary action is a solid fill so it clearly outranks the secondary one. */
 .btn.primary{
-  background: linear-gradient(135deg, rgba(111,177,255,.22), rgba(124,240,215,.16));
-  border-color: rgba(255,255,255,.18);
+  background:var(--accent2);
+  border-color:var(--accent2);
+  color:#04201b;
+  font-weight:600;
+  box-shadow:0 0 0 1px rgba(110,231,210,.15), 0 6px 20px rgba(110,231,210,.16);
+}
+.btn.primary:hover{
+  background:#8af0de;
+  border-color:#8af0de;
+  box-shadow:0 0 0 1px rgba(110,231,210,.25), 0 8px 26px rgba(110,231,210,.24);
 }
 .btn.active{
-  border-color:rgba(255,255,255,.28);
-  background:rgba(255,255,255,.10);
+  border-color:rgba(148,170,204,.5);
+  background:rgba(148,170,204,.12);
 }
-.btn:hover{transform: translateY(-1px)}
-.btn:active{transform: translateY(0px)}
 .btn[disabled]{opacity:.55; pointer-events:none}
+.btn.ghost{background:transparent; border-color:var(--line)}
+.btn.ghost:hover{background:rgba(148,170,204,.07); border-color:var(--line-strong)}
+@media (max-width: 1100px){ .nav-cta .ghost{display:none} }
 
 .menu-btn{
   display:none;
-  height:42px; padding:0 14px; border-radius:14px;
-  border:1px solid rgba(255,255,255,.14);
-  background:rgba(255,255,255,.05);
+  height:40px; padding:0 14px; border-radius:var(--radius-sm);
+  border:1px solid var(--line-strong);
+  background:rgba(148,170,204,.05);
   color:var(--text);
-  font-size:13px; font-family:inherit;
+  font-size:13px; font-weight:500; font-family:inherit;
   cursor:pointer;
 }
 
 .mobile-panel{
   display:none;
-  border-top:1px solid rgba(255,255,255,.08);
-  padding:14px 0 18px;
+  border-top:1px solid var(--line-soft);
+  padding:12px 0 18px;
 }
 .mobile-panel a{
   display:block;
-  padding:12px 10px;
-  border-radius:14px;
-  border:1px solid transparent;
-  color:rgba(231,237,247,.92);
+  padding:11px 12px;
+  border-radius:var(--radius-sm);
+  color:var(--text-2);
+  font-weight:500;
 }
-.mobile-panel a:hover{
-  background:rgba(255,255,255,.05);
-  border-color:rgba(255,255,255,.10);
+.mobile-panel a:hover{background:rgba(148,170,204,.07); color:var(--text)}
+.mobile-panel a.active{color:var(--text); box-shadow:inset 2px 0 0 var(--accent2)}
+.mobile-panel a.btn{display:flex; margin-top:10px; color:#04201b}
+
+/* --- Type ------------------------------------------------------------------ */
+h1, h2, h3, h4{font-weight:650; letter-spacing:-.02em; color:var(--text)}
+h1{
+  margin:16px 0 14px;
+  font-size:clamp(2.05rem, 1.35rem + 2.6vw, 3.35rem);
+  line-height:1.06;
+  letter-spacing:-.035em;
+}
+.lead{
+  font-size:16.5px;
+  line-height:1.65;
+  color:var(--text-2);
+  max-width:64ch;
 }
 
-.hero{
-  padding:55px 0 30px;
+/* Eyebrow chip. Monospace so it reads as a label, not a sentence. */
+.kicker{
+  display:inline-flex; gap:9px; align-items:center;
+  font-family:var(--font-mono);
+  font-size:11.5px; font-weight:500;
+  letter-spacing:.06em; text-transform:uppercase;
+  color:var(--accent2);
+  padding:6px 11px; border-radius:999px;
+  border:1px solid var(--line-accent);
+  background:rgba(110,231,210,.06);
 }
+.kicker .dot{
+  width:6px; height:6px; border-radius:50%;
+  background:var(--accent2);
+  box-shadow:0 0 0 3px rgba(110,231,210,.16);
+}
+
+/* --- Hero ------------------------------------------------------------------ */
+.hero{padding:72px 0 28px}
 .hero-card{
+  position:relative;
+  display:flex; flex-direction:column;
   border-radius:var(--radius2);
   border:1px solid var(--line);
-  background:var(--surface);
+  background:
+    radial-gradient(640px 320px at 100% 0%, rgba(110,231,210,.09), transparent 70%),
+    radial-gradient(520px 300px at 0% 100%, rgba(120,182,255,.07), transparent 70%),
+    var(--surface);
   box-shadow:var(--shadow);
   overflow:hidden;
 }
-.hero-banner{
-  border-bottom:1px solid rgba(255,255,255,.10);
-  background:rgba(0,0,0,.2);
+/* Hairline highlight along the top edge, so the card reads as lit from above. */
+.hero-card::before{
+  content:"";
+  position:absolute; left:0; right:0; top:0; height:1px;
+  background:linear-gradient(90deg, transparent, rgba(110,231,210,.55) 30%, rgba(120,182,255,.45) 70%, transparent);
 }
-.hero-body{padding:26px}
-.kicker{
-  display:inline-flex; gap:10px; align-items:center;
-  font-size:12px; color:rgba(231,237,247,.88);
-  padding:7px 10px; border-radius:999px;
-  border:1px solid rgba(255,255,255,.14);
-  background:rgba(255,255,255,.05);
-}
-.kicker .dot{
-  width:8px; height:8px; border-radius:50%;
-  background: radial-gradient(circle, var(--accent2), var(--accent));
-  box-shadow: 0 0 14px rgba(124,240,215,.5);
-}
-h1{
-  margin:14px 0 10px;
-  font-size:42px;
-  line-height:1.05;
-  letter-spacing:-.7px;
-}
-.lead{
-  font-size:15px;
-  color:rgba(231,237,247,.86);
-  max-width: 64ch;
-}
-.hero-actions{display:flex; gap:10px; margin-top:18px; flex-wrap:wrap}
+.hero-body{padding:56px 56px 48px; order:1}
+.hero-body h1{max-width:22ch}
+.hero-body .lead{max-width:62ch}
+.hero-banner{order:2; max-height:190px; overflow:hidden; border-top:1px solid var(--line-soft); background:rgba(0,0,0,.2)}
+.hero-banner img{width:100%; height:190px; object-fit:cover; object-position:center}
+.hero-actions{display:flex; gap:10px; margin-top:24px; flex-wrap:wrap}
 
+/* Fact strip under the hero copy: three short, verifiable statements. */
+.hero-facts{
+  display:grid;
+  grid-template-columns:repeat(3, minmax(0,1fr));
+  margin:40px 0 0;
+  border-top:1px solid var(--line-soft);
+}
+.hero-facts > div{padding:18px 20px 0 0}
+.hero-facts > div + div{padding-left:20px; border-left:1px solid var(--line-soft)}
+.hero-facts dt{
+  font-family:var(--font-mono);
+  font-size:11px; font-weight:500;
+  letter-spacing:.08em; text-transform:uppercase;
+  color:var(--text-3);
+  margin-bottom:6px;
+}
+.hero-facts dd{margin:0; font-size:14px; color:var(--text); line-height:1.5}
+
+/* --- Grids ----------------------------------------------------------------- */
 .grid-3{
   display:grid;
   grid-template-columns: repeat(3, 1fr);
-  gap:16px;
+  gap:18px;
 }
 .grid-2{
   display:grid;
   grid-template-columns: repeat(2, 1fr);
-  gap:16px;
+  gap:18px;
 }
+
 /* ---------------------------------------------------------------------------
    Card system. One definition, used by every grouped panel on the site:
    tool cards, focus cards, collaboration topics, resource checklists, contact
@@ -225,6 +359,7 @@ h1{
    surface, border or radius.
    --------------------------------------------------------------------------- */
 .card{
+  position:relative;
   display:flex;
   flex-direction:column;
   border-radius:var(--radius);
@@ -242,8 +377,8 @@ h1{
 }
 .card:focus-within{border-color:var(--line-strong)}
 
-.card h2, .card h3{margin:0 0 10px; font-size:17.5px; letter-spacing:-.2px; line-height:1.3; font-weight:700}
-.card p{margin:0; color:var(--text-2); font-size:14px; line-height:1.7}
+.card h2, .card h3{margin:0 0 10px; font-size:17px; letter-spacing:-.015em; line-height:1.3; font-weight:650}
+.card p{margin:0; color:var(--text-2); font-size:14.5px; line-height:1.7}
 .card p + p{margin-top:12px}
 .card > .kicker + h2, .card > .kicker + h3{margin-top:2px}
 
@@ -255,23 +390,46 @@ h1{
   border-top:1px solid var(--line-soft);
   color:var(--text-3);
   font-size:13px;
-  line-height:1.55;
+  line-height:1.6;
 }
 /* A meta block immediately after the heading is a caption, not a footer. */
 .card h2 + .meta, .card h3 + .meta{margin-top:0; padding-top:0; border-top:none}
 
+/* Centered call-to-action panel. Replaces per-page inline text-align/padding. */
+.cta{
+  align-items:center;
+  text-align:center;
+  padding:44px 32px;
+  background:
+    radial-gradient(520px 220px at 50% 0%, rgba(110,231,210,.08), transparent 70%),
+    var(--surface);
+}
+.cta p{max-width:62ch; margin-left:auto; margin-right:auto}
+.cta .cta-actions{display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:22px}
+
 /* Heading and its description read as one unit. These used to sit at opposite
    ends of a space-between flex row, which left a gulf between them. */
-.section-title{margin-bottom:22px}
-.section-title h1{margin:0 0 10px;font-size:32px; letter-spacing:-.8px; line-height:1.15}
-.section-title h2{margin:0 0 8px;font-size:25px; letter-spacing:-.4px; line-height:1.2}
-.section-title h3{margin:0 0 8px;font-size:19px; letter-spacing:-.2px}
-.section-title p{margin:0;color:rgba(231,237,247,.70); font-size:14px; max-width:72ch; line-height:1.6}
+.section-title{margin-bottom:26px}
+.section-title h1{margin:0 0 12px; font-size:clamp(1.85rem, 1.4rem + 1.6vw, 2.5rem); letter-spacing:-.03em; line-height:1.12}
+.section-title h2{margin:0 0 10px; font-size:clamp(1.4rem, 1.2rem + .8vw, 1.75rem); letter-spacing:-.025em; line-height:1.2}
+.section-title h3{margin:0 0 8px; font-size:19px; letter-spacing:-.015em}
+.section-title p{margin:0; color:var(--text-2); font-size:15px; max-width:70ch; line-height:1.65}
+.section-title > .kicker{margin-bottom:4px}
+/* A short accent rule marks the start of each section that has no eyebrow chip. */
+.section-title:not(:has(.kicker))::before{
+  content:"";
+  display:block;
+  width:28px; height:2px;
+  margin-bottom:16px;
+  border-radius:2px;
+  background:linear-gradient(90deg, var(--accent2), var(--accent));
+}
 
+/* --- Tables ---------------------------------------------------------------- */
 .table{
   width:100%;
   border-collapse:collapse;
-  border-radius:14px;
+  border-radius:var(--radius);
   overflow:hidden;
   border:1px solid var(--line);
 }
@@ -282,72 +440,105 @@ h1{
   font-size:13.5px;
   line-height:1.6;
 }
-.table th{color:rgba(231,237,247,.85); background:rgba(255,255,255,.04)}
-.table td{color:rgba(231,237,247,.78)}
+.table th{color:var(--text); background:rgba(148,170,204,.05); font-weight:600}
+.table td{color:var(--text-2)}
 .table tr:last-child td{border-bottom:none}
+
+/* --- Badges and tags ------------------------------------------------------- */
 .badge{
   display:inline-flex; align-items:center; gap:8px;
-  font-size:12.5px;
-  padding:6px 11px;
-  border-radius:999px;
+  font-family:var(--font-mono);
+  font-size:11.5px; font-weight:500;
+  letter-spacing:.02em;
+  padding:4px 10px;
+  border-radius:6px;
   border:1px solid var(--line);
   background:var(--surface-2);
+  color:var(--text-2);
 }
-.badge.ok{border-color:rgba(101,216,138,.35); background:rgba(101,216,138,.10)}
-.badge.warn{border-color:rgba(255,204,102,.35); background:rgba(255,204,102,.12)}
-.badge.bad{border-color:rgba(255,107,107,.35); background:rgba(255,107,107,.12)}
+.badge.ok{border-color:rgba(101,216,138,.32); background:rgba(101,216,138,.08); color:#a6ebbb}
+.badge.warn{border-color:rgba(242,196,107,.32); background:rgba(242,196,107,.08); color:#f5d699}
+.badge.bad{border-color:rgba(255,122,122,.32); background:rgba(255,122,122,.08); color:#ffb0b0}
 
+.tag{
+  font-family:var(--font-mono);
+  font-size:11.5px; padding:3px 9px; border-radius:6px;
+  border:1px solid var(--line); background:var(--surface-2);
+  color:var(--text-2);
+}
+
+/* --- Forms ----------------------------------------------------------------- */
 .form{
-  display:grid; gap:12px;
+  display:grid; gap:16px;
 }
 .field{
-  display:grid; gap:6px;
+  display:grid; gap:7px;
 }
-label{font-size:12px; color:rgba(231,237,247,.72)}
+label{font-size:13px; font-weight:500; color:var(--text-2)}
 input, textarea, select{
   width:100%;
-  background:rgba(255,255,255,.04);
+  background:var(--code-bg);
   color:var(--text);
-  border:1px solid rgba(255,255,255,.14);
-  border-radius:14px;
-  padding:10px 12px;
+  border:1px solid var(--line-strong);
+  border-radius:var(--radius-sm);
+  padding:11px 13px;
   font-family:inherit;
-  font-size:14px;
+  font-size:14.5px;
+  transition:border-color .15s ease, box-shadow .15s ease;
 }
-textarea{min-height:120px; resize:vertical}
+input::placeholder, textarea::placeholder{color:#6f7d92}
+input:hover, textarea:hover, select:hover{border-color:rgba(148,170,204,.45)}
+input:focus-visible, textarea:focus-visible, select:focus-visible{
+  /* Transparent rather than removed, so forced-colors mode still draws a ring. */
+  outline:2px solid transparent;
+  border-color:var(--accent2);
+  box-shadow:0 0 0 3px rgba(110,231,210,.18);
+}
+textarea{min-height:140px; resize:vertical; line-height:1.6}
 
 .hp{position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden}
 
-.form-status{margin:4px 0 0; font-size:13px; min-height:1.2em; color:rgba(231,237,247,.78)}
+.form-status{margin:4px 0 0; font-size:13px; min-height:1.2em; color:var(--text-2)}
 .form-status.ok{color:var(--ok)}
 .form-status.bad{color:var(--bad)}
 
+/* --- Footer ---------------------------------------------------------------- */
 .footer{
-  border-top:1px solid rgba(255,255,255,.10);
-  background: rgba(10,16,30,.55);
-  padding:28px 0;
+  margin-top:24px;
+  border-top:1px solid var(--line-soft);
+  background:rgba(6,9,15,.72);
+  padding:44px 0 28px;
 }
 .footer-grid{
   display:grid;
-  grid-template-columns: 1.5fr 1fr 1fr;
-  gap:16px;
+  grid-template-columns: 1.6fr 1fr 1fr;
+  gap:24px;
 }
 .footer small, .footer a{
-  color:rgba(231,237,247,.70);
-  font-size:12px;
+  color:var(--text-3);
+  font-size:13px;
 }
-.footer a:hover{color:rgba(231,237,247,.92)}
-.footer .footer-h{margin:0 0 8px; font-size:13px; font-weight:700; letter-spacing:0}
-.footer p{margin:0; color:rgba(231,237,247,.70); font-size:12px; max-width:70ch}
-.footer-contact{margin-top:10px !important}
-.footer-contact a{text-decoration:underline}
-.footer .links{display:grid; gap:8px}
+.footer a{transition:color .15s ease}
+.footer a:hover{color:var(--text)}
+.footer .footer-h{
+  margin:0 0 12px;
+  font-family:var(--font-mono);
+  font-size:11px; font-weight:500;
+  letter-spacing:.09em; text-transform:uppercase;
+  color:var(--text-3);
+}
+.footer-grid > div:first-child .footer-h{font-family:var(--font-sans); font-size:15px; letter-spacing:-.01em; text-transform:none; color:var(--text); font-weight:650}
+.footer p{margin:0; color:var(--text-3); font-size:13px; max-width:46ch; line-height:1.6}
+.footer-contact{margin-top:14px !important; line-height:1.9 !important}
+.footer-contact a{text-decoration:underline; text-decoration-color:var(--line-strong); text-underline-offset:3px}
+.footer .links{display:grid; gap:9px; align-content:start}
 .copyright{
-  margin-top:16px;
-  padding-top:14px;
-  border-top:1px solid rgba(255,255,255,.08);
+  margin-top:32px;
+  padding-top:18px;
+  border-top:1px solid var(--line-soft);
   display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap;
 }
+.copyright small{font-family:var(--font-mono); font-size:11.5px; letter-spacing:.02em}
 
 /* Checklists. The tick is a list marker, not text content, so screen readers
    announce list semantics instead of "check mark" on every line. */
@@ -355,42 +546,54 @@ textarea{min-height:120px; resize:vertical}
   list-style: "\2713";
   margin:14px 0 0;
   padding-left:1.5em;
-  font-size:14px;
-  line-height:1.6;
+  font-size:14.5px;
+  line-height:1.65;
   color:var(--text-2);
 }
-.check li{padding-left:6px; padding-block:9px}
+.check li{padding-left:8px; padding-block:10px}
 .check li::marker{color:var(--accent2)}
 .check li + li{border-top:1px solid var(--line-soft)}
 .check li:first-child{padding-top:0}
 .check li:last-child{padding-bottom:0}
 
-.note{
-  padding:16px 18px;
-  border-radius:14px;
-  background:var(--surface);
-  border:1px solid var(--line);
-  border-left:3px solid var(--accent);
+/* Plain bulleted list inside prose cards. Replaces per-page inline margins. */
+.list{
+  margin:14px 0;
+  padding-left:1.25em;
   color:var(--text-2);
-  font-size:14px;
+  font-size:14.5px;
   line-height:1.7;
 }
+.list li + li{margin-top:8px}
+.list li::marker{color:var(--text-3)}
+
+.note{
+  padding:18px 20px;
+  border-radius:var(--radius);
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-left:2px solid var(--accent2);
+  color:var(--text-2);
+  font-size:14.5px;
+  line-height:1.7;
+}
+.note strong{color:var(--text)}
 
 @media (max-width: 980px){
-  h1{font-size:36px}
   .grid-3{grid-template-columns:1fr}
   .grid-2{grid-template-columns:1fr}
-  .footer-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .footer-grid > div:first-child{grid-column:1 / -1}
   .nav-links, .nav-cta{display:none}
   .menu-btn{display:inline-flex; align-items:center; justify-content:center}
   .mobile-panel{display:none}
   .mobile-panel.open{display:block}
+  .hero-body{padding:40px 36px 36px}
 }
 
 /* --- Layout rhythm ---------------------------------------------------------
    Grids and stacked sections previously relied on per-element inline margins,
    which drifted between pages. These set the spacing once. */
-.grid-2, .grid-3{gap:18px}
 .section .grid-2 + .grid-2,
 .section .grid-2 + .grid-3,
 .section .grid-3 + .grid-2,
@@ -399,64 +602,50 @@ textarea{min-height:120px; resize:vertical}
 .section .grid-3 + .note{margin-top:22px}
 .section .note + .section-title,
 .section .grid-2 + .section-title,
-.section .grid-3 + .section-title{margin-top:44px}
-
-
-.lead{font-size:15.5px; line-height:1.65}
-
-/* Larger hero headline, and a tighter ramp down at narrow widths. */
-h1{font-size:40px; line-height:1.08; letter-spacing:-1px}
+.section .grid-3 + .section-title{margin-top:56px}
 
 @media (max-width: 640px){
-  h1{font-size:29px; letter-spacing:-.6px}
-  .section-title h1{font-size:26px}
-  .section-title h2{font-size:22px}
-  .section{padding:48px 0}
-  .section.compact{padding:34px 0}
-  .card{padding:18px}
-  .hero-body{padding:20px}
-}
-
-/* --- Hero: message first, artwork second ----------------------------------
-   The banner used to sit above the headline and repeat the branding already in
-   the header, pushing the value proposition below the fold on mobile. */
-.hero-card{display:flex; flex-direction:column}
-.hero-card{background:radial-gradient(650px 330px at 95% 0%, rgba(124,240,215,.11), transparent 70%), var(--surface)}
-.hero-body{padding:48px; order:1}
-.hero-body h1{max-width:24ch}
-.hero-body .lead{max-width:67ch}
-.hero-banner{order:2; max-height:190px; overflow:hidden; border-bottom:none; border-top:1px solid rgba(255,255,255,.10)}
-.hero-banner img{width:100%; height:190px; object-fit:cover; object-position:center}
-
-/* Primary action needs to clearly outrank the secondary one. */
-.btn.primary{
-  background: linear-gradient(135deg, rgba(124,240,215,.30), rgba(111,177,255,.30));
-  border-color: rgba(124,240,215,.45);
-  color:#eafffb;
-  font-weight:600;
-  box-shadow: 0 0 0 1px rgba(124,240,215,.12), 0 8px 24px rgba(124,240,215,.16);
-}
-.btn.primary:hover{
-  background: linear-gradient(135deg, rgba(124,240,215,.40), rgba(111,177,255,.38));
-  box-shadow: 0 0 0 1px rgba(124,240,215,.2), 0 10px 30px rgba(124,240,215,.24);
+  .container{padding:0 16px}
+  .section{padding:52px 0}
+  .section.compact{padding:38px 0}
+  .card{padding:20px}
+  .hero{padding:36px 0 12px}
+  .hero-body{padding:28px 22px 26px}
+  .lead{font-size:15.5px}
+  .hero-facts{grid-template-columns:1fr; margin-top:28px}
+  .hero-facts > div, .hero-facts > div + div{padding:14px 0; border-left:none}
+  .hero-facts > div + div{border-top:1px solid var(--line-soft)}
+  .hero-facts > div:last-child{padding-bottom:0}
+  .cta{padding:32px 20px}
+  .kicker{font-size:10.5px; letter-spacing:.03em; gap:7px; padding:5px 9px}
 }
 
 /* --- Featured policy demo -------------------------------------------------- */
 .demo{display:grid; grid-template-columns: 1.15fr .85fr; gap:18px; align-items:start}
 .demo-code{
   border-radius:var(--radius); border:1px solid var(--line);
-  background:#0a1120; box-shadow:var(--card-shadow); overflow:hidden;
+  background:var(--code-bg); box-shadow:var(--card-shadow); overflow:hidden;
 }
 .demo-head{
   display:flex; align-items:center; justify-content:space-between; gap:10px;
-  padding:12px 16px; border-bottom:1px solid var(--line-soft);
+  padding:11px 16px; border-bottom:1px solid var(--line-soft);
   background:var(--surface);
 }
-.demo-file{font-size:13px; color:var(--text-3); font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
-.demo-code pre{margin:0; padding:16px 18px; overflow-x:auto}
+/* Window controls, drawn in CSS so the header reads as an editor pane. */
+.demo-file{display:inline-flex; align-items:center; gap:14px; font-size:12.5px; color:var(--text-3); font-family:var(--font-mono)}
+.demo-file::before{
+  content:"";
+  flex:none;
+  width:8px; height:8px; border-radius:50%;
+  background:#3a4558;
+  box-shadow:14px 0 0 #3a4558, 28px 0 0 #3a4558;
+  margin-right:28px;
+}
+.demo-code pre{margin:0; padding:18px 20px; overflow-x:auto}
 .demo-code code, .cmd code{
-  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  font-size:12.5px; line-height:1.7; color:rgba(231,237,247,.9); white-space:pre;
+  font-family:var(--font-mono);
+  font-size:12.75px; line-height:1.75; color:#d5deeb; white-space:pre;
+  font-variant-ligatures:none;
 }
 .demo-side{
   border-radius:var(--radius); border:1px solid var(--line);
@@ -464,10 +653,21 @@ h1{font-size:40px; line-height:1.08; letter-spacing:-1px}
   padding:var(--card-pad);
 }
 .demo-side h3{margin:0 0 10px; font-size:16px}
-.demo-side .check li strong{color:rgba(231,237,247,.95); font-weight:600}
+.demo-side .meta{color:var(--text-3); font-size:13.5px; line-height:1.65}
+.demo-side p.meta{margin-bottom:0}
+.demo-side .check li strong{
+  color:var(--text);
+  font-family:var(--font-mono);
+  font-size:12.5px;
+  font-weight:500;
+  padding:1px 6px;
+  border-radius:4px;
+  background:var(--surface-2);
+  border:1px solid var(--line);
+}
 .cmd{
-  margin:6px 0 0; padding:12px 14px; overflow-x:auto;
-  border-radius:12px; border:1px solid var(--line); background:#0a1120;
+  margin:8px 0 0; padding:13px 15px; overflow-x:auto;
+  border-radius:var(--radius-sm); border:1px solid var(--line); background:var(--code-bg);
 }
 
 /* --- Label / value rows ----------------------------------------------------
@@ -483,12 +683,13 @@ h1{font-size:40px; line-height:1.08; letter-spacing:-1px}
 }
 .spec dt{
   grid-column:1;
-  color:var(--accent2);
-  font-size:12px;
-  font-weight:600;
+  color:var(--text-3);
+  font-family:var(--font-mono);
+  font-size:11px;
+  font-weight:500;
   text-transform:uppercase;
   letter-spacing:.07em;
-  line-height:1.5;
+  line-height:1.6;
   padding:var(--row-gap) 12px var(--row-gap) 0;
   border-top:1px solid var(--line-soft);
 }
@@ -511,24 +712,20 @@ h1{font-size:40px; line-height:1.08; letter-spacing:-1px}
   border-top:1px solid var(--line-soft);
   font-size:13px;
 }
+.tool-card .spec{margin-bottom:18px}
 .tool-foot .link{margin-left:auto; text-decoration:none; border-bottom:1px solid transparent}
 .tool-foot .link:hover{border-bottom-color:currentColor}
-.tag{
-  font-size:12px; padding:5px 10px; border-radius:999px;
-  border:1px solid var(--line); background:var(--surface-2);
-  color:var(--text-2);
-}
 
 /* --- Bio block ------------------------------------------------------------- */
-.bio{display:grid; grid-template-columns:1.4fr .6fr; gap:20px; align-items:start}
-.bio-text h2{margin:0 0 12px; font-size:25px; letter-spacing:-.4px}
-.bio-text p{margin:0 0 12px; color:var(--text-2); font-size:14.5px; line-height:1.7; max-width:66ch}
+.bio{display:grid; grid-template-columns:1.4fr .6fr; gap:24px; align-items:start}
+.bio-text h2{margin:0 0 14px; font-size:clamp(1.4rem, 1.2rem + .8vw, 1.75rem); letter-spacing:-.025em}
+.bio-text p{margin:0 0 12px; color:var(--text-2); font-size:15px; line-height:1.7; max-width:64ch}
 .bio-facts{display:grid; gap:12px}
 .bio-facts .box{
-  border:1px solid var(--line); border-radius:14px; padding:16px;
+  border:1px solid var(--line); border-radius:var(--radius); padding:18px;
   background:var(--surface);
 }
-.bio-facts .box strong{display:block; font-size:16px; margin-bottom:4px}
+.bio-facts .box strong{display:block; font-size:15px; margin-bottom:4px}
 .bio-facts .box small{color:var(--text-3); font-size:13px; line-height:1.55; display:block}
 
 @media (max-width: 980px){
@@ -536,30 +733,25 @@ h1{font-size:40px; line-height:1.08; letter-spacing:-1px}
   .bio{grid-template-columns:1fr}
 }
 @media (max-width: 640px){
-  .hero-body{padding:22px}
   .hero-banner, .hero-banner img{max-height:130px; height:130px}
 }
-
-/* Keep long-form policies readable and the contact form at a useful line length. */
-.prose-page .section > .container{max-width:860px}
-.contact-card{max-width:760px}
-.field-hint{color:var(--text-3);font-size:12px;line-height:1.5}
-
-/* A compact index makes the long Resources page navigable at phone widths. */
-.resource-nav{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.resource-nav span{width:100%;color:var(--text-3);font-size:12px;text-transform:uppercase;letter-spacing:.09em;font-weight:700}
-.resource-nav a{padding:6px 11px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--text-2);font-size:13px}
-.resource-nav a:hover{border-color:var(--line-strong);background:var(--surface-hover);color:var(--text)}
-.resource-nav + .section-title,.section-title[id]{scroll-margin-top:95px}
 /* Below this the logo, wordmark and menu button start crowding each other. */
 @media (max-width: 420px){
   .brand-name small{display:none}
   .brand{min-width:0}
 }
 
-.btn.ghost{background:transparent; border-color:rgba(255,255,255,.16)}
-.btn.ghost:hover{background:rgba(255,255,255,.05)}
-@media (max-width: 1100px){ .nav-cta .ghost{display:none} }
+/* Keep long-form policies readable and the contact form at a useful line length. */
+.prose-page .section > .container{max-width:860px}
+.contact-card{max-width:760px}
+.field-hint{color:var(--text-3);font-size:12.5px;line-height:1.5}
+
+/* A compact index makes the long Resources page navigable at phone widths. */
+.resource-nav{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.resource-nav span{width:100%;color:var(--text-3);font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:.09em;font-weight:500}
+.resource-nav a{padding:6px 11px;border:1px solid var(--line);border-radius:var(--radius-sm);background:var(--surface);color:var(--text-2);font-size:13px;transition:border-color .15s ease, color .15s ease}
+.resource-nav a:hover{border-color:var(--line-accent);background:var(--surface-hover);color:var(--text)}
+.resource-nav + .section-title,.section-title[id]{scroll-margin-top:95px}
 
 /* Grid and flex children default to min-width:auto, so a wide <pre> or table
    refuses to shrink and pushes the page sideways. */
@@ -568,10 +760,11 @@ h1{font-size:40px; line-height:1.08; letter-spacing:-1px}
 .table-scroll{overflow-x:auto; -webkit-overflow-scrolling:touch; max-width:100%}
 .table-scroll .table{min-width:520px}
 
-.check code{
-  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  font-size:.92em; padding:2px 6px; border-radius:5px;
+.check code, .card p code, .section-title p code, .note code{
+  font-family:var(--font-mono);
+  font-size:.86em; padding:1px 6px; border-radius:5px;
   background:var(--surface-2); border:1px solid var(--line);
+  color:var(--text);
 }
 
 /* A single-column grid sizes its track to the widest child, and a <textarea> has a
@@ -593,7 +786,7 @@ h1{font-size:40px; line-height:1.08; letter-spacing:-1px}
 }
 
 /* ---------------------------------------------------------------------------
-   Card system: interactive states and responsive behaviour.
+   Card system: interactive states and responsive behavior.
    --------------------------------------------------------------------------- */
 
 /* Links inside cards need a focus ring that reads against the card surface,
@@ -627,7 +820,8 @@ h1{font-size:40px; line-height:1.08; letter-spacing:-1px}
 
   /* Keep the link right-aligned; let it wrap only if the tags genuinely fill the row. */
   .tool-foot{gap:8px 10px}
-  :root{--card-pad:18px; --row-gap:12px}
+  :root{--card-pad:20px; --row-gap:12px}
+  .footer-grid{grid-template-columns:1fr}
 }
 
 /* ---------------------------------------------------------------------------
@@ -644,13 +838,15 @@ h1{font-size:40px; line-height:1.08; letter-spacing:-1px}
   border:none;
   border-radius:0;
   background:none;
+  text-transform:none;
+  letter-spacing:0;
 }
 
 /* Skip link: hidden until focused, then pinned above the sticky header so a
    keyboard user is not forced through seven nav items on every page. */
 .skip-link{
   position:absolute; left:12px; top:-60px; z-index:100;
-  padding:10px 16px; border-radius:0 0 12px 12px;
+  padding:10px 16px; border-radius:0 0 var(--radius-sm) var(--radius-sm);
   background:var(--surface-2); border:1px solid var(--line-strong);
   color:var(--text); font-size:14px;
   transition:top .15s ease;

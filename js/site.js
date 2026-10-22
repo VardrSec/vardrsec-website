@@ -35,7 +35,7 @@
         if (res.ok) {
           form.reset();
           status.className = "form-status ok";
-          status.textContent = "Message sent. I'll reply within 1–2 business days.";
+          status.textContent = "Message sent.";
         } else {
           status.className = "form-status bad";
           status.textContent = data.error || "Something went wrong. Email contact@vardrsec.com instead.";

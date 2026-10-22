@@ -16,7 +16,7 @@
   <meta property="og:description" content="Independent research from SSH and API decoys, plus open-source tools for testing access control." />
   <meta property="og:image" content="https://vardrsec.com/assets/orgbanner.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <link rel="stylesheet" href="css/styles.css?v=b5901ccb" />
+  <link rel="stylesheet" href="css/styles.css?v=07f654ad" />
 </head>
 <body>
 <!-- @partial:header -->
@@ -67,7 +67,7 @@
         <a href="observatory.html">Threat Observatory</a>
         <a href="blog.html">Blog</a>
         <a href="resources.html">Resources</a>
-        <a class="btn primary" href="contact.html" style="margin-top:8px">Contact</a>
+        <a class="btn primary" href="contact.html">Contact</a>
       </div>
     </div>
   </header>
@@ -89,6 +89,11 @@
               <a class="btn primary" href="observatory.html">Explore the Observatory</a>
               <a class="btn" href="tools.html">Browse the tools</a>
             </div>
+            <dl class="hero-facts">
+              <div><dt>Sensors</dt><dd>SSH and API decoys</dd></div>
+              <div><dt>Publishing</dt><dd>Delayed, sanitized snapshots</dd></div>
+              <div><dt>Licenses</dt><dd>Apache-2.0 · MIT · AGPL-3.0</dd></div>
+            </dl>
           </div>
         </div>
       </div>
@@ -117,8 +122,8 @@
     <section class="section compact" id="policy">
       <div class="container">
         <div class="section-title">
-          <h2>What "write the rules down" looks like</h2>
-          <p>A real VardrGate policy. You state how an endpoint should treat each caller; VardrGate runs the request as every one of them and reports where behavior disagrees, with request and response evidence.</p>
+          <h2>Authorization as a declarative policy</h2>
+          <p>A VardrGate policy file declares the expected outcome for each caller. VardrGate replays the request as every identity and reports each divergence from the policy, with request and response evidence.</p>
         </div>
 
         <div class="demo">
@@ -149,7 +154,7 @@ response:
           </div>
 
           <div class="demo-side">
-            <h3>What it catches</h3>
+            <h3>Finding types</h3>
             <ul class="check">
               <li><strong>potential_bola</strong> — a non-owner reached an identified object</li>
               <li><strong>cross_tenant_access</strong> — an identity from another tenant got through</li>
@@ -176,7 +181,7 @@ response:
       <div class="container">
         <div class="section-title">
           <h2>Open-source tools</h2>
-          <p>Built and maintained in the open. Read the code, run it, tell me what's wrong with it.</p>
+          <p>Source, issues, and releases are public on GitHub. Bug reports and pull requests are welcome.</p>
         </div>
         <div class="grid-3">
           <div class="card tool-card">
@@ -184,7 +189,7 @@ response:
             <dl class="spec">
               <dt>Purpose</dt><dd>Verifies API authorization against a declared policy</dd>
               <dt>How it works</dt><dd>Replays one request as every identity and compares the result to the policy</dd>
-              <dt>Why it matters</dt><dd>Can flag authorization regressions in a configured CI run</dd>
+              <dt>Outcome</dt><dd>Can flag authorization regressions in a configured CI run</dd>
             </dl>
             <div class="tool-foot">
               <span class="tag">Go</span><span class="tag">Apache-2.0</span>
@@ -197,7 +202,7 @@ response:
             <dl class="spec">
               <dt>Purpose</dt><dd>Runs security engagements: scope, authorization and findings</dd>
               <dt>How it works</dt><dd>Multi-tenant app that starts scans and authorization tests through VardrRunner and VardrGate</dd>
-              <dt>Why it matters</dt><dd>Keeps scope and evidence tied to an engagement</dd>
+              <dt>Outcome</dt><dd>Keeps scope and evidence tied to an engagement</dd>
             </dl>
             <div class="tool-foot">
               <span class="tag">Python</span><span class="tag">AGPL-3.0</span>
@@ -210,7 +215,7 @@ response:
             <dl class="spec">
               <dt>Purpose</dt><dd>Executes security workflows locally</dd>
               <dt>How it works</dt><dd>Claims queued jobs, runs them locally, and uploads results</dd>
-              <dt>Why it matters</dt><dd>Runs tools from the operator's machine while the backend tracks results</dd>
+              <dt>Outcome</dt><dd>Runs tools from the operator's machine while the backend tracks results</dd>
             </dl>
             <div class="tool-foot">
               <span class="tag">Python</span><span class="tag">MIT</span>
@@ -219,7 +224,7 @@ response:
           </div>
         </div>
         <p class="mt-4">
-          <a class="link" href="tools.html">All tools, including what's still in development →</a>
+          <a class="link" href="tools.html">All tools, including prototypes →</a>
         </p>
       </div>
     </section>
@@ -229,14 +234,14 @@ response:
       <div class="container">
         <div class="bio">
           <div class="bio-text">
-            <h2>Who's behind this</h2>
+            <h2>Maintainer</h2>
             <p>
               VardrSec is built by Jorge Aquino, a software engineer focused on broken access control.
             </p>
             <p>
               Security testing requires written authorization and a defined scope.
             </p>
-            <a class="link" href="about.html">More about me →</a>
+            <a class="link" href="about.html">Background and working principles →</a>
           </div>
           <div class="bio-facts">
             <div class="box">
@@ -255,14 +260,14 @@ response:
     <!-- CTA Section -->
     <section class="section compact">
       <div class="container">
-        <div class="card" style="text-align: center; padding: 32px;">
+        <div class="card cta">
           <h3>Questions about the tools?</h3>
-          <p class="mt-3" style="max-width: 700px; margin-left: auto; margin-right: auto">
+          <p class="mt-3">
             Send a message, or open an issue on GitHub.
           </p>
-          <div class="mt-5">
-            <a class="btn primary" href="contact.html" style="display: inline-flex; margin-right: 10px;">Get in touch</a>
-            <a class="btn" href="https://github.com/VardrSec" rel="noopener" style="display: inline-flex;">GitHub</a>
+          <div class="cta-actions">
+            <a class="btn primary" href="contact.html">Get in touch</a>
+            <a class="btn" href="https://github.com/VardrSec" rel="noopener">GitHub</a>
           </div>
         </div>
       </div>
@@ -300,7 +305,7 @@ response:
         <small>© <span id="year"></span> VardrSec. All rights reserved.</small>
       </div>
     </div>
-    <script src="js/site.js?v=8fbf366c"></script>
+    <script src="js/site.js?v=b479d60a"></script>
   </footer>
   <!-- @endpartial -->
 </body>

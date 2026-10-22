@@ -14,7 +14,7 @@
   <meta property="og:description" content="Open-source security tooling built by VardrSec: API authorization testing, engagement tracking, and local scan automation." />
   <meta property="og:image" content="https://vardrsec.com/assets/orgbanner.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <link rel="stylesheet" href="css/styles.css?v=b5901ccb" />
+  <link rel="stylesheet" href="css/styles.css?v=07f654ad" />
 </head>
 <body>
 <!-- @partial:header -->
@@ -65,7 +65,7 @@
         <a href="observatory.html">Threat Observatory</a>
         <a href="blog.html">Blog</a>
         <a href="resources.html">Resources</a>
-        <a class="btn primary" href="contact.html" style="margin-top:8px">Contact</a>
+        <a class="btn primary" href="contact.html">Contact</a>
       </div>
     </div>
   </header>
@@ -80,9 +80,9 @@
         </div>
 
         <div class="note mb-7">
-          <strong>A common thread:</strong> broken access control is difficult to test automatically
-          because scanners cannot infer the permissions an application intended to enforce. These tools make
-          those rules explicit, repeatable, and cheaper to verify.
+          <strong>Design premise:</strong> scanners cannot infer the permissions an application intended to
+          enforce, so broken access control is difficult to test automatically. These tools make those rules
+          explicit, repeatable, and cheaper to verify.
         </div>
 
         <!-- Published -->
@@ -118,8 +118,8 @@
             </div>
             <h3>VardrMap</h3>
             <p class="mt-4">
-              A multi-tenant engagement platform that tracks scope, authorization and findings, so you
-              always know what you're allowed to test and what you've already tested.
+              A multi-tenant engagement platform that tracks scope, authorization and findings, so the
+              authorized scope and the work already done are recorded in one place.
             </p>
             <p class="mt-3">
               It starts scan pipelines and API authorization tests through VardrRunner and VardrGate, and
@@ -156,7 +156,7 @@
           <p>Active experiments and design work. These projects are not yet supported for production use.</p>
         </div>
 
-        <div class="grid-3 mb-6">
+        <div class="grid-2 mb-6">
           <div class="card">
             <div class="kicker mb-3">
               <span class="badge">Python</span>
@@ -181,29 +181,18 @@
               for a target allowlist; that restriction still needs implementation and validation.
             </p>
           </div>
-
-          <div class="card">
-            <div class="kicker mb-3">
-              <span class="badge warn">Go</span>
-            </div>
-            <h3>VardrVault</h3>
-            <p class="mt-3">
-              A secrets manager with token auth, encrypted storage, and audit logging. Built mostly to
-              learn how a secrets manager works.
-            </p>
-          </div>
         </div>
 
-        <div class="card mt-9" style="text-align: center; padding: 32px">
-          <h3>Found a bug? Have a better idea?</h3>
-          <p class="mt-3" style="max-width: 700px; margin-left: auto; margin-right: auto">
-            Issues and pull requests are welcome on any of the published repositories. If you've used one
-            of the tools on real work and it got in your way, I'd like to hear about it. Please report
-            security issues in the tools privately first.
+        <div class="card cta mt-9">
+          <h3>Issues and contributions</h3>
+          <p class="mt-3">
+            Bug reports, feature requests, and pull requests are accepted on every published repository.
+            Reports from use on real systems are the most useful. Report security vulnerabilities in the
+            tools privately, through the repository's security policy where one exists or the contact page, not in a public issue.
           </p>
-          <div class="mt-5">
-            <a class="btn primary" href="contact.html" style="display: inline-flex; margin-right: 10px;">Get in touch</a>
-            <a class="btn" href="https://github.com/VardrSec" rel="noopener" style="display: inline-flex;">Browse the org</a>
+          <div class="cta-actions">
+            <a class="btn primary" href="contact.html">Get in touch</a>
+            <a class="btn" href="https://github.com/VardrSec" rel="noopener">Browse the org</a>
           </div>
         </div>
 
@@ -242,7 +231,7 @@
         <small>© <span id="year"></span> VardrSec. All rights reserved.</small>
       </div>
     </div>
-    <script src="js/site.js?v=8fbf366c"></script>
+    <script src="js/site.js?v=b479d60a"></script>
   </footer>
   <!-- @endpartial -->
 </body>

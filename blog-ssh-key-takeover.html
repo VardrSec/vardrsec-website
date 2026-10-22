@@ -8,7 +8,7 @@
 <meta property="og:type" content="article" /><meta property="og:title" content="How SSH bots try to replace authorized_keys" />
 <meta property="og:description" content="Two SSH command patterns, what each step does, who else has seen them, and how to check your own servers." />
 <meta property="og:url" content="https://vardrsec.com/blog-ssh-key-takeover" /><meta property="og:image" content="https://vardrsec.com/assets/orgbanner.png" />
-<link rel="stylesheet" href="css/styles.css?v=b5901ccb" /><link rel="stylesheet" href="css/research.css?v=ccf7b611" />
+<link rel="stylesheet" href="css/styles.css?v=07f654ad" /><link rel="stylesheet" href="css/research.css?v=b235f9c3" />
 </head><body>
 <!-- @partial:header -->
   <a class="skip-link" href="#main">Skip to content</a>
@@ -58,7 +58,7 @@
         <a href="observatory.html">Threat Observatory</a>
         <a href="blog.html">Blog</a>
         <a href="resources.html">Resources</a>
-        <a class="btn primary" href="contact.html" style="margin-top:8px">Contact</a>
+        <a class="btn primary" href="contact.html">Contact</a>
       </div>
     </div>
   </header>
@@ -81,13 +81,13 @@
 </tbody></table></div>
 <p>That averages about 47 sessions per source address. The volume is consistent with automated activity, but a source address does not identify an individual bot or operator.</p>
 
-<h2>The two commands that keep coming back</h2>
+<h2>Recurring command patterns</h2>
 <p>Over the seven days from 8 to 15 October, two multi-step patterns came up again and again, almost the same number of times:</p>
 <pre><code>cd ~ ; chattr -ia .ssh ; [EXECUTABLE] -ia .ssh</code></pre>
 <p class="research-note">Seen 150 times in seven days.</p>
 <pre><code>cd ~ &amp;&amp; rm -rf .ssh &amp;&amp; mkdir .ssh &amp;&amp; echo [SSH_KEY] &gt;&gt; .ssh/authorized_keys &amp;&amp; chmod -R go= ~/.ssh &amp;&amp; cd ~</code></pre>
 <p class="research-note">Seen 146 times in seven days.</p>
-<p>My publishing filter replaces anything that might be sensitive or unrecognized with a placeholder like <code>[SSH_KEY]</code>, which is why you see those brackets. The two counts are nearly equal, and as the outside reports below show, other sensors record these commands back to back. My read is that they are two halves of one routine.</p>
+<p>My publishing filter replaces anything that might be sensitive or unrecognized with a placeholder like <code>[SSH_KEY]</code>, which is why you see those brackets. The two counts are nearly equal, and as the outside reports below show, other sensors record these commands back to back. The likely interpretation is that they are two halves of one routine.</p>
 
 <h2>What each step does</h2>
 <ol>
@@ -99,11 +99,11 @@
 </ol>
 <p>If this sequence succeeds on a real host, a guessed password can become key access that survives a password change. Rotating the password alone would not remove the planted key. MITRE ATT&amp;CK lists this as <a class="link" href="https://attack.mitre.org/techniques/T1098/004/" rel="noopener">T1098.004, SSH Authorized Keys</a>.</p>
 
-<h2>I'm not the only one seeing it</h2>
+<h2>Corroborating reports</h2>
 <p>Other honeypot operators have recorded this same chain, step for step, for years. In public write-ups the planted key ends with the comment <code>mdrfckr</code>, which is how the campaign got its name (<a class="link" href="https://blog.port22.dk/mdrfckrs-part-two/" rel="noopener">port22, 2023</a>; <a class="link" href="https://dev.to/demodex/mdrfckr-the-outlawdota-botnet-changes-its-ssh-fingerprint-again-c89" rel="noopener">DEV Community, 2026</a>). Some researchers link it to the Outlaw (also called Dota) cryptomining group. Others say the bot is separate from that group. I'm not attributing it to anyone.</p>
-<p>One limit is my own doing. I redact keys before publishing, so the public data on this page can't show whether my sensor received that exact key. My claim is that the commands match the published reports, nothing more.</p>
+<p>One limitation is self-imposed. Keys are redacted before publishing, so the public data on this page cannot show whether this sensor received that exact key. The claim here is limited to the commands matching the published reports.</p>
 
-<h2>Check your own servers</h2>
+<h2>Detection and hardening</h2>
 <ul>
 <li>Read every <code>authorized_keys</code> file, including root's, and remove any key you can't account for. A quick first check: <code>grep -r mdrfckr /root/.ssh /home/*/.ssh</code>.</li>
 <li>Turn off password logins for SSH with <code>PasswordAuthentication no</code>, and use <code>PermitRootLogin no</code> (or <code>prohibit-password</code>). This routine only works after a password has been guessed.</li>
@@ -153,7 +153,7 @@
         <small>© <span id="year"></span> VardrSec. All rights reserved.</small>
       </div>
     </div>
-    <script src="js/site.js?v=8fbf366c"></script>
+    <script src="js/site.js?v=b479d60a"></script>
   </footer>
   <!-- @endpartial -->
 </body></html>
