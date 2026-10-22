@@ -44,8 +44,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   list; redundant eyebrow removed. API sensor section unchanged.
 - Blog: teaser caveat and the empty Malware analysis track removed; tracks in two columns,
   aligned with the post card.
-- About: How I work and Elsewhere side by side; repeated VardrGate rationale, the
-  VardrForge bullet and the duplicate response-time line removed.
+- About: How I work section removed; repeated VardrGate rationale and the VardrForge
+  bullet removed.
 
 - Visual refresh in `css/styles.css`: darker base with a faded grid backdrop, tighter
   radii, monospace labels for eyebrows, badges, tags and spec rows, a solid primary button,
