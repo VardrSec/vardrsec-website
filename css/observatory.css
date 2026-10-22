@@ -63,10 +63,34 @@
 .obs-months{margin-top:13px}
 .obs-months summary{cursor:pointer;font-weight:600}
 .obs-months caption{text-align:left;padding-bottom:12px}
-.obs-recent-title{font-size:1.08rem;margin:0 0 15px}
 @media(max-width:880px){.obs-lifetime-stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .obs-api{margin-top:32px;border-top:1px solid var(--line);padding-top:30px}
 .obs-api>.obs-panel-heading{margin-bottom:8px}
 .obs-api .obs-panel-heading h3{font-size:1rem;margin:0}
 .obs-api>.obs-disclaimer{margin-bottom:18px}
 .obs-api-clients{margin-top:13px}
+
+/* Observatory hierarchy and compact research states. */
+.obs-jump{display:flex;gap:8px;overflow-x:auto;padding:2px 0 16px;margin:0 0 20px;scrollbar-width:thin}
+.obs-jump a{flex:none;padding:8px 12px;border:1px solid var(--line);border-radius:999px;color:var(--text-2);font-size:.8rem;text-decoration:none}
+.obs-jump a:hover,.obs-jump a:focus-visible{color:var(--text);border-color:var(--accent2)}
+.obs-section-heading{margin-bottom:15px}
+.obs-section-heading h2{font-size:1.25rem}
+.obs-recent,.obs-history,.obs-api,#obs-commands,#obs-method{scroll-margin-top:24px}
+.obs-recent-stats{grid-template-columns:repeat(3,minmax(0,1fr))}
+.obs-snapshot-time{font-size:.76rem;color:var(--text-3);margin:12px 0 0}
+.obs-highlight{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:16px 20px;margin-top:16px;border-color:rgba(124,240,215,.34)}
+.obs-highlight[hidden],.obs-api-pending[hidden],.obs-api-results[hidden]{display:none}
+.obs-highlight>div{display:flex;flex-direction:column;gap:4px}
+.obs-highlight .obs-eyebrow{margin:0;font-size:.68rem}
+.obs-highlight strong{font-size:1rem}
+.obs-highlight>div:last-child{display:block;font-size:.79rem;color:var(--text-2)}
+.obs-highlight a{color:var(--accent2)}
+.obs-table details summary{cursor:pointer;color:var(--text);font-weight:600}
+.obs-table details code{display:block;margin-top:10px;padding:10px;border-radius:8px;background:rgba(255,255,255,.04);font-weight:400;white-space:pre-wrap;overflow-wrap:anywhere}
+.obs-copy-hash{margin-top:8px;border:1px solid var(--line);border-radius:7px;background:transparent;color:var(--text-2);padding:6px 9px;cursor:pointer;font:inherit;font-size:.75rem}
+.obs-copy-hash:hover,.obs-copy-hash:focus-visible{color:var(--text);border-color:var(--accent2)}
+.obs-history{border-top:1px solid var(--line);padding-top:30px}
+.obs-api-pending{padding:20px;color:var(--text-2);font-size:.86rem}
+@media(max-width:880px){.obs-recent-stats{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:600px){.obs-jump{flex-wrap:wrap;overflow:visible}.obs-recent-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.obs-recent-stats .obs-stat:last-child{grid-column:span 2}.obs-highlight{align-items:flex-start;flex-direction:column}}

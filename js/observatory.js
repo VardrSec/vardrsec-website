@@ -8,6 +8,13 @@ import { validHistory } from '../lib/observatory-history.mjs?v=1';
   const fmt = (n) => Number(n).toLocaleString("en-US");
   const isCount = (n) => Number.isSafeInteger(n) && n >= 0 && n <= 1e9;
   const text = (id, value) => { const el = byId(id); if (el) el.textContent = value; };
+  function techniqueLabel(template) {
+    if (template.includes('.ssh') || template.includes('[SSH_KEY]')) return 'SSH key or configuration change';
+    if (/\b(?:curl|wget|tftp)\b/.test(template)) return 'Payload retrieval attempt';
+    if (/\b(?:crontab|systemctl|service|nohup)\b|\/etc\/cron|rc\.local/.test(template)) return 'Persistence or service change';
+    if (/\b(?:chmod|chown|chattr|rm|mv|install)\b/.test(template)) return 'File or system modification';
+    return 'Multi-step command sequence';
+  }
   const ns = "http://www.w3.org/2000/svg";
   function elem(tag, attrs = {}, value) {
     const node = document.createElementNS(ns, tag);
@@ -65,17 +72,30 @@ import { validHistory } from '../lib/observatory-history.mjs?v=1';
       td.textContent=mode==="artifacts"?"No reviewed artifacts published yet":dataVersion>=3
         ?"No supported multi-step command patterns in this seven-day reporting period."
         :"Command details are temporarily withheld for privacy review. Activity counts remain available.";
-      tr.append(td);tbody.append(tr);return;
+      tr.append(td);tbody.append(tr);return [];
     }
+    const rendered=[];
     for(const item of data.slice(0,10)){
       const tr=document.createElement("tr"),first=document.createElement("td");
       const validHash=typeof item.sha256==="string" && /^[a-f0-9]{64}$/.test(item.sha256);
       if(mode==="artifacts"){
         if(!validHash || !isCount(item.count))continue;
-        const code=document.createElement("code");code.textContent=item.sha256;first.append(code);
+        const details=document.createElement('details'),summary=document.createElement('summary');
+        summary.textContent=item.sha256.slice(0,8)+'…'+item.sha256.slice(-6);
+        const code=document.createElement('code');code.textContent=item.sha256;
+        const button=document.createElement('button');button.type='button';button.className='obs-copy-hash';
+        button.textContent='Copy full hash';button.setAttribute('aria-label','Copy full SHA-256 hash');
+        button.addEventListener('click',async()=>{
+          try { await navigator.clipboard.writeText(item.sha256); button.textContent='Copied'; }
+          catch { button.textContent='Select and copy the full hash above'; }
+        });
+        details.append(summary,code,button);first.append(details);
       } else {
         if(dataVersion<3 || !commandPolicy?.safeTemplate(item.template) || !isCount(item.count) || item.count===0)continue;
-        const code=document.createElement("code");code.textContent=item.template;first.append(code);
+        const details=document.createElement('details'),summary=document.createElement('summary');
+        summary.textContent=techniqueLabel(item.template);
+        const code=document.createElement('code');code.textContent=item.template;
+        details.append(summary,code);first.append(details);
       }
       const count=document.createElement("td");count.textContent=fmt(item.count);
       tr.append(first,count);
@@ -86,6 +106,17 @@ import { validHistory } from '../lib/observatory-history.mjs?v=1';
         td.append(a);tr.append(td);
       }
       tbody.append(tr);
+      rendered.push(item);
+    }
+    return rendered;
+  }
+  function renderHighlight(commands) {
+    const highlight=byId('obs-highlight');
+    const featured=commands.reduce((best,item)=>!best || item.count>best.count ? item : best,null);
+    highlight.hidden=!featured;
+    if (featured) {
+      text('obs-highlight-label',techniqueLabel(featured.template));
+      text('obs-highlight-count',fmt(featured.count));
     }
   }
   function renderHistory(value) {
@@ -123,20 +154,21 @@ import { validHistory } from '../lib/observatory-history.mjs?v=1';
       text("obs-sessions",fmt(t.sessions));
       text("obs-sources",fmt(t.unique_sources));
       text("obs-auth",fmt(t.auth_events));
-      text("obs-auth-detail",fmt(t.auth_events));
       text("obs-commands-count",fmt(t.command_events));
       text("obs-files-count",fmt(t.file_events));
       const at=new Date(data.published_at);
       text("obs-updated",at.toLocaleString(undefined,{month:"short",day:"numeric",hour:"2-digit",minute:"2-digit",timeZoneName:"short"}));
+      byId('obs-updated').dateTime=at.toISOString();
       const age=Date.now()-at.getTime();
-      text("obs-status",age>20*60*1000?"Data delayed":"Up to date");
+      text("obs-status",age>20*60*1000?"Publisher delayed":"Snapshot current");
       const note=byId("obs-notice");
       if(age>20*60*1000){note.hidden=false;note.textContent="Latest data may be stale; the publisher has not updated recently.";}
       else note.hidden=true;
       renderHistory(data.version === 4 ? data.lifetime : null);
       drawChart(data.hourly);
       // v3 and v4 carry the independently validated fixed-vocabulary projection.
-      renderRows("obs-command-rows",data.version>=3?data.commands:[],"commands",data.version);
+      const commands=renderRows("obs-command-rows",data.version>=3?data.commands:[],"commands",data.version);
+      renderHighlight(commands);
       text('obs-command-window',data.version>=3?'Seven-day reporting period':'Privacy review');
       if(data.version>=3) text('obs-command-note',
         `Sanitized patterns observed ${data.command_window_start.slice(0,16).replace('T',' ')} to ${data.command_window_end.slice(0,16).replace('T',' ')} UTC (end exclusive). Counts combine observations of the same sanitized pattern. These are attempts in a simulated service, not proof of successful execution.`);
