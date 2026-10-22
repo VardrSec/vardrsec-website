@@ -12,3 +12,9 @@
 .research-table td:last-child{text-align:right;font-variant-numeric:tabular-nums}
 .research-links{display:flex;gap:12px;flex-wrap:wrap;margin:24px 0}
 .research-note{color:var(--text-3);font-size:.9rem}
+.research-index .research-intro{margin-bottom:30px}
+.research-index article.card{gap:12px;max-width:820px}
+.research-index article.card .btn{align-self:flex-start;margin-top:8px}
+.research-index article.card h3 .link{text-decoration:none}
+.research-index article.card h3 .link:hover{text-decoration:underline}
+.research-index article.card + .section-title{margin-top:48px}

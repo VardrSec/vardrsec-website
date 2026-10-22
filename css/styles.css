@@ -421,7 +421,10 @@ h1{font-size:40px; line-height:1.08; letter-spacing:-1px}
    The banner used to sit above the headline and repeat the branding already in
    the header, pushing the value proposition below the fold on mobile. */
 .hero-card{display:flex; flex-direction:column}
-.hero-body{padding:30px 30px 26px; order:1}
+.hero-card{background:radial-gradient(650px 330px at 95% 0%, rgba(124,240,215,.11), transparent 70%), var(--surface)}
+.hero-body{padding:48px; order:1}
+.hero-body h1{max-width:24ch}
+.hero-body .lead{max-width:67ch}
 .hero-banner{order:2; max-height:190px; overflow:hidden; border-bottom:none; border-top:1px solid rgba(255,255,255,.10)}
 .hero-banner img{width:100%; height:190px; object-fit:cover; object-position:center}
 
@@ -536,6 +539,18 @@ h1{font-size:40px; line-height:1.08; letter-spacing:-1px}
   .hero-body{padding:22px}
   .hero-banner, .hero-banner img{max-height:130px; height:130px}
 }
+
+/* Keep long-form policies readable and the contact form at a useful line length. */
+.prose-page .section > .container{max-width:860px}
+.contact-card{max-width:760px}
+.field-hint{color:var(--text-3);font-size:12px;line-height:1.5}
+
+/* A compact index makes the long Resources page navigable at phone widths. */
+.resource-nav{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.resource-nav span{width:100%;color:var(--text-3);font-size:12px;text-transform:uppercase;letter-spacing:.09em;font-weight:700}
+.resource-nav a{padding:6px 11px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--text-2);font-size:13px}
+.resource-nav a:hover{border-color:var(--line-strong);background:var(--surface-hover);color:var(--text)}
+.resource-nav + .section-title,.section-title[id]{scroll-margin-top:95px}
 /* Below this the logo, wordmark and menu button start crowding each other. */
 @media (max-width: 420px){
   .brand-name small{display:none}

@@ -14,7 +14,7 @@
   <meta property="og:description" content="Questions about the VardrSec tools, API authorization, or anything else on the site." />
   <meta property="og:image" content="https://vardrsec.com/assets/orgbanner.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <link rel="stylesheet" href="css/styles.css?v=4134f0e9" />
+  <link rel="stylesheet" href="css/styles.css?v=b5901ccb" />
 </head>
 <body>
   <!-- Top Nav -->
@@ -88,7 +88,7 @@
         </div>
 
         <!-- Form Card -->
-        <div class="card">
+        <div class="card contact-card">
           <h2 class="mb-4" style="margin-top: 0">Send a message</h2>
 
           <form class="form" id="contactForm" action="/api/contact" method="post">
@@ -100,6 +100,7 @@
             <div class="field">
               <label for="message">Message</label>
               <textarea id="message" name="message" placeholder="What are you working on, and what's the question?" required></textarea>
+              <small class="field-hint">A link to a repository or report helps. Please do not include passwords, keys, or other secrets.</small>
             </div>
 
             <!-- Honeypot: bots fill this, humans never see it. -->
@@ -112,33 +113,13 @@
               <div class="cf-turnstile" data-sitekey="0x4AAAAAAD_4mzi2PwO_QOdX" data-theme="dark"></div>
             </div>
 
-            <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
-              <button class="btn primary" type="submit">Send message</button>
-              <span class="badge warn">Security testing requires written authorization and defined scope</span>            </div>
+            <div><button class="btn primary" type="submit">Send message</button></div>
 
             <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
 
           </form>
         </div>
 
-        <!-- Optional: quick contact info -->
-        <div class="grid-2 mt-4">
-          <div class="card">
-            <h2>What to include</h2>
-            <p>
-              What you're working on and what you've already tried. A link to a repository, spec, or
-              report helps.
-            </p>
-          </div>
-
-          <div class="card">
-            <h2>What I can help with</h2>
-            <p>
-              Authorization and access control, API security, secure design review, and anything to do with the tools.
-            </p>
-            <div class="meta">Not sure if it's something I can help with? Ask anyway.</div>
-          </div>
-        </div>
       </div>
     </section>
   </main>
@@ -154,7 +135,7 @@
       <div class="footer-grid">
         <div>
           <h2 class="footer-h">VardrSec</h2>
-          <p>Security research and open-source tools, mostly about broken access control.</p>
+          <p>Independent decoy-sensor research and open-source security tools.</p>
           <p class="footer-contact">
             <a href="mailto:contact@vardrsec.com">contact@vardrsec.com</a><br/>
             <a href="https://github.com/VardrSec" rel="noopener">github.com/VardrSec</a>
@@ -165,7 +146,7 @@
           <a href="about.html">About</a>
           <a href="tools.html">Tools</a>
           <a href="observatory.html">Threat Observatory</a>
-          <a href="blog.html">Research Blog</a>
+          <a href="blog.html">Blog</a>
           <a href="resources.html">Resources</a>
         </div>
         <div class="links">
