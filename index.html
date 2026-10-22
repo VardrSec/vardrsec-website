@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>VardrSec | Security Research &amp; Open-Source Tools</title>
+  <title>VardrSec | Decoy-Sensor Research &amp; Access-Control Tools</title>
   <meta name="description" content="Independent research from SSH and API decoys, plus open-source tools for testing access control. Explore VardrSec's findings, methods, and code." />
   <link rel="canonical" href="https://vardrsec.com/" />
   <!-- AbuseIPDB domain ownership check (Account > Webmasters). Removing it can un-verify the domain. -->
@@ -12,11 +12,11 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="VardrSec" />
   <meta property="og:url" content="https://vardrsec.com/" />
-  <meta property="og:title" content="VardrSec | Security Research &amp; Open-Source Tools" />
+  <meta property="og:title" content="VardrSec | Decoy-Sensor Research &amp; Access-Control Tools" />
   <meta property="og:description" content="Independent research from SSH and API decoys, plus open-source tools for testing access control." />
   <meta property="og:image" content="https://vardrsec.com/assets/orgbanner.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <link rel="stylesheet" href="css/styles.css?v=07f654ad" />
+  <link rel="stylesheet" href="css/styles.css?v=b1737a4d" />
 </head>
 <body>
 <!-- @partial:header -->
@@ -79,11 +79,10 @@
       <div class="container">
         <div class="hero-card">
           <div class="hero-body">
-          <div class="kicker"><span class="dot"></span> Independent research · Open source</div>
-            <h1>Security research, with the evidence in view.</h1>
+            <h1>Decoy-sensor research and <span class="nowrap">open-source</span> <span class="nowrap">access-control</span> tools</h1>
             <p class="lead">
-              VardrSec studies activity seen by its SSH and API decoys and builds tools for testing access control.
-              Read the findings, examine the methods, and use the code.
+              VardrSec publishes what its SSH and API decoys record and builds tools for testing API
+              authorization. The findings, methods and code are public.
             </p>
             <div class="hero-actions">
               <a class="btn primary" href="observatory.html">Explore the Observatory</a>
@@ -92,7 +91,7 @@
             <dl class="hero-facts">
               <div><dt>Sensors</dt><dd>SSH and API decoys</dd></div>
               <div><dt>Publishing</dt><dd>Delayed, sanitized snapshots</dd></div>
-              <div><dt>Licenses</dt><dd>Apache-2.0 · MIT · AGPL-3.0</dd></div>
+              <div><dt>Code</dt><dd>Open source on GitHub</dd></div>
             </dl>
           </div>
         </div>
@@ -104,17 +103,16 @@
         <div class="section-title">
           <div class="kicker"><span class="dot"></span> Threat Observatory</div>
           <h2 id="observatory-preview-title">What the decoys record.</h2>
-          <p>Delayed, reviewed activity from SSH and API sensors. Public snapshots omit source IP addresses and credentials.</p>
+          <p>Public snapshots omit source IP addresses and credentials.</p>
         </div>
         <div class="grid-3">
           <div class="card"><h3>24-hour activity</h3><p>Sessions, authentication attempts, and hourly changes across the latest delayed reporting window.</p></div>
           <div class="card"><h3>Seven-day command patterns</h3><p>Selected multi-step behavior, including downloads and SSH-key changes, reduced to safe command templates.</p></div>
           <div class="card"><h3>API sensor</h3><p>Request paths, methods, and interaction patterns from an exposed decoy API, summarized without raw request data.</p></div>
         </div>
-        <div class="hero-actions">
-          <a class="btn primary" href="observatory.html">Open Threat Observatory</a>
-          <a class="btn" href="blog.html">Read the research blog</a>
-        </div>
+        <p class="section-more">
+          <a class="link" href="blog.html">Read the research blog →</a>
+        </p>
       </div>
     </section>
 
@@ -162,16 +160,19 @@ response:
               <li><strong>sensitive_data_exposure</strong> — a caller saw fields it must not (evidence names the fields, never the values)</li>
             </ul>
             <p class="meta mt-4">
-              Run that policy locally or in a configured CI job. It exits non-zero when a finding lands at or
-              above the severity you name, so the job can flag a regression:
+              <a class="link" href="https://github.com/VardrSec/VardrGate" rel="noopener">Full docs and examples on GitHub →</a>
             </p>
-            <pre class="cmd"><code>vardrgate policy run --policy profile_ownership.policy.yaml \
+          </div>
+        </div>
+
+        <div class="demo-run">
+          <p class="meta">
+            Run the policy locally or in a CI job. It exits non-zero when a finding lands at or above the
+            severity you name:
+          </p>
+          <pre class="cmd"><code>vardrgate policy run --policy profile_ownership.policy.yaml \
   --base https://api.example.com --param user_id=42 \
   --identities identities.json --fail-on high</code></pre>
-            <div class="meta mt-3">
-              <a class="link" href="https://github.com/VardrSec/VardrGate" rel="noopener">Full docs and examples on GitHub →</a>
-            </div>
-          </div>
         </div>
       </div>
     </section>
@@ -223,51 +224,27 @@ response:
             </div>
           </div>
         </div>
-        <p class="mt-4">
-          <a class="link" href="tools.html">All tools, including prototypes →</a>
+        <p class="section-more">
+          <a class="link" href="tools.html">More on the tools page →</a>
         </p>
       </div>
     </section>
 
-    <!-- Credibility / ethics -->
+    <!-- Maintainer and contact -->
     <section class="section compact">
       <div class="container">
-        <div class="bio">
-          <div class="bio-text">
+        <div class="card maintainer">
+          <div>
             <h2>Maintainer</h2>
             <p>
               VardrSec is built by Jorge Aquino, a software engineer focused on broken access control.
+              Security testing requires written authorization and a defined scope. Questions about the
+              tools are welcome by message or as a GitHub issue.
             </p>
-            <p>
-              Security testing requires written authorization and a defined scope.
-            </p>
-            <a class="link" href="about.html">Background and working principles →</a>
           </div>
-          <div class="bio-facts">
-            <div class="box">
-              <strong>Open source</strong>
-              <small>Apache-2.0, MIT, and AGPL-3.0. The code is on GitHub.</small>
-            </div>
-            <div class="box">
-              <strong>Operator-run</strong>
-              <small>VardrRunner executes jobs locally and sends results to its backend.</small>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="section compact">
-      <div class="container">
-        <div class="card cta">
-          <h3>Questions about the tools?</h3>
-          <p class="mt-3">
-            Send a message, or open an issue on GitHub.
-          </p>
-          <div class="cta-actions">
+          <div class="maintainer-actions">
             <a class="btn primary" href="contact.html">Get in touch</a>
-            <a class="btn" href="https://github.com/VardrSec" rel="noopener">GitHub</a>
+            <a class="btn" href="about.html">About</a>
           </div>
         </div>
       </div>

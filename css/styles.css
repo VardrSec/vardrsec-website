@@ -129,8 +129,8 @@ code, kbd, samp, pre{font-family:var(--font-mono)}
 }
 
 .container{width:100%;max-width:var(--max);margin:0 auto;padding:0 24px}
-.section{padding:80px 0}
-.section.compact{padding:52px 0}
+.section{padding:56px 0}
+.section.compact{padding:36px 0}
 
 /* --- Header ---------------------------------------------------------------- */
 .topbar{
@@ -296,7 +296,7 @@ h1{
 }
 
 /* --- Hero ------------------------------------------------------------------ */
-.hero{padding:72px 0 28px}
+.hero{padding:44px 0 12px}
 .hero-card{
   position:relative;
   display:flex; flex-direction:column;
@@ -315,21 +315,22 @@ h1{
   position:absolute; left:0; right:0; top:0; height:1px;
   background:linear-gradient(90deg, transparent, rgba(110,231,210,.55) 30%, rgba(120,182,255,.45) 70%, transparent);
 }
-.hero-body{padding:56px 56px 48px; order:1}
-.hero-body h1{max-width:22ch}
+.hero-body{padding:44px 48px 36px}
+.hero-body h1{margin-top:0; max-width:28ch}
+/* Keeps hyphenated compounds whole; a break after "open-" reads as a typo. Phones
+   are exempt, where "access-control" at heading size is wider than the card. */
+@media (min-width: 700px){ .nowrap{white-space:nowrap} }
 .hero-body .lead{max-width:62ch}
-.hero-banner{order:2; max-height:190px; overflow:hidden; border-top:1px solid var(--line-soft); background:rgba(0,0,0,.2)}
-.hero-banner img{width:100%; height:190px; object-fit:cover; object-position:center}
-.hero-actions{display:flex; gap:10px; margin-top:24px; flex-wrap:wrap}
+.hero-actions{display:flex; gap:10px; margin-top:22px; flex-wrap:wrap}
 
 /* Fact strip under the hero copy: three short, verifiable statements. */
 .hero-facts{
   display:grid;
   grid-template-columns:repeat(3, minmax(0,1fr));
-  margin:40px 0 0;
+  margin:30px 0 0;
   border-top:1px solid var(--line-soft);
 }
-.hero-facts > div{padding:18px 20px 0 0}
+.hero-facts > div{padding:16px 20px 0 0}
 .hero-facts > div + div{padding-left:20px; border-left:1px solid var(--line-soft)}
 .hero-facts dt{
   font-family:var(--font-mono);
@@ -392,6 +393,9 @@ h1{
   font-size:13px;
   line-height:1.6;
 }
+/* Keep a gap above the footer divider even in the tallest card of a row, where
+   margin-top:auto resolves to zero. */
+.card > p:has(+ .meta){margin-bottom:16px}
 /* A meta block immediately after the heading is a caption, not a footer. */
 .card h2 + .meta, .card h3 + .meta{margin-top:0; padding-top:0; border-top:none}
 
@@ -409,7 +413,7 @@ h1{
 
 /* Heading and its description read as one unit. These used to sit at opposite
    ends of a space-between flex row, which left a gulf between them. */
-.section-title{margin-bottom:26px}
+.section-title{margin-bottom:20px}
 .section-title h1{margin:0 0 12px; font-size:clamp(1.85rem, 1.4rem + 1.6vw, 2.5rem); letter-spacing:-.03em; line-height:1.12}
 .section-title h2{margin:0 0 10px; font-size:clamp(1.4rem, 1.2rem + .8vw, 1.75rem); letter-spacing:-.025em; line-height:1.2}
 .section-title h3{margin:0 0 8px; font-size:19px; letter-spacing:-.015em}
@@ -420,7 +424,7 @@ h1{
   content:"";
   display:block;
   width:28px; height:2px;
-  margin-bottom:16px;
+  margin-bottom:14px;
   border-radius:2px;
   background:linear-gradient(90deg, var(--accent2), var(--accent));
 }
@@ -602,17 +606,23 @@ textarea{min-height:140px; resize:vertical; line-height:1.6}
 .section .grid-3 + .note{margin-top:22px}
 .section .note + .section-title,
 .section .grid-2 + .section-title,
-.section .grid-3 + .section-title{margin-top:56px}
+.section .grid-3 + .section-title,
+.section .card + .section-title{margin-top:40px}
+/* A trailing "more" link closes a section without a full button row. */
+.section-more{margin:16px 0 0; font-size:14px; color:var(--text-2)}
+.section-more strong{color:var(--text)}
+/* A card holding buttons is not itself a link target, so it should not lift on hover. */
+.card.maintainer:hover{transform:none}
 
 @media (max-width: 640px){
   .container{padding:0 16px}
-  .section{padding:52px 0}
-  .section.compact{padding:38px 0}
+  .section{padding:40px 0}
+  .section.compact{padding:28px 0}
   .card{padding:20px}
-  .hero{padding:36px 0 12px}
-  .hero-body{padding:28px 22px 26px}
+  .hero{padding:24px 0 8px}
+  .hero-body{padding:28px 22px 24px}
   .lead{font-size:15.5px}
-  .hero-facts{grid-template-columns:1fr; margin-top:28px}
+  .hero-facts{grid-template-columns:1fr; margin-top:24px}
   .hero-facts > div, .hero-facts > div + div{padding:14px 0; border-left:none}
   .hero-facts > div + div{border-top:1px solid var(--line-soft)}
   .hero-facts > div:last-child{padding-bottom:0}
@@ -669,6 +679,9 @@ textarea{min-height:140px; resize:vertical; line-height:1.6}
   margin:8px 0 0; padding:13px 15px; overflow-x:auto;
   border-radius:var(--radius-sm); border:1px solid var(--line); background:var(--code-bg);
 }
+/* The run command spans both demo columns; inside the narrow side panel it was clipped. */
+.demo-run{margin-top:18px}
+.demo-run .meta{margin:0; color:var(--text-3); font-size:13.5px; line-height:1.65}
 
 /* --- Label / value rows ----------------------------------------------------
    A definition list rendered as two aligned columns with a divider between each
@@ -716,24 +729,15 @@ textarea{min-height:140px; resize:vertical; line-height:1.6}
 .tool-foot .link{margin-left:auto; text-decoration:none; border-bottom:1px solid transparent}
 .tool-foot .link:hover{border-bottom-color:currentColor}
 
-/* --- Bio block ------------------------------------------------------------- */
-.bio{display:grid; grid-template-columns:1.4fr .6fr; gap:24px; align-items:start}
-.bio-text h2{margin:0 0 14px; font-size:clamp(1.4rem, 1.2rem + .8vw, 1.75rem); letter-spacing:-.025em}
-.bio-text p{margin:0 0 12px; color:var(--text-2); font-size:15px; line-height:1.7; max-width:64ch}
-.bio-facts{display:grid; gap:12px}
-.bio-facts .box{
-  border:1px solid var(--line); border-radius:var(--radius); padding:18px;
-  background:var(--surface);
-}
-.bio-facts .box strong{display:block; font-size:15px; margin-bottom:4px}
-.bio-facts .box small{color:var(--text-3); font-size:13px; line-height:1.55; display:block}
+/* --- Maintainer ------------------------------------------------------------ */
+.maintainer{flex-direction:row; align-items:center; justify-content:space-between; gap:24px}
+.maintainer h2{margin:0 0 8px; font-size:19px}
+.maintainer p{max-width:70ch}
+.maintainer-actions{display:flex; gap:10px; flex:none}
 
 @media (max-width: 980px){
   .demo{grid-template-columns:1fr}
-  .bio{grid-template-columns:1fr}
-}
-@media (max-width: 640px){
-  .hero-banner, .hero-banner img{max-height:130px; height:130px}
+  .maintainer{flex-direction:column; align-items:flex-start}
 }
 /* Below this the logo, wordmark and menu button start crowding each other. */
 @media (max-width: 420px){

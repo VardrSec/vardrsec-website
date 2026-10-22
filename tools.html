@@ -14,7 +14,7 @@
   <meta property="og:description" content="Open-source security tooling built by VardrSec: API authorization testing, engagement tracking, and local scan automation." />
   <meta property="og:image" content="https://vardrsec.com/assets/orgbanner.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <link rel="stylesheet" href="css/styles.css?v=07f654ad" />
+  <link rel="stylesheet" href="css/styles.css?v=b1737a4d" />
 </head>
 <body>
 <!-- @partial:header -->
@@ -79,116 +79,86 @@
           <p>Open-source tools for testing authorization, tracking engagements, and running security workflows locally.</p>
         </div>
 
-        <div class="note mb-7">
+        <div class="note mb-8">
           <strong>Design premise:</strong> scanners cannot infer the permissions an application intended to
           enforce, so broken access control is difficult to test automatically. These tools make those rules
           explicit, repeatable, and cheaper to verify.
         </div>
 
         <!-- Published -->
-        <div class="section-title mt-9">
+        <div class="section-title">
           <h2>Published</h2>
-          <p>Source and setup instructions are available on GitHub. Check each repository's documentation before use.</p>
+          <p>Source and setup instructions are on GitHub.</p>
         </div>
 
-        <div class="grid-2 mb-6">
+        <div class="grid-3">
           <div class="card">
             <div class="kicker mb-3">
               <span class="badge warn">Go</span>
-              <span class="badge ok">Open source</span>
+              <span class="badge">Apache-2.0</span>
             </div>
             <h3>VardrGate</h3>
-            <p class="mt-4">
-              Define who should be allowed to call an endpoint. VardrGate repeats the request across users
-              and roles, then flags where actual behavior violates the policy—with request and response
-              evidence.
+            <p>
+              Define who should be allowed to call an endpoint. VardrGate repeats the request as each user
+              and role and flags where behavior violates the policy, with request and response evidence.
             </p>
-            <p class="mt-3">
-              Policy files can run in CI and fail a build when a finding reaches a configured severity.
+            <p>
+              Policies can run in CI and fail a build when a finding reaches a configured severity.
             </p>
             <div class="meta mt-4">
-              <a class="link" href="https://github.com/VardrSec/VardrGate" rel="noopener">github.com/VardrSec/VardrGate →</a><br/>Apache-2.0 licensed
+              <a class="link" href="https://github.com/VardrSec/VardrGate" rel="noopener">github.com/VardrSec/VardrGate →</a>
             </div>
           </div>
 
           <div class="card">
             <div class="kicker mb-3">
               <span class="badge">Python</span>
-              <span class="badge ok">Open source</span>
+              <span class="badge">AGPL-3.0</span>
             </div>
             <h3>VardrMap</h3>
-            <p class="mt-4">
-              A multi-tenant engagement platform that tracks scope, authorization and findings, so the
-              authorized scope and the work already done are recorded in one place.
+            <p>
+              A multi-tenant engagement platform that keeps authorized scope, completed work and findings
+              in one place.
             </p>
-            <p class="mt-3">
-              It starts scan pipelines and API authorization tests through VardrRunner and VardrGate, and
-              uses organization and ownership checks to separate engagement data.
+            <p>
+              It starts scan pipelines and authorization tests through VardrRunner and VardrGate, with
+              organization and ownership checks separating engagement data.
             </p>
             <div class="meta mt-4">
-              <a class="link" href="https://github.com/VardrSec/VardrMap" rel="noopener">github.com/VardrSec/VardrMap →</a><br/>AGPL-3.0 licensed
-            </div>
-          </div>
-        </div>
-
-        <div class="card mb-8">
-          <div class="kicker mb-3">
-            <span class="badge">Python</span>
-            <span class="badge ok">Open source</span>
-          </div>
-          <h3>VardrRunner</h3>
-          <p class="mt-4">
-            Run queued security jobs on your own machine while a remote backend handles orchestration and
-            results. Jobs execute locally; the runner uploads their results to the backend.
-          </p>
-          <p class="mt-3">
-            The operator provides the runner with access to the systems under test. The backend queues jobs
-            and receives findings, so review its data handling before connecting sensitive targets.
-          </p>
-          <div class="meta mt-4">
-            <a class="link" href="https://github.com/VardrSec/VardrRunner" rel="noopener">github.com/VardrSec/VardrRunner →</a><br/>MIT licensed
-          </div>
-        </div>
-
-        <!-- In development -->
-        <div class="section-title mt-9">
-          <h2>Prototypes and designs</h2>
-          <p>Active experiments and design work. These projects are not yet supported for production use.</p>
-        </div>
-
-        <div class="grid-2 mb-6">
-          <div class="card">
-            <div class="kicker mb-3">
-              <span class="badge">Python</span>
-            </div>
-            <h3>VardrScanner</h3>
-            <p class="mt-3">
-              An API security testing framework focused on the top three OWASP API risks: broken object-level authorization, broken authentication and broken object property-level authorization. Architecture and design
-              notes are public; the implementation is not.
-            </p>
-            <div class="meta mt-3">
-              <a class="link" href="https://github.com/jorge-aquino/vardrscanner-docs" rel="noopener">Read the design docs →</a>
+              <a class="link" href="https://github.com/VardrSec/VardrMap" rel="noopener">github.com/VardrSec/VardrMap →</a>
             </div>
           </div>
 
           <div class="card">
             <div class="kicker mb-3">
               <span class="badge">Python</span>
+              <span class="badge">MIT</span>
             </div>
-            <h3>VardrForge</h3>
-            <p class="mt-3">
-              A proposed local CLI for generating small testing tools from controlled templates. The design calls
-              for a target allowlist; that restriction still needs implementation and validation.
+            <h3>VardrRunner</h3>
+            <p>
+              Runs queued security jobs on your own machine and uploads the results to a remote backend that
+              handles orchestration.
             </p>
+            <p>
+              The backend receives findings, so review its data handling before connecting sensitive targets.
+            </p>
+            <div class="meta mt-4">
+              <a class="link" href="https://github.com/VardrSec/VardrRunner" rel="noopener">github.com/VardrSec/VardrRunner →</a>
+            </div>
           </div>
         </div>
 
-        <div class="card cta mt-9">
+        <p class="section-more">
+          <strong>In design:</strong> VardrScanner
+          (<a class="link" href="https://github.com/jorge-aquino/vardrscanner-docs" rel="noopener">design docs →</a>)
+          and VardrForge. Neither is ready to use.
+        </p>
+
+        <div class="card cta mt-8">
           <h3>Issues and contributions</h3>
           <p class="mt-3">
-            Bug reports, feature requests, and pull requests are accepted on every published repository.
-            Reports from use on real systems are the most useful. Report security vulnerabilities in the
-            tools privately, through the repository's security policy where one exists or the contact page, not in a public issue.
+            Bug reports and pull requests are welcome on every repository. Report vulnerabilities in the
+            tools privately, through the repository's security policy or the contact page.
           </p>
           <div class="cta-actions">
             <a class="btn primary" href="contact.html">Get in touch</a>

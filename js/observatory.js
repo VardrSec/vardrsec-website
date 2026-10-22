@@ -171,7 +171,7 @@ import { validHistory } from '../lib/observatory-history.mjs?v=1';
       renderHighlight(commands);
       text('obs-command-window',data.version>=3?'Seven-day reporting period':'Privacy review');
       if(data.version>=3) text('obs-command-note',
-        `Sanitized patterns observed ${data.command_window_start.slice(0,16).replace('T',' ')} to ${data.command_window_end.slice(0,16).replace('T',' ')} UTC (end exclusive). Counts combine observations of the same sanitized pattern. These are attempts in a simulated service, not proof of successful execution.`);
+        `Sanitized patterns observed ${data.command_window_start.slice(0,16).replace('T',' ')} to ${data.command_window_end.slice(0,16).replace('T',' ')} UTC (end exclusive). Counts combine observations of the same sanitized pattern.`);
       else text('obs-command-note','Command details are temporarily withheld. Activity statistics and reviewed artifacts cover the delayed 24-hour window.');
       renderRows("obs-artifact-rows",data.artifacts,"artifacts");
     } catch(error){showError("Unable to load the observatory snapshot. Previously displayed data may be stale.");}

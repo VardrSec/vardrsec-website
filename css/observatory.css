@@ -45,6 +45,9 @@
 .obs-about{margin-top:13px;padding:19px 22px}
 .obs-about h2{font-size:1rem;margin:0 0 6px}
 .obs-about p{font-size:.81rem;line-height:1.65;margin:0;color:var(--text-3)}
+.obs-about ul{margin:8px 0 0;padding-left:1.15em;font-size:.84rem;line-height:1.65;color:var(--text-2)}
+.obs-about li+li{margin-top:6px}
+.obs-about li::marker{color:var(--text-3)}
 @media(max-width:880px){.obs-findings{grid-template-columns:1fr}}
 
 /* Aggregated activity visual. No external charting library. */
