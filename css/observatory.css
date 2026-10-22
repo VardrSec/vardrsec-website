@@ -65,3 +65,8 @@
 .obs-months caption{text-align:left;padding-bottom:12px}
 .obs-recent-title{font-size:1.08rem;margin:0 0 15px}
 @media(max-width:880px){.obs-lifetime-stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.obs-api{margin-top:32px;border-top:1px solid var(--line);padding-top:30px}
+.obs-api>.obs-panel-heading{margin-bottom:8px}
+.obs-api .obs-panel-heading h3{font-size:1rem;margin:0}
+.obs-api>.obs-disclaimer{margin-bottom:18px}
+.obs-api-clients{margin-top:13px}
