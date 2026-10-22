@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>VardrSec | Open-source authorization testing</title>
-  <meta name="description" content="Define expected access by user, role, and tenant. VardrSec compares those rules against real API behavior and reports mismatches with request and response evidence." />
+  <title>VardrSec | Security Research &amp; Open-Source Tools</title>
+  <meta name="description" content="Independent research from SSH and API decoys, plus open-source tools for testing access control. Explore VardrSec's findings, methods, and code." />
   <link rel="canonical" href="https://vardrsec.com/" />
   <!-- AbuseIPDB domain ownership check (Account > Webmasters). Removing it can un-verify the domain. -->
   <meta name="abuseipdb-verification" content="ZVCVjKaq" />
@@ -12,11 +12,11 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="VardrSec" />
   <meta property="og:url" content="https://vardrsec.com/" />
-  <meta property="og:title" content="VardrSec | Open-source authorization testing" />
-  <meta property="og:description" content="Define expected access by user, role, and tenant. VardrSec compares those rules against real API behavior and reports mismatches with request and response evidence." />
+  <meta property="og:title" content="VardrSec | Security Research &amp; Open-Source Tools" />
+  <meta property="og:description" content="Independent research from SSH and API decoys, plus open-source tools for testing access control." />
   <meta property="og:image" content="https://vardrsec.com/assets/orgbanner.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <link rel="stylesheet" href="css/styles.css?v=4134f0e9" />
+  <link rel="stylesheet" href="css/styles.css?v=b5901ccb" />
 </head>
 <body>
 <!-- @partial:header -->
@@ -79,22 +79,16 @@
       <div class="container">
         <div class="hero-card">
           <div class="hero-body">
-            <div class="kicker"><span class="dot"></span> Open-source · Local-first</div>
-            <h1>Verify authorization across users, roles, and tenants.</h1>
+          <div class="kicker"><span class="dot"></span> Independent research · Open source</div>
+            <h1>Security research, with the evidence in view.</h1>
             <p class="lead">
-              Define expected access by user, role, and tenant. VardrSec compares those rules against real
-              API behavior and reports mismatches with request and response evidence.
+              VardrSec studies activity seen by its SSH and API decoys and builds tools for testing access control.
+              Read the findings, examine the methods, and use the code.
             </p>
             <div class="hero-actions">
-              <a class="btn primary" href="#policy">Explore VardrGate</a>
-              <a class="btn" href="tools.html">View all tools</a>
+              <a class="btn primary" href="observatory.html">Explore the Observatory</a>
+              <a class="btn" href="tools.html">Browse the tools</a>
             </div>
-          </div>
-          <div class="hero-banner">
-            <picture>
-              <source srcset="assets/orgbanner.webp" type="image/webp" />
-              <img src="assets/orgbanner.png" alt="" width="1291" height="454" fetchpriority="high" />
-            </picture>
           </div>
         </div>
       </div>
@@ -103,14 +97,14 @@
     <section class="section compact" aria-labelledby="observatory-preview-title">
       <div class="container">
         <div class="section-title">
-          <div class="kicker"><span class="dot"></span> New: Threat Observatory</div>
-          <h2 id="observatory-preview-title">What bots try on an exposed SSH server.</h2>
-          <p>Real activity from a VardrSec honeypot, published with a delay and with IP addresses and credentials removed.</p>
+          <div class="kicker"><span class="dot"></span> Threat Observatory</div>
+          <h2 id="observatory-preview-title">What the decoys record.</h2>
+          <p>Delayed, reviewed activity from SSH and API sensors. Public snapshots omit source IP addresses and credentials.</p>
         </div>
         <div class="grid-3">
           <div class="card"><h3>24-hour activity</h3><p>Sessions, authentication attempts, and hourly changes across the latest delayed reporting window.</p></div>
           <div class="card"><h3>Seven-day command patterns</h3><p>Selected multi-step behavior, including downloads and SSH-key changes, reduced to safe command templates.</p></div>
-          <div class="card"><h3>Research blog</h3><p>Write-ups that explain what the sensor recorded, with sources and limits. First post: the SSH-key takeover routine.</p></div>
+          <div class="card"><h3>API sensor</h3><p>Request paths, methods, and interaction patterns from an exposed decoy API, summarized without raw request data.</p></div>
         </div>
         <div class="hero-actions">
           <a class="btn primary" href="observatory.html">Open Threat Observatory</a>
@@ -163,8 +157,8 @@ response:
               <li><strong>sensitive_data_exposure</strong> — a caller saw fields it must not (evidence names the fields, never the values)</li>
             </ul>
             <p class="meta mt-4">
-              Run that policy once, or on every commit. It exits non-zero when a finding lands at or
-              above the severity you name, so a build fails on a real regression:
+              Run that policy locally or in a configured CI job. It exits non-zero when a finding lands at or
+              above the severity you name, so the job can flag a regression:
             </p>
             <pre class="cmd"><code>vardrgate policy run --policy profile_ownership.policy.yaml \
   --base https://api.example.com --param user_id=42 \
@@ -181,7 +175,7 @@ response:
     <section class="section compact">
       <div class="container">
         <div class="section-title">
-          <h2>The Tools</h2>
+          <h2>Open-source tools</h2>
           <p>Built and maintained in the open. Read the code, run it, tell me what's wrong with it.</p>
         </div>
         <div class="grid-3">
@@ -190,7 +184,7 @@ response:
             <dl class="spec">
               <dt>Purpose</dt><dd>Verifies API authorization against a declared policy</dd>
               <dt>How it works</dt><dd>Replays one request as every identity and compares the result to the policy</dd>
-              <dt>Why it matters</dt><dd>Runs in CI, so authorization is tested on every commit</dd>
+              <dt>Why it matters</dt><dd>Can flag authorization regressions in a configured CI run</dd>
             </dl>
             <div class="tool-foot">
               <span class="tag">Go</span><span class="tag">Apache-2.0</span>
@@ -203,7 +197,7 @@ response:
             <dl class="spec">
               <dt>Purpose</dt><dd>Runs security engagements: scope, authorization and findings</dd>
               <dt>How it works</dt><dd>Multi-tenant app that starts scans and authorization tests through VardrRunner and VardrGate</dd>
-              <dt>Why it matters</dt><dd>Each user sees only their own organization's engagements and findings</dd>
+              <dt>Why it matters</dt><dd>Keeps scope and evidence tied to an engagement</dd>
             </dl>
             <div class="tool-foot">
               <span class="tag">Python</span><span class="tag">AGPL-3.0</span>
@@ -215,8 +209,8 @@ response:
             <h3>VardrRunner</h3>
             <dl class="spec">
               <dt>Purpose</dt><dd>Executes security workflows locally</dd>
-              <dt>How it works</dt><dd>Claims queued jobs, runs them locally, and streams results back</dd>
-              <dt>Why it matters</dt><dd>Credentials, scan traffic, and tool execution remain on your machine</dd>
+              <dt>How it works</dt><dd>Claims queued jobs, runs them locally, and uploads results</dd>
+              <dt>Why it matters</dt><dd>Runs tools from the operator's machine while the backend tracks results</dd>
             </dl>
             <div class="tool-foot">
               <span class="tag">Python</span><span class="tag">MIT</span>
@@ -250,8 +244,8 @@ response:
               <small>Apache-2.0, MIT, and AGPL-3.0. The code is on GitHub.</small>
             </div>
             <div class="box">
-              <strong>Local-first</strong>
-              <small>Scans and credentials stay on your machine.</small>
+              <strong>Operator-run</strong>
+              <small>VardrRunner executes jobs locally and sends results to its backend.</small>
             </div>
           </div>
         </div>
@@ -281,7 +275,7 @@ response:
       <div class="footer-grid">
         <div>
           <h2 class="footer-h">VardrSec</h2>
-          <p>Security research and open-source tools, mostly about broken access control.</p>
+          <p>Independent decoy-sensor research and open-source security tools.</p>
           <p class="footer-contact">
             <a href="mailto:contact@vardrsec.com">contact@vardrsec.com</a><br/>
             <a href="https://github.com/VardrSec" rel="noopener">github.com/VardrSec</a>
@@ -292,7 +286,7 @@ response:
           <a href="about.html">About</a>
           <a href="tools.html">Tools</a>
           <a href="observatory.html">Threat Observatory</a>
-          <a href="blog.html">Research Blog</a>
+          <a href="blog.html">Blog</a>
           <a href="resources.html">Resources</a>
         </div>
         <div class="links">
