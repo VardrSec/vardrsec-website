@@ -6,10 +6,10 @@
   <meta name="robots" content="noindex, nofollow" />
   <link rel="canonical" href="https://vardrsec.com/observatory.html" />
   <title>Threat Observatory | VardrSec</title>
-  <meta name="description" content="Delayed, anonymized statistics on attacks against a VardrSec SSH honeypot." />
+  <meta name="description" content="Delayed, privacy-reviewed findings from VardrSec's SSH and API research sensors." />
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="css/styles.css?v=4134f0e9" />
-  <link rel="stylesheet" href="css/observatory.css?v=498eae4c" />
+  <link rel="stylesheet" href="css/observatory.css?v=5f0418be" />
 </head>
 <body>
 <!-- @partial:header -->
@@ -69,12 +69,42 @@
   <section class="container obs-wrap">
     <div class="obs-heading">
       <div><p class="obs-eyebrow">VardrSec</p><h1>Threat Observatory</h1>
-      <p class="obs-lead">Attacks against a VardrSec SSH honeypot, published with a delay. No IP addresses or credentials are shown.</p></div>
+      <p class="obs-lead">Delayed, privacy-reviewed findings from VardrSec's SSH and API decoys. No IP addresses or credentials are shown.</p></div>
       <span class="obs-status" id="obs-status" role="status" aria-live="polite">Loading</span>
     </div>
     <p class="obs-notice" id="obs-notice" hidden></p>
+    <nav class="obs-jump" aria-label="Observatory sections">
+      <a href="#obs-ssh">SSH activity</a><a href="#obs-commands">Attacker techniques</a><a href="#obs-lifetime-title">Historical totals</a><a href="#obs-api-title">API sensor</a><a href="#obs-method">Methodology</a>
+    </nav>
+    <section id="obs-ssh" class="obs-recent" aria-labelledby="obs-recent-title">
+    <div class="obs-panel-heading obs-section-heading"><h2 id="obs-recent-title">SSH activity</h2><span>Past 24 complete hours</span></div>
+    <div class="obs-stats obs-recent-stats" aria-label="SSH observation statistics">
+      <article class="obs-card obs-stat"><span>Observed sessions</span><strong id="obs-sessions">—</strong><small>Past 24 complete hours</small></article>
+      <article class="obs-card obs-stat"><span>Unique sources</span><strong id="obs-sources">—</strong><small>No raw addresses exposed</small></article>
+      <article class="obs-card obs-stat"><span>SSH authentication activity</span><strong id="obs-auth">—</strong><small>Decoy-service observations</small></article>
+    </div>
+    <p class="obs-snapshot-time">Latest SSH snapshot published <time id="obs-updated">—</time>. Activity and artifact counts cover the delayed 24-hour period.</p>
+    <aside class="obs-card obs-highlight" id="obs-highlight" hidden aria-label="Featured attacker technique">
+      <div><span class="obs-eyebrow">Seven-day technique highlight</span><strong id="obs-highlight-label">—</strong></div>
+      <div><span id="obs-highlight-count">—</span> observations · <a href="#obs-commands">Explore command patterns</a></div>
+    </aside>
+    <div class="obs-columns">
+      <section class="obs-card obs-panel" aria-labelledby="obs-trend"><div class="obs-panel-heading"><h2 id="obs-trend">Activity over time</h2><span>Hourly UTC buckets</span></div><div class="obs-empty-chart" id="obs-chart"><p>Loading activity statistics…</p></div></section>
+      <section class="obs-card obs-panel" aria-labelledby="obs-categories"><div class="obs-panel-heading"><h2 id="obs-categories">Other activity</h2><span>Same 24-hour period</span></div><dl class="obs-categories"><div><dt>Commands observed</dt><dd id="obs-commands-count">—</dd></div><div><dt>File-transfer events</dt><dd id="obs-files-count">—</dd></div></dl><p class="obs-disclaimer">Activity within a simulated service does not establish compromise of the host.</p></section>
+    </div>
+    </section>
+    <div class="obs-columns obs-findings">
+      <section class="obs-card obs-panel" aria-labelledby="obs-commands"><div class="obs-panel-heading"><h2 id="obs-commands">Observed attacker commands</h2><span id="obs-command-window">Separate seven-day reporting period</span></div>
+        <div class="obs-table-wrap"><table class="obs-table"><thead><tr><th scope="col">Command / technique</th><th scope="col">Observations</th></tr></thead><tbody id="obs-command-rows"><tr><td class="obs-muted">Awaiting reviewed command statistics</td><td>—</td></tr></tbody></table></div>
+        <p class="obs-disclaimer" id="obs-command-note">Sanitized command patterns use a separate seven-day reporting period. The activity chart, counts and reviewed artifact indicators continue to cover the delayed 24-hour window. Redaction markers are for research display, not executable instructions.</p>
+      </section>
+      <section class="obs-card obs-panel" aria-labelledby="obs-artifacts"><div class="obs-panel-heading"><h2 id="obs-artifacts">Observed artifacts</h2><span>SHA-256 indicators</span></div>
+        <div class="obs-table-wrap"><table class="obs-table"><thead><tr><th scope="col">SHA-256</th><th scope="col">Observations</th><th scope="col">Analysis</th></tr></thead><tbody id="obs-artifact-rows"><tr><td class="obs-muted">No reviewed artifacts published yet</td><td>—</td><td>—</td></tr></tbody></table></div>
+        <p class="obs-disclaimer">Reviewed SHA-256 indicators will link to VirusTotal file reports (external site). A hash alone does not establish maliciousness; files are never uploaded automatically.</p>
+      </section>
+    </div>
     <section class="obs-history" aria-labelledby="obs-lifetime-title">
-      <div class="obs-panel-heading"><h2 id="obs-lifetime-title">Since collection began</h2><span>Historical totals</span></div>
+      <div class="obs-panel-heading obs-section-heading"><h2 id="obs-lifetime-title">Since collection began</h2><span>Historical totals</span></div>
       <p class="obs-disclaimer" id="obs-lifetime-period">Historical totals are awaiting a delayed archive summary.</p>
       <div class="obs-stats obs-lifetime-stats">
         <article class="obs-card obs-stat"><span>SSH connections</span><strong id="obs-lifetime-connections">—</strong><small>Recorded connection events</small></article>
@@ -89,32 +119,13 @@
         <div class="obs-table-wrap"><table class="obs-table"><caption class="obs-disclaimer">Latest 12 months with archived observations · UTC</caption><thead><tr><th scope="col">Month</th><th scope="col">Connections</th><th scope="col">Login attempts</th><th scope="col">Commands</th><th scope="col">File events</th></tr></thead><tbody id="obs-month-rows"><tr><td colspan="5">Monthly totals will appear with the historical summary.</td></tr></tbody></table></div>
         <p class="obs-disclaimer">Partial months are marked. Closed months can still have collection gaps or late arrivals. Totals cover archived observations from one sensor, not global attack activity. Source addresses are not individual people.</p>
       </details>
-      <p class="obs-disclaimer">Historical counts survive the 30-day detailed-event retention policy. They are kept separately from the recent activity below.</p>
+      <p class="obs-disclaimer">Historical counts survive the 30-day detailed-event retention policy. They are kept separately from recent activity.</p>
     </section>
-    <h2 class="obs-recent-title">Past 24 complete hours</h2>
-    <div class="obs-stats" aria-label="Observation statistics">
-      <article class="obs-card obs-stat"><span>Observed sessions</span><strong id="obs-sessions">—</strong><small>Past 24 complete hours</small></article>
-      <article class="obs-card obs-stat"><span>Unique sources</span><strong id="obs-sources">—</strong><small>No raw addresses exposed</small></article>
-      <article class="obs-card obs-stat"><span>SSH authentication activity</span><strong id="obs-auth">—</strong><small>Decoy-service observations</small></article>
-      <article class="obs-card obs-stat"><span>Last published</span><strong class="obs-last" id="obs-updated">—</strong><small>Delayed, sanitized snapshot</small></article>
-    </div>
-    <div class="obs-columns">
-      <section class="obs-card obs-panel" aria-labelledby="obs-trend"><div class="obs-panel-heading"><h2 id="obs-trend">Activity over time</h2><span>Hourly UTC buckets</span></div><div class="obs-empty-chart" id="obs-chart"><p>Loading activity statistics…</p></div></section>
-      <section class="obs-card obs-panel" aria-labelledby="obs-categories"><div class="obs-panel-heading"><h2 id="obs-categories">Observed activity</h2><span>Aggregates only</span></div><dl class="obs-categories"><div><dt>Authentication attempts</dt><dd id="obs-auth-detail">—</dd></div><div><dt>Commands observed</dt><dd id="obs-commands-count">—</dd></div><div><dt>File-transfer events</dt><dd id="obs-files-count">—</dd></div></dl><p class="obs-disclaimer">Activity within a simulated service does not establish compromise of the host.</p></section>
-    </div>
-    <div class="obs-columns obs-findings">
-      <section class="obs-card obs-panel" aria-labelledby="obs-commands"><div class="obs-panel-heading"><h2 id="obs-commands">Observed attacker commands</h2><span id="obs-command-window">Separate seven-day reporting period</span></div>
-        <div class="obs-table-wrap"><table class="obs-table"><thead><tr><th scope="col">Command / technique</th><th scope="col">Observations</th></tr></thead><tbody id="obs-command-rows"><tr><td class="obs-muted">Awaiting reviewed command statistics</td><td>—</td></tr></tbody></table></div>
-        <p class="obs-disclaimer" id="obs-command-note">Sanitized command patterns use a separate seven-day reporting period. The activity chart, counts and reviewed artifact indicators continue to cover the delayed 24-hour window. Redaction markers are for research display, not executable instructions.</p>
-      </section>
-      <section class="obs-card obs-panel" aria-labelledby="obs-artifacts"><div class="obs-panel-heading"><h2 id="obs-artifacts">Observed artifacts</h2><span>SHA-256 indicators</span></div>
-        <div class="obs-table-wrap"><table class="obs-table"><thead><tr><th scope="col">SHA-256</th><th scope="col">Observations</th><th scope="col">Analysis</th></tr></thead><tbody id="obs-artifact-rows"><tr><td class="obs-muted">No reviewed artifacts published yet</td><td>—</td><td>—</td></tr></tbody></table></div>
-        <p class="obs-disclaimer">Reviewed SHA-256 indicators will link to VirusTotal file reports (external site). A hash alone does not establish maliciousness; files are never uploaded automatically.</p>
-      </section>
-    </div>
     <section class="obs-api" aria-labelledby="obs-api-title">
-      <div class="obs-panel-heading"><h2 id="obs-api-title">API sensor research</h2><span id="obs-api-status" role="status" aria-live="polite">Awaiting real traffic</span></div>
-      <p class="obs-disclaimer" id="obs-api-period">A low-interaction REST API decoy is being validated privately. Public findings will appear only after live collection is approved and a full delayed reporting period is available.</p>
+      <div class="obs-panel-heading obs-section-heading"><h2 id="obs-api-title">API sensor research</h2><span id="obs-api-status" role="status" aria-live="polite">Awaiting published data</span></div>
+      <p class="obs-disclaimer" id="obs-api-period">Public observations appear after a complete delayed reporting period and a reviewed snapshot.</p>
+      <div class="obs-card obs-api-pending" id="obs-api-pending" role="status">No reviewed API observations have been published yet. This section will show request patterns, methods and claimed tool families when data is available.</div>
+      <div id="obs-api-results" class="obs-api-results" hidden>
       <div class="obs-stats" aria-label="API observation statistics">
         <article class="obs-card obs-stat"><span>API requests</span><strong id="obs-api-requests">—</strong><small>Separate 24-hour period</small></article>
         <article class="obs-card obs-stat"><span>Authentication probes</span><strong id="obs-api-auth">—</strong><small>Attempts, not successful access</small></article>
@@ -126,6 +137,7 @@
         <section class="obs-card obs-panel" aria-labelledby="obs-api-methods-title"><div class="obs-panel-heading"><h3 id="obs-api-methods-title">HTTP methods</h3><span>Aggregated counts</span></div><div class="obs-table-wrap"><table class="obs-table"><thead><tr><th scope="col">Method</th><th scope="col">Requests</th></tr></thead><tbody id="obs-api-methods"><tr><td class="obs-muted">Awaiting live observations</td><td>—</td></tr></tbody></table></div></section>
       </div>
       <section class="obs-card obs-panel obs-api-clients" aria-labelledby="obs-api-clients-title"><div class="obs-panel-heading"><h3 id="obs-api-clients-title">Self-reported client tools</h3><span>User-Agent family labels</span></div><div class="obs-table-wrap"><table class="obs-table"><thead><tr><th scope="col">Claimed tool family</th><th scope="col">Requests</th></tr></thead><tbody id="obs-api-clients"><tr><td class="obs-muted">Awaiting live observations</td><td>—</td></tr></tbody></table></div><p class="obs-disclaimer">User-Agent strings are easy to spoof. These fixed labels are hints about tooling, not bot identity or reliable fingerprints. Raw headers are not retained.</p></section>
+      </div>
       <p class="obs-disclaimer">The API decoy returns fixed responses. Counts describe requests, not authenticated access, executed payloads, or host compromise. Source addresses, credentials, query strings, request bodies and raw paths are never displayed.</p>
     </section>
     <section class="obs-card obs-about" aria-labelledby="obs-method"><h2 id="obs-method">About this data</h2><p>These are totals from a honeypot, a fake server that records what attackers try. They are published with a delay, and IP addresses, credentials and other session details are left out. Activity in a honeypot does not mean the underlying host was compromised.</p></section>
@@ -166,7 +178,7 @@
   </footer>
   <!-- @endpartial -->
   <script src="js/observatory-policy.js?v=38d753bd" defer></script>
-  <script src="js/observatory.js?v=77d52515" type="module"></script>
-  <script src="js/api-research.js?v=1c53fc66" type="module"></script>
+  <script src="js/observatory.js?v=916d2e95" type="module"></script>
+  <script src="js/api-research.js?v=a4958f8d" type="module"></script>
 </body>
 </html>

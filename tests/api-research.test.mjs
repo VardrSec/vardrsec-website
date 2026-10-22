@@ -69,6 +69,8 @@ test('browser renders only fixed labels and counts',()=>{
     fetch:async()=>({ok:true,json:async()=>({status:'awaiting_data'})}),setInterval(){}});
   vm.runInContext(source+'\nglobalThis.renderApiResearch=renderApiResearch;',context);
   const data=fixture();context.renderApiResearch(data);
+  assert.equal(nodes.get('obs-api-pending').hidden,true);
+  assert.equal(nodes.get('obs-api-results').hidden,false);
   assert.equal(nodes.get('obs-api-requests').textContent,'2');
   assert.equal(nodes.get('obs-api-auth').textContent,'2');
   assert.equal(nodes.get('obs-api-patterns').children[0].children[0].textContent,'Authentication endpoint');

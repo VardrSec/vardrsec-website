@@ -31,6 +31,8 @@ function rows(id, counts, keys, labels) {
 
 export function renderApiResearch(data) {
   if (!validApiResearch(data)) throw new Error('Invalid API research snapshot');
+  byId('obs-api-pending').hidden = true;
+  byId('obs-api-results').hidden = false;
   show('obs-api-status', Date.now() - Date.parse(data.published_at) > 20*60*1000 ? 'Data delayed' : 'Published');
   show('obs-api-period', `Observed ${data.window_start.slice(0,16).replace('T',' ')} to ${data.window_end.slice(0,16).replace('T',' ')} UTC (end exclusive). Published with a delay. Counts represent one API decoy.`);
   show('obs-api-requests', fmt(data.total_requests));

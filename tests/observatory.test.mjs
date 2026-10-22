@@ -92,6 +92,7 @@ class Element {
   append(...nodes){this.children.push(...nodes);}
   replaceChildren(...nodes){this.children=[...nodes];}
   setAttribute(){}
+  addEventListener(){}
 }
 async function render(value) {
   const nodes=new Map();
@@ -110,8 +111,29 @@ test('browser labels seven-day commands separately and rejects unsafe/legacy row
   assert.equal(contents(nodes.get('obs-command-rows')).includes('curl [URL] ; sh [PATH]'),true);
   assert.equal(contents(nodes.get('obs-command-rows')).includes('actual-sensitive-value'),false);
   assert.equal(nodes.get('obs-command-window').textContent,'Seven-day reporting period');
+  assert.equal(nodes.get('obs-highlight-label').textContent,'Payload retrieval attempt');
+  assert.equal(nodes.get('obs-highlight-count').textContent,'2');
+  assert.equal(nodes.get('obs-highlight').hidden,false);
   const legacy=snapshot(2);legacy.commands=[{template:'synthetic-private-command',count:1}];
   nodes=await render(legacy);assert.equal(contents(nodes.get('obs-command-rows')).includes('synthetic-private-command'),false);
+});
+
+test('artifact hashes are shortened in the summary and remain available in full',async()=>{
+  const value=snapshot();value.artifacts=[{sha256:'a'.repeat(64),count:1}];
+  const nodes=await render(value);
+  const row=nodes.get('obs-artifact-rows').children[0];
+  const details=row.children[0].children[0];
+  assert.equal(details.children[0].textContent,'aaaaaaaa…aaaaaa');
+  assert.equal(details.children[1].textContent,'a'.repeat(64));
+  assert.equal(details.children[2].textContent,'Copy full hash');
+});
+
+test('page leads with current SSH activity and hides unpublished API panels',()=>{
+  const html=readFileSync(new URL('../observatory.html',import.meta.url),'utf8');
+  assert.ok(html.indexOf('id="obs-ssh"')<html.indexOf('id="obs-lifetime-title"'));
+  assert.ok(html.indexOf('id="obs-commands"')<html.indexOf('id="obs-lifetime-title"'));
+  assert.match(html,/id="obs-api-results"[^>]*hidden/);
+  assert.match(html,/aria-label="Observatory sections"/);
 });
 
 function lifetimeSnapshot() {
