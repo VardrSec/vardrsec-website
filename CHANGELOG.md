@@ -36,12 +36,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Homepage: plain descriptive headline, hero label removed, licenses replaced in the
   fact strip, one Observatory button instead of two, section endings as text links, and
   the Maintainer and contact blocks merged into one card. The `vardrgate policy run`
-  command moved out of the narrow Finding types card, where it was clipped, to full
-  width under the demo.
+  command, one flag per line, sits in the Finding types card so the card matches the
+  height of the policy example. Trailing period dropped from the Observatory heading.
+- An odd third card in a three-column grid now spans the row at tablet widths instead
+  of leaving half of it empty.
 - Tools: the three published tools in one row of equal cards with language and license
   badges; prototypes reduced to one line; shorter contributions panel.
 - Observatory: SSH-side caveats consolidated into a single Methodology and limitations
-  list; redundant eyebrow removed. API sensor section unchanged.
+  list; redundant eyebrow removed; Other activity rows fill their panel. API sensor
+  section unchanged.
 - Blog: teaser caveat and the empty Malware analysis track removed; tracks in two columns,
   aligned with the post card.
 - About: How I work section removed; repeated VardrGate rationale and the VardrForge

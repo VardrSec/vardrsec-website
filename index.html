@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>VardrSec | Decoy-Sensor Research &amp; Access-Control Tools</title>
+  <title>VardrSec | Security Research &amp; Open-Source Tools</title>
   <meta name="description" content="Independent research from SSH and API decoys, plus open-source tools for testing access control. Explore VardrSec's findings, methods, and code." />
   <link rel="canonical" href="https://vardrsec.com/" />
   <!-- AbuseIPDB domain ownership check (Account > Webmasters). Removing it can un-verify the domain. -->
@@ -12,11 +12,11 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="VardrSec" />
   <meta property="og:url" content="https://vardrsec.com/" />
-  <meta property="og:title" content="VardrSec | Decoy-Sensor Research &amp; Access-Control Tools" />
+  <meta property="og:title" content="VardrSec | Security Research &amp; Open-Source Tools" />
   <meta property="og:description" content="Independent research from SSH and API decoys, plus open-source tools for testing access control." />
   <meta property="og:image" content="https://vardrsec.com/assets/orgbanner.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <link rel="stylesheet" href="css/styles.css?v=b1737a4d" />
+  <link rel="stylesheet" href="css/styles.css?v=8aad5361" />
 </head>
 <body>
 <!-- @partial:header -->
@@ -102,7 +102,7 @@
       <div class="container">
         <div class="section-title">
           <div class="kicker"><span class="dot"></span> Threat Observatory</div>
-          <h2 id="observatory-preview-title">What the decoys record.</h2>
+          <h2 id="observatory-preview-title">What the decoys record</h2>
           <p>Public snapshots omit source IP addresses and credentials.</p>
         </div>
         <div class="grid-3">
@@ -160,19 +160,19 @@ response:
               <li><strong>sensitive_data_exposure</strong> — a caller saw fields it must not (evidence names the fields, never the values)</li>
             </ul>
             <p class="meta mt-4">
+              Run it locally or in a CI job. It exits non-zero when a finding lands at or above the
+              severity you name:
+            </p>
+            <pre class="cmd"><code>vardrgate policy run \
+  --policy profile_ownership.policy.yaml \
+  --base https://api.example.com \
+  --param user_id=42 \
+  --identities identities.json \
+  --fail-on high</code></pre>
+            <p class="meta mt-4">
               <a class="link" href="https://github.com/VardrSec/VardrGate" rel="noopener">Full docs and examples on GitHub →</a>
             </p>
           </div>
-        </div>
-
-        <div class="demo-run">
-          <p class="meta">
-            Run the policy locally or in a CI job. It exits non-zero when a finding lands at or above the
-            severity you name:
-          </p>
-          <pre class="cmd"><code>vardrgate policy run --policy profile_ownership.policy.yaml \
-  --base https://api.example.com --param user_id=42 \
-  --identities identities.json --fail-on high</code></pre>
         </div>
       </div>
     </section>

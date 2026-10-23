@@ -631,7 +631,7 @@ textarea{min-height:140px; resize:vertical; line-height:1.6}
 }
 
 /* --- Featured policy demo -------------------------------------------------- */
-.demo{display:grid; grid-template-columns: 1.15fr .85fr; gap:18px; align-items:start}
+.demo{display:grid; grid-template-columns: 1.15fr .85fr; gap:18px; align-items:stretch}
 .demo-code{
   border-radius:var(--radius); border:1px solid var(--line);
   background:var(--code-bg); box-shadow:var(--card-shadow); overflow:hidden;
@@ -665,6 +665,7 @@ textarea{min-height:140px; resize:vertical; line-height:1.6}
 .demo-side h3{margin:0 0 10px; font-size:16px}
 .demo-side .meta{color:var(--text-3); font-size:13.5px; line-height:1.65}
 .demo-side p.meta{margin-bottom:0}
+.demo-side .cmd code{font-size:12px}
 .demo-side .check li strong{
   color:var(--text);
   font-family:var(--font-mono);
@@ -679,9 +680,7 @@ textarea{min-height:140px; resize:vertical; line-height:1.6}
   margin:8px 0 0; padding:13px 15px; overflow-x:auto;
   border-radius:var(--radius-sm); border:1px solid var(--line); background:var(--code-bg);
 }
-/* The run command spans both demo columns; inside the narrow side panel it was clipped. */
-.demo-run{margin-top:18px}
-.demo-run .meta{margin:0; color:var(--text-3); font-size:13.5px; line-height:1.65}
+/* One flag per line so the command fits the side panel down to the 980px breakpoint. */
 
 /* --- Label / value rows ----------------------------------------------------
    A definition list rendered as two aligned columns with a divider between each
@@ -806,6 +805,8 @@ textarea{min-height:140px; resize:vertical; line-height:1.6}
 @media (max-width: 1024px){
   /* Three columns become two before they become one, so cards keep a usable measure. */
   .grid-3{grid-template-columns: repeat(2, 1fr)}
+  /* An odd card out spans the row instead of leaving half of it empty. */
+  .grid-3 > :last-child:nth-child(odd){grid-column:1 / -1}
   .spec{--label-col: 100px}
 }
 
