@@ -28,6 +28,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   `_headers` now allows `https://www.abuseipdb.com`, and AbuseIPDB is listed as a
   processor in the privacy policy, because the image request sends the visitor's IP
   address to it.
+- About: a VardrSec introduction above the Background card, matching the GitHub
+  organization profile, and a line on the decoy research linking to the Threat
+  Observatory.
 
 ### Changed
 
