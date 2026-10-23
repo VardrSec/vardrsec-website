@@ -31,6 +31,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Tighter vertical rhythm: section padding 80px to 56px (36px compact), smaller hero
+  padding and section-title gaps, with matching reductions at phone widths.
+- Homepage: plain descriptive headline, hero label removed, licenses replaced in the
+  fact strip, one Observatory button instead of two, section endings as text links, and
+  the Maintainer and contact blocks merged into one card. The `vardrgate policy run`
+  command, one flag per line, sits in the Finding types card so the card matches the
+  height of the policy example. Trailing period dropped from the Observatory heading.
+- An odd third card in a three-column grid now spans the row at tablet widths instead
+  of leaving half of it empty.
+- Tools: the three published tools in one row of equal cards with language and license
+  badges; prototypes reduced to one line; shorter contributions panel.
+- Observatory: SSH-side caveats consolidated into a single Methodology and limitations
+  list; redundant eyebrow removed; Other activity rows fill their panel. API sensor
+  section unchanged.
+- Blog: teaser caveat and the empty Malware analysis track removed; tracks in two columns,
+  aligned with the post card.
+- About: How I work section removed; repeated VardrGate rationale and the VardrForge
+  bullet removed.
+
 - Visual refresh in `css/styles.css`: darker base with a faded grid backdrop, tighter
   radii, monospace labels for eyebrows, badges, tags and spec rows, a solid primary button,
   an underline active state in the nav, an editor-style header on the policy demo, and a

@@ -23,9 +23,12 @@
 .obs-empty-chart{height:240px;display:flex;align-items:center;justify-content:center;text-align:center;background:repeating-linear-gradient(to bottom,transparent 0,transparent 47px,rgba(255,255,255,.06) 48px,transparent 49px);color:var(--text-3)}
 .obs-empty-chart p{max-width:250px;background:var(--surface);padding:8px;font-size:.84rem}
 .obs-categories{margin:20px 0 0}
+.obs-panel:has(.obs-categories){display:flex;flex-direction:column}
+.obs-panel:has(.obs-categories) .obs-categories{flex:1;display:flex;flex-direction:column}
+.obs-categories div{flex:1;align-items:center}
 .obs-categories div{display:flex;justify-content:space-between;gap:12px;padding:13px 0;border-bottom:1px solid var(--line-soft)}
 .obs-categories dt{font-size:.85rem;color:var(--text-2)}
-.obs-categories dd{margin:0;font-weight:700}
+.obs-categories dd{margin:0;font-weight:700;font-size:1.35rem}
 .obs-disclaimer{font-size:.75rem;color:var(--text-3);margin-top:16px}
 .obs-method{display:grid;grid-template-columns:1.4fr 1fr;gap:24px;padding:23px;margin-top:13px}
 .obs-method p{font-size:.86rem;color:var(--text-2);margin:10px 0 0}
@@ -45,6 +48,9 @@
 .obs-about{margin-top:13px;padding:19px 22px}
 .obs-about h2{font-size:1rem;margin:0 0 6px}
 .obs-about p{font-size:.81rem;line-height:1.65;margin:0;color:var(--text-3)}
+.obs-about ul{margin:8px 0 0;padding-left:1.15em;font-size:.84rem;line-height:1.65;color:var(--text-2)}
+.obs-about li+li{margin-top:6px}
+.obs-about li::marker{color:var(--text-3)}
 @media(max-width:880px){.obs-findings{grid-template-columns:1fr}}
 
 /* Aggregated activity visual. No external charting library. */
