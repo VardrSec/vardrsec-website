@@ -1,4 +1,4 @@
-import { validApiResearch, categories, methods, families } from '../lib/api-research.mjs';
+import { validApiResearch, categories, methods, families } from '../lib/api-research.mjs?v=2';
 
 const names = {
   api_schema_request:'API schema discovery', api_authentication_request:'Authentication endpoint',
