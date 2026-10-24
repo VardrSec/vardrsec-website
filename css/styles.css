@@ -58,7 +58,6 @@
 
   --card-pad: 24px;
   --card-shadow: 0 1px 0 rgba(255,255,255,.04) inset, 0 12px 32px rgba(0,0,0,.32);
-  --row-gap: 14px;
 }
 
 *{box-sizing:border-box}
@@ -355,8 +354,8 @@ h1{
 
 /* ---------------------------------------------------------------------------
    Card system. One definition, used by every grouped panel on the site:
-   tool cards, focus cards, collaboration topics, resource checklists, contact
-   panels and the bio facts. Page-specific variants only adjust layout, never
+   tool cards, focus cards, resource checklists, contact panels and the bio
+   facts. Page-specific variants only adjust layout, never
    surface, border or radius.
    --------------------------------------------------------------------------- */
 .card{
@@ -463,13 +462,6 @@ h1{
 .badge.ok{border-color:rgba(101,216,138,.32); background:rgba(101,216,138,.08); color:#a6ebbb}
 .badge.warn{border-color:rgba(242,196,107,.32); background:rgba(242,196,107,.08); color:#f5d699}
 .badge.bad{border-color:rgba(255,122,122,.32); background:rgba(255,122,122,.08); color:#ffb0b0}
-
-.tag{
-  font-family:var(--font-mono);
-  font-size:11.5px; padding:3px 9px; border-radius:6px;
-  border:1px solid var(--line); background:var(--surface-2);
-  color:var(--text-2);
-}
 
 /* --- Forms ----------------------------------------------------------------- */
 .form{
@@ -630,7 +622,7 @@ textarea{min-height:140px; resize:vertical; line-height:1.6}
   .kicker{font-size:10.5px; letter-spacing:.03em; gap:7px; padding:5px 9px}
 }
 
-/* --- Featured policy demo -------------------------------------------------- */
+/* --- Code panel with a side card (homepage) -------------------------------- */
 .demo{display:grid; grid-template-columns: 1.15fr .85fr; gap:18px; align-items:stretch}
 .demo-code{
   border-radius:var(--radius); border:1px solid var(--line);
@@ -652,7 +644,7 @@ textarea{min-height:140px; resize:vertical; line-height:1.6}
   margin-right:28px;
 }
 .demo-code pre{margin:0; padding:18px 20px; overflow-x:auto}
-.demo-code code, .cmd code{
+.demo-code code{
   font-family:var(--font-mono);
   font-size:12.75px; line-height:1.75; color:#d5deeb; white-space:pre;
   font-variant-ligatures:none;
@@ -665,7 +657,6 @@ textarea{min-height:140px; resize:vertical; line-height:1.6}
 .demo-side h3{margin:0 0 10px; font-size:16px}
 .demo-side .meta{color:var(--text-3); font-size:13.5px; line-height:1.65}
 .demo-side p.meta{margin-bottom:0}
-.demo-side .cmd code{font-size:12px}
 .demo-side .check li strong{
   color:var(--text);
   font-family:var(--font-mono);
@@ -676,57 +667,6 @@ textarea{min-height:140px; resize:vertical; line-height:1.6}
   background:var(--surface-2);
   border:1px solid var(--line);
 }
-.cmd{
-  margin:8px 0 0; padding:13px 15px; overflow-x:auto;
-  border-radius:var(--radius-sm); border:1px solid var(--line); background:var(--code-bg);
-}
-/* One flag per line so the command fits the side panel down to the 980px breakpoint. */
-
-/* --- Label / value rows ----------------------------------------------------
-   A definition list rendered as two aligned columns with a divider between each
-   row. The label column is a fixed width so rows line up across sibling cards,
-   which is what makes three tool cards scan as one table.
-   --------------------------------------------------------------------------- */
-.spec{
-  --label-col: 108px;
-  margin:0;
-  display:grid;
-  grid-template-columns: var(--label-col) 1fr;
-}
-.spec dt{
-  grid-column:1;
-  color:var(--text-3);
-  font-family:var(--font-mono);
-  font-size:11px;
-  font-weight:500;
-  text-transform:uppercase;
-  letter-spacing:.07em;
-  line-height:1.6;
-  padding:var(--row-gap) 12px var(--row-gap) 0;
-  border-top:1px solid var(--line-soft);
-}
-.spec dd{
-  grid-column:2;
-  margin:0;
-  color:var(--text-2);
-  font-size:14px;
-  line-height:1.65;
-  padding:var(--row-gap) 0;
-  border-top:1px solid var(--line-soft);
-}
-/* The first row's divider would sit directly under the heading margin. */
-.spec > dt:first-of-type, .spec > dt:first-of-type + dd{border-top:none; padding-top:0}
-
-/* --- Card footer ------------------------------------------------------------ */
-.tool-foot{
-  display:flex; align-items:center; gap:8px; flex-wrap:wrap;
-  margin-top:auto; padding-top:16px;
-  border-top:1px solid var(--line-soft);
-  font-size:13px;
-}
-.tool-card .spec{margin-bottom:18px}
-.tool-foot .link{margin-left:auto; text-decoration:none; border-bottom:1px solid transparent}
-.tool-foot .link:hover{border-bottom-color:currentColor}
 
 /* --- Maintainer ------------------------------------------------------------ */
 .maintainer{flex-direction:row; align-items:center; justify-content:space-between; gap:24px}
@@ -759,7 +699,7 @@ textarea{min-height:140px; resize:vertical; line-height:1.6}
 /* Grid and flex children default to min-width:auto, so a wide <pre> or table
    refuses to shrink and pushes the page sideways. */
 .demo > *, .grid-2 > *, .grid-3 > *, .hero-card > *{min-width:0}
-.demo-code pre, .cmd{max-width:100%}
+.demo-code pre{max-width:100%}
 .table-scroll{overflow-x:auto; -webkit-overflow-scrolling:touch; max-width:100%}
 .table-scroll .table{min-width:520px}
 
@@ -795,7 +735,6 @@ textarea{min-height:140px; resize:vertical; line-height:1.6}
 /* Links inside cards need a focus ring that reads against the card surface,
    not only against the page background. */
 .card a:focus-visible,
-.tool-foot .link:focus-visible,
 .check a:focus-visible{
   outline:2px solid var(--accent2);
   outline-offset:3px;
@@ -807,7 +746,6 @@ textarea{min-height:140px; resize:vertical; line-height:1.6}
   .grid-3{grid-template-columns: repeat(2, 1fr)}
   /* An odd card out spans the row instead of leaving half of it empty. */
   .grid-3 > :last-child:nth-child(odd){grid-column:1 / -1}
-  .spec{--label-col: 100px}
 }
 
 @media (max-width: 760px){
@@ -815,17 +753,7 @@ textarea{min-height:140px; resize:vertical; line-height:1.6}
 }
 
 @media (max-width: 560px){
-  /* Below this the label column squeezes each value to a few words per line, so
-     rows stack. The dividers stay, which is what keeps the grouping legible. */
-  .spec{grid-template-columns: 1fr}
-  .spec dt{grid-column:1; padding:var(--row-gap) 0 2px; border-top:1px solid var(--line-soft)}
-  .spec dd{grid-column:1; padding:0 0 var(--row-gap); border-top:none}
-  .spec > dt:first-of-type{padding-top:0}
-  .spec > dt:first-of-type + dd{padding-top:0}
-
-  /* Keep the link right-aligned; let it wrap only if the tags genuinely fill the row. */
-  .tool-foot{gap:8px 10px}
-  :root{--card-pad:20px; --row-gap:12px}
+  :root{--card-pad:20px}
   .footer-grid{grid-template-columns:1fr}
 }
 
