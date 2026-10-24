@@ -98,5 +98,13 @@
 .obs-copy-hash:hover,.obs-copy-hash:focus-visible{color:var(--text);border-color:var(--accent2)}
 .obs-history{border-top:1px solid var(--line);padding-top:30px}
 .obs-api-pending{padding:20px;color:var(--text-2);font-size:.86rem}
+.obs-api-behavior{margin-top:24px}
+.obs-api-behavior[hidden]{display:none}
+.obs-api-last{margin-top:13px}
+.obs-api-breakdown{margin:28px 0 0}
+.obs-ssh-behavior{margin-top:16px}
+.obs-ssh-behavior[hidden]{display:none}
+.obs-ssh-signals{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:16px}
+@media(max-width:600px){.obs-ssh-signals{grid-template-columns:1fr;gap:0}}
 @media(max-width:880px){.obs-recent-stats{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:600px){.obs-jump{flex-wrap:wrap;overflow:visible}.obs-recent-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.obs-recent-stats .obs-stat:last-child{grid-column:span 2}.obs-highlight{align-items:flex-start;flex-direction:column}}

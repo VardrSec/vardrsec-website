@@ -4,12 +4,15 @@ import { readFileSync } from 'node:fs';
 import vm from 'node:vm';
 
 import { validHistory } from '../lib/observatory-history.mjs';
+import { validSessionBehavior, sessionStages } from '../lib/observatory-behavior.mjs';
 const historyUrl = new URL('../lib/observatory-history.mjs', import.meta.url).href;
+const behaviorUrl = new URL('../lib/observatory-behavior.mjs', import.meta.url).href;
 const policyUrl = new URL('../lib/observatory-command-policy.mjs', import.meta.url).href;
 async function loadFunction(name) {
   const source = readFileSync(new URL('../functions/api/' + name, import.meta.url), 'utf8')
     .replace("'../../lib/observatory-command-policy.mjs'", JSON.stringify(policyUrl))
-    .replace("'../../lib/observatory-history.mjs'", JSON.stringify(historyUrl));
+    .replace("'../../lib/observatory-history.mjs'", JSON.stringify(historyUrl))
+    .replace("'../../lib/observatory-behavior.mjs'", JSON.stringify(behaviorUrl));
   return import('data:text/javascript;base64,' + Buffer.from(source).toString('base64'));
 }
 const publisher = await loadFunction('observatory-publish.js');
@@ -98,9 +101,9 @@ async function render(value) {
   const nodes=new Map();
   const document={getElementById:id=>{if(!nodes.has(id))nodes.set(id,new Element('div'));return nodes.get(id);},
     createElement:tag=>new Element(tag),createElementNS:(_,tag)=>new Element(tag)};
-  const context=vm.createContext({validHistory,window:{},document,setInterval(){},fetch:async()=>({ok:true,json:async()=>value})});
+  const context=vm.createContext({validHistory,validSessionBehavior,sessionStages,window:{},document,setInterval(){},fetch:async()=>({ok:true,json:async()=>value})});
   vm.runInContext(readFileSync(new URL('../js/observatory-policy.js',import.meta.url),'utf8'),context);
-  vm.runInContext(readFileSync(new URL('../js/observatory.js',import.meta.url),'utf8').replace(/^import .*;\n/,''),context);
+  vm.runInContext(readFileSync(new URL('../js/observatory.js',import.meta.url),'utf8').replace(/^import .*;\r?\n/gm,''),context);
   await new Promise(resolve=>setImmediate(resolve));
   return nodes;
 }
@@ -181,4 +184,25 @@ test('v3 remains available while delayed lifetime history warms up',async()=>{
   assert.equal(nodes.get('obs-lifetime-auth').textContent,'—');
   assert.match(nodes.get('obs-lifetime-period').textContent,/awaiting/);
   assert.equal(nodes.get('obs-auth').textContent,'2');
+});
+test('v5 publishes only fixed session stages and the browser labels their limits',async()=>{
+  const value=lifetimeSnapshot();value.version=5;
+  value.behavior={furthest_observed_stage:{connect_only:0,auth_failed_only:0,
+    login_no_command:1,command_no_file:0,file_transfer:0},
+    command_result_events:{reported_success:1,reported_failure:2},forwarding_requests:3};
+  assert.equal(publisher.valid(value),true);
+  assert.deepEqual(getter.publicSnapshot(value).behavior,value.behavior);
+  const nodes=await render(value);
+  assert.equal(nodes.get('obs-ssh-behavior').hidden,false);
+  assert.match(contents(nodes.get('obs-ssh-stage-rows')),/Decoy login, no command/);
+  assert.equal(nodes.get('obs-forwarding-requests').textContent,'3');
+  for(const mutate of [v=>v.behavior.source='192.0.2.1',
+    v=>v.behavior.furthest_observed_stage.connect_only=1,
+    v=>v.behavior.furthest_observed_stage.file_transfer=-1,
+    v=>v.behavior.command_result_events.reported_failure='private-value']) {
+    const invalid=structuredClone(value);mutate(invalid);
+    assert.equal(publisher.valid(invalid),false);
+    assert.throws(()=>getter.publicSnapshot(invalid));
+    assert.equal((await render(invalid)).get('obs-status').textContent,'Data unavailable');
+  }
 });

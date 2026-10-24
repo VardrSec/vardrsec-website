@@ -39,6 +39,15 @@ export function renderApiResearch(data) {
   show('obs-api-auth', fmt(data.categories.api_authentication_request));
   show('obs-api-schema', fmt(data.categories.api_schema_request));
   show('obs-api-data', fmt(data.categories.api_data_request));
+  byId('obs-api-behavior').hidden = data.version < 2;
+  if (data.version === 2) {
+    const behavior = data.behavior;
+    show('obs-api-runs', fmt(behavior.runs));
+    show('obs-api-multi', fmt(behavior.depth.two_to_four + behavior.depth.five_or_more));
+    show('obs-api-route-runs', fmt(behavior.api_route_runs));
+    show('obs-api-mixed-runs', fmt(behavior.mixed_category_runs));
+    rows('obs-api-last-categories', behavior.last_categories, categories, names);
+  }
   rows('obs-api-patterns', data.categories, categories, names);
   rows('obs-api-methods', data.methods, methods, Object.fromEntries(methods.map(method => [method, method])));
   rows('obs-api-clients', data.families, families, familyNames);
