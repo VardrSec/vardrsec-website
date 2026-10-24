@@ -16,7 +16,7 @@
   <meta property="og:description" content="Independent research from SSH and API decoys, plus open-source tools for testing access control." />
   <meta property="og:image" content="https://vardrsec.com/assets/orgbanner.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <link rel="stylesheet" href="css/styles.css?v=8aad5361" />
+  <link rel="stylesheet" href="css/styles.css?v=5ea58cfa" />
 </head>
 <body>
 <!-- @partial:header -->
@@ -116,117 +116,41 @@
       </div>
     </section>
 
-    <!-- Featured: what the tooling actually looks like -->
-    <section class="section compact" id="policy">
+    <!-- How the tools fit together, with a short VardrRunner session -->
+    <section class="section compact" aria-labelledby="tools-overview-title">
       <div class="container">
         <div class="section-title">
-          <h2>Authorization as a declarative policy</h2>
-          <p>A VardrGate policy file declares the expected outcome for each caller. VardrGate replays the request as every identity and reports each divergence from the policy, with request and response evidence.</p>
+          <h2 id="tools-overview-title">How the tools work together</h2>
+          <p>During an engagement, work moves from VardrMap to VardrRunner, and VardrRunner hands authorization tests to VardrGate. Each tool also works on its own.</p>
         </div>
 
         <div class="demo">
           <div class="demo-code">
             <div class="demo-head">
-              <span class="demo-file">profile_ownership.policy.yaml</span>
-              <span class="badge">YAML</span>
+              <span class="demo-file">vardrrunner console</span>
+              <span class="badge">Terminal</span>
             </div>
-<pre><code>api:
-  endpoint: GET /users/{user_id}/profile
-  owner: identity:owner
-  resource:
-    type: user_profile
-    id_param: user_id
-    tenant_field: tenant_id
-
-expect:
-  owner: allow
-  other_user: deny
-  anonymous: deny
-
-response:
-  deny_status: [401, 403, 404]
-  sensitive_fields:
-    forbidden_for:
-      - other_user
-      - anonymous</code></pre>
+<pre><code>$ pipx install vardrrunner
+$ vardrrunner                          # opens the console
+vardrrunner &gt; use 3f2a9c1e-…           # an engagement in VardrMap
+vardrrunner(3f2a9c1e) &gt; jobs list      # queued scans and VardrGate tests
+vardrrunner(3f2a9c1e) &gt; jobs run       # run them here, report back
+vardrrunner(3f2a9c1e) &gt; status         # version, config and tools
+vardrrunner(3f2a9c1e) &gt; exit</code></pre>
           </div>
 
           <div class="demo-side">
-            <h3>Finding types</h3>
+            <h3>Who does what</h3>
             <ul class="check">
-              <li><strong>potential_bola</strong> — a non-owner reached an identified object</li>
-              <li><strong>cross_tenant_access</strong> — an identity from another tenant got through</li>
-              <li><strong>missing_authentication</strong> — an anonymous caller reached a protected resource</li>
-              <li><strong>sensitive_data_exposure</strong> — a caller saw fields it must not (evidence names the fields, never the values)</li>
+              <li><strong>VardrMap</strong> queues a scan pipeline or an authorization test from an engagement. Scan targets come from the scope recorded on that engagement.</li>
+              <li><strong>VardrRunner</strong> runs the queued jobs when the operator starts it, and sends each job's progress back while it runs.</li>
+              <li><strong>VardrGate</strong> runs the reviewed cases of an authorization-test job on the same machine. Its findings return as candidates for review, next to the scan results.</li>
             </ul>
             <p class="meta mt-4">
-              Run it locally or in a CI job. It exits non-zero when a finding lands at or above the
-              severity you name:
-            </p>
-            <pre class="cmd"><code>vardrgate policy run \
-  --policy profile_ownership.policy.yaml \
-  --base https://api.example.com \
-  --param user_id=42 \
-  --identities identities.json \
-  --fail-on high</code></pre>
-            <p class="meta mt-4">
-              <a class="link" href="https://github.com/VardrSec/VardrGate" rel="noopener">Full docs and examples on GitHub →</a>
+              <a class="link" href="tools.html">Licenses, source and setup on the tools page →</a>
             </p>
           </div>
         </div>
-      </div>
-    </section>
-
-    <!-- Open Source Tools -->
-    <section class="section compact">
-      <div class="container">
-        <div class="section-title">
-          <h2>Open-source tools</h2>
-          <p>Source, issues, and releases are public on GitHub. Bug reports and pull requests are welcome.</p>
-        </div>
-        <div class="grid-3">
-          <div class="card tool-card">
-            <h3>VardrGate</h3>
-            <dl class="spec">
-              <dt>Purpose</dt><dd>Verifies API authorization against a declared policy</dd>
-              <dt>How it works</dt><dd>Replays one request as every identity and compares the result to the policy</dd>
-              <dt>Outcome</dt><dd>Can flag authorization regressions in a configured CI run</dd>
-            </dl>
-            <div class="tool-foot">
-              <span class="tag">Go</span><span class="tag">Apache-2.0</span>
-              <a class="link" href="https://github.com/VardrSec/VardrGate" rel="noopener">GitHub →</a>
-            </div>
-          </div>
-
-          <div class="card tool-card">
-            <h3>VardrMap</h3>
-            <dl class="spec">
-              <dt>Purpose</dt><dd>Runs security engagements: scope, authorization and findings</dd>
-              <dt>How it works</dt><dd>Multi-tenant app that starts scans and authorization tests through VardrRunner and VardrGate</dd>
-              <dt>Outcome</dt><dd>Keeps scope and evidence tied to an engagement</dd>
-            </dl>
-            <div class="tool-foot">
-              <span class="tag">Python</span><span class="tag">AGPL-3.0</span>
-              <a class="link" href="https://github.com/VardrSec/VardrMap" rel="noopener">GitHub →</a>
-            </div>
-          </div>
-
-          <div class="card tool-card">
-            <h3>VardrRunner</h3>
-            <dl class="spec">
-              <dt>Purpose</dt><dd>Executes security workflows locally</dd>
-              <dt>How it works</dt><dd>Claims queued jobs, runs them locally, and uploads results</dd>
-              <dt>Outcome</dt><dd>Runs tools from the operator's machine while the backend tracks results</dd>
-            </dl>
-            <div class="tool-foot">
-              <span class="tag">Python</span><span class="tag">MIT</span>
-              <a class="link" href="https://github.com/VardrSec/VardrRunner" rel="noopener">GitHub →</a>
-            </div>
-          </div>
-        </div>
-        <p class="section-more">
-          <a class="link" href="tools.html">More on the tools page →</a>
-        </p>
       </div>
     </section>
 

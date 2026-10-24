@@ -14,7 +14,7 @@
   <meta property="og:description" content="Open-source security tooling built by VardrSec: API authorization testing, engagement tracking, and local scan automation." />
   <meta property="og:image" content="https://vardrsec.com/assets/orgbanner.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <link rel="stylesheet" href="css/styles.css?v=8aad5361" />
+  <link rel="stylesheet" href="css/styles.css?v=5ea58cfa" />
 </head>
 <body>
 <!-- @partial:header -->
@@ -136,11 +136,13 @@
             </div>
             <h3>VardrRunner</h3>
             <p>
-              Runs queued security jobs on your own machine and uploads the results to a remote backend that
-              handles orchestration.
+              Runs security tools on your own machine, either directly or as jobs queued in VardrMap, and
+              uploads the results. It runs only when invoked, with no startup service or background worker.
             </p>
             <p>
-              The backend receives findings, so review its data handling before connecting sensitive targets.
+              Installs with pipx, and verifies each pinned scanner binary against its hash before running it.
+              The connected backend receives findings, so review its data handling before connecting
+              sensitive targets.
             </p>
             <div class="meta mt-4">
               <a class="link" href="https://github.com/VardrSec/VardrRunner" rel="noopener">github.com/VardrSec/VardrRunner →</a>
@@ -149,9 +151,7 @@
         </div>
 
         <p class="section-more">
-          <strong>In design:</strong> VardrScanner
-          (<a class="link" href="https://github.com/jorge-aquino/vardrscanner-docs" rel="noopener">design docs →</a>)
-          and VardrForge. Neither is ready to use.
+          <strong>In design:</strong> VardrForge. It is not ready to use.
         </p>
 
         <div class="card cta mt-8">

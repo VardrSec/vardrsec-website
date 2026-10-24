@@ -7,108 +7,71 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-10-24
+
+Research-led homepage, a first blog post, self-hosted fonts and a plainer voice across the
+site. The tools are presented as peers.
+
 ### Added
 
-- Self-hosted Inter and JetBrains Mono variable fonts (Latin subset, OFL-licensed) in
-  `assets/fonts/`, with their license files. No CSP change: `font-src 'self'` already
-  covers them.
-- `.cta` and `.list` classes, replacing the inline `style=` attributes on call-to-action
-  cards and prose lists in `index.html`, `about.html` and `tools.html`, and on the mobile
-  Contact button in the header partial.
-- Fact strip under the homepage hero (sensors, publishing model, licenses).
-
-- First research blog post, `blog-ssh-key-takeover.html`: the two SSH-key takeover
-  command patterns from the frozen October snapshot, step-by-step explanation,
-  matching public reports, and hardening checks. Listed on the blog and in the sitemap.
-- `abuseipdb-verification` meta tag in the `index.html` head, which proves ownership of
-  `vardrsec.com` to AbuseIPDB (Account > Webmasters). The token is public by design.
-
-- AbuseIPDB contributor badge on `about.html`. Loading it from `vardrsec.com` sends the
-  Referer that AbuseIPDB uses to verify the domain on the account. `img-src` in
-  `_headers` now allows `https://www.abuseipdb.com`, and AbuseIPDB is listed as a
-  processor in the privacy policy, because the image request sends the visitor's IP
-  address to it.
-- About: a VardrSec introduction above the Background card, matching the GitHub
-  organization profile, and a line on the decoy research linking to the Threat
-  Observatory.
+- **Research:** the first blog post, `blog-ssh-key-takeover.html`, covering the two SSH-key
+  takeover patterns from the October snapshot, with matching public reports and
+  hardening checks.
+- **Homepage:** a fact strip under the hero, and a "How the tools work together" section: a
+  short VardrRunner console session beside one line on what VardrMap, VardrRunner and
+  VardrGate each do during an engagement.
+- **About:** a VardrSec introduction matching the GitHub organization profile, a line on
+  the decoy research, OWASP membership, and an "Elsewhere" card with GitHub links and the
+  AbuseIPDB contributor badge.
+- **AbuseIPDB:** a domain-verification meta tag on the homepage, and the badge on About.
+  `_headers` allows its image host, and the privacy policy lists AbuseIPDB as a processor,
+  since loading the badge sends the visitor's IP address to it.
+- **Fonts:** self-hosted Inter and JetBrains Mono (Latin subset, OFL) with their licenses.
+  `font-src 'self'` already covered them.
 
 ### Changed
 
-- Tighter vertical rhythm: section padding 80px to 56px (36px compact), smaller hero
-  padding and section-title gaps, with matching reductions at phone widths.
-- Homepage: plain descriptive headline, hero label removed, licenses replaced in the
-  fact strip, one Observatory button instead of two, section endings as text links, and
-  the Maintainer and contact blocks merged into one card. The `vardrgate policy run`
-  command, one flag per line, sits in the Finding types card so the card matches the
-  height of the policy example. Trailing period dropped from the Observatory heading.
-- An odd third card in a three-column grid now spans the row at tablet widths instead
-  of leaving half of it empty.
-- Tools: the three published tools in one row of equal cards with language and license
-  badges; prototypes reduced to one line; shorter contributions panel.
-- Observatory: SSH-side caveats consolidated into a single Methodology and limitations
-  list; redundant eyebrow removed; Other activity rows fill their panel. API sensor
-  section unchanged.
-- Blog: teaser caveat and the empty Malware analysis track removed; tracks in two columns,
-  aligned with the post card.
-- About: How I work section removed; repeated VardrGate rationale and the VardrForge
-  bullet removed.
-
-- Visual refresh in `css/styles.css`: darker base with a faded grid backdrop, tighter
-  radii, monospace labels for eyebrows, badges, tags and spec rows, a solid primary button,
-  an underline active state in the nav, an editor-style header on the policy demo, and a
-  restyled footer. Token names are unchanged, and every documented layout fix (grid
-  `min-width:0`, form `minmax(0,1fr)`, Turnstile scaling, `.spec` stacking, skip link) is
-  kept. `observatory.css` and `research.css` were aligned to the same radii and type.
-- Copy: informal phrasing replaced with plain technical language on the homepage, About,
-  Tools, Contact, 404, Resources and the SSH blog post. Figures, dates, limits and
-  sources are unchanged.
-- `resources.html` rewritten: learning paths, an access-control testing method, API and
-  web testing tools, recon and OSINT, cloud practice and auditing, developer checks with
-  the reason for each, detection, and reporting. Every external link was checked.
-- Plain-language pass: the blog intro, Observatory wording and status labels, homepage
-  Observatory section, header tagline ("Offensive" dropped) and footer. Observatory and
-  footer copy no longer describe the sensor setup.
-- VardrMap is described as a multi-tenant engagement platform on the homepage and tools
-  page, matching the GitHub description.
-
-### Fixed
-
-- The contact form's success message promised a reply "within 1–2 business days", which
-  contradicted the About page. It now reads "Message sent."
-- `tools/verify.js` listed `catalog` as a British spelling; the entry is now `catalogue`.
-
-- The October 2026 working-draft report is unlisted: removed from the blog, the homepage
-  research card and the sitemap, and marked `noindex`. The page and artifacts remain.
-
-- `about.html` rewritten to be shorter and plainer: background, what I work on, how I
-  work, and contact. The narrative intro and the pitch-style sections were removed.
-- Plain-language pass across the site. Removed self-promotional and sales copy: the
-  home page services list and slogans, the "Need customized resources?" box on
-  `resources.html`, and similar lines on the tools page and in the footer.
-- `about.html` gained the "why" behind each tool, the career-changer note from the old
-  Collaboration page, and an "Elsewhere" card with GitHub links and the AbuseIPDB badge.
-- Nav order is now Home, About, Tools, Resources.
-- `contact.html` no longer promises a 1–2 business day reply, since replies fit around
-  a full-time job. The hidden `company` honeypot field is unchanged.
-
-- About and Contact no longer state current employment ("I work full time", "I write
-  code for a living"). The wording now holds regardless of job status.
-- About, Background: OWASP Foundation membership and interest in the OWASP Top 10 and
-  API Security Top 10, with links to both lists.
+- **Homepage:** a plain descriptive headline, one Observatory button, and the Maintainer
+  and contact blocks merged into one card. The VardrGate policy demo and the three tool
+  cards, which repeated the tools page, are replaced by the section above.
+- **Tools:** the three published tools sit in one row of equal cards with language and
+  license badges. The VardrRunner card now describes direct and queued runs, invocation
+  only, pipx installs and hash-verified scanner binaries.
+- **Copy:** informal, promotional and sales phrasing replaced with plain technical language
+  on every page. Figures, dates, limits and sources are unchanged. The header tagline
+  drops "Offensive".
+- **Resources:** rewritten around learning paths, an access-control testing method, tools
+  by area, and reporting. Every external link was checked.
+- **Observatory and Blog:** caveats consolidated into one Methodology and limitations list,
+  and empty tracks and redundant labels removed.
+- **About:** shorter and plainer. It no longer states current employment or promises a
+  reply time.
+- **Design:** a darker base with a faded grid, tighter radii and vertical rhythm, monospace
+  labels, a solid primary button, and an underlined active nav state. Inline `style=`
+  attributes are replaced by `.cta` and `.list` classes, and an odd third card spans the
+  row at tablet widths.
+- VardrMap is described as a multi-tenant engagement platform, matching GitHub.
 
 ### Removed
 
-- VardrVault is no longer listed on the site: its card on `tools.html` (the prototypes
-  grid is now two columns) and its entry in the `about.html` tools list.
-- `collaboration.html`. Its content was folded into `about.html` and `tools.html`.
-  `/collaboration`, `/services` and `/consulting` now 301 straight to `/about`.
+- Prototypes other than VardrForge are no longer mentioned. The tools page lists only
+  VardrForge as in design.
+- `collaboration.html`, folded into About and Tools. `/collaboration`, `/services` and
+  `/consulting` redirect to `/about`.
+- The October 2026 working-draft report is unlisted: off the blog, homepage and sitemap,
+  and marked `noindex`. The page and its artifacts remain.
+- Stylesheet rules left unused by the homepage change (`.spec`, `.tool-card`, `.tool-foot`,
+  `.tag`, `.cmd`).
 
 ### Fixed
 
-- VardrMap was listed as MIT on the home and tools pages; it is AGPL-3.0. The tools page
-  also described all published tools as "permissive licenses", which AGPL is not.
-- "Scope allowlists are compiled into the tools" on the home page was only true of
-  VardrForge, which is still in design. Removed.
+- VardrMap was listed as MIT; it is AGPL-3.0. The tools page no longer calls every tool
+  permissively licensed.
+- The homepage claimed scope allowlists are compiled into the tools, which was only true
+  of the unreleased VardrForge.
+- The contact form's success message promised a reply within 1–2 business days, against
+  the About page; it now reads "Message sent."
+- `tools/verify.js` listed `catalog` as a British spelling instead of `catalogue`.
 
 ## [1.0.0] - 2026-07-31
 
@@ -194,9 +157,8 @@ Everything below happened in that rebuild.
 ### Added
 
 - `tools.html` — a first-class page for the toolchain. Published tools (VardrGate,
-  VardrMap, VardrRunner) link to their repositories; unpublished ones (VardrScanner,
-  VardrForge, VardrVault) are listed as in development without dead links to private
-  repos.
+  VardrMap, VardrRunner) link to their repositories; unpublished ones are listed as in
+  development without dead links to private repos.
 
 ### Changed
 
