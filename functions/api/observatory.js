@@ -1,4 +1,5 @@
 import { validHistory } from '../../lib/observatory-history.mjs';
+import { validSessionBehavior, sessionStages } from '../../lib/observatory-behavior.mjs';
 // Read-only public snapshot. No Oracle connectivity or secrets.
 import { safeTemplate, policyVersion } from '../../lib/observatory-command-policy.mjs';
 const count = value => Number.isSafeInteger(value) && value >= 0 && value <= 1e9;
@@ -7,7 +8,7 @@ const utc = value => typeof value === 'string' && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2
 
 export function publicSnapshot(snapshot) {
   if (!snapshot || typeof snapshot !== 'object' || Array.isArray(snapshot)) throw new Error('Invalid snapshot');
-  if (![1,2,3,4].includes(snapshot.version) || snapshot.window_hours !== 24 || !utc(snapshot.published_at)) throw new Error('Invalid metadata');
+  if (![1,2,3,4,5].includes(snapshot.version) || snapshot.window_hours !== 24 || !utc(snapshot.published_at)) throw new Error('Invalid metadata');
   const clean = {version:snapshot.version,published_at:snapshot.published_at,window_hours:24,totals:{},hourly:[],artifacts:[],commands:[]};
   for (const key of ['sessions','unique_sources','auth_events','command_events','file_events']) {
     if (!count(snapshot.totals?.[key])) throw new Error('Invalid totals');
@@ -34,10 +35,18 @@ export function publicSnapshot(snapshot) {
       && count(c.count) && c.count > 0).slice(0,10)
       .map(c => ({template:c.template,count:c.count})) : [];
   }
-  if (snapshot.version === 4) {
+  if (snapshot.version >= 4) {
     const end = Math.floor(Date.parse(snapshot.published_at) / 3_600_000) * 3_600_000 - 3_600_000;
     if (!validHistory(snapshot.lifetime, end)) throw new Error('Invalid lifetime summary');
     clean.lifetime = snapshot.lifetime; // Exact keys and count-only values validated above.
+  }
+  if (snapshot.version === 5) {
+    if (!validSessionBehavior(snapshot.behavior, clean.totals.sessions)) throw new Error('Invalid session behavior');
+    clean.behavior = {furthest_observed_stage:Object.fromEntries(
+      sessionStages.map(key => [key, snapshot.behavior.furthest_observed_stage[key]])),
+      command_result_events:{reported_success:snapshot.behavior.command_result_events.reported_success,
+        reported_failure:snapshot.behavior.command_result_events.reported_failure},
+      forwarding_requests:snapshot.behavior.forwarding_requests};
   }
   return clean;
 }

@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import vm from 'node:vm';
-import {validApiResearch, categories, methods, outcomes, families} from '../lib/api-research.mjs';
+import {validApiResearch, categories, methods, outcomes, families, runDepths, validBehavior} from '../lib/api-research.mjs';
 import {onRequestGet} from '../functions/api/api-research.js';
 import {onRequestPost} from '../functions/api/api-research-publish.js';
 
@@ -17,6 +17,14 @@ function fixture() {
     methods:group(methods),outcomes:group(outcomes),families:group(families)};
   value.categories.api_authentication_request=2;value.methods.POST=2;value.outcomes['4xx']=2;
   value.families.curl=2;
+  return value;
+}
+function behaviorFixture() {
+  const value=fixture();value.version=2;value.behavior={gap_minutes:30,runs:2,
+    depth:Object.fromEntries(runDepths.map(k=>[k,0])),
+    last_categories:Object.fromEntries(categories.map(k=>[k,0])),
+    api_route_runs:2,mixed_category_runs:0};
+  value.behavior.depth.one=2;value.behavior.last_categories.api_authentication_request=2;
   return value;
 }
 function env(previous=null) {
@@ -38,9 +46,18 @@ test('exact, delayed fixed-vocabulary contract',()=>{
     v=>v.window_start=v.window_end,v=>v.sensor='private-pilot'];
   for(const mutate of changes) {const value=fixture();mutate(value);assert.equal(validApiResearch(value),false);}
 });
+test('version two behavior accepts only fixed aggregate labels',()=>{
+  assert.equal(validApiResearch(behaviorFixture()),true);
+  const changes=[v=>v.behavior.source='192.0.2.1',v=>v.behavior.last_categories.raw_path='secret',
+    v=>v.behavior.depth.one=1,v=>v.behavior.api_route_runs=3,
+    v=>v.behavior.gap_minutes=60,v=>v.behavior.runs=3];
+  for(const mutate of changes){const value=behaviorFixture();mutate(value);assert.equal(validApiResearch(value),false);}
+  const valid=behaviorFixture();assert.equal(validBehavior(valid.behavior,2,valid.categories),true);
+});
 test('publisher authenticates and writes one fixed key',async()=>{
   const environment=env();
   assert.equal((await onRequestPost({request:request(fixture()),env:environment})).status,202);
+  assert.equal((await onRequestPost({request:request(behaviorFixture()),env:env()})).status,202);
   assert.equal(environment.writes[0][0],'api_research_snapshot');
   assert.equal((await onRequestPost({request:request(fixture(),'invalid'),env:env()})).status,401);
   const privateValue=fixture();privateValue.query='synthetic-secret';
@@ -75,6 +92,10 @@ test('browser renders only fixed labels and counts',()=>{
   assert.equal(nodes.get('obs-api-auth').textContent,'2');
   assert.equal(nodes.get('obs-api-patterns').children[0].children[0].textContent,'Authentication endpoint');
   assert.equal(nodes.get('obs-api-clients').children[0].children[0].textContent,'curl');
+  const behavior=behaviorFixture();context.renderApiResearch(behavior);
+  assert.equal(nodes.get('obs-api-behavior').hidden,false);
+  assert.equal(nodes.get('obs-api-runs').textContent,'2');
+  assert.equal(nodes.get('obs-api-last-categories').children[0].children[0].textContent,'Authentication endpoint');
   data.private_value='<script>synthetic-secret</script>';
   assert.throws(()=>context.renderApiResearch(data));
   assert.equal(JSON.stringify([...nodes.values()]).includes('synthetic-secret'),false);

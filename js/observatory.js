@@ -1,4 +1,5 @@
 import { validHistory } from '../lib/observatory-history.mjs?v=1';
+import { validSessionBehavior, sessionStages } from '../lib/observatory-behavior.mjs?v=1';
 /* VardrSec Threat Observatory: read-only sanitized aggregates. */
 (() => {
   "use strict";
@@ -23,7 +24,7 @@ import { validHistory } from '../lib/observatory-history.mjs?v=1';
     return node;
   }
   function validate(data) {
-    return data && [1,2,3,4].includes(data.version) && data.window_hours === 24 &&
+    return data && [1,2,3,4,5].includes(data.version) && data.window_hours === 24 &&
       typeof data.published_at === "string" && Number.isFinite(Date.parse(data.published_at)) &&
       data.totals && ["sessions","unique_sources","auth_events","command_events","file_events"].every(k => isCount(data.totals[k])) &&
       Array.isArray(data.hourly) && data.hourly.length === 24 && data.hourly.every(h =>
@@ -33,7 +34,8 @@ import { validHistory } from '../lib/observatory-history.mjs?v=1';
         && data.command_window_hours === 168 && Number.isFinite(Date.parse(data.command_window_start))
         && Number.isFinite(Date.parse(data.command_window_end))
         && Date.parse(data.command_window_end) - Date.parse(data.command_window_start) === 168 * 3_600_000)) &&
-      (data.version !== 4 || validHistory(data.lifetime, Math.floor(Date.parse(data.published_at) / 3_600_000) * 3_600_000 - 3_600_000));
+      (data.version < 4 || validHistory(data.lifetime, Math.floor(Date.parse(data.published_at) / 3_600_000) * 3_600_000 - 3_600_000)) &&
+      (data.version !== 5 || validSessionBehavior(data.behavior, data.totals.sessions));
   }
   function drawChart(points) {
     const host = byId("obs-chart");
@@ -139,6 +141,23 @@ import { validHistory } from '../lib/observatory-history.mjs?v=1';
       body.append(row);
     }
   }
+  function renderStages(value) {
+    const panel=byId('obs-ssh-behavior');
+    panel.hidden=!value;
+    if (!value) return;
+    const labels={connect_only:'Connection only',auth_failed_only:'Authentication rejected',
+      login_no_command:'Decoy login, no command',command_no_file:'Command, no file event',
+      file_transfer:'File-transfer event'};
+    const body=byId('obs-ssh-stage-rows');body.replaceChildren();
+    for(const key of sessionStages) {
+      const row=document.createElement('tr'),label=document.createElement('td'),count=document.createElement('td');
+      label.textContent=labels[key];count.textContent=fmt(value.furthest_observed_stage[key]);
+      row.append(label,count);body.append(row);
+    }
+    text('obs-command-success',fmt(value.command_result_events.reported_success));
+    text('obs-command-failure',fmt(value.command_result_events.reported_failure));
+    text('obs-forwarding-requests',fmt(value.forwarding_requests));
+  }
   function showError(message) {
     text("obs-status","Data unavailable");
     const el=byId("obs-notice");el.hidden=false;el.textContent=message;
@@ -164,7 +183,8 @@ import { validHistory } from '../lib/observatory-history.mjs?v=1';
       const note=byId("obs-notice");
       if(age>20*60*1000){note.hidden=false;note.textContent="Latest data may be stale; the publisher has not updated recently.";}
       else note.hidden=true;
-      renderHistory(data.version === 4 ? data.lifetime : null);
+      renderHistory(data.version >= 4 ? data.lifetime : null);
+      renderStages(data.version === 5 ? data.behavior : null);
       drawChart(data.hourly);
       // v3 and v4 carry the independently validated fixed-vocabulary projection.
       const commands=renderRows("obs-command-rows",data.version>=3?data.commands:[],"commands",data.version);

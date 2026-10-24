@@ -9,7 +9,7 @@
   <meta name="description" content="Delayed, privacy-reviewed findings from VardrSec's SSH and API research sensors." />
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="css/styles.css?v=5ea58cfa" />
-  <link rel="stylesheet" href="css/observatory.css?v=404d314c" />
+  <link rel="stylesheet" href="css/observatory.css?v=165c47fe" />
 </head>
 <body>
 <!-- @partial:header -->
@@ -84,6 +84,7 @@
       <article class="obs-card obs-stat"><span>SSH authentication activity</span><strong id="obs-auth">—</strong><small>Decoy-service observations</small></article>
     </div>
     <p class="obs-snapshot-time">Latest SSH snapshot published <time id="obs-updated">—</time>. Activity and artifact counts cover the delayed 24-hour period.</p>
+    <section class="obs-card obs-panel obs-ssh-behavior" id="obs-ssh-behavior" hidden aria-labelledby="obs-ssh-behavior-title"><div class="obs-panel-heading"><h3 id="obs-ssh-behavior-title">How far sessions progressed</h3><span>Same delayed 24-hour period</span></div><div class="obs-table-wrap"><table class="obs-table"><thead><tr><th scope="col">Furthest observed stage</th><th scope="col">Sessions</th></tr></thead><tbody id="obs-ssh-stage-rows"></tbody></table></div><dl class="obs-categories obs-ssh-signals"><div><dt>Cowrie command success events</dt><dd id="obs-command-success">—</dd></div><div><dt>Cowrie command failure events</dt><dd id="obs-command-failure">—</dd></div><div><dt>SSH forwarding requests</dt><dd id="obs-forwarding-requests">—</dd></div></dl><p class="obs-disclaimer">Each connection is counted once at its furthest recorded stage. Cowrie command results are separate decoy events and do not add up to command inputs or prove host execution. A forwarding request is an attempt, not granted access. The last recorded stage does not establish why a client disconnected.</p></section>
     <aside class="obs-card obs-highlight" id="obs-highlight" hidden aria-label="Featured attacker technique">
       <div><span class="obs-eyebrow">Seven-day technique highlight</span><strong id="obs-highlight-label">—</strong></div>
       <div><span id="obs-highlight-count">—</span> observations · <a href="#obs-commands">Explore command patterns</a></div>
@@ -130,6 +131,17 @@
         <article class="obs-card obs-stat"><span>Schema discovery</span><strong id="obs-api-schema">—</strong><small>OpenAPI and related requests</small></article>
         <article class="obs-card obs-stat"><span>Data access probes</span><strong id="obs-api-data">—</strong><small>Requests to simulated resources</small></article>
       </div>
+      <section class="obs-api-behavior" id="obs-api-behavior" hidden aria-labelledby="obs-api-behavior-title">
+        <div class="obs-panel-heading obs-section-heading"><h3 id="obs-api-behavior-title">Observed request runs</h3><span>Same delayed 24-hour period</span></div>
+        <div class="obs-stats" aria-label="API request-run statistics">
+          <article class="obs-card obs-stat"><span>Request runs</span><strong id="obs-api-runs">—</strong><small>Grouped by source and time gap</small></article>
+          <article class="obs-card obs-stat"><span>Multi-request runs</span><strong id="obs-api-multi">—</strong><small>Two or more requests</small></article>
+          <article class="obs-card obs-stat"><span>API-route runs</span><strong id="obs-api-route-runs">—</strong><small>At least one named API category</small></article>
+          <article class="obs-card obs-stat"><span>Mixed-category runs</span><strong id="obs-api-mixed-runs">—</strong><small>More than one fixed category</small></article>
+        </div>
+        <section class="obs-card obs-panel obs-api-last" aria-labelledby="obs-api-last-title"><div class="obs-panel-heading"><h3 id="obs-api-last-title">Last observed request category</h3><span>Per request run</span></div><div class="obs-table-wrap"><table class="obs-table"><thead><tr><th scope="col">Category</th><th scope="col">Runs</th></tr></thead><tbody id="obs-api-last-categories"></tbody></table></div><p class="obs-disclaimer">A run groups requests from one source address with gaps of up to 30 minutes. Addresses can be shared or proxied, and reporting-window edges can split runs. The last observed request does not establish why activity ended.</p></section>
+      </section>
+      <div class="obs-panel-heading obs-section-heading obs-api-breakdown"><h3>Request and client signals</h3><span>Fixed labels; no raw request data</span></div>
       <div class="obs-columns">
         <section class="obs-card obs-panel" aria-labelledby="obs-api-techniques-title"><div class="obs-panel-heading"><h3 id="obs-api-techniques-title">Observed request patterns</h3><span>Fixed research categories</span></div><div class="obs-table-wrap"><table class="obs-table"><thead><tr><th scope="col">Pattern</th><th scope="col">Requests</th></tr></thead><tbody id="obs-api-patterns"><tr><td class="obs-muted">Awaiting live observations</td><td>—</td></tr></tbody></table></div></section>
         <section class="obs-card obs-panel" aria-labelledby="obs-api-methods-title"><div class="obs-panel-heading"><h3 id="obs-api-methods-title">HTTP methods</h3><span>Aggregated counts</span></div><div class="obs-table-wrap"><table class="obs-table"><thead><tr><th scope="col">Method</th><th scope="col">Requests</th></tr></thead><tbody id="obs-api-methods"><tr><td class="obs-muted">Awaiting live observations</td><td>—</td></tr></tbody></table></div></section>
@@ -184,7 +196,7 @@
   </footer>
   <!-- @endpartial -->
   <script src="js/observatory-policy.js?v=38d753bd" defer></script>
-  <script src="js/observatory.js?v=e1203df5" type="module"></script>
-  <script src="js/api-research.js?v=a4958f8d" type="module"></script>
+  <script src="js/observatory.js?v=cfa1bf71" type="module"></script>
+  <script src="js/api-research.js?v=9c1d2ef7" type="module"></script>
 </body>
 </html>

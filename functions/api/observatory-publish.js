@@ -1,4 +1,5 @@
 import { validHistory } from '../../lib/observatory-history.mjs';
+import { validSessionBehavior } from '../../lib/observatory-behavior.mjs';
 // Authenticated ingestion for sanitized telemetry only.
 // Provide OBSERVATORY_PUBLISH_SECRET as a Cloudflare Pages encrypted secret,
 // plus OBSERVATORY_KV as the dedicated KV binding.
@@ -17,9 +18,10 @@ export function valid(payload) {
   if (!isObject(payload)) return false;
   const keys = ["version","published_at","window_hours","totals","hourly","commands","artifacts"];
   if (payload.version >= 3) keys.push('command_window_hours','command_window_start','command_window_end','command_policy_version');
-  if (payload.version === 4) keys.push('lifetime');
+  if (payload.version >= 4) keys.push('lifetime');
+  if (payload.version === 5) keys.push('behavior');
   if (!exactKeys(payload, keys)) return false;
-  if (![1,2,3,4].includes(payload.version) || !utc(payload.published_at) || payload.window_hours !== 24) return false;
+  if (![1,2,3,4,5].includes(payload.version) || !utc(payload.published_at) || payload.window_hours !== 24) return false;
   const when = Date.parse(payload.published_at);
   const now = Date.now();
   if (when > now + 5 * 60_000 || when < now - 60 * 60_000) return false;
@@ -51,7 +53,8 @@ export function valid(payload) {
          integer(a.count) && ["ssh_key","script","binary","other"].includes(a.type))) return false;
   if (new Set(payload.commands.map(c => c.template)).size !== payload.commands.length) return false;
   if (new Set(payload.artifacts.map(a => a.sha256)).size !== payload.artifacts.length) return false;
-  if (payload.version === 4 && !validHistory(payload.lifetime, Math.floor(when / 3_600_000) * 3_600_000 - 3_600_000)) return false;
+  if (payload.version >= 4 && !validHistory(payload.lifetime, Math.floor(when / 3_600_000) * 3_600_000 - 3_600_000)) return false;
+  if (payload.version === 5 && !validSessionBehavior(payload.behavior, payload.totals.sessions)) return false;
   return true;
 }
 async function authorized(request, secret) {
