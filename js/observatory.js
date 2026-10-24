@@ -154,11 +154,13 @@ import { validSessionBehavior, sessionStages } from '../lib/observatory-behavior
     text('obs-ssh-activity-share',`${total ? Math.round(active*100/total) : 0}%`);
     for(const key of sessionStages) {
       const row=document.createElement('tr'),label=document.createElement('td'),count=document.createElement('td'),share=document.createElement('td');
-      label.textContent=labels[key];count.textContent=fmt(value.furthest_observed_stage[key]);
-      const percent=total ? Math.round(value.furthest_observed_stage[key]*100/total) : 0;
+      const observations=value.furthest_observed_stage[key];
+      label.textContent=labels[key];count.textContent=fmt(observations);
+      const percent=total ? observations*100/total : 0;
+      const labelPercent=!observations ? '0%' : percent<0.1 ? '<0.1%' : percent<1 ? `${percent.toFixed(1)}%` : `${Math.round(percent)}%`;
       const visual=document.createElement('span'),bar=document.createElement('progress'),number=document.createElement('span');
       visual.className='obs-ssh-share';bar.max=100;bar.value=percent;bar.setAttribute('aria-hidden','true');
-      number.textContent=`${percent}%`;visual.append(bar,number);share.append(visual);
+      number.textContent=labelPercent;visual.append(bar,number);share.append(visual);
       row.append(label,count,share);body.append(row);
     }
     text('obs-command-success',fmt(value.command_result_events.reported_success));

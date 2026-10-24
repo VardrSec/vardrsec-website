@@ -199,6 +199,11 @@ test('v5 publishes only fixed session stages and the browser labels their limits
   assert.equal(nodes.get('obs-ssh-activity-share').textContent,'40%');
   assert.equal(nodes.get('obs-ssh-stage-rows').children[3].children[2].children[0].children[0].value,40);
   assert.equal(nodes.get('obs-forwarding-requests').textContent,'3');
+  const sparse=structuredClone(value);
+  sparse.totals.sessions=1000;
+  sparse.behavior.furthest_observed_stage={connect_only:1,auth_failed_only:2,
+    login_no_command:597,command_no_file:400,file_transfer:0};
+  assert.match(contents((await render(sparse)).get('obs-ssh-stage-rows')),/0\.1%/);
   for(const mutate of [v=>v.behavior.source='192.0.2.1',
     v=>v.behavior.furthest_observed_stage.connect_only=2,
     v=>v.behavior.furthest_observed_stage.file_transfer=-1,
