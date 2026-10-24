@@ -9,7 +9,7 @@
   <meta name="description" content="Delayed, privacy-reviewed findings from VardrSec's SSH and API research sensors." />
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="css/styles.css?v=5ea58cfa" />
-  <link rel="stylesheet" href="css/observatory.css?v=165c47fe" />
+  <link rel="stylesheet" href="css/observatory.css?v=c20fb9f8" />
 </head>
 <body>
 <!-- @partial:header -->
@@ -84,7 +84,13 @@
       <article class="obs-card obs-stat"><span>SSH authentication activity</span><strong id="obs-auth">—</strong><small>Decoy-service observations</small></article>
     </div>
     <p class="obs-snapshot-time">Latest SSH snapshot published <time id="obs-updated">—</time>. Activity and artifact counts cover the delayed 24-hour period.</p>
-    <section class="obs-card obs-panel obs-ssh-behavior" id="obs-ssh-behavior" hidden aria-labelledby="obs-ssh-behavior-title"><div class="obs-panel-heading"><h3 id="obs-ssh-behavior-title">How far sessions progressed</h3><span>Same delayed 24-hour period</span></div><div class="obs-table-wrap"><table class="obs-table"><thead><tr><th scope="col">Furthest observed stage</th><th scope="col">Sessions</th></tr></thead><tbody id="obs-ssh-stage-rows"></tbody></table></div><dl class="obs-categories obs-ssh-signals"><div><dt>Cowrie command success events</dt><dd id="obs-command-success">—</dd></div><div><dt>Cowrie command failure events</dt><dd id="obs-command-failure">—</dd></div><div><dt>SSH forwarding requests</dt><dd id="obs-forwarding-requests">—</dd></div></dl><p class="obs-disclaimer">Each connection is counted once at its furthest recorded stage. Cowrie command results are separate decoy events and do not add up to command inputs or prove host execution. A forwarding request is an attempt, not granted access. The last recorded stage does not establish why a client disconnected.</p></section>
+    <section class="obs-card obs-panel obs-ssh-behavior" id="obs-ssh-behavior" hidden aria-labelledby="obs-ssh-behavior-title">
+      <div class="obs-panel-heading"><h3 id="obs-ssh-behavior-title">Session progression</h3><span>Same delayed 24-hour period</span></div>
+      <p class="obs-ssh-summary"><strong id="obs-ssh-activity-share">—</strong> of sessions had command or file activity</p>
+      <div class="obs-table-wrap"><table class="obs-table"><thead><tr><th scope="col">Last observed stage</th><th scope="col">Sessions</th><th scope="col">Share</th></tr></thead><tbody id="obs-ssh-stage-rows"></tbody></table></div>
+      <p class="obs-disclaimer">A stage is the last recorded event, not a reason the client disconnected.</p>
+      <details class="obs-ssh-more"><summary>Additional Cowrie events</summary><dl class="obs-ssh-signals"><div><dt>Reported command successes</dt><dd id="obs-command-success">—</dd></div><div><dt>Reported command failures</dt><dd id="obs-command-failure">—</dd></div><div><dt>SSH forwarding requests</dt><dd id="obs-forwarding-requests">—</dd></div></dl><p class="obs-disclaimer">Command results are separate decoy events; they do not add up to command inputs or prove host execution. A forwarding request is an attempt, not granted access.</p></details>
+    </section>
     <aside class="obs-card obs-highlight" id="obs-highlight" hidden aria-label="Featured attacker technique">
       <div><span class="obs-eyebrow">Seven-day technique highlight</span><strong id="obs-highlight-label">—</strong></div>
       <div><span id="obs-highlight-count">—</span> observations · <a href="#obs-commands">Explore command patterns</a></div>
@@ -196,7 +202,7 @@
   </footer>
   <!-- @endpartial -->
   <script src="js/observatory-policy.js?v=38d753bd" defer></script>
-  <script src="js/observatory.js?v=cfa1bf71" type="module"></script>
+  <script src="js/observatory.js?v=d0f329df" type="module"></script>
   <script src="js/api-research.js?v=9cb314c7" type="module"></script>
 </body>
 </html>
