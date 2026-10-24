@@ -149,10 +149,17 @@ import { validSessionBehavior, sessionStages } from '../lib/observatory-behavior
       login_no_command:'Decoy login, no command',command_no_file:'Command, no file event',
       file_transfer:'File-transfer event'};
     const body=byId('obs-ssh-stage-rows');body.replaceChildren();
+    const total=sessionStages.reduce((sum,key)=>sum+value.furthest_observed_stage[key],0);
+    const active=value.furthest_observed_stage.command_no_file+value.furthest_observed_stage.file_transfer;
+    text('obs-ssh-activity-share',`${total ? Math.round(active*100/total) : 0}%`);
     for(const key of sessionStages) {
-      const row=document.createElement('tr'),label=document.createElement('td'),count=document.createElement('td');
+      const row=document.createElement('tr'),label=document.createElement('td'),count=document.createElement('td'),share=document.createElement('td');
       label.textContent=labels[key];count.textContent=fmt(value.furthest_observed_stage[key]);
-      row.append(label,count);body.append(row);
+      const percent=total ? Math.round(value.furthest_observed_stage[key]*100/total) : 0;
+      const visual=document.createElement('span'),bar=document.createElement('progress'),number=document.createElement('span');
+      visual.className='obs-ssh-share';bar.max=100;bar.value=percent;bar.setAttribute('aria-hidden','true');
+      number.textContent=`${percent}%`;visual.append(bar,number);share.append(visual);
+      row.append(label,count,share);body.append(row);
     }
     text('obs-command-success',fmt(value.command_result_events.reported_success));
     text('obs-command-failure',fmt(value.command_result_events.reported_failure));
